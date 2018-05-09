@@ -2,20 +2,11 @@ import numpy as np
 import pickle, re
 import torch
 
-from spacy.lang.en.stop_words import STOP_WORDS
-from nasframe.utils.keras_preprocessing import Tokenizer, pad_sequences
+from torch.utils.data import TensorDataset, Dataset
 from multiprocessing import Pool
 
-from torch.utils.data import TensorDataset, Dataset
-from torch import LongTensor
-
+from nasframe.utils.keras_preprocessing import Tokenizer, pad_sequences
 from nasframe.utils.torch import wrap
-
-try:
-    from IPython import display
-    ipython = True
-except ImportError:
-    ipython = False
 
 
 class TextLoader:
@@ -76,7 +67,7 @@ class TextLoader:
         embedding = torch.nn.Embedding(self.vocab_size,
                                        self.embedding_stats['dims'])
         if self.embedding is not None:
-            embedding.weight = torch.nn.Parameter(torch.FloatTensor(self.embedding))
+            embedding.weight = torch.nn.Parameter(wrap(self.embedding))
         return embedding
 
     @staticmethod
@@ -157,6 +148,10 @@ class TextLoader:
 
         """
 
+        if ignore_stop_words:
+            from stop_words import get_stop_words
+            STOP_WORDS = get_stop_words('en')
+
         if correct_spelling:
             import enchant
             en = enchant.Dict("en_US")
@@ -173,13 +168,10 @@ class TextLoader:
                     return item[0], item[0]
 
                 with Pool(num_threads) as pool:
+                    imap = pool.imap(map_word, self.word_index.items())
                     if tqdm is not None:
-                        self.word_mapping = dict(tqdm(pool.imap(map_word,
-                                            self.word_index.items()),
-                                            total=len(self.word_index.items())))
-                    else:
-                        self.word_mapping = dict(pool.imap(map_word,
-                                                 self.word_index.items()))
+                        imap = tqdm(tqdm(imap), total=len(self.word_index.items()))
+                    self.word_mapping = dict(imap)
                     pool.close()
                     pool.join()
 
@@ -206,10 +198,9 @@ class TextLoader:
                 new_index[word] = i = i + 1
                 continue
 
-            if word in STOP_WORDS:
-                if ignore_stop_words:
-                    new_index[word] = -1
-                    continue
+            if ignore_stop_words and word in STOP_WORDS:
+                new_index[word] = -1
+                continue
 
             elif ignore_chars and len(word) <= 1:
                 new_index[word] = -1
@@ -295,7 +286,7 @@ class TextLoader:
         if corpus is not None or self.sequences is None:
             self.tokenize(corpus)
 
-        sequence_tensor = LongTensor(self.sequences)
+        sequence_tensor = wrap(self.sequences, dtype=torch.long)
         if 'predict' in self.task_type:
             self.dataset = TensorDataset(sequence_tensor[:-1],
                                          sequence_tensor[1:])

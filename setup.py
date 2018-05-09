@@ -11,17 +11,23 @@ setup(
         'torch',
         'flatten_dict',
         'numpy',
-        'spacy',
-        'sklearn',
+        'scikit-learn',
         'scipy',
         'pillow',
-        'pandas',
         'tensorboardX',
         'pygraphviz',
-        'pyenchant',
-        'jellyfish',
-        'sphinx-rtd-theme'
     ],
+    extras_require={
+        'text': [
+            'stop-words',
+            'pyenchant',
+            'pandas',
+            'jellyfish',
+        ],
+        'docs': [
+            'sphinx-rtd-theme'
+        ]
+    },
     entry_points='''
         [console_scripts]
         toxic_nas=nasframe.scripts.train_toxic:cli
