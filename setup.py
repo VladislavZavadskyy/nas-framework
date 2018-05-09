@@ -19,7 +19,8 @@ setup(
         'tensorboardX',
         'pygraphviz',
         'pyenchant',
-        'jellyfish'
+        'jellyfish',
+        'sphinx-rtd-theme'
     ],
     entry_points='''
         [console_scripts]
