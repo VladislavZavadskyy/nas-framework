@@ -1,0 +1,6 @@
+Architect
+=========
+
+.. automodule:: architect
+   :members:
+   :private-members:

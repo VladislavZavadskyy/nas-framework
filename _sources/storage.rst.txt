@@ -1,0 +1,17 @@
+Storage
+=======
+.. currentmodule:: storage
+
+Plain Storage
+^^^^^^^^^^^^^
+
+.. autoclass:: Storage
+   :members:
+   :private-members:
+
+Curriculum Storage
+^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: CurriculumStorage
+   :members:
+   :private-members:

@@ -1,0 +1,578 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>coaches.base &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>coaches.base</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for coaches.base</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">nasframe.utils.misc</span> <span class="k">import</span> <span class="n">Bunch</span><span class="p">,</span> <span class="n">selfless</span><span class="p">,</span> <span class="n">add_if_doesnt_exist</span><span class="p">,</span> <span class="n">get_tqdm</span>
+<span class="kn">from</span> <span class="nn">nasframe.utils.torch</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">tensorboardX</span> <span class="k">import</span> <span class="n">SummaryWriter</span>
+
+
+<span class="k">class</span> <span class="nc">LossIsNoneError</span><span class="p">(</span><span class="ne">BaseException</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Intended to be raised when loss tensor is overflown.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="CoachBase"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase">[docs]</a><span class="k">class</span> <span class="nc">CoachBase</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A base class for coach classes, which encapsulate training methods and variables and facilitate</span>
+<span class="sd">    training code reuse.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (nn.Module): model to be trained</span>
+<span class="sd">        name (str): name of the model to be trained</span>
+<span class="sd">        optimizer (str): a name of the optimizer type to be used</span>
+<span class="sd">        optimizer_kwargs (dict): keyword arguments passed to optimizer constructor</span>
+<span class="sd">        initial_lr (float): initial learning rate</span>
+<span class="sd">        grad_clip_norm (float): gradient clipping norm, if 0, gradients don&#39;t get clipped</span>
+<span class="sd">        scheduler (str): name of scheduler type to be used</span>
+<span class="sd">        scheduler_kwargs (dict): keyword arguments passed to scheduler constructor</span>
+<span class="sd">        scheduler_metric (str): key of ``metrics`` dict, to be passed to ``scheduler.step``</span>
+<span class="sd">        scheduler_scale (str): &#39;step&#39; or &#39;epoch&#39;, at what frequency ``scheduler.step`` gets called</span>
+<span class="sd">        steps_per_epoch (int): number of training steps per one epoch</span>
+<span class="sd">        metrics (dict): dictionary of metrics descriptions</span>
+<span class="sd">        log_dir (str): path to the log directory</span>
+<span class="sd">        tensorboard (str, bool, SummaryWriter): if True, SummaryWriter is instantiated in the ``log_dir``, if str,</span>
+<span class="sd">            assumed to be a path at which SummaryWrtier should be instantiated, if SummaryWriter, well, then it&#39;s</span>
+<span class="sd">            just a SummaryWriter.</span>
+<span class="sd">        log_every (int): number of training steps defining the frequency of logging</span>
+<span class="sd">        logger (Logger): a logger instance to be used for logging</span>
+<span class="sd">        break_on_nan (bool): whether to break training loop if np.nan is encountered in loss</span>
+<span class="sd">        raise_on_nan (bool): whether to raise LossIsNoneException if np.nan is encountered in loss,</span>
+<span class="sd">            this has higher priority than ``break_on_nan``</span>
+<span class="sd">        tqdm (callable, optional): tqdm constructor, if None, default is used</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;model&#39;</span><span class="p">,</span>
+                 <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">optimizer_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initial_lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">grad_clip_norm</span><span class="o">=.</span><span class="mi">0</span><span class="p">,</span>
+                 <span class="n">scheduler</span><span class="o">=</span><span class="s1">&#39;reduceonplateau&#39;</span><span class="p">,</span> <span class="n">scheduler_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scheduler_metric</span><span class="o">=</span><span class="s1">&#39;loss&#39;</span><span class="p">,</span>
+                 <span class="n">scheduler_scale</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">steps_per_epoch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log_dir</span><span class="o">=</span><span class="s1">&#39;logs&#39;</span><span class="p">,</span>
+                 <span class="n">tensorboard</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log_every</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">break_on_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">raise_on_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">tqdm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">grad_norm</span> <span class="o">=</span> <span class="n">grad_clip_norm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_lr</span> <span class="o">=</span> <span class="n">initial_lr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optim_name</span> <span class="o">=</span> <span class="n">optimizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_kwargs</span> <span class="o">=</span> <span class="n">optimizer_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_kwargs</span> <span class="o">=</span> <span class="n">scheduler_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sched_name</span> <span class="o">=</span> <span class="n">scheduler</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_metric</span> <span class="o">=</span> <span class="n">scheduler_metric</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_scale</span> <span class="o">=</span> <span class="n">scheduler_scale</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span> <span class="o">=</span> <span class="n">steps_per_epoch</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">default_patience</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span> <span class="o">//</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">scheduler_scale</span> <span class="o">==</span> <span class="s1">&#39;step&#39;</span> <span class="k">else</span> <span class="mi">1</span>
+            <span class="n">add_if_doesnt_exist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheduler_kwargs</span><span class="p">,</span> <span class="s1">&#39;patience&#39;</span><span class="p">,</span> <span class="n">default_patience</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metrics</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="n">metrics</span>
+        <span class="k">elif</span> <span class="n">metrics</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;`metrics` must be a dict or None, got {type(metrics)}.&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_every</span> <span class="o">=</span> <span class="n">log_every</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+
+        <span class="c1"># region convergence detection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span> <span class="o">=</span> <span class="n">Bunch</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">patience</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;patience&#39;</span><span class="p">,</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">scheduler_scale</span> <span class="o">==</span> <span class="s1">&#39;step&#39;</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">patience</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">patience</span><span class="o">*</span><span class="mf">1.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;threshold&#39;</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">)</span>
+        <span class="c1"># endregion</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_dir</span> <span class="o">=</span> <span class="n">log_dir</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensorboard</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tensorboard</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">summary_writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensorboard</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">summary_writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="n">tensorboard</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">summary_writer</span> <span class="o">=</span> <span class="n">tensorboard</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">break_on_nan</span> <span class="o">=</span> <span class="n">break_on_nan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raise_on_nan</span> <span class="o">=</span> <span class="n">raise_on_nan</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tqdm</span> <span class="o">=</span> <span class="n">tqdm</span> <span class="k">if</span> <span class="n">tqdm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">get_tqdm</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_lr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the current learning rate (assuming there&#39;s only one optimizer parameter group)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">optim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">param_groups</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns current epoch step</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">step</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">accumulated_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns step accumulated across epochs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">accumulated_step</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_converged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the model is converged</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">indicator</span>
+
+<div class="viewcode-block" id="CoachBase.get_current_lr"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase.get_current_lr">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_lr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the current learning rate (assuming there&#39;s only one optimizer parameter group)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_lr</span></div>
+
+<div class="viewcode-block" id="CoachBase.decay_lr"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase.decay_lr">[docs]</a>    <span class="k">def</span> <span class="nf">decay_lr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Multiplies current learning rate by ``factor``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">param_groups</span><span class="p">:</span>
+            <span class="n">group</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">factor</span></div>
+
+<div class="viewcode-block" id="CoachBase.update_convergence_status"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase.update_convergence_status">[docs]</a>    <span class="k">def</span> <span class="nf">update_convergence_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the convergence status, given a ``metric`` value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rel_epsilon</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">threshold</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+            <span class="n">is_better</span> <span class="o">=</span> <span class="n">metric</span><span class="o">*</span><span class="n">rel_epsilon</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">best_val</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
+            <span class="n">is_better</span> <span class="o">=</span> <span class="n">metric</span> <span class="o">*</span> <span class="n">rel_epsilon</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">best_val</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Unknown convergence mode </span><span class="si">{self.convergence.mode}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">is_better</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">best_val</span> <span class="o">=</span> <span class="n">metric</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">indicator</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">counter</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">patience</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">indicator</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="CoachBase.reset"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resets all counters and stats to their initial values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span> <span class="o">=</span> <span class="n">Bunch</span><span class="p">({})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">accumulated_step</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">epoch</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">optim</span> <span class="o">=</span> <span class="n">get_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">optim_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optim</span> <span class="o">=</span> <span class="n">optim</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_lr</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">optimizer_kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sched_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">get_scheduler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sched_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">optim</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">scheduler_kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">indicator</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">best_val</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span></div>
+
+<div class="viewcode-block" id="CoachBase.train"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Train for ``epochs`` epochs, each of ``steps`` batches.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            epochs (int): number of epochs to train</span>
+<span class="sd">            steps (int, optional): number of batches in one epoch</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span>
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_epoch</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_training_loop</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_finalize_epoch</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CoachBase.train_until_convergence"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase.train_until_convergence">[docs]</a>    <span class="k">def</span> <span class="nf">train_until_convergence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Trains until the model has converged.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_converged</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">break_on_convergence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CoachBase._training_loop"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase._training_loop">[docs]</a>    <span class="k">def</span> <span class="nf">_training_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The training loop, which trains for ``steps`` steps.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span><span class="p">,</span> <span class="n">steps</span><span class="p">)</span> <span class="k">if</span> <span class="n">steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span>
+
+        <span class="n">progress_bar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;Training </span><span class="si">{self.name}</span><span class="s1"> on {str(self.model.device)}&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">progress_bar</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">step</span> <span class="o">&gt;=</span> <span class="n">steps</span><span class="p">:</span> <span class="k">break</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_training_loop_body</span><span class="p">(</span><span class="o">**</span><span class="n">selfless</span><span class="p">(</span><span class="nb">locals</span><span class="p">()),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">raise_on_nan</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">LossIsNoneError</span><span class="p">(</span><span class="s1">&#39;Loss is None.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">break_on_nan</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">accumulated_step</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_every</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">accumulated_step</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="o">**</span><span class="n">selfless</span><span class="p">(</span><span class="nb">locals</span><span class="p">()))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">accumulated_step</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_scale</span> <span class="o">==</span> <span class="s1">&#39;step&#39;</span><span class="p">:</span>
+                <span class="n">metric</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_metric</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">scheduler_metric</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_convergence_status</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_converged</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;break_on_convergence&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                    <span class="k">break</span></div>
+
+<div class="viewcode-block" id="CoachBase._training_loop_body"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase._training_loop_body">[docs]</a>    <span class="k">def</span> <span class="nf">_training_loop_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The boilerplate of training loop.</span>
+<span class="sd">        Should consist roughly of getting the loss, backpropagating and</span>
+<span class="sd">        performing an optimizer step.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="bp">NotImplemented</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CoachBase._init_epoch"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase._init_epoch">[docs]</a>    <span class="k">def</span> <span class="nf">_init_epoch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes an epoch of training.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="CoachBase._finalize_epoch"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase._finalize_epoch">[docs]</a>    <span class="k">def</span> <span class="nf">_finalize_epoch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finalizes an epoch of training.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler_scale</span> <span class="o">==</span> <span class="s1">&#39;epoch&#39;</span><span class="p">:</span>
+            <span class="n">metric</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_metric</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">scheduler_metric</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_convergence_status</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">epoch</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+<div class="viewcode-block" id="CoachBase._log"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase._log">[docs]</a>    <span class="k">def</span> <span class="nf">_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Logs some info about training.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">evaluated_metrics</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">evaluated_metrics</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_metric</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">summary_writer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">summary_writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{self.name}</span><span class="s2">/</span><span class="si">{name}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                                   <span class="n">evaluated_metrics</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
+                                                   <span class="bp">self</span><span class="o">.</span><span class="n">accumulated_step</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">metric_string</span> <span class="o">=</span> <span class="s1">&#39; | &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{k}</span><span class="s1">: </span><span class="si">{v:6.4f}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">evaluated_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Training </span><span class="si">{self.name}</span><span class="s1">, epoch </span><span class="si">{self.stats.epoch}</span><span class="s1">,&#39;</span>
+                                 <span class="n">f</span><span class="s1">&#39; step </span><span class="si">{self.stats.step}</span><span class="s1">: </span><span class="si">{metric_string}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CoachBase._evaluate_metric"><a class="viewcode-back" href="../../coaches.html#coaches.CoachBase._evaluate_metric">[docs]</a>    <span class="k">def</span> <span class="nf">_evaluate_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluates a metric description.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metric_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">kwarg</span> <span class="ow">in</span> <span class="n">metric</span><span class="p">[</span><span class="s1">&#39;kwargs&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">kwarg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">:</span>
+                <span class="n">metric_kwargs</span><span class="p">[</span><span class="n">kwarg</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="n">kwarg</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">kwarg</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">metric_kwargs</span><span class="p">[</span><span class="n">kwarg</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">kwarg</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metric</span><span class="p">[</span><span class="s1">&#39;fn&#39;</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">arg</span> <span class="o">=</span> <span class="n">metric_kwargs</span><span class="p">[</span><span class="n">metric</span><span class="p">[</span><span class="s1">&#39;kwargs&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">log_every</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+            <span class="k">if</span> <span class="s1">&#39;np&#39;</span> <span class="ow">in</span> <span class="n">metric</span><span class="p">[</span><span class="s1">&#39;fn&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="s1">&#39;mean&#39;</span> <span class="ow">in</span> <span class="n">metric</span><span class="p">[</span><span class="s1">&#39;fn&#39;</span><span class="p">]:</span>
+                    <span class="n">arg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s1">&#39;last&#39;</span> <span class="ow">in</span> <span class="n">metric</span><span class="p">[</span><span class="s1">&#39;fn&#39;</span><span class="p">]:</span>
+                <span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;stack&#39;</span> <span class="ow">in</span> <span class="n">metric</span><span class="p">[</span><span class="s1">&#39;fn&#39;</span><span class="p">]:</span>
+                    <span class="n">arg</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;mean&#39;</span> <span class="ow">in</span> <span class="n">metric</span><span class="p">[</span><span class="s1">&#39;fn&#39;</span><span class="p">]:</span>
+                    <span class="n">arg</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;sum&#39;</span> <span class="ow">in</span> <span class="n">metric</span><span class="p">[</span><span class="s1">&#39;fn&#39;</span><span class="p">]:</span>
+                    <span class="n">arg</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">arg</span>
+
+        <span class="k">return</span> <span class="n">metric</span><span class="p">[</span><span class="s1">&#39;fn&#39;</span><span class="p">](</span><span class="o">**</span><span class="n">metric_kwargs</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

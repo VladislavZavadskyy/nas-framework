@@ -1,0 +1,791 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Utility functions and classes &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="index.html"/>
+        <link rel="next" title="Data Loaders" href="loaders.html"/>
+        <link rel="prev" title="Scripts" href="scripts.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Utility functions and classes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/utils.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="utility-functions-and-classes">
+<h1>Utility functions and classes<a class="headerlink" href="#utility-functions-and-classes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-utils.torch">
+<span id="torch-related"></span><h2>Torch-related<a class="headerlink" href="#module-utils.torch" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="utils.torch.Identity">
+<em class="property">class </em><code class="descclassname">utils.torch.</code><code class="descname">Identity</code><a class="reference internal" href="_modules/utils/torch.html#Identity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.Identity" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> which returns arguments passed to it unchanged, on instance (<code class="docutils literal notranslate"><span class="pre">forward</span></code>) call.</p>
+<dl class="method">
+<dt id="utils.torch.Identity.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#Identity.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.Identity.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.torch.get_activation">
+<code class="descclassname">utils.torch.</code><code class="descname">get_activation</code><span class="sig-paren">(</span><em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns instantiated activation given the name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – activation name</li>
+<li><strong>kwargs</strong> (<em>dict</em>) – keyword arguments passed to activation constructor</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Corresponding activation instance from torch.nn module</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Available activations:</dt>
+<dd>ELU, SELU, GLU, ReLU, ReLU6, PReLU, RReLU, LeakyReLU,
+Sigmoid, LogSigmoid, Softmax, Softmax2d, LogSoftmax,
+Softmin, Softplus, Softshrink, Softsign, Tanhshrink,
+Tanh, Hardshrink, Hardtanh, identity/linear/none</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.torch.get_criterion">
+<code class="descclassname">utils.torch.</code><code class="descname">get_criterion</code><span class="sig-paren">(</span><em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_criterion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_criterion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns criterion instance given the name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – criterion name</li>
+<li><strong>kwargs</strong> (<em>dict</em>) – keyword arguments passed to criterion constructor</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Corresponding criterion from torch.nn module</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Available criteria:</dt>
+<dd>BCE, BCEWithLogits, CosineEmbedding, CrossEntropy, HingeEmbedding, KLDiv,
+L1, MSE, MarginRanking, MultilabelMargin, MultilabelSoftmargin, MultiMargin,
+NLL, PoissoNLL, SmoothL1, SoftMargin, TripletMargin</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.torch.get_np">
+<code class="descclassname">utils.torch.</code><code class="descname">get_np</code><span class="sig-paren">(</span><em>inputs: torch.Tensor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_np"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_np" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to wrap inputs in a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.
+If torch.Tensor passed, places it onto CPU and calls <code class="docutils literal notranslate"><span class="pre">tensor.numpy()</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inputs</strong> (<em>iterable</em>) – inputs to be wrapped.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> containing inputs.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.torch.get_optimizer">
+<code class="descclassname">utils.torch.</code><code class="descname">get_optimizer</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns optimizer constructor given the name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – optimizer name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Corresponding optimizer from torch.optim module.</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Available optimizers:</dt>
+<dd>ASGD, Adadelta, Adagrad, Adam, SparseAdam, Adamax, LBFGS, RMSprop, Rprop, SGD</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.torch.get_scheduler">
+<code class="descclassname">utils.torch.</code><code class="descname">get_scheduler</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_scheduler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_scheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns scheduler constructor given the name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – scheduler name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Corresponding scheduler from torch.optim module</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Available criteria:</dt>
+<dd>CosineAnnealing, Exponential, Lambda, MultiStep, ReduceOnPlateau, Step</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.torch.param_count">
+<code class="descclassname">utils.torch.</code><code class="descname">param_count</code><span class="sig-paren">(</span><em>module</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#param_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.param_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts parameters in passed module.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>module</strong> (<em>torch.nn.Module</em>) – module to count parameters in.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Parameter count.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.torch.wrap">
+<code class="descclassname">utils.torch.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>inputs</em>, <em>device=-1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#wrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a tensor or copies an existing one and puts it on <cite>device</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputs</strong> – torch.Tensor, list or numpy.ndarray</li>
+<li><strong>device</strong> – GPU index or -1 for CPU or device name (e.g. ‘cpu’, ‘cuda:0’) or <code class="docutils literal notranslate"><span class="pre">torch.Device</span></code></li>
+<li><strong>kwargs</strong> – optional kwargs passed to <code class="docutils literal notranslate"><span class="pre">torch.tensor</span></code> constructor.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="docutils literal notranslate"><span class="pre">torch.Tensor</span></code> with inputs as data.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="miscellaneous">
+<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="utils.FileLock">
+<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">FileLock</code><span class="sig-paren">(</span><em>path</em>, <em>delay=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/filelock.html#FileLock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.FileLock" title="Permalink to this definition">¶</a></dt>
+<dd><p>A file locking mechanism.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> – path to attempt to acquire lock for.</li>
+<li><strong>delay</strong> – delay between attempts.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="utils.FileLock.acquire">
+<code class="descname">acquire</code><span class="sig-paren">(</span><em>blocking=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/filelock.html#FileLock.acquire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.FileLock.acquire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to acquire the lock.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>blocking</strong> – if the lock is unavailable and <cite>blocking</cite> is False, will return False,
+otherwise will block the next statement execution until the lock is available.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="utils.FileLock.available">
+<code class="descname">available</code><a class="headerlink" href="#utils.FileLock.available" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates whether the path is available to be locked.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="utils.FileLock.purge">
+<code class="descname">purge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/filelock.html#FileLock.purge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.FileLock.purge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the lock file, even if it wasn’t created by the current instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the file existed and was successfully removed, False otherwise.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="utils.FileLock.release">
+<code class="descname">release</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/filelock.html#FileLock.release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.FileLock.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Releases the lock.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-utils.misc"></span><dl class="class">
+<dt id="utils.misc.Bunch">
+<em class="property">class </em><code class="descclassname">utils.misc.</code><code class="descname">Bunch</code><span class="sig-paren">(</span><em>dict_or_bunch=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#Bunch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.Bunch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience class, which can be thought of as an extension to pythons <code class="docutils literal notranslate"><span class="pre">dict</span></code>
+which allows accessing it’s items by class attribute access operator <code class="docutils literal notranslate"><span class="pre">.</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dict_or_bunch</strong> (<em>dict</em><em> or </em><a class="reference internal" href="#utils.misc.Bunch" title="utils.misc.Bunch"><em>Bunch</em></a><em>, </em><em>optional</em>) – a collection to initialize items from.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="utils.misc.Bunch.pprint">
+<code class="descname">pprint</code><span class="sig-paren">(</span><em>_indent_level=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#Bunch.pprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.Bunch.pprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pretty prints a (possibly nested) Bunch.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>_indent_level</strong> (<em>int</em>) – level of indentation to be used on current recursion level</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="utils.misc.Bunch.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>object</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#Bunch.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.Bunch.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates itself with an object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>object</strong> – <code class="docutils literal notranslate"><span class="pre">Bunch</span></code>, <code class="docutils literal notranslate"><span class="pre">dict</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">tuple</span></code> of items (each of length 2) or
+any object, in which case <code class="docutils literal notranslate"><span class="pre">vars(object)</span></code> will be used.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc._nested_defaultdict">
+<code class="descclassname">utils.misc.</code><code class="descname">_nested_defaultdict</code><span class="sig-paren">(</span><em>levels</em>, <em>factory</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#_nested_defaultdict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc._nested_defaultdict" title="Permalink to this definition">¶</a></dt>
+<dd><p>A recursive call for <code class="docutils literal notranslate"><span class="pre">nested_defaultdict</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>levels</strong> (<em>int</em>) – depth of nestedness</li>
+<li><strong>factory</strong> (<em>callable</em><em>, </em><em>optional</em>) – factory for the leaf <code class="docutils literal notranslate"><span class="pre">defaultdict</span></code></li>
+<li><strong>value</strong> (<em>any</em><em>, </em><em>optional</em>) – a value, which will be used for the default factory if <code class="docutils literal notranslate"><span class="pre">factory</span></code> is not specified</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A factory which produces a defaultdict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.add_if_doesnt_exist">
+<code class="descclassname">utils.misc.</code><code class="descname">add_if_doesnt_exist</code><span class="sig-paren">(</span><em>dictionary</em>, <em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#add_if_doesnt_exist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.add_if_doesnt_exist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutates <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> to contain a <code class="docutils literal notranslate"><span class="pre">key</span></code> if it doesn’t already.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dictionary</strong> (<em>dict</em>) – dictionary to add key to</li>
+<li><strong>key</strong> (<em>hashable</em>) – a <code class="docutils literal notranslate"><span class="pre">dict</span></code> key</li>
+<li><strong>value</strong> (<em>any</em>) – a value corresponding to the <code class="docutils literal notranslate"><span class="pre">key</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.add_increment">
+<code class="descclassname">utils.misc.</code><code class="descname">add_increment</code><span class="sig-paren">(</span><em>dictionary</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#add_increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.add_increment" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <code class="docutils literal notranslate"><span class="pre">key</span></code> doesn’t exist in <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>, increments maximum
+existing value by one, and assigns a <cite>key`</cite> to it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dictionary</strong> (<em>dict</em>) – dictionary to be modified</li>
+<li><strong>key</strong> (<em>hashable</em>) – a key to assign incremented value to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.bool_val">
+<code class="descclassname">utils.misc.</code><code class="descname">bool_val</code><span class="sig-paren">(</span><em>string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#bool_val"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.bool_val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a boolean value of a string.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bool_val</span><span class="p">(</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bool_val</span><span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bool_val</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>string</strong> (<em>str</em>) – string to be evaluated</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.convert_keys_to_int">
+<code class="descclassname">utils.misc.</code><code class="descname">convert_keys_to_int</code><span class="sig-paren">(</span><em>dictionary</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#convert_keys_to_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.convert_keys_to_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tries to convert each key of a (possibly nested) <code class="docutils literal notranslate"><span class="pre">dict</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>.
+Useful when loading from json.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dictionary</strong> (<em>dict</em>) – dictionary to be processed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A copy of <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> with numeric-like keys converted to <code class="docutils literal notranslate"><span class="pre">int</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.delete_file">
+<code class="descclassname">utils.misc.</code><code class="descname">delete_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#delete_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.delete_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a file, if it exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<em>str</em>) – path of a file to be deleted</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.get_logger">
+<code class="descclassname">utils.misc.</code><code class="descname">get_logger</code><span class="sig-paren">(</span><em>name='/root/nas-framework/nasframe/utils/misc.py'</em>, <em>file=None</em>, <em>file_level='INFO'</em>, <em>stout_level='WARNING'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#get_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.get_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets logger by name if it exists, otherwise initializes one.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – logger name</li>
+<li><strong>file</strong> (<em>str</em><em>, </em><em>optional</em>) – path to the log file</li>
+<li><strong>stout_level</strong> (<em>str</em>) – stdout logging level</li>
+<li><strong>file_level</strong> (<em>str</em>) – file logging level</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A logger instance</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.get_tqdm">
+<code class="descclassname">utils.misc.</code><code class="descname">get_tqdm</code><span class="sig-paren">(</span><em>try_notebook=False</em>, <em>leave=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#get_tqdm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.get_tqdm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns tqdm progressbar constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>try_notebook</strong> (<em>bool</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> will attempt to import <code class="docutils literal notranslate"><span class="pre">tqdm_notebook</span></code> and return it instead</li>
+<li><strong>leave</strong> (<em>bool</em>) – whether to leave the bar, after it’s closed</li>
+<li><strong>redirect</strong> (<em>bool</em>) – whether to redirect stdout and stderror to a bar constructed with returned constructor</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A tqdm progressbar constructor</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.int_to_range">
+<code class="descclassname">utils.misc.</code><code class="descname">int_to_range</code><span class="sig-paren">(</span><em>value</em>, <em>shift=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#int_to_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.int_to_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts <code class="docutils literal notranslate"><span class="pre">value</span></code> to <code class="docutils literal notranslate"><span class="pre">range(shift,</span> <span class="pre">value</span> <span class="pre">+</span> <span class="pre">shift))</span></code> if <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">int</span></code>,
+returns <code class="docutils literal notranslate"><span class="pre">value</span></code> unchanged otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.make_dirs">
+<code class="descclassname">utils.misc.</code><code class="descname">make_dirs</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#make_dirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.make_dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes dirs, including intermediate one if they don’t exist.
+:param path: path that needs to be created</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.nested_defaultdict">
+<code class="descclassname">utils.misc.</code><code class="descname">nested_defaultdict</code><span class="sig-paren">(</span><em>levels</em>, <em>factory=None</em>, <em>value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#nested_defaultdict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.nested_defaultdict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produces a nested defaultdict with <code class="docutils literal notranslate"><span class="pre">defaultdict(factory)</span></code> as a leaf.
+If <code class="docutils literal notranslate"><span class="pre">factory</span></code> is not specified, creates a factory that returns <code class="docutils literal notranslate"><span class="pre">value</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>levels</strong> (<em>int</em>) – depth of nestedness</li>
+<li><strong>factory</strong> (<em>callable</em><em>, </em><em>optional</em>) – factory for the leaf <code class="docutils literal notranslate"><span class="pre">defaultdict</span></code></li>
+<li><strong>value</strong> (<em>any</em><em>, </em><em>optional</em>) – a value, which will be used for the default factory if <code class="docutils literal notranslate"><span class="pre">factory</span></code> is not specified</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A nested defaultdict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.now">
+<code class="descclassname">utils.misc.</code><code class="descname">now</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#now"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.now" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Current formatted date-time.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.return_value">
+<code class="descclassname">utils.misc.</code><code class="descname">return_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#return_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.return_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a value passed to it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>any</em>) – value to be returned</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="docutils literal notranslate"><span class="pre">value</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.misc.selfless">
+<code class="descclassname">utils.misc.</code><code class="descname">selfless</code><span class="sig-paren">(</span><em>variables</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#selfless"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.selfless" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of a dict of variables, without <code class="docutils literal notranslate"><span class="pre">self</span></code> in it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>variables</strong> (<em>dict</em><em> or </em><em>callable</em>) – named variables</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="loaders.html" class="btn btn-neutral float-right" title="Data Loaders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scripts.html" class="btn btn-neutral" title="Scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

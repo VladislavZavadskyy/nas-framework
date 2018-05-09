@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Storage &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="index.html"/>
+        <link rel="next" title="Scripts" href="scripts.html"/>
+        <link rel="prev" title="Training Classes" href="coaches.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Storage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/storage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="storage">
+<h1>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plain-storage">
+<h2>Plain Storage<a class="headerlink" href="#plain-storage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="storage.Storage">
+<em class="property">class </em><code class="descclassname">storage.</code><code class="descname">Storage</code><a class="reference internal" href="_modules/storage.html#Storage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing all the data, needed for architect training.</p>
+<dl class="method">
+<dt id="storage.Storage._on_change">
+<code class="descname">_on_change</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#Storage._on_change"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage._on_change" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should be called on data change.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.Storage._update_advantages">
+<code class="descname">_update_advantages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#Storage._update_advantages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage._update_advantages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates advantages from rewards and predicted values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.Storage.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>description</em>, <em>log_probs</em>, <em>pred_values</em>, <em>entropies</em>, <em>reward=None</em>, <em>param_count=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#Storage.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends data to the storage.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.Storage.best">
+<code class="descname">best</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#Storage.best"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage.best" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns description and corresponding best reward.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.Storage.filter_na">
+<code class="descname">filter_na</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#Storage.filter_na"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage.filter_na" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters out items with <code class="docutils literal notranslate"><span class="pre">reward</span> <span class="pre">!=</span> <span class="pre">reward</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.Storage.find">
+<code class="descname">find</code><span class="sig-paren">(</span><em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#Storage.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds <code class="docutils literal notranslate"><span class="pre">description</span></code> in self.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">index if description is stored in this instance of Storage, None otherwise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="storage.Storage.from_json">
+<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>*</em>, <em>path=None</em>, <em>json=None</em>, <em>space=None</em>, <em>input_shape=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#Storage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage.from_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads description-reward pairs from json and constructs a Storage from it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arch</strong> (<a class="reference internal" href="architect.html#architect.Architect" title="architect.Architect"><em>Architect</em></a>) – architect instance to collect needed data</li>
+<li><strong>path</strong> (<em>str</em>) – path to json file</li>
+<li><strong>json</strong> (<em>list</em>) – pre-read list of description-reward pairs</li>
+<li><strong>space</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.SearchSpace" title="searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space instance to calculate described model complexity</li>
+<li><strong>input_shape</strong> (<em>list</em><em>, </em><em>tuple</em><em>, </em><em>torch.Size</em>) – shape of the input</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">storage instance containing data from given json</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#storage.Storage" title="storage.Storage">Storage</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.Storage.reward">
+<code class="descname">reward</code><span class="sig-paren">(</span><em>description</em>, <em>amount</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#Storage.reward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage.reward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets or overwrites the reward for given description.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.Storage.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>description</em>, <em>log_probs</em>, <em>pred_values</em>, <em>entropies</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#Storage.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.Storage.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the associated description with new log probs, predicted values and entropies.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="curriculum-storage">
+<h2>Curriculum Storage<a class="headerlink" href="#curriculum-storage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="storage.CurriculumStorage">
+<em class="property">class </em><code class="descclassname">storage.</code><code class="descname">CurriculumStorage</code><span class="sig-paren">(</span><em>max_complexity</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing all the data, needed for architect curriculum training.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>max_complexity</strong> – maximum complexity of the curriculum.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="storage.CurriculumStorage.advantages">
+<code class="descname">advantages</code><a class="headerlink" href="#storage.CurriculumStorage.advantages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns advantages corresponding to current complexity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.CurriculumStorage.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>description</em>, <em>log_probs</em>, <em>pred_values</em>, <em>entropies</em>, <em>reward=None</em>, <em>parameter_count=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends data to the storage.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.CurriculumStorage.best">
+<code class="descname">best</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage.best"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage.best" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns description and corresponding best reward.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="storage.CurriculumStorage.current_storage">
+<code class="descname">current_storage</code><a class="headerlink" href="#storage.CurriculumStorage.current_storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns storage corresponding to current complexity.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="storage.CurriculumStorage.descriptions">
+<code class="descname">descriptions</code><a class="headerlink" href="#storage.CurriculumStorage.descriptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns descriptions corresponding to current complexity.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="storage.CurriculumStorage.entropies">
+<code class="descname">entropies</code><a class="headerlink" href="#storage.CurriculumStorage.entropies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns entropies corresponding to current complexity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.CurriculumStorage.filter_na">
+<code class="descname">filter_na</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage.filter_na"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage.filter_na" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters out items with <code class="docutils literal notranslate"><span class="pre">reward</span> <span class="pre">!=</span> <span class="pre">reward</span></code> across levels.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.CurriculumStorage.find">
+<code class="descname">find</code><span class="sig-paren">(</span><em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds <code class="docutils literal notranslate"><span class="pre">description</span></code> in self.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">mapping of levels to indices</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.CurriculumStorage.flatten">
+<code class="descname">flatten</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage.flatten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage.flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flattens current instance into a Storage instance, which contains all the data from current instance.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="storage.CurriculumStorage.from_json">
+<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>arch</em>, <em>space=None</em>, <em>input_shape=None</em>, <em>max_complexity=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage.from_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads description-reward pairs from json and constructs a Storage from it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arch</strong> (<a class="reference internal" href="architect.html#architect.Architect" title="architect.Architect"><em>Architect</em></a>) – architect instance to collect needed data</li>
+<li><strong>path</strong> (<em>str</em>) – path to json file</li>
+<li><strong>space</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.SearchSpace" title="searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space instance to calculate described model complexity</li>
+<li><strong>input_shape</strong> (<em>list</em><em>, </em><em>tuple</em><em>, </em><em>torch.Size</em>) – shape of the input</li>
+<li><strong>max_complexity</strong> (<em>int</em>) – maximum complexity of constructed storage</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">storage instance containing data from given json</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#storage.CurriculumStorage" title="storage.CurriculumStorage">CurriculumStorage</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="storage.CurriculumStorage.log_probs">
+<code class="descname">log_probs</code><a class="headerlink" href="#storage.CurriculumStorage.log_probs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <span class="math notranslate">\(log(probs)\)</span> corresponding to current complexity.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="storage.CurriculumStorage.parameter_counts">
+<code class="descname">parameter_counts</code><a class="headerlink" href="#storage.CurriculumStorage.parameter_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns parameter counts corresponding to current complexity.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="storage.CurriculumStorage.pred_values">
+<code class="descname">pred_values</code><a class="headerlink" href="#storage.CurriculumStorage.pred_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns predicted values corresponding to current complexity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.CurriculumStorage.reward">
+<code class="descname">reward</code><span class="sig-paren">(</span><em>description</em>, <em>ammount</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage.reward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage.reward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets or overwrites the reward for given description.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="storage.CurriculumStorage.rewards">
+<code class="descname">rewards</code><a class="headerlink" href="#storage.CurriculumStorage.rewards" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns rewards corresponding to current complexity.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.CurriculumStorage.set_complexity">
+<code class="descname">set_complexity</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage.set_complexity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage.set_complexity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets current curriculum complexity to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="storage.CurriculumStorage.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>description</em>, <em>log_probs</em>, <em>pred_values</em>, <em>entropies</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/storage.html#CurriculumStorage.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#storage.CurriculumStorage.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the associated description with new log probs, predicted values and entropies.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scripts.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="coaches.html" class="btn btn-neutral" title="Training Classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

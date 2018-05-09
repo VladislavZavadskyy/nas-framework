@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>coaches.recurrent &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>coaches.recurrent</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for coaches.recurrent</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.feedforward</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="RecurrentCoach"><a class="viewcode-back" href="../../coaches.html#coaches.RecurrentCoach">[docs]</a><span class="k">class</span> <span class="nc">RecurrentCoach</span><span class="p">(</span><span class="n">FeedForwardCoach</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class which facilitates training of recurrent search spaces or models, based on such spaces,</span>
+<span class="sd">    given they follow interface defined in scripts.GenericModel.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        space (nn.Module): SearchSpace or GenericModel and their descendants</span>
+<span class="sd">        sequence_loss (bool): wheter to calculate loss based on output sequence rather than the last element of it</span>
+<span class="sd">        **kwargs (dict): keyword arguments passed to FeedForwardCoach constructor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">sequence_loss</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">space</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sequence_loss</span> <span class="o">=</span> <span class="n">sequence_loss</span>
+
+<div class="viewcode-block" id="RecurrentCoach.train"><a class="viewcode-back" href="../../coaches.html#coaches.RecurrentCoach.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preserve_states</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Train for ``epochs`` epochs, each of ``steps`` batches.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            epochs (int): number of epochs to train</span>
+<span class="sd">            steps (int, optional): number of batches in one epoch</span>
+<span class="sd">            preserve_states (bool): whether to preserve states across batches</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">preserve_states</span><span class="o">=</span><span class="n">preserve_states</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RecurrentCoach._training_loop_body"><a class="viewcode-back" href="../../coaches.html#coaches.RecurrentCoach._training_loop_body">[docs]</a>    <span class="k">def</span> <span class="nf">_training_loop_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">preserve_states</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">progress_bar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A training loop, which wraps ``steps`` calls to ``_training_loop_body``.</span>
+<span class="sd">        If ``steps`` is not specified, defaults to  ``len(loaders.train)``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">preserve_states</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">loss</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_loss</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
+                                          <span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad_norm</span><span class="p">:</span>
+            <span class="n">clip_grad_norm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad_norm</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">progress_bar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">progress_bar</span><span class="o">.</span><span class="n">set_postfix_str</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Loss: {loss.item():5.3f}&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RecurrentCoach.evaluate"><a class="viewcode-back" href="../../coaches.html#coaches.RecurrentCoach.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">loader</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preserve_states</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluates trained model on data from ``loader`` or</span>
+<span class="sd">        ``self.loaders.validation`` if the former is not specified.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            description (dict): description to evaluate.</span>
+<span class="sd">            loader (DataLoader, optional): loader with validation data</span>
+<span class="sd">            preserve_states (bool): whether to preserve states across batches</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Model performance stats collected during evaluation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_epoch</span><span class="p">()</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">loader</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaders</span><span class="o">.</span><span class="n">validation</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You must train the model first.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+        <span class="n">progress_bar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;Evaluating </span><span class="si">{self.name}</span><span class="s1"> on {str(self.space.device)}&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">progress_bar</span><span class="p">):</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">preserve_states</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">loss</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_loss</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span>
+                                                  <span class="n">hidden</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+                <span class="n">progress_bar</span><span class="o">.</span><span class="n">set_postfix_str</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Loss: {loss.item():5.3f}&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.name}</span><span class="s1"> evaluation loss is: &#39;</span>
+                             <span class="n">f</span><span class="s1">&#39;{np.mean(self.stats.losses):5.3f}&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span></div>
+
+<div class="viewcode-block" id="RecurrentCoach.get_loss"><a class="viewcode-back" href="../../coaches.html#coaches.RecurrentCoach.get_loss">[docs]</a>    <span class="k">def</span> <span class="nf">get_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">hidden</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A method which handles calculating loss and all that comes with it.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">             description (dict): description of the graph to evaluate</span>
+<span class="sd">             inputs (Tensor): pretty self-explanatory</span>
+<span class="sd">             labels (Tensor): labels, corresponding to inputs</span>
+<span class="sd">             hidden (list, tuple): hidden states passed to the recurrent cell</span>
+<span class="sd">             mean (bool): whether or not to return mean value of losses.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            loss.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+                            <span class="n">h</span><span class="o">=</span><span class="n">hidden</span><span class="p">,</span> <span class="n">return_sequence</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sequence_loss</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s1">&#39;auc&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">detach</span><span class="p">())</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">auc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">get_np</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">get_np</span><span class="p">(</span><span class="n">out</span><span class="p">)))</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">loss</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">if</span> <span class="n">mean</span> <span class="k">else</span> <span class="n">loss</span><span class="p">,</span> <span class="n">states</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

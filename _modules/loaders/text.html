@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>loaders.text &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>loaders.text</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for loaders.text</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pickle</span><span class="o">,</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">TensorDataset</span><span class="p">,</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Pool</span>
+
+<span class="kn">from</span> <span class="nn">nasframe.utils.keras_preprocessing</span> <span class="k">import</span> <span class="n">Tokenizer</span><span class="p">,</span> <span class="n">pad_sequences</span>
+<span class="kn">from</span> <span class="nn">nasframe.utils.torch</span> <span class="k">import</span> <span class="n">wrap</span>
+
+
+<div class="viewcode-block" id="TextLoader"><a class="viewcode-back" href="../../loaders.html#loaders.TextLoader">[docs]</a><span class="k">class</span> <span class="nc">TextLoader</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A text dataset loader and preprocessor.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        corpus: text corpus</span>
+<span class="sd">        task_type (str): task for which the dataset should be prepared (&#39;classification&#39; or &#39;prediction&#39;)</span>
+<span class="sd">        labels (numpy.array, optional): labels for a &#39;classification&#39; task</span>
+<span class="sd">        filters (str): string of characters to be filtered out from the ``corpus``</span>
+<span class="sd">        oov_token (str): token used in place of anything that is out of the vocabulary,</span>
+<span class="sd">            if None, such tokens are dropped out.</span>
+<span class="sd">        vocab_size (int): size of the vocabulary</span>
+<span class="sd">        max_length (int): maximum sequence length</span>
+<span class="sd">        verbose (bool): whether to print information about how the preprocessing is going</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">task_type</span><span class="o">=</span><span class="s1">&#39;classification&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">filters</span><span class="o">=</span><span class="s1">&#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[</span><span class="se">\\</span><span class="s1">]^_`{|}~</span><span class="se">\t\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">oov_token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">vocab_size</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span> <span class="o">=</span> <span class="n">corpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_type</span> <span class="o">=</span> <span class="n">task_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span> <span class="o">=</span> <span class="n">vocab_size</span> <span class="k">if</span> <span class="n">oov_token</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">vocab_size</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">oov_token</span> <span class="o">=</span> <span class="n">oov_token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_length</span> <span class="o">=</span> <span class="n">max_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dict</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_stats</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;dims&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sequences</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_original_index</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word_mapping</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit_tokenizer</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">word_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Word index used for converting text into numeric sequences.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">torch_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            torch.nn.Embedding with pretrained weights if ``fit_emeddings`` was called,</span>
+<span class="sd">            randomly initialized otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">embedding</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">embedding_stats</span><span class="p">[</span><span class="s1">&#39;dims&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">embedding</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">embedding</span>
+
+<div class="viewcode-block" id="TextLoader.load"><a class="viewcode-back" href="../../loaders.html#loaders.TextLoader.load">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads an existing loader state, saved via ``save`` method, and returns a ``TextLoader`` instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path: path to the saved state</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">TextLoader</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">loader</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">loader</span></div>
+
+<div class="viewcode-block" id="TextLoader.fit_tokenizer"><a class="viewcode-back" href="../../loaders.html#loaders.TextLoader.fit_tokenizer">[docs]</a>    <span class="k">def</span> <span class="nf">fit_tokenizer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fits a ``Tokenizer`` instance on a text corpus.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_print</span><span class="p">(</span><span class="s2">&quot;Fitting tokenizer...&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">num_words</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span>
+                                   <span class="n">oov_token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">oov_token</span><span class="p">,</span>
+                                   <span class="n">filters</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">)</span>
+
+        <span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_original_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sequences</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="TextLoader.load_embeddings"><a class="viewcode-back" href="../../loaders.html#loaders.TextLoader.load_embeddings">[docs]</a>    <span class="k">def</span> <span class="nf">load_embeddings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">embeddings_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">embedding_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads embeddings from a vec-like file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            embedding_dim (int): embedding dimensionality</span>
+<span class="sd">            embeddings_path (str, optional): path to a file where embeddings are stored</span>
+<span class="sd">            embedding_dict (dict, optional): if specified, loading from a file is omitted</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">embedding_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_print</span><span class="p">(</span><span class="s2">&quot;Reading embeddings file...&quot;</span><span class="p">)</span>
+            <span class="n">embedding_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">embeddings_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+                    <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">read_vec</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">embedding_dim</span><span class="p">:</span> <span class="k">continue</span>
+                    <span class="n">embedding_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="n">emb_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">embedding_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dict</span> <span class="o">=</span> <span class="n">embedding_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_stats</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">emb_arr</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_stats</span><span class="p">[</span><span class="s1">&#39;std&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">emb_arr</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_stats</span><span class="p">[</span><span class="s1">&#39;dims&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">embedding_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_print</span><span class="p">(</span><span class="s1">&#39;Done, now call fit_embeddings.&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TextLoader.fit_embeddings"><a class="viewcode-back" href="../../loaders.html#loaders.TextLoader.fit_embeddings">[docs]</a>    <span class="k">def</span> <span class="nf">fit_embeddings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">correct_spelling</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_dl</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                       <span class="n">ignore_stop_words</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ignore_chars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">ignore_matching</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;\d&#39;</span><span class="p">),</span> <span class="n">reserved_words</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">num_threads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">tqdm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fits preloaded embeddings to match with ``self.wrod_index``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            correct_spelling (bool): whether to correct spelling errors</span>
+<span class="sd">            max_dl (int, optional): if ``correct_spelling`` is True, maximum Damerau-Levenshtein distance for a proposed</span>
+<span class="sd">                spelling correction to be considered as a correction, instead of a different word</span>
+<span class="sd">            ignore_stop_words (bool): if True, stop words are thrown out</span>
+<span class="sd">            ignore_chars (bool): if True, single-character tokens are thrown out</span>
+<span class="sd">            ignore_matching (re.Pattern, optional): if a token matches this pattern, it&#39;s thrown out</span>
+<span class="sd">            reserved_words (iterable, optional): any token in this collection is guaranteed</span>
+<span class="sd">                a randomly initialized embedding</span>
+<span class="sd">            num_threads (int, optional): number of threads used for spell correcting</span>
+<span class="sd">            tqdm (callable, optional): tqdm constructor for showing progress on spell correcting</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">ignore_stop_words</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">stop_words</span> <span class="k">import</span> <span class="n">get_stop_words</span>
+            <span class="n">STOP_WORDS</span> <span class="o">=</span> <span class="n">get_stop_words</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">correct_spelling</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">enchant</span>
+            <span class="n">en</span> <span class="o">=</span> <span class="n">enchant</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="s2">&quot;en_US&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_mapping</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">jellyfish</span> <span class="k">import</span> <span class="n">damerau_levenshtein_distance</span> <span class="k">as</span> <span class="n">dl</span>
+
+                <span class="k">def</span> <span class="nf">map_word</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">max_dl</span><span class="o">=</span><span class="n">max_dl</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">suggestion</span> <span class="o">=</span> <span class="n">en</span><span class="o">.</span><span class="n">suggest</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">dl</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">suggestion</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_dl</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">suggestion</span>
+                    <span class="k">return</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">num_threads</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+                    <span class="n">imap</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap</span><span class="p">(</span><span class="n">map_word</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_index</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+                    <span class="k">if</span> <span class="n">tqdm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">imap</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">imap</span><span class="p">),</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">word_index</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">word_mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">imap</span><span class="p">)</span>
+                    <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_print</span><span class="p">(</span><span class="s2">&quot;Fitting embeddings...&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_index</span>
+        <span class="n">index_items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="n">index_items</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">index_items</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_stats</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">],</span>
+                                          <span class="bp">self</span><span class="o">.</span><span class="n">embedding_stats</span><span class="p">[</span><span class="s1">&#39;std&#39;</span><span class="p">],</span>
+                                          <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">embedding_stats</span><span class="p">[</span><span class="s1">&#39;dims&#39;</span><span class="p">]))</span>
+
+        <span class="n">new_index</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="p">{},</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitting embeddings...&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">index_items</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">:</span> <span class="k">break</span>
+
+            <span class="k">if</span> <span class="n">new_index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">reserved_words</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">reserved_words</span><span class="p">:</span>
+                <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">ignore_stop_words</span> <span class="ow">and</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">STOP_WORDS</span><span class="p">:</span>
+                <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">continue</span>
+
+            <span class="k">elif</span> <span class="n">ignore_chars</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">ignore_matching</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">ignore_matching</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">word</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">99</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{i}</span><span class="s2">/</span><span class="si">{self.vocab_size}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">vector</span>
+                <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">ignore_chars</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">correct_spelling</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">en</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+                <span class="n">suggestion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">suggestion</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+                    <span class="k">continue</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">suggestion</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">idx</span> <span class="o">=</span> <span class="n">new_index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">suggestion</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">vector</span>
+                        <span class="n">new_index</span><span class="p">[</span><span class="n">suggestion</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+                        <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">oov_token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_index</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">oov_token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">new_index</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="o">+</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">[:</span><span class="nb">max</span><span class="p">(</span><span class="n">new_index</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span> <span class="o">=</span> <span class="n">new_index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sequences</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="TextLoader.tokenize"><a class="viewcode-back" href="../../loaders.html#loaders.TextLoader.tokenize">[docs]</a>    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tokenizes a sequence and maps it to corresponding indices from ``word_index``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sequence (iterable, optional): sequence to be tokenized, if None ``self.corpus`` is used</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Indices, if sequence was provided, else sets ``self.sequences`` and returns None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">sequence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">sequence</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">sequence</span>
+
+        <span class="k">if</span> <span class="s1">&#39;class&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_type</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">pad_sequences</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_length</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sequence</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequences</span> <span class="o">=</span> <span class="n">indices</span>
+        <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">indices</span></div>
+
+<div class="viewcode-block" id="TextLoader.make_torch_dataset"><a class="viewcode-back" href="../../loaders.html#loaders.TextLoader.make_torch_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">make_torch_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels_dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Makes a torch.utils.data.Dataset from ``corpus`` or ``self.sequences`` if ``corpus`` is None.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            corpus: corpus of text to make a dataset of</span>
+<span class="sd">            labels (iterable): labels, if there are any</span>
+<span class="sd">            labels_dtype: data type of the labels, if there are any</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An instance of torch.utils.data.Dataset with corpus indices and labels is there are any as data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">corpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequences</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+        <span class="n">sequence_tensor</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sequences</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;predict&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_type</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">sequence_tensor</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                         <span class="n">sequence_tensor</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">elif</span> <span class="s1">&#39;class&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_type</span><span class="p">:</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span> <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span>
+            <span class="n">labels_tensor</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">labels_dtype</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">sequence_tensor</span><span class="p">,</span> <span class="n">labels_tensor</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">class</span> <span class="nc">MonoDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+                <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_tensor</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data_tensor</span> <span class="o">=</span> <span class="n">data_tensor</span>
+
+                <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_tensor</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+                <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_tensor</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">MonoDataset</span><span class="p">(</span><span class="n">sequence_tensor</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span></div>
+
+<div class="viewcode-block" id="TextLoader.save"><a class="viewcode-back" href="../../loaders.html#loaders.TextLoader.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves current state into a file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path: path to save to.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;wb+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_print</span><span class="p">(</span><span class="s2">&quot;Saved.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TextLoader._maybe_print"><a class="viewcode-back" href="../../loaders.html#loaders.TextLoader._maybe_print">[docs]</a>    <span class="k">def</span> <span class="nf">_maybe_print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prints ``string`` if ``self.verbose``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">read_vec</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parses one line of a vec-like file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        string: a line to parse.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        a tuple of (word, embedding)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">word</span><span class="p">,</span> <span class="o">*</span><span class="n">arr</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">word</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

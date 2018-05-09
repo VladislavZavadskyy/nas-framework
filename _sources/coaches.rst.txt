@@ -1,0 +1,32 @@
+Training Classes
+================
+
+.. currentmodule:: coaches
+
+Base
+^^^^
+
+.. autoclass:: CoachBase
+   :members:
+   :private-members:
+
+Architect
+^^^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: ArchitectCoach
+   :members:
+   :private-members:
+
+Feed Forward
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: FeedForwardCoach
+   :members:
+   :private-members:
+
+Recurrent
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. autoclass:: RecurrentCoach
+   :members:
+   :private-members:

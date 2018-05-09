@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Architect &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="index.html"/>
+        <link rel="next" title="Search Spaces" href="searchspaces.html"/>
+        <link rel="prev" title="Documentation for NAS Framework" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Architect</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/architect.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-architect">
+<span id="architect"></span><h1>Architect<a class="headerlink" href="#module-architect" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="architect.Architect">
+<em class="property">class </em><code class="descclassname">architect.</code><code class="descname">Architect</code><span class="sig-paren">(</span><em>search_space</em>, <em>state_dims=(128</em>, <em>128)</em>, <em>cell_type='LSTM'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Architect neural network.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>search_space</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.SearchSpace" title="searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space to which this architect instance belongs</li>
+<li><strong>state_dims</strong> (<em>tuple</em>) – graph encoder cell dimensions</li>
+<li><strong>cell_type</strong> (<em>str</em>) – ‘lstm’ or ‘gru’; graph encoder cell type</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="architect.Architect._subsample">
+<code class="descname">_subsample</code><span class="sig-paren">(</span><em>hidden</em>, <em>explore</em>, <em>search_space</em>, <em>names</em>, <em>representations</em>, <em>output</em>, <em>description</em>, <em>outer_i=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect._subsample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect._subsample" title="Permalink to this definition">¶</a></dt>
+<dd><p>The recursive workhorse of <cite>sample</cite> method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hidden</strong> (<em>list</em>) – previous encoder hidden state</li>
+<li><strong>explore</strong> (<em>bool</em>) – whether to explore the search/action space or exploit only</li>
+<li><strong>search_space</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.SearchSpace" title="searchspaces.SearchSpace"><em>SearchSpace</em></a>) – current level of search space</li>
+<li><strong>names</strong> (<em>list</em>) – names of search spaces up to current level</li>
+<li><strong>output</strong> (<em>defaultdict</em><em>(</em><em>list</em><em>)</em><em>, </em><em>optional</em>) – dict of lists to append outputs to</li>
+<li><strong>description</strong> (<em>dict</em>) – description being generated</li>
+<li><strong>outer_i</strong> (<em>int</em>) – outer iteration ordinal (used in recursion, <cite>None</cite> on depth <cite>0</cite>)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">next hidden state</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="architect.Architect.act">
+<code class="descname">act</code><span class="sig-paren">(</span><em>inputs</em>, <em>hidden</em>, <em>explore</em>, <em>key</em>, <em>output=None</em>, <em>pick=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect.act"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect.act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get action given encoded graph predicted to the moment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputs</strong> (<em>torch.Tensor</em>) – encoded graph representation</li>
+<li><strong>explore</strong> (<em>bool</em>) – whether to explore or exploit only</li>
+<li><strong>hidden</strong> (<em>list</em>) – list of encoder cell(s) hidden states</li>
+<li><strong>key</strong> (<em>str</em>) – key corresponding to policy and value layers</li>
+<li><strong>output</strong> (<em>defaultdict</em><em>(</em><em>list</em><em>)</em><em>, </em><em>optional</em>) – if provided, chosen logprobs, chosen values and
+entropies will be appended to those lists, instead of being returned</li>
+<li><strong>pick</strong> (<em>int</em><em>, </em><em>optional</em>) – index of action to pick instead of sampling or argmax.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">action, hidden state, chosen logprobs, chosen values, entropies</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="architect.Architect.adapt">
+<code class="descname">adapt</code><span class="sig-paren">(</span><em>items</em>, <em>names</em>, <em>outer_i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect.adapt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect.adapt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates layers and updates embedding index given search space dimensions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>items</strong> (<em>iterable</em>) – iterable of tuples corresponding to search space dimensions</li>
+<li><strong>names</strong> (<em>list</em>) – names of search spaces up to current level</li>
+<li><strong>outer_i</strong> (<em>int</em>) – outer iteration ordinal (used in recursion, <cite>None</cite> on depth <cite>0</cite>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="architect.Architect.device">
+<code class="descname">device</code><a class="headerlink" href="#architect.Architect.device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">torch.Device</span></code> on which this architect is located.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="architect.Architect.evaluate_description">
+<code class="descname">evaluate_description</code><span class="sig-paren">(</span><em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect.evaluate_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect.evaluate_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Picks described actions in order to obtain log probabilities, predicted values
+and the entropies of output distributions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>description</strong> (<em>dict</em>) – description to evaluate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>sampled graph, log probabilities and predicted</dt>
+<dd>values of chosen actions, entropies of output distributions</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="architect.Architect.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>input</em>, <em>hidden</em>, <em>key=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a forward path through graph encoder.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">new hidden state if key is None
+else tuple of (logits, values, hidden)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="architect.Architect.init_hidden">
+<code class="descname">init_hidden</code><span class="sig-paren">(</span><em>num_samples</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect.init_hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect.init_hidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes hidden by passing <span class="math notranslate">\(state_0\)</span> embedding and
+zero-initialized hidden state to graph encoder</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="architect.Architect.initialize">
+<code class="descname">initialize</code><span class="sig-paren">(</span><em>search_space</em>, <em>names</em>, <em>outer_i=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively initializes architect, creating value and policy layers and embedding index.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>search_space</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.SearchSpace" title="searchspaces.SearchSpace"><em>SearchSpace</em></a>) – current level of search space</li>
+<li><strong>names</strong> (<em>list</em>) – names of search spaces up to current level</li>
+<li><strong>outer_i</strong> (<em>int</em>) – outer iteration ordinal (used in recursion, <cite>None</cite> on depth <cite>0</cite>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="architect.Architect.is_cuda">
+<code class="descname">is_cuda</code><a class="headerlink" href="#architect.Architect.is_cuda" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns bool value, indicating whether this architect is located on a CUDA device.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="architect.Architect.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes all parameters.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="architect.Architect.sample">
+<code class="descname">sample</code><span class="sig-paren">(</span><em>explore=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect.sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Samples a graph description, using current policy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>explore</strong> – whether to explore or exploit only.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>sampled graph, log probabilities and predicted</dt>
+<dd>values of chosen actions, entropies of output distributions</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="architect.Architect.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>prefix='./'</em>, <em>name=None</em>, <em>include_space=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/architect.html#Architect.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#architect.Architect.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves architect to a file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>prefix</strong> (<em>str</em>) – prefix directory of a future save</li>
+<li><strong>name</strong> (<em>str</em>) – save name</li>
+<li><strong>include_space</strong> (<em>bool</em>) – whether to save the search space along with this architect instance</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">path to which architect was saved (<code class="docutils literal notranslate"><span class="pre">prefix</span></code>/architect/<code class="docutils literal notranslate"><span class="pre">name</span></code>.pth)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="searchspaces.html" class="btn btn-neutral float-right" title="Search Spaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Documentation for NAS Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

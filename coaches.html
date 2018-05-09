@@ -1,0 +1,706 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Training Classes &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="index.html"/>
+        <link rel="next" title="Storage" href="storage.html"/>
+        <link rel="prev" title="Search Spaces" href="searchspaces.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Training Classes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/coaches.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="training-classes">
+<h1>Training Classes<a class="headerlink" href="#training-classes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="base">
+<h2>Base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="coaches.CoachBase">
+<em class="property">class </em><code class="descclassname">coaches.</code><code class="descname">CoachBase</code><span class="sig-paren">(</span><em>model</em>, <em>name='model'</em>, <em>optimizer='adam'</em>, <em>optimizer_kwargs=None</em>, <em>initial_lr=0.001</em>, <em>grad_clip_norm=0.0</em>, <em>scheduler='reduceonplateau'</em>, <em>scheduler_kwargs=None</em>, <em>scheduler_metric='loss'</em>, <em>scheduler_scale='step'</em>, <em>steps_per_epoch=None</em>, <em>metrics=None</em>, <em>log_dir='logs'</em>, <em>tensorboard=None</em>, <em>log_every=10</em>, <em>logger=None</em>, <em>break_on_nan=True</em>, <em>raise_on_nan=True</em>, <em>tqdm=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>A base class for coach classes, which encapsulate training methods and variables and facilitate
+training code reuse.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> (<em>nn.Module</em>) – model to be trained</li>
+<li><strong>name</strong> (<em>str</em>) – name of the model to be trained</li>
+<li><strong>optimizer</strong> (<em>str</em>) – a name of the optimizer type to be used</li>
+<li><strong>optimizer_kwargs</strong> (<em>dict</em>) – keyword arguments passed to optimizer constructor</li>
+<li><strong>initial_lr</strong> (<em>float</em>) – initial learning rate</li>
+<li><strong>grad_clip_norm</strong> (<em>float</em>) – gradient clipping norm, if 0, gradients don’t get clipped</li>
+<li><strong>scheduler</strong> (<em>str</em>) – name of scheduler type to be used</li>
+<li><strong>scheduler_kwargs</strong> (<em>dict</em>) – keyword arguments passed to scheduler constructor</li>
+<li><strong>scheduler_metric</strong> (<em>str</em>) – key of <code class="docutils literal notranslate"><span class="pre">metrics</span></code> dict, to be passed to <code class="docutils literal notranslate"><span class="pre">scheduler.step</span></code></li>
+<li><strong>scheduler_scale</strong> (<em>str</em>) – ‘step’ or ‘epoch’, at what frequency <code class="docutils literal notranslate"><span class="pre">scheduler.step</span></code> gets called</li>
+<li><strong>steps_per_epoch</strong> (<em>int</em>) – number of training steps per one epoch</li>
+<li><strong>metrics</strong> (<em>dict</em>) – dictionary of metrics descriptions</li>
+<li><strong>log_dir</strong> (<em>str</em>) – path to the log directory</li>
+<li><strong>tensorboard</strong> (<em>str</em><em>, </em><em>bool</em><em>, </em><em>SummaryWriter</em>) – if True, SummaryWriter is instantiated in the <code class="docutils literal notranslate"><span class="pre">log_dir</span></code>, if str,
+assumed to be a path at which SummaryWrtier should be instantiated, if SummaryWriter, well, then it’s
+just a SummaryWriter.</li>
+<li><strong>log_every</strong> (<em>int</em>) – number of training steps defining the frequency of logging</li>
+<li><strong>logger</strong> (<em>Logger</em>) – a logger instance to be used for logging</li>
+<li><strong>break_on_nan</strong> (<em>bool</em>) – whether to break training loop if np.nan is encountered in loss</li>
+<li><strong>raise_on_nan</strong> (<em>bool</em>) – whether to raise LossIsNoneException if np.nan is encountered in loss,
+this has higher priority than <code class="docutils literal notranslate"><span class="pre">break_on_nan</span></code></li>
+<li><strong>tqdm</strong> (<em>callable</em><em>, </em><em>optional</em>) – tqdm constructor, if None, default is used</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="coaches.CoachBase._evaluate_metric">
+<code class="descname">_evaluate_metric</code><span class="sig-paren">(</span><em>metric</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase._evaluate_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase._evaluate_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates a metric description.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase._finalize_epoch">
+<code class="descname">_finalize_epoch</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase._finalize_epoch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase._finalize_epoch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finalizes an epoch of training.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase._init_epoch">
+<code class="descname">_init_epoch</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase._init_epoch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase._init_epoch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes an epoch of training.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase._log">
+<code class="descname">_log</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase._log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase._log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs some info about training.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase._training_loop">
+<code class="descname">_training_loop</code><span class="sig-paren">(</span><em>steps</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase._training_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase._training_loop" title="Permalink to this definition">¶</a></dt>
+<dd><p>The training loop, which trains for <code class="docutils literal notranslate"><span class="pre">steps</span></code> steps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase._training_loop_body">
+<code class="descname">_training_loop_body</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase._training_loop_body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase._training_loop_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>The boilerplate of training loop.
+Should consist roughly of getting the loss, backpropagating and
+performing an optimizer step.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="coaches.CoachBase.accumulated_step">
+<code class="descname">accumulated_step</code><a class="headerlink" href="#coaches.CoachBase.accumulated_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns step accumulated across epochs</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="coaches.CoachBase.current_lr">
+<code class="descname">current_lr</code><a class="headerlink" href="#coaches.CoachBase.current_lr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current learning rate (assuming there’s only one optimizer parameter group)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase.decay_lr">
+<code class="descname">decay_lr</code><span class="sig-paren">(</span><em>factor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase.decay_lr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase.decay_lr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies current learning rate by <code class="docutils literal notranslate"><span class="pre">factor</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase.get_current_lr">
+<code class="descname">get_current_lr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase.get_current_lr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase.get_current_lr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current learning rate (assuming there’s only one optimizer parameter group)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="coaches.CoachBase.is_converged">
+<code class="descname">is_converged</code><a class="headerlink" href="#coaches.CoachBase.is_converged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the model is converged</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets all counters and stats to their initial values</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="coaches.CoachBase.step">
+<code class="descname">step</code><a class="headerlink" href="#coaches.CoachBase.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns current epoch step</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase.train">
+<code class="descname">train</code><span class="sig-paren">(</span><em>epochs=1</em>, <em>steps=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train for <code class="docutils literal notranslate"><span class="pre">epochs</span></code> epochs, each of <code class="docutils literal notranslate"><span class="pre">steps</span></code> batches.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>epochs</strong> (<em>int</em>) – number of epochs to train</li>
+<li><strong>steps</strong> (<em>int</em><em>, </em><em>optional</em>) – number of batches in one epoch</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase.train_until_convergence">
+<code class="descname">train_until_convergence</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase.train_until_convergence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase.train_until_convergence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains until the model has converged.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.CoachBase.update_convergence_status">
+<code class="descname">update_convergence_status</code><span class="sig-paren">(</span><em>metric</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/base.html#CoachBase.update_convergence_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.CoachBase.update_convergence_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the convergence status, given a <code class="docutils literal notranslate"><span class="pre">metric</span></code> value.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="architect">
+<h2>Architect<a class="headerlink" href="#architect" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="coaches.ArchitectCoach">
+<em class="property">class </em><code class="descclassname">coaches.</code><code class="descname">ArchitectCoach</code><span class="sig-paren">(</span><em>architect</em>, <em>storage</em>, <em>name='architect'</em>, <em>curriculum=True</em>, <em>epochs_to_increase=10</em>, <em>lower_complexity_chance=0.2</em>, <em>batch_size=8</em>, <em>entropy_gain=0.0001</em>, <em>complexity_penalty=0.0</em>, <em>ppo_clip=0.2</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/arch.html#ArchitectCoach"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.ArchitectCoach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class which facilitates architect network training with PPO algorithm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>architect</strong> (<a class="reference internal" href="architect.html#architect.Architect" title="architect.Architect"><em>Architect</em></a>) – architect to be trained</li>
+<li><strong>name</strong> (<em>str</em>) – name of the architect, defaults to ‘architect’</li>
+<li><strong>storage</strong> (<a class="reference internal" href="storage.html#storage.Storage" title="storage.Storage"><em>Storage</em></a><em>, </em><a class="reference internal" href="storage.html#storage.CurriculumStorage" title="storage.CurriculumStorage"><em>CurriculumStorage</em></a>) – storage of data required for the reinforcement learning of architect</li>
+<li><strong>curriculum</strong> (<em>bool</em>) – whether to train using curriculum training procedure</li>
+<li><strong>epochs_to_increase</strong> (<em>int</em><em>, </em><em>optional</em>) – epochs needed to pass for the level of curriculum to be increased</li>
+<li><strong>random_complexity_chance</strong> (<em>float</em>) – a chance of choosing a lower curriculum level for an epoch</li>
+<li><strong>batch_size</strong> (<em>int</em>) – number of descriptions to be processed per training step</li>
+<li><strong>entropy_gain</strong> (<em>float</em>) – factor by which mean entropy is multiplied before it’s subtracted from total loss</li>
+<li><strong>complexity_penalty</strong> (<em>float</em>) – reward penalty for 1 million parameters</li>
+<li><strong>ppo_clip</strong> (<em>float</em>) – PPO clipping factor</li>
+<li><strong>**kwargs</strong> – keyword arguments passed to CoachBase constructor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="coaches.ArchitectCoach._init_epoch">
+<code class="descname">_init_epoch</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/arch.html#ArchitectCoach._init_epoch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.ArchitectCoach._init_epoch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes an epoch of training.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.ArchitectCoach._training_loop">
+<code class="descname">_training_loop</code><span class="sig-paren">(</span><em>steps</em>, <em>explore=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/arch.html#ArchitectCoach._training_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.ArchitectCoach._training_loop" title="Permalink to this definition">¶</a></dt>
+<dd><p>The training loop, which trains for <code class="docutils literal notranslate"><span class="pre">steps</span></code> steps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.ArchitectCoach._training_loop_body">
+<code class="descname">_training_loop_body</code><span class="sig-paren">(</span><em>batch_indices</em>, <em>progress_bar</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/arch.html#ArchitectCoach._training_loop_body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.ArchitectCoach._training_loop_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>The boilerplate of training loop.
+Should consist roughly of getting the loss, backpropagating and
+performing an optimizer step.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.ArchitectCoach.train">
+<code class="descname">train</code><span class="sig-paren">(</span><em>epochs=1</em>, <em>steps=None</em>, <em>explore=True</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/arch.html#ArchitectCoach.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.ArchitectCoach.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train architect for <cite>epochs</cite> epochs.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="feed-forward">
+<h2>Feed Forward<a class="headerlink" href="#feed-forward" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="coaches.FeedForwardCoach">
+<em class="property">class </em><code class="descclassname">coaches.</code><code class="descname">FeedForwardCoach</code><span class="sig-paren">(</span><em>space</em>, <em>loaders=None</em>, <em>criterion=None</em>, <em>criterion_kwargs=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/feedforward.html#FeedForwardCoach"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.FeedForwardCoach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class which facilitates training of feed forward search spaces or models, based on such spaces,
+given they follow interface defined in scripts.GenericModel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>space</strong> (<em>nn.Module</em>) – SearchSpace or GenericModel and their descendants</li>
+<li><strong>loaders</strong> (<a class="reference internal" href="utils.html#utils.misc.Bunch" title="utils.misc.Bunch"><em>Bunch</em></a>) – bunch of data loaders containing ‘train’ and ‘validation’ keys</li>
+<li><strong>criterion</strong> (<em>str</em>) – name of criterion type to use for loss calculation</li>
+<li><strong>criterion_kwargs</strong> (<em>dict</em>) – keyword arguments passed to the criterion constructor</li>
+<li><strong>**kwargs</strong> – keyword arguments passed to CoachBase constructor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="coaches.FeedForwardCoach._init_epoch">
+<code class="descname">_init_epoch</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/feedforward.html#FeedForwardCoach._init_epoch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.FeedForwardCoach._init_epoch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes an epoch of training.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.FeedForwardCoach._training_loop">
+<code class="descname">_training_loop</code><span class="sig-paren">(</span><em>steps</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/feedforward.html#FeedForwardCoach._training_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.FeedForwardCoach._training_loop" title="Permalink to this definition">¶</a></dt>
+<dd><p>A training loop, which wraps <code class="docutils literal notranslate"><span class="pre">steps</span></code> calls to <code class="docutils literal notranslate"><span class="pre">_training_loop_body</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">steps</span></code> is not specified, defaults to  <code class="docutils literal notranslate"><span class="pre">len(loaders.train)</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.FeedForwardCoach._training_loop_body">
+<code class="descname">_training_loop_body</code><span class="sig-paren">(</span><em>input</em>, <em>labels</em>, <em>description</em>, <em>progress_bar=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/feedforward.html#FeedForwardCoach._training_loop_body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.FeedForwardCoach._training_loop_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>The boilerplate of training loop.
+Roughly consists of getting the loss, backpropagating and
+performing an optimizer step.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.FeedForwardCoach.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><em>description</em>, <em>loader=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/feedforward.html#FeedForwardCoach.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.FeedForwardCoach.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates trained model on data from <code class="docutils literal notranslate"><span class="pre">loader</span></code> or
+<code class="docutils literal notranslate"><span class="pre">self.loaders.validation</span></code> if the former is not specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>description</strong> (<em>dict</em>) – description to evaluate.</li>
+<li><strong>loader</strong> (<em>DataLoader</em><em>, </em><em>optional</em>) – loader with validation data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Model performance stats collected during evaluation</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.FeedForwardCoach.get_loss">
+<code class="descname">get_loss</code><span class="sig-paren">(</span><em>description</em>, <em>inputs</em>, <em>labels</em>, <em>mean=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/feedforward.html#FeedForwardCoach.get_loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.FeedForwardCoach.get_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method which handles calculating loss and all that comes with it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>description</strong> (<em>dict</em>) – description of the graph to evaluate</li>
+<li><strong>inputs</strong> (<em>Tensor</em>) – pretty self-explanatory</li>
+<li><strong>labels</strong> (<em>Tensor</em>) – labels, corresponding to inputs</li>
+<li><strong>mean</strong> (<em>bool</em>) – whether or not to return mean value of losses.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">loss.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.FeedForwardCoach.train">
+<code class="descname">train</code><span class="sig-paren">(</span><em>epochs=1</em>, <em>steps=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/feedforward.html#FeedForwardCoach.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.FeedForwardCoach.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train for <code class="docutils literal notranslate"><span class="pre">epochs</span></code> epochs, each of <code class="docutils literal notranslate"><span class="pre">steps</span></code> batches.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>epochs</strong> (<em>int</em>) – number of epochs to train</li>
+<li><strong>steps</strong> (<em>int</em><em>, </em><em>optional</em>) – number of batches in one epoch</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.FeedForwardCoach.train_until_convergence">
+<code class="descname">train_until_convergence</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/feedforward.html#FeedForwardCoach.train_until_convergence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.FeedForwardCoach.train_until_convergence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains until the model has converged.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.FeedForwardCoach.update_optim">
+<code class="descname">update_optim</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/feedforward.html#FeedForwardCoach.update_optim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.FeedForwardCoach.update_optim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates optimizer for given parameters, retaining current learning rate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> – parameters to optimize.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="recurrent">
+<h2>Recurrent<a class="headerlink" href="#recurrent" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="coaches.RecurrentCoach">
+<em class="property">class </em><code class="descclassname">coaches.</code><code class="descname">RecurrentCoach</code><span class="sig-paren">(</span><em>space</em>, <em>sequence_loss=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/recurrent.html#RecurrentCoach"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.RecurrentCoach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class which facilitates training of recurrent search spaces or models, based on such spaces,
+given they follow interface defined in scripts.GenericModel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>space</strong> (<em>nn.Module</em>) – SearchSpace or GenericModel and their descendants</li>
+<li><strong>sequence_loss</strong> (<em>bool</em>) – wheter to calculate loss based on output sequence rather than the last element of it</li>
+<li><strong>**kwargs</strong> (<em>dict</em>) – keyword arguments passed to FeedForwardCoach constructor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="coaches.RecurrentCoach._training_loop_body">
+<code class="descname">_training_loop_body</code><span class="sig-paren">(</span><em>input</em>, <em>labels</em>, <em>description</em>, <em>preserve_states=True</em>, <em>progress_bar=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/recurrent.html#RecurrentCoach._training_loop_body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.RecurrentCoach._training_loop_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>A training loop, which wraps <code class="docutils literal notranslate"><span class="pre">steps</span></code> calls to <code class="docutils literal notranslate"><span class="pre">_training_loop_body</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">steps</span></code> is not specified, defaults to  <code class="docutils literal notranslate"><span class="pre">len(loaders.train)</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.RecurrentCoach.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><em>description</em>, <em>loader=None</em>, <em>preserve_states=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/recurrent.html#RecurrentCoach.evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.RecurrentCoach.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates trained model on data from <code class="docutils literal notranslate"><span class="pre">loader</span></code> or
+<code class="docutils literal notranslate"><span class="pre">self.loaders.validation</span></code> if the former is not specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>description</strong> (<em>dict</em>) – description to evaluate.</li>
+<li><strong>loader</strong> (<em>DataLoader</em><em>, </em><em>optional</em>) – loader with validation data</li>
+<li><strong>preserve_states</strong> (<em>bool</em>) – whether to preserve states across batches</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Model performance stats collected during evaluation</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.RecurrentCoach.get_loss">
+<code class="descname">get_loss</code><span class="sig-paren">(</span><em>description</em>, <em>inputs</em>, <em>labels</em>, <em>hidden=None</em>, <em>mean=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/recurrent.html#RecurrentCoach.get_loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.RecurrentCoach.get_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method which handles calculating loss and all that comes with it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>description</strong> (<em>dict</em>) – description of the graph to evaluate</li>
+<li><strong>inputs</strong> (<em>Tensor</em>) – pretty self-explanatory</li>
+<li><strong>labels</strong> (<em>Tensor</em>) – labels, corresponding to inputs</li>
+<li><strong>hidden</strong> (<em>list</em><em>, </em><em>tuple</em>) – hidden states passed to the recurrent cell</li>
+<li><strong>mean</strong> (<em>bool</em>) – whether or not to return mean value of losses.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">loss.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="coaches.RecurrentCoach.train">
+<code class="descname">train</code><span class="sig-paren">(</span><em>epochs=1</em>, <em>steps=None</em>, <em>preserve_states=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/coaches/recurrent.html#RecurrentCoach.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#coaches.RecurrentCoach.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train for <code class="docutils literal notranslate"><span class="pre">epochs</span></code> epochs, each of <code class="docutils literal notranslate"><span class="pre">steps</span></code> batches.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>epochs</strong> (<em>int</em>) – number of epochs to train</li>
+<li><strong>steps</strong> (<em>int</em><em>, </em><em>optional</em>) – number of batches in one epoch</li>
+<li><strong>preserve_states</strong> (<em>bool</em>) – whether to preserve states across batches</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="storage.html" class="btn btn-neutral float-right" title="Storage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="searchspaces.html" class="btn btn-neutral" title="Search Spaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

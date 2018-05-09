@@ -1,0 +1,10 @@
+Data Loaders
+============
+
+Text loader
+^^^^^^^^^^^
+
+.. autoclass:: loaders.TextLoader
+   :members:
+   :private-members:
+

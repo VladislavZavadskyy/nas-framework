@@ -1,0 +1,726 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>searchspaces.mlp &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>searchspaces.mlp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for searchspaces.mlp</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="MLPSpace"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace">[docs]</a><span class="k">class</span> <span class="nc">MLPSpace</span><span class="p">(</span><span class="n">SearchSpace</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines a multilayer perceptron search space.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        max_nodes (int): maximum number of layers in a graph</span>
+<span class="sd">        out_sizes (list, tuple): possible numbers of output dims relative to the number of input dims (num_out/num_in)</span>
+<span class="sd">        input_combine_ops (list, tuple): names of operations to combine inputs, if there&#39;s more than one</span>
+<span class="sd">        activations (list, tuple): names of nonlinearities to apply to layer outputs</span>
+<span class="sd">        drop_probs (list, tuple): possible node input dropout probabilities</span>
+<span class="sd">        max_node_inputs (int, str, optional): maximum number of layers to be used as input or expression</span>
+<span class="sd">            to be evaluated, which returns this number. If not specified, defaults to maximum possible number of inputs.</span>
+<span class="sd">        kwargs: keyword arguments to be passed to SearchSpace constructor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">,</span> <span class="n">out_sizes</span><span class="o">=</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                 <span class="n">input_combine_ops</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="s1">&#39;mult&#39;</span><span class="p">,</span> <span class="s1">&#39;avg&#39;</span><span class="p">,</span> <span class="s1">&#39;u_gate&#39;</span><span class="p">,</span> <span class="s1">&#39;concat&#39;</span><span class="p">),</span>
+                 <span class="n">activations</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="s1">&#39;sigmoid&#39;</span><span class="p">,</span> <span class="s1">&#39;tanh&#39;</span><span class="p">),</span>
+                 <span class="n">drop_probs</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">max_node_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_node_inputs</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">max_node_inputs</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;min(</span><span class="si">{max_node_inputs}</span><span class="s1">, outer_i+2)&#39;</span>
+        <span class="k">elif</span> <span class="n">max_node_inputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">max_node_inputs</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;list(range(1, outer_i+2))&#39;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;node&#39;</span><span class="p">,</span>
+                         <span class="n">outer</span><span class="o">=</span><span class="p">{},</span>
+                         <span class="n">num_inner</span><span class="o">=</span><span class="n">int_to_range</span><span class="p">(</span><span class="n">max_nodes</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                         <span class="n">inner</span><span class="o">=</span><span class="p">[</span><span class="n">SearchSpace</span><span class="p">(</span>
+                             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;input&#39;</span><span class="p">,</span>
+                             <span class="n">outer</span><span class="o">=</span><span class="n">OrderedDict</span><span class="p">({</span>
+                                 <span class="s1">&#39;inp_combine&#39;</span><span class="p">:</span> <span class="n">input_combine_ops</span><span class="p">,</span>
+                                 <span class="s1">&#39;out_size&#39;</span><span class="p">:</span> <span class="n">out_sizes</span><span class="p">,</span>
+                                 <span class="s1">&#39;activation&#39;</span><span class="p">:</span> <span class="n">activations</span><span class="p">,</span>
+                                 <span class="s1">&#39;drop_prob&#39;</span><span class="p">:</span> <span class="n">drop_probs</span><span class="p">,</span>
+                             <span class="p">}),</span>
+                             <span class="n">num_inner</span><span class="o">=</span><span class="n">int_to_range</span><span class="p">(</span><span class="n">max_node_inputs</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                             <span class="n">inner</span><span class="o">=</span><span class="p">{</span>
+                                 <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">f</span><span class="s1">&#39;[&quot;graph_input&quot;] + [&quot;node_</span><span class="si">%d</span><span class="s1">&quot;</span><span class="si">%i</span><span class="s1"> for i in range(outer_i)]&#39;</span><span class="p">,</span>
+                             <span class="p">})],</span>
+                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimension_names</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;drop_prob&#39;</span><span class="p">:</span> <span class="s1">&#39;Dropout&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;activation&#39;</span><span class="p">:</span> <span class="s1">&#39;Activation&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;inp_combine&#39;</span><span class="p">:</span> <span class="s1">&#39;Input combine&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;out_size&#39;</span><span class="p">:</span> <span class="s1">&#39;Size multiplier&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dim&#39;</span><span class="p">:</span> <span class="s1">&#39;Dimension&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="c1"># region Curriculum related stuff</span>
+<div class="viewcode-block" id="MLPSpace.force_num_nodes"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.force_num_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">force_num_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Signals architect, that number of nodes should always be ``n``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">force_num_inner</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace.force_num_node_inputs"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.force_num_node_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">force_num_node_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Signals architect, that number of node inputs should always be ``n``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inner</span><span class="o">.</span><span class="n">force_num_inner</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace.release_num_nodes"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.release_num_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">release_num_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Releases constraints set on number of nodes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">release_num_inner</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="MLPSpace.release_num_node_inputs"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.release_num_node_inputs">[docs]</a>    <span class="k">def</span> <span class="nf">release_num_node_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Releases constraints set on number of node inpus.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inner</span><span class="o">.</span><span class="n">release_num_inner</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="MLPSpace.set_curriculum_complexity"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.set_curriculum_complexity">[docs]</a>    <span class="k">def</span> <span class="nf">set_curriculum_complexity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets curriculum complexity ``i``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">force_num_inner</span><span class="p">(</span><span class="n">i</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace.release_all_constraints"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.release_all_constraints">[docs]</a>    <span class="k">def</span> <span class="nf">release_all_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Releases all constraints set by ``force*`` or ``set_curriculum_complexity`` methods.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">release_num_node_inputs</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">release_num_nodes</span><span class="p">()</span></div>
+
+    <span class="c1"># endregion</span>
+
+    <span class="c1"># region Layer ops</span>
+<div class="viewcode-block" id="MLPSpace.get_layer"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.get_layer">[docs]</a>    <span class="k">def</span> <span class="nf">get_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a layer or returns existing.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            input_name: input node id.</span>
+<span class="sd">            unit_name: layer node id.</span>
+<span class="sd">            shape: weight shape (e.g. tuple of (input_node_dim, output_node_dim)).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            nn.Linear: layer in question.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span>
+        <span class="n">constructor</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="n">constructor</span><span class="o">=</span><span class="n">constructor</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace.delete_layer"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.delete_layer">[docs]</a>    <span class="k">def</span> <span class="nf">delete_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes layer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            input_name: input node id.</span>
+<span class="sd">            unit_name: layer node id.</span>
+<span class="sd">            shape: weight shape (e.g. tuple of (input_node_dim, output_node_dim)).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete_layer</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Layer </span><span class="si">{input_name}</span><span class="s1"> -&gt; </span><span class="si">{unit_name}</span><span class="s1"> (</span><span class="si">{shape}</span><span class="s1">) has been deleted.&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace.move_layer"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.move_layer">[docs]</a>    <span class="k">def</span> <span class="nf">move_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Moves layer to ``device``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            input_name: input node id.</span>
+<span class="sd">            unit_name: layer node id.</span>
+<span class="sd">            shape: weight shape (e.g. tuple of (input_node_dim, output_node_dim)).</span>
+<span class="sd">            device (torch.Device): device to move layer to, if not specified defaults to ``self.device``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span>
+        <span class="k">if</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">move_layer</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Layer </span><span class="si">{input_name}</span><span class="s1"> -&gt; </span><span class="si">{unit_name}</span><span class="s1"> (</span><span class="si">{shape}</span><span class="s1">) moved to {str(device)}.&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace.get_index"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.get_index">[docs]</a>    <span class="k">def</span> <span class="nf">get_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns index of layer specified by ``input_name``, ``unit_name`` and ``shape`` is ``self.layers``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer_index</span><span class="p">,</span> <span class="o">*</span><span class="n">key</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace.layer_exists"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.layer_exists">[docs]</a>    <span class="k">def</span> <span class="nf">layer_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns layer&#39;s existence status.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">layer_exists</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace._init_layer"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace._init_layer">[docs]</a>    <span class="k">def</span> <span class="nf">_init_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_init_layer</span><span class="p">(</span><span class="n">module</span><span class="p">,</span>
+                            <span class="n">weight_init</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">xavier_normal_</span><span class="p">,</span>
+                            <span class="n">bias_init</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">constant_</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span></div>
+
+    <span class="c1"># endregion</span>
+
+    <span class="c1"># region Parameter and memory management</span>
+<div class="viewcode-block" id="MLPSpace.parameter_count"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.parameter_count">[docs]</a>    <span class="k">def</span> <span class="nf">parameter_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">create_nonexistent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns tuple of existing, new and total existing parameter counts of the model described by ``description``</span>
+<span class="sd">        and a list of keys corresponding to used layers.</span>
+<span class="sd">        if ``create_nonexistent`` is True, creates described layers along the way.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dim&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The shapes are not resolved. &quot;</span>
+                             <span class="s2">&quot;Please pass the result of `MLPSpace.resolve_shapes` as description next time.&quot;</span><span class="p">)</span>
+
+        <span class="p">(</span><span class="n">existing</span><span class="p">,</span> <span class="n">new</span><span class="p">),</span> <span class="n">used_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count_related_params</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="n">create_nonexistent</span><span class="p">)</span>
+
+        <span class="n">total_existing</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="n">total_existing</span> <span class="o">+=</span> <span class="n">param_count</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">existing</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">total_existing</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="n">used_dict</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="MLPSpace._count_related_params"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace._count_related_params">[docs]</a>    <span class="k">def</span> <span class="nf">_count_related_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="n">space_name</span><span class="p">,</span> <span class="n">create_nonexistent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns tuple of (existing and new) parameter counts of the model described by ``desc``</span>
+<span class="sd">        and a ``dict`` with of keys of used layers.</span>
+<span class="sd">        if ``create_nonexistent`` is True, creates described layers along the way.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">param_count</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># 0: existing, 1: new</span>
+        <span class="n">used_dict</span> <span class="o">=</span> <span class="n">nested_defaultdict</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">unit_id</span><span class="p">,</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">desc</span><span class="p">[</span><span class="n">space_name</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">unit_name</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{space_name}</span><span class="s1">_</span><span class="si">{unit_id}</span><span class="s1">&#39;</span>
+            <span class="n">total_input_shape</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">for</span> <span class="n">input_name</span> <span class="ow">in</span> <span class="n">unit</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]:</span>
+                <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resolve_shape</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="s1">&#39;None&#39;</span><span class="p">),</span> <span class="n">unit</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">])</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_unnecessary_layers</span><span class="p">)</span> \
+                        <span class="ow">and</span> <span class="n">unit</span><span class="p">[</span><span class="s1">&#39;inp_combine&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;concat&#39;</span><span class="p">:</span>
+
+                    <span class="n">is_new</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer_exists</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+                    <span class="n">param_count</span><span class="p">[</span><span class="n">is_new</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">+</span> <span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span>
+
+                    <span class="n">used_dict</span><span class="p">[</span><span class="n">input_name</span><span class="p">][</span><span class="n">unit_name</span><span class="p">][</span><span class="n">shape</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+                    <span class="k">if</span> <span class="n">is_new</span> <span class="ow">and</span> <span class="n">create_nonexistent</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+
+                <span class="n">total_input_shape</span> <span class="o">+=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_layer_after_combine</span> <span class="ow">or</span> <span class="n">unit</span><span class="p">[</span><span class="s1">&#39;inp_combine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;concat&#39;</span><span class="p">:</span>
+                <span class="n">input_shape</span> <span class="o">=</span> <span class="n">total_input_shape</span> <span class="k">if</span> <span class="n">unit</span><span class="p">[</span><span class="s1">&#39;inp_combine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;concat&#39;</span> <span class="k">else</span> <span class="n">unit</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">]</span>
+                <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_shape</span><span class="p">,</span> <span class="n">unit</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">])</span>
+
+                <span class="n">is_new</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer_exists</span><span class="p">(</span><span class="s1">&#39;combine&#39;</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+                <span class="n">param_count</span><span class="p">[</span><span class="n">is_new</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">+</span> <span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span>
+
+                <span class="n">used_dict</span><span class="p">[</span><span class="s1">&#39;combine&#39;</span><span class="p">][</span><span class="n">unit_name</span><span class="p">][</span><span class="n">shape</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="k">if</span> <span class="n">is_new</span> <span class="ow">and</span> <span class="n">create_nonexistent</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="s1">&#39;combine&#39;</span><span class="p">,</span> <span class="n">unit_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">param_count</span><span class="p">,</span> <span class="n">used_dict</span></div>
+
+<div class="viewcode-block" id="MLPSpace.reset"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resets search space to initial state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">usage_count</span> <span class="o">=</span> <span class="n">nested_defaultdict</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_used</span> <span class="o">=</span> <span class="n">nested_defaultdict</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer_index</span> <span class="o">=</span> <span class="n">nested_defaultdict</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer_created</span> <span class="o">=</span> <span class="n">nested_defaultdict</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+
+        <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_cuda</span><span class="p">:</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">empty_cache</span><span class="p">()</span></div>
+
+    <span class="c1"># endregion</span>
+
+    <span class="c1"># region Description processing</span>
+<div class="viewcode-block" id="MLPSpace._add_agraph_unit"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace._add_agraph_unit">[docs]</a>    <span class="k">def</span> <span class="nf">_add_agraph_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="n">gv</span><span class="o">.</span><span class="n">AGraph</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">combine_op</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a single unit to ``gv.Agraph``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            graph: graph to add unit to.</span>
+<span class="sd">            unit: unit description.</span>
+<span class="sd">            name: unit name.</span>
+<span class="sd">            combine_op: unit&#39;s input combination op.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unit</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">unit</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">combine_op</span> <span class="o">==</span> <span class="s1">&#39;u_gate&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unit</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_agraph_unit</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_gate_fallback</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">unit</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">unit</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
+                    <span class="n">unit</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">][:</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">op_node</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">unit</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])))</span> <span class="o">+</span> <span class="n">combine_op</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">op_node</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">combine_op</span><span class="p">,</span> <span class="o">**</span><span class="n">op_attrs</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">input_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unit</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">combine_op</span> <span class="o">==</span> <span class="s1">&#39;u_gate&#39;</span><span class="p">:</span>
+                    <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">op_node</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;u&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">idx</span> <span class="k">else</span> <span class="n">idx</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">op_node</span><span class="p">)</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">op_node</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace._add_agraph_units"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace._add_agraph_units">[docs]</a>    <span class="k">def</span> <span class="nf">_add_agraph_units</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="n">gv</span><span class="o">.</span><span class="n">AGraph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds units to ``AGraph``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            description (dict): description of a graph</span>
+<span class="sd">            graph (gv.AGraph): pygraphviz graph to add units to</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            gv.AGraph: graph with units added</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">input_dim</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;input_dim&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">input_dim</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;&lt;BR/&gt;Dimension: </span><span class="si">{description[&quot;input_dim&quot;]}</span><span class="s1">&#39;</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="s1">&#39;graph_input&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;&lt;Input&lt;sub&gt;t&lt;/sub&gt;</span><span class="si">{input_dim}</span><span class="s1">&gt;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">input_attrs</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">description</span><span class="p">[</span><span class="s1">&#39;num_node&#39;</span><span class="p">]):</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">node_name</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;node_</span><span class="si">{i}</span><span class="s1">&#39;</span>
+
+            <span class="n">label</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;&lt;&#39;</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;num_input&#39;</span><span class="p">]:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s1">&#39;inp_combine&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_agraph_unit</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">node_name</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">label</span> <span class="o">+=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.dimension_names[k]}</span><span class="s1">: </span><span class="si">{v}</span><span class="s1">&lt;BR/&gt;&#39;</span>
+            <span class="n">label</span> <span class="o">+=</span> <span class="s1">&#39;&gt;&#39;</span>
+            <span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">node_name</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="o">**</span><span class="n">node_attrs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">graph</span></div>
+
+<div class="viewcode-block" id="MLPSpace.fill_the_gaps"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.fill_the_gaps">[docs]</a>    <span class="k">def</span> <span class="nf">fill_the_gaps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fills gaps in the description.</span>
+
+<span class="sd">        If a certain search space dimension has only one possible value, it is ignored by architect and thus</span>
+<span class="sd">        is absent in descriptions generated by it. This method fills such description &#39;gaps&#39; with that only value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            description (dict): graph description</span>
+<span class="sd">        Returns:</span>
+<span class="sd">             dict: graph description with default values filled in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SearchSpace</span><span class="o">.</span><span class="n">_fill_the_gaps</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace.resolve_shapes"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.resolve_shapes">[docs]</a>    <span class="k">def</span> <span class="nf">resolve_shapes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desc</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts relative shapes to absolute.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            desc: description of a graph.</span>
+<span class="sd">            input: graphs input or its shape.</span>
+<span class="sd">            method: method to resolve shape ambiguity; either &#39;min&#39;, &#39;max&#39; or &#39;mean&#39;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: description with shapes resolved.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">method</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape_resolution_method</span>
+        <span class="k">return</span> <span class="n">SearchSpace</span><span class="o">.</span><span class="n">_resolve_shapes</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLPSpace.connect"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">picking_method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resolves graph&#39;s connections, by picking requested input names</span>
+<span class="sd">        from available input names using ``picking_method``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            description (dict): description to be connected</span>
+<span class="sd">            picking_method (str): name of the input picking method</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: connected description</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+
+        <span class="n">picking_method</span> <span class="o">=</span> <span class="n">picking_method</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_picking_method</span>
+        <span class="n">node_inputs</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;[&quot;graph_input&quot;] + [&quot;node_</span><span class="si">%d</span><span class="s1">&quot;</span><span class="si">%i</span><span class="s1"> for i in range(outer_i)]&#39;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_connect</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">picking_method</span><span class="p">,</span> <span class="n">node_inputs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">description</span></div>
+
+<div class="viewcode-block" id="MLPSpace.connect_leafs"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.connect_leafs">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">connect_leafs</span><span class="p">(</span><span class="n">description</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connects leaf nodes, which otherwise would be pruned, to the output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">useful_nodes</span> <span class="o">=</span> <span class="n">MLPSpace</span><span class="o">.</span><span class="n">walk_graph</span><span class="p">(</span><span class="n">desc</span><span class="p">)</span>
+        <span class="n">leaf_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">useful_nodes</span><span class="p">))</span>
+        <span class="n">last_node</span> <span class="o">=</span> <span class="n">desc</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="nb">max</span><span class="p">(</span><span class="n">desc</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+        <span class="n">last_node</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">last_node</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">leaf_nodes</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">desc</span></div>
+
+<div class="viewcode-block" id="MLPSpace.prune"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.prune">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">prune</span><span class="p">(</span><span class="n">description</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns modified copy of the ``description``, which doesn&#39;t contain unused units and boolean value</span>
+<span class="sd">        indicating whether the description is viable (i.e. contains used units).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">depends_on_input</span><span class="p">,</span> <span class="n">useful_nodes</span> <span class="o">=</span> <span class="n">MLPSpace</span><span class="o">.</span><span class="n">walk_graph</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">depends_on_input</span><span class="p">:</span> <span class="k">return</span> <span class="p">{},</span> <span class="kc">False</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+
+        <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;graph_input&#39;</span><span class="p">:</span> <span class="s1">&#39;graph_input&#39;</span><span class="p">}</span>
+        <span class="n">mapping</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="p">(</span><span class="n">f</span><span class="s1">&#39;node_</span><span class="si">{i[1]}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;node_</span><span class="si">{i[0]}</span><span class="s1">&#39;</span><span class="p">),</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">useful_nodes</span><span class="p">))</span>
+        <span class="p">)</span>
+
+        <span class="n">SearchSpace</span><span class="o">.</span><span class="n">_prune</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
+
+        <span class="n">viable</span> <span class="o">=</span> <span class="n">depends_on_input</span> <span class="ow">and</span> <span class="n">desc</span><span class="p">[</span><span class="s1">&#39;num_node&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">viable</span> <span class="o">&amp;=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">desc</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">desc</span><span class="p">,</span> <span class="n">viable</span></div>
+
+<div class="viewcode-block" id="MLPSpace.walk_graph"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.walk_graph">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">walk_graph</span><span class="p">(</span><span class="n">description</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Walks described graph bakwards to determine which nodes are connected</span>
+<span class="sd">        to the last one (which is assumed to be output).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            description (dict): description of a graph.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: ((bool) whether graph depends on input,</span>
+<span class="sd">                    (set) of useful node ids)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">persistent_nodes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;graph_input&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">()}</span>
+        <span class="n">reachable_nodes</span> <span class="o">=</span> <span class="n">SearchSpace</span><span class="o">.</span><span class="n">_walk_graph</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="n">persistent_nodes</span><span class="p">)</span>
+
+        <span class="n">useful_nodes</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="s1">&#39;graph_input&#39;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reachable_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="n">useful_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">useful_nodes</span><span class="p">))</span>
+
+        <span class="n">output_node_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">description</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">depends_on_input</span> <span class="o">=</span> <span class="n">output_node_id</span> <span class="ow">in</span> <span class="n">useful_nodes</span>
+
+        <span class="k">return</span> <span class="n">depends_on_input</span><span class="p">,</span> <span class="n">useful_nodes</span></div>
+
+    <span class="c1"># endregion</span>
+
+<div class="viewcode-block" id="MLPSpace.forward"><a class="viewcode-back" href="../../searchspaces.html#searchspaces.MLPSpace.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Does one forward pass through the described graph.</span>
+<span class="sd">        Call ``prepare`` first, and use ``forward`` method of the returned module instead.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            inputs (torch.Tensor): inputs to be forwarded</span>
+<span class="sd">            description (dict): description of a graph to forward through</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">description</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;input&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The description is not connected. &quot;</span>
+                             <span class="s2">&quot;Please pass the result of `MLPSpace.connect(description)` next time.&quot;</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">inputs</span><span class="p">),</span> <span class="n">f</span><span class="s1">&#39;How dare you pass {type(inputs)} to me?&#39;</span>
+        <span class="k">assert</span> <span class="n">inputs</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Input shape must be [batch, input_dim]&#39;</span>
+
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;graph_input&#39;</span><span class="p">:</span> <span class="n">inputs</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">node_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">description</span><span class="p">[</span><span class="s1">&#39;num_node&#39;</span><span class="p">]):</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="n">node_id</span><span class="p">]</span>
+            <span class="n">node_name</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;node_</span><span class="si">{node_id}</span><span class="s1">&#39;</span>
+
+            <span class="n">interm_outs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">input_name</span> <span class="ow">in</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]:</span>
+                <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="n">input_name</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_unnecessary_layers</span><span class="p">)</span> \
+                        <span class="ow">and</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;inp_combine&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;concat&#39;</span><span class="p">:</span>
+
+                    <span class="n">interm_inp</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="n">input_name</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;drop_prob&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span><span class="p">:</span>
+                        <span class="n">interm_inp</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;drop_prob&#39;</span><span class="p">])(</span><span class="n">interm_inp</span><span class="p">)</span>
+
+                    <span class="n">layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="n">input_name</span><span class="p">,</span> <span class="n">node_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+                    <span class="n">interm_outs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="p">(</span><span class="n">interm_inp</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">interm_outs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="n">input_name</span><span class="p">])</span>
+
+            <span class="n">outputs</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combine_tensors</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;inp_combine&#39;</span><span class="p">],</span> <span class="n">interm_outs</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_layer_after_combine</span> <span class="ow">or</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;inp_combine&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;concat&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;drop_prob&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span><span class="p">:</span>
+                    <span class="n">outputs</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;drop_prob&#39;</span><span class="p">])(</span><span class="n">outputs</span><span class="p">[</span><span class="n">node_name</span><span class="p">])</span>
+                <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">node</span><span class="p">[</span><span class="s1">&#39;dim&#39;</span><span class="p">])</span>
+                <span class="n">layer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="s1">&#39;combine&#39;</span><span class="p">,</span> <span class="n">node_name</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+                <span class="n">outputs</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="n">node_name</span><span class="p">])</span>
+
+            <span class="n">outputs</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_activation</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s1">&#39;activation&#39;</span><span class="p">])(</span><span class="n">outputs</span><span class="p">[</span><span class="n">node_name</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">outputs</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span>  <span class="c1"># Assuming last node_name belongs to the last node</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

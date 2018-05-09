@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Scripts &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="index.html"/>
+        <link rel="next" title="Utility functions and classes" href="utils.html"/>
+        <link rel="prev" title="Storage" href="storage.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Scripts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/scripts.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="scripts">
+<h1>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-scripts.train_generic">
+<span id="reusable-training-functions"></span><h2>Reusable training functions<a class="headerlink" href="#module-scripts.train_generic" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scripts.train_generic.GenericModel">
+<em class="property">class </em><code class="descclassname">scripts.train_generic.</code><code class="descname">GenericModel</code><span class="sig-paren">(</span><em>space</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#GenericModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.GenericModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic model template to be used as a wrapper for search space.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>space</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.MLPSpace" title="searchspaces.MLPSpace"><em>MLPSpace</em></a>) – search space being wrapped</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="scripts.train_generic.GenericModel.device">
+<code class="descname">device</code><a class="headerlink" href="#scripts.train_generic.GenericModel.device" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Returns</em> – <code class="docutils literal notranslate"><span class="pre">torch.Device</span></code> on which <code class="docutils literal notranslate"><span class="pre">self.space</span></code> is located.
+Should be also the device of any other instance’s module.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scripts.train_generic.GenericModel.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#GenericModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.GenericModel.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="scripts.train_generic.GenericModel.prepare">
+<code class="descname">prepare</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#GenericModel.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.GenericModel.prepare" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for the <code class="docutils literal notranslate"><span class="pre">space.prepare</span></code> call.
+Useful when inputs passed to this wrapper have a shape different from the one of inputs passed to search space.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="scripts.train_generic.evaluate">
+<code class="descclassname">scripts.train_generic.</code><code class="descname">evaluate</code><span class="sig-paren">(</span><em>descriptions</em>, <em>worker_fn</em>, <em>gpu_indices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launch the workers to evaluate descriptions in parallel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>descriptions</strong> (<em>list</em>) – descriptions to be evaluated</li>
+<li><strong>worker_fn</strong> (<em>callable</em>) – worker callable</li>
+<li><strong>gpu_indices</strong> (<em>list</em>) – list of gpu indices to run on</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list of (description, reward, device_idx) tuples</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="scripts.train_generic.hash_description">
+<code class="descclassname">scripts.train_generic.</code><code class="descname">hash_description</code><span class="sig-paren">(</span><em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#hash_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.hash_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to create a consistent description representation and hash it.
+Usually fails.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="scripts.train_generic.prepare">
+<code class="descclassname">scripts.train_generic.</code><code class="descname">prepare</code><span class="sig-paren">(</span><em>space_proto</em>, <em>curriculum</em>, <em>log_dir</em>, <em>resume</em>, <em>architect_batch_size</em>, <em>architect_steps_per_epoch</em>, <em>input_shape</em>, <em>load_architect</em>, <em>max_curriculum_complexity=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.prepare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes training session.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>space_proto</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.SearchSpace" title="searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space prototype</li>
+<li><strong>curriculum</strong> (<em>bool</em>) – whether to prepare for a curriculum training session</li>
+<li><strong>log_dir</strong> (<em>str</em>) – path to the log directory</li>
+<li><strong>resume</strong> (<em>boot</em>) – whether to attempt to resume a previous session</li>
+<li><strong>architect_batch_size</strong> (<em>int</em>) – number of samples processed per training step</li>
+<li><strong>architect_steps_per_epoch</strong> (<em>int</em>) – number of steps per epoch of architect training</li>
+<li><strong>input_shape</strong> (<em>list</em><em>, </em><em>tuple</em><em>, </em><em>torch.Size</em>) – shape of the inputs</li>
+<li><strong>load_architect</strong> (<em>bool</em>) – if True architect will be loaded, and won’t be trained
+if no graphs were evaluated on current loop iteration.</li>
+<li><strong>max_curriculum_complexity</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum level of curriculum complexity,
+can be ommited if <code class="docutils literal notranslate"><span class="pre">curriculum</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Architect and an ArchitectCoach</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="scripts.train_generic.sample_loop">
+<code class="descclassname">scripts.train_generic.</code><code class="descname">sample_loop</code><span class="sig-paren">(</span><em>arch</em>, <em>storage</em>, <em>space_proto</em>, <em>input_shape</em>, <em>desired_storage_len</em>, <em>append_deterministic=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#sample_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.sample_loop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description sampling loop.</p>
+<p>Samples description given an architect and a space prototype, then perprocesses them by applying
+<code class="docutils literal notranslate"><span class="pre">space_proto.preprocess</span></code> method with default parameters, if description is viable after that,
+appends it to the list and puts it into storage. Loop stops when the storage length reaches
+<code class="docutils literal notranslate"><span class="pre">desired_storage_len</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>arch</strong> (<a class="reference internal" href="architect.html#architect.Architect" title="architect.Architect"><em>Architect</em></a>) – architect instance</li>
+<li><strong>storage</strong> (<a class="reference internal" href="storage.html#storage.Storage" title="storage.Storage"><em>Storage</em></a><em>, </em><a class="reference internal" href="storage.html#storage.CurriculumStorage" title="storage.CurriculumStorage"><em>CurriculumStorage</em></a>) – storage instance</li>
+<li><strong>space_proto</strong> (<em>SeachSpace</em>) – search space prototype</li>
+<li><strong>input_shape</strong> (<em>list</em><em>, </em><em>tuple</em><em>, </em><em>torch.Size</em>) – input shape</li>
+<li><strong>desired_storage_len</strong> (<em>int</em>) – the length storage should have when the loop is completed</li>
+<li><strong>append_deterministic</strong> (<em>bool</em>) – whehter to append description obtained by deterministically choosing the actions
+with the highest probability in the architect’s output distribution. If it would be the only description in
+resulting evaluation list, this argument will be ignored.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of sampled but not evaluated descriptions.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="scripts.train_generic.train_curriculum">
+<code class="descclassname">scripts.train_generic.</code><code class="descname">train_curriculum</code><span class="sig-paren">(</span><em>space_proto</em>, <em>worker</em>, <em>input_shape</em>, <em>max_complexity</em>, <em>log_dir</em>, <em>resume</em>, <em>architect_steps_per_epoch</em>, <em>architect_batch_size</em>, <em>architect_lr_decay</em>, <em>storage_surplus_factor</em>, <em>num_gpus</em>, <em>gpu_idx</em>, <em>epochs_per_loop</em>, <em>load_architect</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#train_curriculum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.train_curriculum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Curriculum architect training procedure.
+Includes sampling descriptions with complexity <span class="math notranslate">\(i\)</span>, evaluating them, train architect and start over again
+with complexity <span class="math notranslate">\(i+1\)</span>.
+When <code class="docutils literal notranslate"><span class="pre">max_compexity</span></code> is reached, disables curriculum, flattens <code class="xref py py-class docutils literal notranslate"><span class="pre">CurriculumStorage</span></code> and trains plainly
+from then on.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>space_proto</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.SearchSpace" title="searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space prototype</li>
+<li><strong>worker</strong> (<em>callable</em>) – worker callable</li>
+<li><strong>input_shape</strong> (<em>tuple</em><em>, </em><em>list</em><em>, </em><em>torch.Size</em>) – input’s shape</li>
+<li><strong>max_complexity</strong> (<em>int</em>) – maximum  curriculum complexity</li>
+<li><strong>log_dir</strong> (<em>str</em>) – path to the log directory</li>
+<li><strong>resume</strong> (<em>bool</em>) – whether  to try resuming the previous session</li>
+<li><strong>architect_batch_size</strong> (<em>int</em>) – number of samples processed per training step</li>
+<li><strong>architect_steps_per_epoch</strong> (<em>int</em>) – number of steps per epoch of architect training</li>
+<li><strong>architect_lr_decay</strong> (<em>float</em>) – architect learning rate decay factor,
+which is applied every <code class="docutils literal notranslate"><span class="pre">epochs_per_loop</span></code> epochs.</li>
+<li><strong>storage_surplus_factor</strong> (<em>float</em>) – the factor by which number of stored
+data points (description-rewards) must surpass minimum required
+at the current curriculum level</li>
+<li><strong>num_gpus</strong> (<em>int</em>) – number of GPUs to use</li>
+<li><strong>gpu_idx</strong> (<em>str</em><em>, </em><em>optional</em>) – string of comma separated dpu indices. if <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">range(num_gpus)</span></code> is used.</li>
+<li><strong>epochs_per_loop</strong> (<em>int</em>) – number of architect training epochs per one loop</li>
+<li><strong>load_architect</strong> (<em>bool</em>) – if True architect will be loaded, and won’t be trained
+if no graphs were evaluated on current loop iteration.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">On keyboard interrupt returns storage filled with all that’s benn found and evaluated.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="scripts.train_generic.train_plain">
+<code class="descclassname">scripts.train_generic.</code><code class="descname">train_plain</code><span class="sig-paren">(</span><em>space_proto</em>, <em>worker</em>, <em>input_shape</em>, <em>log_dir</em>, <em>resume</em>, <em>architect_steps_per_epoch</em>, <em>architect_batch_size</em>, <em>architect_lr_decay</em>, <em>num_gpus</em>, <em>gpu_idx</em>, <em>epochs_per_loop</em>, <em>load_architect</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#train_plain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.train_plain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Architect training procedure.
+Includes sampling descriptions, evaluating them, train architect and start over again
+with complexity i+1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>space_proto</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.SearchSpace" title="searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space prototype</li>
+<li><strong>worker</strong> (<em>callable</em>) – worker callable</li>
+<li><strong>input_shape</strong> (<em>tuple</em><em>, </em><em>list</em><em>, </em><em>torch.Size</em>) – input’s shape</li>
+<li><strong>log_dir</strong> (<em>str</em>) – path to the log directory</li>
+<li><strong>resume</strong> (<em>bool</em>) – whether  to try resuming the previous session</li>
+<li><strong>architect_batch_size</strong> (<em>int</em>) – number of samples processed per training step</li>
+<li><strong>architect_steps_per_epoch</strong> (<em>int</em>) – number of steps per epoch of architect training</li>
+<li><strong>architect_lr_decay</strong> (<em>float</em>) – architect learning rate decay factor,
+which is applied every <code class="docutils literal notranslate"><span class="pre">epochs_per_loop</span></code> epochs.</li>
+<li><strong>num_gpus</strong> (<em>int</em>) – number of GPUs to use</li>
+<li><strong>gpu_idx</strong> (<em>str</em><em>, </em><em>optional</em>) – string of comma separated dpu indices. if <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">range(num_gpus)</span></code> is used.</li>
+<li><strong>epochs_per_loop</strong> (<em>int</em>) – number of architect training epochs per one loop</li>
+<li><strong>load_architect</strong> (<em>bool</em>) – if True architect will be loaded, and won’t be trained
+if no graphs were evaluated on current loop iteration.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">On keyboard interrupt returns storage filled with all that’s benn found and evaluated.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="scripts.train_generic.worker_init">
+<code class="descclassname">scripts.train_generic.</code><code class="descname">worker_init</code><span class="sig-paren">(</span><em>description</em>, <em>log_dir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_generic.html#worker_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_generic.worker_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a worker process.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>device_idx</strong> (<em>int</em>) – CUDA device index for the worker to work on</li>
+<li><strong>description</strong> (<em>dict</em>) – description for the worker to evaluate</li>
+<li><strong>log_dir</strong> (<em>str</em>) – path to a directory where logs shall be stored</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">logger instance
+summary_writer (SummaryWriter): summary writer assigned to this worker
+description_dir (str): path of a directory, to which passed description has been assigned</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">logger</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-scripts.train_toxic">
+<span id="jigsaw-toxic-comment-dataset-training"></span><h2>Jigsaw Toxic Comment dataset training<a class="headerlink" href="#module-scripts.train_toxic" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="scripts.train_toxic.ToxicModel">
+<em class="property">class </em><code class="descclassname">scripts.train_toxic.</code><code class="descname">ToxicModel</code><span class="sig-paren">(</span><em>space</em>, <em>embedding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_toxic.html#ToxicModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_toxic.ToxicModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (one of many possible) model, for Jigsaw Toxic Comment dataset.
+This one uses concatenated 1D average and max pooling after unrolled
+<code class="docutils literal notranslate"><span class="pre">RNNSpace</span></code> cell output as an input to the last linear.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>space</strong> (<a class="reference internal" href="searchspaces.html#searchspaces.RNNSpace" title="searchspaces.RNNSpace"><em>RNNSpace</em></a>) – a space</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="scripts.train_toxic.ToxicModel.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_toxic.html#ToxicModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_toxic.ToxicModel.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="scripts.train_toxic.ToxicModel.prepare">
+<code class="descname">prepare</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_toxic.html#ToxicModel.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_toxic.ToxicModel.prepare" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for the <code class="docutils literal notranslate"><span class="pre">space.prepare</span></code> function.</p>
+<p>It’s needed since actual input shape differs from
+passed as inputs are indices passed through embedding.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>inputs</strong> – </li>
+<li><strong>description</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="scripts.train_toxic.ToxicModel.set_linear">
+<code class="descname">set_linear</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_toxic.html#ToxicModel.set_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_toxic.ToxicModel.set_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets <code class="docutils literal notranslate"><span class="pre">self.linear</span></code> to a new linear layer with weight matrix of shape <code class="docutils literal notranslate"><span class="pre">(size,</span> <span class="pre">6)</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>size</strong> – output of the penultimate layer (state_0 shape)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="scripts.train_toxic.toxic_worker">
+<code class="descclassname">scripts.train_toxic.</code><code class="descname">toxic_worker</code><span class="sig-paren">(</span><em>description</em>, <em>device_queue</em>, <em>log_dir</em>, <em>data_dir</em>, <em>batch_size</em>, <em>initial_lr</em>, <em>current_complexity</em>, <em>adaptive_batch_size</em>, <em>min_batch_size</em>, <em>max_batch_size</em>, <em>batch_size_decay</em>, <em>keep_data_on_device</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_toxic.html#toxic_worker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_toxic.toxic_worker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concurrent description evaluator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>description</strong> (<em>dict</em>) – description to be evaluated</li>
+<li><strong>device_queue</strong> (<em>Queue</em>) – a queue with available CUDA devices indices</li>
+<li><strong>log_dir</strong> (<em>str</em>) – path to log directory</li>
+<li><strong>data_dir</strong> (<em>str</em>) – path to the data directory</li>
+<li><strong>batch_size</strong> (<em>int</em>) – default batch size</li>
+<li><strong>initial_lr</strong> (<em>float</em>) – <code class="docutils literal notranslate"><span class="pre">model</span></code>’s initial earning rate</li>
+<li><strong>current_complexity</strong> (<em>int</em>) – current curriculum complexity level.</li>
+<li><strong>adaptive_batch_size</strong> (<em>bool</em>) – whether to use adaptive batch size.</li>
+<li><strong>min_batch_size</strong> (<em>int</em>) – the lowest possible batch size if using adaptive batch size.</li>
+<li><strong>max_batch_size</strong> (<em>int</em>) – the highest (and default) possible batch size if using adaptive batch size.</li>
+<li><strong>batch_size_decay</strong> (<em>float</em>) – factor to decay batch size by, if OOM has been encountered.</li>
+<li><strong>keep_data_on_device</strong> (<em>bool</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> <code class="docutils literal notranslate"><span class="pre">datasets</span></code> will be transferred to device memory.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>Tuple of (description, mean_auc, device_idx).</p>
+<p>If loss is nan – mean_auc = -1.</p>
+<p>If OOM was raised and <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">adaptive_batch_size</span></code> or using <code class="docutils literal notranslate"><span class="pre">min_batch_size</span></code> causes OOM – mean_auc=None.</p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="scripts.train_toxic.train_toxic">
+<code class="descclassname">scripts.train_toxic.</code><code class="descname">train_toxic</code><span class="sig-paren">(</span><em>data_dir</em>, <em>val_fraction</em>, <em>child_batch_size</em>, <em>force_perprocess</em>, <em>max_states</em>, <em>max_nodes</em>, <em>search_space_kwargs</em>, <em>num_gpus</em>, <em>log_dir</em>, <em>resume</em>, <em>storage_surplus_factor</em>, <em>architect_batch_size</em>, <em>architect_epoch_steps</em>, <em>adaptive_batch_size</em>, <em>min_batch_size</em>, <em>max_batch_size</em>, <em>child_lr</em>, <em>keep_data_on_device</em>, <em>batch_size_decay</em>, <em>gpu_idx</em>, <em>load_architect</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/train_toxic.html#train_toxic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#scripts.train_toxic.train_toxic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains architect (performs NAS) of Jigsaw Toxic Comment dataset.
+See cli help, for parameter description.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="utils.html" class="btn btn-neutral float-right" title="Utility functions and classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="storage.html" class="btn btn-neutral" title="Storage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>utils.torch &mdash; NAS Framework v0.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#module-utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>utils.torch</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for utils.torch</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="k">import</span> <span class="n">nn</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+
+<span class="kn">from</span> <span class="nn">torch.nn.modules</span> <span class="k">import</span> <span class="n">loss</span>
+<span class="kn">from</span> <span class="nn">torch.nn.modules</span> <span class="k">import</span> <span class="n">activation</span>
+
+<span class="kn">import</span> <span class="nn">torch.optim.lr_scheduler</span> <span class="k">as</span> <span class="nn">sched</span>
+
+
+<div class="viewcode-block" id="Identity"><a class="viewcode-back" href="../../utils.html#utils.torch.Identity">[docs]</a><span class="k">class</span> <span class="nc">Identity</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A ``torch.nn.Module`` which returns arguments passed to it unchanged, on instance (``forward``) call.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Identity.forward"><a class="viewcode-back" href="../../utils.html#utils.torch.Identity.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">input</span></div></div>
+
+
+<div class="viewcode-block" id="get_optimizer"><a class="viewcode-back" href="../../utils.html#utils.torch.get_optimizer">[docs]</a><span class="k">def</span> <span class="nf">get_optimizer</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns optimizer constructor given the name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): optimizer name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Corresponding optimizer from torch.optim module.</span>
+
+<span class="sd">    Available optimizers:</span>
+<span class="sd">        ASGD, Adadelta, Adagrad, Adam, SparseAdam, Adamax, LBFGS, RMSprop, Rprop, SGD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;asgd&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">ASGD</span><span class="p">,</span>
+        <span class="s1">&#39;adadelta&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adadelta</span><span class="p">,</span>
+        <span class="s1">&#39;adagrad&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adagrad</span><span class="p">,</span>
+        <span class="s1">&#39;adam&#39;</span><span class="p">:</span> <span class="n">partial</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">,</span> <span class="n">amsgrad</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="s1">&#39;adamax&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adamax</span><span class="p">,</span>
+        <span class="s1">&#39;lbfgs&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">LBFGS</span><span class="p">,</span>
+        <span class="s1">&#39;rmsprop&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">RMSprop</span><span class="p">,</span>
+        <span class="s1">&#39;rprop&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Rprop</span><span class="p">,</span>
+        <span class="s1">&#39;sgd&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">,</span>
+        <span class="s1">&#39;sparseadam&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SparseAdam</span>
+    <span class="p">}[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="get_activation"><a class="viewcode-back" href="../../utils.html#utils.torch.get_activation">[docs]</a><span class="k">def</span> <span class="nf">get_activation</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns instantiated activation given the name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): activation name</span>
+<span class="sd">        kwargs (dict): keyword arguments passed to activation constructor</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Corresponding activation instance from torch.nn module</span>
+
+<span class="sd">    Available activations:</span>
+<span class="sd">        ELU, SELU, GLU, ReLU, ReLU6, PReLU, RReLU, LeakyReLU,</span>
+<span class="sd">        Sigmoid, LogSigmoid, Softmax, Softmax2d, LogSoftmax,</span>
+<span class="sd">        Softmin, Softplus, Softshrink, Softsign, Tanhshrink,</span>
+<span class="sd">        Tanh, Hardshrink, Hardtanh, identity/linear/none</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;elu&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">ELU</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;glu&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">GLU</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;hardshrink&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Hardshrink</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;hardtanh&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Hardtanh</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;leakyrelu&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">LeakyReLU</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;logsigmoid&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">LogSigmoid</span><span class="p">(),</span>
+        <span class="s1">&#39;logsoftmax&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">LogSoftmax</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;prelu&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">PReLU</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;rrelu&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">RReLU</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;relu&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;relu6&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">ReLU6</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;selu&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">SELU</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;sigmoid&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>
+        <span class="s1">&#39;softmax&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Softmax</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;softmax2d&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Softmax2d</span><span class="p">(),</span>
+        <span class="s1">&#39;softmin&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Softmin</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;softplus&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Softplus</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;softshrink&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Softshrink</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;softsign&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Softsign</span><span class="p">(),</span>
+        <span class="s1">&#39;tanh&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+        <span class="s1">&#39;tanhshrink&#39;</span><span class="p">:</span> <span class="n">activation</span><span class="o">.</span><span class="n">Tanhshrink</span><span class="p">(),</span>
+        <span class="s1">&#39;identity&#39;</span><span class="p">:</span> <span class="n">Identity</span><span class="p">(),</span>
+        <span class="s1">&#39;linear&#39;</span><span class="p">:</span> <span class="n">Identity</span><span class="p">(),</span>
+        <span class="s1">&#39;none&#39;</span><span class="p">:</span> <span class="n">Identity</span><span class="p">(),</span>
+    <span class="p">}[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="get_criterion"><a class="viewcode-back" href="../../utils.html#utils.torch.get_criterion">[docs]</a><span class="k">def</span> <span class="nf">get_criterion</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns criterion instance given the name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): criterion name</span>
+<span class="sd">        kwargs (dict): keyword arguments passed to criterion constructor</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Corresponding criterion from torch.nn module</span>
+
+<span class="sd">    Available criteria:</span>
+<span class="sd">        BCE, BCEWithLogits, CosineEmbedding, CrossEntropy, HingeEmbedding, KLDiv,</span>
+<span class="sd">        L1, MSE, MarginRanking, MultilabelMargin, MultilabelSoftmargin, MultiMargin,</span>
+<span class="sd">        NLL, PoissoNLL, SmoothL1, SoftMargin, TripletMargin</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;bce&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;bcewithlogits&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">BCEWithLogitsLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;cosineembedding&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">CosineEmbeddingLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;crossentropy&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;hingeembedding&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">HingeEmbeddingLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;kldiv&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">KLDivLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;l1&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">L1Loss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;mse&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;marginranking&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">MarginRankingLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;multilabelmargin&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">MultiLabelMarginLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;multilabelsoftmargin&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">MultiLabelSoftMarginLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;multimargin&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">MultiMarginLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;nll&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">NLLLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;poissonnll&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">PoissonNLLLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;smoothl1&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">SmoothL1Loss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;softmargin&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">SoftMarginLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+        <span class="s1">&#39;tripletmargin&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">TripletMarginLoss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="p">}[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="get_scheduler"><a class="viewcode-back" href="../../utils.html#utils.torch.get_scheduler">[docs]</a><span class="k">def</span> <span class="nf">get_scheduler</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns scheduler constructor given the name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): scheduler name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Corresponding scheduler from torch.optim module</span>
+
+<span class="sd">    Available criteria:</span>
+<span class="sd">        CosineAnnealing, Exponential, Lambda, MultiStep, ReduceOnPlateau, Step</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;cosineannealing&#39;</span><span class="p">:</span> <span class="n">sched</span><span class="o">.</span><span class="n">CosineAnnealingLR</span><span class="p">,</span>
+        <span class="s1">&#39;exponential&#39;</span><span class="p">:</span> <span class="n">sched</span><span class="o">.</span><span class="n">ExponentialLR</span><span class="p">,</span>
+        <span class="s1">&#39;lambda&#39;</span><span class="p">:</span> <span class="n">sched</span><span class="o">.</span><span class="n">LambdaLR</span><span class="p">,</span>
+        <span class="s1">&#39;multistep&#39;</span><span class="p">:</span> <span class="n">sched</span><span class="o">.</span><span class="n">MultiStepLR</span><span class="p">,</span>
+        <span class="s1">&#39;reduceonplateau&#39;</span><span class="p">:</span> <span class="n">sched</span><span class="o">.</span><span class="n">ReduceLROnPlateau</span><span class="p">,</span>
+        <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="n">sched</span><span class="o">.</span><span class="n">StepLR</span>
+    <span class="p">}[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span></div>
+
+
+<div class="viewcode-block" id="wrap"><a class="viewcode-back" href="../../utils.html#utils.torch.wrap">[docs]</a><span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">device</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Makes a tensor or copies an existing one and puts it on `device`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        inputs: torch.Tensor, list or numpy.ndarray</span>
+<span class="sd">        device: GPU index or -1 for CPU or device name (e.g. &#39;cpu&#39;, &#39;cuda:0&#39;) or ``torch.Device``</span>
+<span class="sd">        kwargs: optional kwargs passed to ``torch.tensor`` constructor.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ``torch.Tensor`` with inputs as data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="nb">map</span><span class="p">):</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;cpu&#39;</span> <span class="k">if</span> <span class="n">device</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">f</span><span class="s1">&#39;cuda:</span><span class="si">{device}</span><span class="s1">&#39;</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+<div class="viewcode-block" id="get_np"><a class="viewcode-back" href="../../utils.html#utils.torch.get_np">[docs]</a><span class="k">def</span> <span class="nf">get_np</span><span class="p">(</span><span class="n">inputs</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attempts to wrap inputs in a ``numpy.ndarray``.</span>
+<span class="sd">    If torch.Tensor passed, places it onto CPU and calls ``tensor.numpy()``</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        inputs (iterable): inputs to be wrapped.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ``numpy.ndarray`` containing inputs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">is_cuda</span><span class="p">:</span>
+            <span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="param_count"><a class="viewcode-back" href="../../utils.html#utils.torch.param_count">[docs]</a><span class="k">def</span> <span class="nf">param_count</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts parameters in passed module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        module (torch.nn.Module): module to count parameters in.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Parameter count.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">(),</span> <span class="n">module</span><span class="o">.</span><span class="n">parameters</span><span class="p">()))</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
