@@ -2,11 +2,9 @@
   "u_gate_fallback": "avg",
   "input_picking_method": "set_last",
   "shape_resolution_method": "min",
-  "oom_prevention_strategy": "none",
   "add_unnecessary_layers": false,
   "add_layer_after_combine": false,
   "reuse_parameters": true,
-  "use_swap": true,
   "data_parallel": false,
   "bias": true
 }

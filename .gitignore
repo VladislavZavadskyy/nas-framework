@@ -163,3 +163,4 @@ default_loader
 */__pycache__/
 *.png
 train/
+docs/build
