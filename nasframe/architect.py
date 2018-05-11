@@ -7,7 +7,6 @@ from collections import defaultdict
 from os.path import join, exists
 
 import torch.nn as nn
-import warnings
 import torch
 import copy
 

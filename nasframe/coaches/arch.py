@@ -32,8 +32,6 @@ class ArchitectCoach(CoachBase):
         kwargs['scheduler_metric'] = kwargs.get('scheduler_metric', 'total_loss')
         super().__init__(model=architect, **kwargs)
 
-        self.name = name
-
         self.entropy_gain = entropy_gain
         self.storage = storage
         self.batch_size = batch_size

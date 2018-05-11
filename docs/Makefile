@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
 SPHINXPROJ    = NASFramework
 SOURCEDIR     = source
-BUILDDIR      = build
+BUILDDIR      = ../../nas-framework-docs
 
 # Put it first so that "make" without argument is like "make help".
 help:
