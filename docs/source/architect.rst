@@ -1,6 +1,6 @@
 Architect
 =========
 
-.. automodule:: architect
+.. automodule:: nasframe.architect
    :members:
    :private-members:

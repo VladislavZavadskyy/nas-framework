@@ -1,24 +1,23 @@
 Search Spaces
 =============
-.. currentmodule:: searchspaces
 
 Base
 ^^^^
 
-.. autoclass:: SearchSpace
+.. autoclass:: nasframe.searchspaces.SearchSpace
    :members:
    :private-members:
 
 Multilayer Perceptron
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass:: MLPSpace
+.. autoclass:: nasframe.searchspaces.MLPSpace
    :members:
    :private-members:
 
 Recurrent Neural Network
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass:: RNNSpace
+.. autoclass:: nasframe.searchspaces.RNNSpace
    :members:
    :private-members:

@@ -12,14 +12,14 @@ def now():
     return time.strftime("%d.%m.%Y_%H:%M:%S")
 
 
-def get_logger(name=__file__, file=None, file_level='INFO', stout_level='WARNING'):
+def get_logger(name=__file__, file=None, file_level='INFO', stdout_level='DEBUG'):
     """
     Gets logger by name if it exists, otherwise initializes one.
 
     Args:
         name (str):  logger name
         file (str, optional):  path to the log file
-        stout_level (str): stdout logging level
+        stdout_level (str): stdout logging level
         file_level (str):  file logging level
 
     Returns:
@@ -31,7 +31,7 @@ def get_logger(name=__file__, file=None, file_level='INFO', stout_level='WARNING
         logger.setLevel(file_level)
         return logger
 
-    min_level = min(map(logging._nameToLevel.get, [file_level, stout_level]))
+    min_level = min(map(logging._nameToLevel.get, [file_level, stdout_level]))
 
     logger._init_done__ = True
     logger.propagate = False
@@ -42,7 +42,7 @@ def get_logger(name=__file__, file=None, file_level='INFO', stout_level='WARNING
 
     handler = logging.StreamHandler()
     handler.setFormatter(formatter)
-    handler.setLevel(stout_level)
+    handler.setLevel(stdout_level)
 
     del logger.handlers[:]
     logger.addHandler(handler)

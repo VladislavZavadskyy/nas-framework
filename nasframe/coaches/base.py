@@ -47,7 +47,9 @@ class CoachBase:
                  tensorboard=None, log_every=10, logger=None, break_on_nan=True, raise_on_nan=True,
                  tqdm=None, **kwargs):
 
-        self.__dict__.update(**kwargs)
+        if logger is not None and len(kwargs) > 0:
+            kwargs = ', '.join(kwargs.keys())
+            logger.info(f'Keyword arguments {kwargs} were provided, but won\'t be used.')
 
         self.model = model
         self.name = name

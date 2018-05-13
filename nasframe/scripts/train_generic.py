@@ -1,10 +1,14 @@
 from flatten_dict import flatten
 
 from nasframe.utils.torch import *
-from nasframe.utils import make_dirs
+from nasframe import FeedForwardCoach
+from torch.utils.data import DataLoader
+from nasframe.utils import make_dirs, Bunch, get_tqdm
 from nasframe.utils import get_logger, FileLock
 from nasframe import Architect, ArchitectCoach
+from nasframe.coaches.base import LossIsNoneError
 from nasframe.storage import CurriculumStorage, Storage
+from nasframe.searchspaces import RNNSpace, MLPSpace
 
 from tensorboardX import SummaryWriter
 from functools import partial
@@ -15,7 +19,9 @@ from os.path import join
 
 from PIL import Image
 
+import gc
 import os
+import yaml
 import json
 import copy
 
@@ -81,7 +87,6 @@ def worker_init(description, log_dir):
     Initializes a worker process.
 
     Args:
-        device_idx (int): CUDA device index for the worker to work on
         description (dict): description for the worker to evaluate
         log_dir (str): path to a directory where logs shall be stored
 
@@ -107,31 +112,27 @@ def worker_init(description, log_dir):
     return logger, summary_writer, description_dir
 
 
-def prepare(space_proto, curriculum, log_dir, resume,
-            architect_batch_size, architect_steps_per_epoch,
-            input_shape, load_architect, max_curriculum_complexity=None):
+def prepare(config, resume, input_shape, gpu_idx, num_gpus):
     """
     Initializes training session.
 
     Args:
-        space_proto (SearchSpace): search space prototype
-        curriculum (bool): whether to prepare for a curriculum training session
-        log_dir (str): path to the log directory
+        config (dict, str): configuration dictionary or path to YAML file.
         resume (boot): whether to attempt to resume a previous session
-        architect_batch_size (int): number of samples processed per training step
-        architect_steps_per_epoch (int):  number of steps per epoch of architect training
         input_shape (list, tuple, torch.Size): shape of the inputs
-        load_architect (bool): if True architect will be loaded, and won't be trained
-            if no graphs were evaluated on current loop iteration.
-        max_curriculum_complexity (int, optional): maximum level of curriculum complexity,
-            can be ommited if ``curriculum`` is ``False``
+        num_gpus (int): number of GPUs to use
+        gpu_idx (str, optional): string of comma separated dpu indices. if ``None``, ``range(num_gpus)`` is used.
 
     Returns:
         Architect and an ArchitectCoach
     """
-    if not resume:
-        if exists(log_dir):
-            rmtree(log_dir)
+    if isinstance(config, str):
+        with open(config) as f:
+            config = yaml.load(f)
+
+    log_dir = config['log_dir']
+    if not resume and exists(log_dir):
+        rmtree(log_dir)
 
     make_dirs(join(log_dir, 'descriptions'))
 
@@ -142,39 +143,43 @@ def prepare(space_proto, curriculum, log_dir, resume,
     else:
         make_dirs(join(log_dir, 'architect'))
 
-    summary_writer = SummaryWriter(join(log_dir, 'architect'))
+    space_type = config['searchspace'].pop('type').lower()
+    Type = {
+        'rnn': RNNSpace,
+        'mlp': MLPSpace
+    }.get(space_type)
+
+    if Type is None:
+        raise NotImplementedError(f'Search space of type {space_type} is not implemented.')
+    space_proto = Type(**config['searchspace'])
+
     arch_logger = get_logger('arch_coach', join(log_dir, 'architect', 'training.log'))
+    load_architect = config['architect_training']['load_architect']
 
     if (exists(join(log_dir, 'architect', 'checkpoint.pth'))
             and resume and load_architect):
         arch = torch.load(join(log_dir, 'architect', 'checkpoint.pth'))
         arch.search_space = space_proto
         arch_logger.info('Restored architect from checkpoint.')
-
-    if curriculum:
-        assert max_curriculum_complexity is not None
-        storage = CurriculumStorage(max_curriculum_complexity)
     else:
-        storage = Storage()
+        arch = Architect(space_proto)
 
-    arch = Architect(space_proto)
-    arch_coach = ArchitectCoach(arch, storage,
-                                scheduler=None,
-                                logger=arch_logger,
-                                curriculum=curriculum,
-                                epochs_to_increase=np.inf,
-                                tensorboard=summary_writer,
-                                batch_size=architect_batch_size,
-                                steps_per_epoch=architect_steps_per_epoch)
+    curriculum = config['architect_training'].get('curriculum', False)
+
+    max_complexity = config['architect_training'].get('max_curriculum_complexity')
+    assert max_complexity is not None
+
+    summary_writer = SummaryWriter(join(log_dir, 'architect'))
 
     if not exists(join(log_dir, 'description_reward.json')):
         with open(join(log_dir, 'description_reward.json'), 'w+') as f:
             json.dump({}, f)
-    elif resume:
+
+    if resume:
         if curriculum:
             storage = CurriculumStorage.from_json(
                 join(log_dir, 'description_reward.json'),
-                arch, space_proto, input_shape, max_curriculum_complexity)
+                arch, space_proto, input_shape, max_complexity)
 
             flat_storage = storage.flatten()
             arch_logger.info(f'Loaded {len(flat_storage)} descriptions, '
@@ -211,8 +216,15 @@ def prepare(space_proto, curriculum, log_dir, resume,
 
                 with open(join(description_dir, 'description.json'), 'w+') as f:
                     json.dump(description, f)
+    else:
+        storage = CurriculumStorage(max_complexity) if curriculum else Storage()
 
-        arch_coach.storage = storage
+    arch_coach = ArchitectCoach(arch, storage,
+                                scheduler=None,
+                                logger=arch_logger,
+                                epochs_to_increase=np.inf,
+                                tensorboard=summary_writer,
+                                **config['architect_training'])
 
     if not exists(join(log_dir, space_proto.name, 'merged_space.pth')):
         space_proto.save(log_dir, 'merged_space')
@@ -220,7 +232,8 @@ def prepare(space_proto, curriculum, log_dir, resume,
     FileLock(join(log_dir, space_proto.name, 'merged_space.pth.lock')).purge()
     FileLock(join(log_dir, 'description_reward.json')).purge()
 
-    return arch, arch_coach
+    gpu_indices = range(num_gpus) if gpu_idx is None else map(int, gpu_idx.split(','))
+    return config['architect_training'], space_proto, arch, arch_coach, list(gpu_indices), log_dir
 
 
 def sample_loop(arch, storage, space_proto, input_shape,
@@ -239,7 +252,7 @@ def sample_loop(arch, storage, space_proto, input_shape,
         space_proto (SeachSpace): search space prototype
         input_shape (list, tuple, torch.Size): input shape
         desired_storage_len (int): the length storage should have when the loop is completed
-        append_deterministic (bool): whehter to append description obtained by deterministically choosing the actions
+        append_deterministic (bool): whether to append description obtained by deterministically choosing the actions
             with the highest probability in the architect's output distribution. If it would be the only description in
             resulting evaluation list, this argument will be ignored.
 
@@ -293,21 +306,15 @@ def evaluate(descriptions, worker_fn, gpu_indices):
         worker_fn = partial(worker_fn, device_queue=device_queue)
 
         eval_list = list(map(manager.dict, descriptions))
-        with ctx.Pool(len(gpu_indices)) as pool:
+
+        with ctx.Pool(len(gpu_indices), maxtasksperchild=1) as pool:
             result = pool.map(worker_fn, eval_list)
 
     return result
 
 
-def train_curriculum(space_proto, worker, input_shape,
-                     max_complexity, log_dir, resume,
-                     architect_steps_per_epoch,
-                     architect_batch_size,
-                     architect_lr_decay,
-                     storage_surplus_factor,
-                     num_gpus, gpu_idx,
-                     epochs_per_loop,
-                     load_architect):
+def train_curriculum(config, worker, input_shape,
+                     resume, num_gpus, gpu_idx):
     """
     Curriculum architect training procedure.
     Includes sampling descriptions with complexity :math:`i`, evaluating them, train architect and start over again
@@ -316,45 +323,29 @@ def train_curriculum(space_proto, worker, input_shape,
     from then on.
 
     Args:
-        space_proto (SearchSpace): search space prototype
+        config (dict, str): configuration dictionary or path to YAML file.
         worker (callable): worker callable
         input_shape (tuple, list, torch.Size): input's shape
-        max_complexity (int): maximum  curriculum complexity
-        log_dir (str): path to the log directory
         resume (bool): whether  to try resuming the previous session
-        architect_batch_size (int): number of samples processed per training step
-        architect_steps_per_epoch (int):  number of steps per epoch of architect training
-        architect_lr_decay (float): architect learning rate decay factor,
-            which is applied every ``epochs_per_loop`` epochs.
-        storage_surplus_factor (float): the factor by which number of stored
-              data points (description-rewards) must surpass minimum required
-              at the current curriculum level
         num_gpus (int): number of GPUs to use
         gpu_idx (str, optional): string of comma separated dpu indices. if ``None``, ``range(num_gpus)`` is used.
-        epochs_per_loop (int): number of architect training epochs per one loop
-        load_architect (bool): if True architect will be loaded, and won't be trained
-            if no graphs were evaluated on current loop iteration.
 
     Returns:
         On keyboard interrupt returns storage filled with all that's benn found and evaluated.
     """
-    arch, arch_coach = prepare(space_proto,
-                               curriculum=True,
-                               input_shape=input_shape,
-                               log_dir=log_dir, resume=resume,
-                               architect_batch_size=architect_batch_size,
-                               architect_steps_per_epoch=architect_steps_per_epoch,
-                               max_curriculum_complexity=max_complexity,
-                               load_architect=load_architect)
+    training_config, space_proto, arch, arch_coach, gpu_indices, log_dir =\
+        prepare(config, resume, input_shape, gpu_idx, num_gpus)
+
+    load_architect = training_config['load_architect']
+    epochs_per_loop = training_config['epochs_per_loop']
+    architect_lr_decay = training_config['lr_decay']
+    assert 0 < architect_lr_decay < 1
+
+    storage_surplus_factor = training_config.get('storage_surplus_factor', 1)
+    assert storage_surplus_factor >= 1
 
     storage = arch_coach.storage
     summary_writer = arch_coach.summary_writer
-
-    if gpu_idx is None:
-        gpu_indices = range(num_gpus)
-    else:
-        gpu_indices = map(int, gpu_idx.split(','))
-    gpu_indices = list(gpu_indices)
 
     loops = 0
     points_per_epoch = arch_coach.batch_size * arch_coach.epoch_steps
@@ -374,11 +365,10 @@ def train_curriculum(space_proto, worker, input_shape,
             elif curriculum_complexity == storage.max_complexity + 1:
 
                 arch.curriculum = False
-                storage.set_complexity(0)
                 curriculum_complexity = 0
 
                 arch.search_space.release_all_constraints()
-                arch.storage.storages[0] = arch.storage.flatten()
+                arch_coach.storage = arch_coach.storage.flatten()
 
             else:
 
@@ -432,51 +422,34 @@ def train_curriculum(space_proto, worker, input_shape,
             return storage
 
 
-def train_plain(space_proto, worker, input_shape,
-                log_dir, resume, architect_steps_per_epoch,
-                architect_batch_size, architect_lr_decay,
-                num_gpus, gpu_idx, epochs_per_loop,
-                load_architect):
+def train_plain(config, worker, input_shape,
+                resume, num_gpus, gpu_idx):
     """
         Architect training procedure.
         Includes sampling descriptions, evaluating them, train architect and start over again
         with complexity i+1.
 
         Args:
-            space_proto (SearchSpace): search space prototype
+            config (dict, str): configuration dictionary or path to YAML file.
             worker (callable): worker callable
             input_shape (tuple, list, torch.Size): input's shape
-            log_dir (str): path to the log directory
             resume (bool): whether  to try resuming the previous session
-            architect_batch_size (int): number of samples processed per training step
-            architect_steps_per_epoch (int):  number of steps per epoch of architect training
-            architect_lr_decay (float): architect learning rate decay factor,
-                which is applied every ``epochs_per_loop`` epochs.
             num_gpus (int): number of GPUs to use
             gpu_idx (str, optional): string of comma separated dpu indices. if ``None``, ``range(num_gpus)`` is used.
-            epochs_per_loop (int): number of architect training epochs per one loop
-            load_architect (bool): if True architect will be loaded, and won't be trained
-                if no graphs were evaluated on current loop iteration.
 
         Returns:
             On keyboard interrupt returns storage filled with all that's benn found and evaluated.
         """
-    arch, arch_coach = prepare(space_proto,
-                               curriculum=False,
-                               input_shape=input_shape,
-                               load_architect=load_architect,
-                               log_dir=log_dir, resume=resume,
-                               architect_batch_size=architect_batch_size,
-                               architect_steps_per_epoch=architect_steps_per_epoch)
+    training_config, space_proto, arch, arch_coach, gpu_indices, log_dir =\
+        prepare(config, resume, input_shape, gpu_idx, num_gpus)
+
+    load_architect = training_config['load_architect']
+    epochs_per_loop = training_config['epochs_per_loop']
+    architect_lr_decay = training_config['lr_decay']
+    assert 0 < architect_lr_decay < 1
 
     storage = arch_coach.storage
     summary_writer = arch_coach.summary_writer
-
-    if gpu_idx is None:
-        gpu_indices = range(num_gpus)
-    else:
-        gpu_indices = map(int, gpu_idx.split(','))
-    gpu_indices = list(gpu_indices)
 
     loops = 0
     points_per_epoch = arch_coach.batch_size * arch_coach.epoch_steps
@@ -530,3 +503,153 @@ def train_plain(space_proto, worker, input_shape,
 
         except KeyboardInterrupt:
             return storage
+
+
+def generic_worker(description, device_queue, current_complexity, config, space_type):
+    """
+    Concurrent description evaluator.
+
+    Args:
+        description (dict): description to be evaluated
+        device_queue (Queue): a queue with available CUDA devices indices
+        current_complexity (int): current curriculum complexity level.
+        config (dict, str): configuration dictionary or path to YAML file.
+        space_type (str): the name of root search space.
+
+    Returns:
+        Tuple of (description, mean_auc, device_idx).
+
+        If loss is nan -- mean_auc = -1.
+
+        If OOM was raised and ``not adaptive_batch_size`` or using ``min_batch_size`` causes OOM -- mean_auc=None.
+    """
+    if isinstance(config, str):
+        with open(config) as f:
+            config = yaml.load(f)
+
+    log_dir = config['log_dir']
+    data_dir = config['data_dir']
+
+    config = config.get('child_training', config)
+
+    batch_size = config.pop('batch_size')
+    keep_data_on_device = config.pop('keep_data_on_device')
+    adaptive_batch_size = config.pop('adaptive_batch_size')
+
+    if adaptive_batch_size:
+        min_batch_size = config.pop('min_batch_size')
+        max_batch_size = config.pop('max_batch_size')
+        batch_size_decay = config.pop('batch_size_decay')
+
+        assert isinstance(min_batch_size, int)
+        assert isinstance(max_batch_size, int)
+        assert 0 < batch_size_decay < 1
+
+        config['initial_lr'] *= max_batch_size / batch_size
+        batch_size = max_batch_size
+    else:
+        min_batch_size = batch_size
+
+    description = dict(description)
+    device_idx = device_queue.get()
+    datasets = torch.load(join(data_dir, 'preprocessed.pth'))
+
+    with torch.cuda.device(device_idx):
+        logger, summary_writer, description_dir = worker_init(description, log_dir)
+        logger.debug(f'Aquired device {device_idx}.')
+        save_path = join(log_dir, space_type, 'merged_space.pth')
+        model_path = join(log_dir, space_type, 'model.pth')
+
+        model = torch.load(model_path)
+        with FileLock(save_path):
+            model.space = torch.load(save_path)
+        model = model.cuda()
+
+        model.space.logger = logger
+
+        desc = model.space.preprocess(description, (-1, model.input_size))
+
+        model.space.draw(desc, join(description_dir, 'graph.png'))
+        img = np.array(Image.open(join(description_dir, 'graph.png')))
+        summary_writer.add_image('graph', img)
+
+        if keep_data_on_device:
+            for key in datasets.keys():
+                datasets[key].tensors = tuple(map(
+                    lambda t: t.cuda(device_idx), datasets[key].tensors))
+            gc.collect()
+
+        def cleanup():
+            for f in os.listdir(description_dir):
+                if f.startswith('events.out.tfevents'):
+                    os.remove(join(description_dir, f))
+            device_queue.put(device_idx)
+            logger.debug(f'Released device {device_idx}.')
+
+        while min_batch_size <= batch_size:
+            try:
+                loaders = Bunch()
+                for k in datasets.keys():
+                    loaders[k] = DataLoader(datasets[k], batch_size, shuffle=True,
+                                            pin_memory=not keep_data_on_device)
+
+                space_coach = FeedForwardCoach(model, loaders,
+                                               logger=logger,
+                                               log_dir=log_dir,
+                                               tensorboard=summary_writer,
+                                               tqdm=get_tqdm(position=device_idx),
+                                               **config)
+
+                space_coach.train_until_convergence(description=desc)
+                stats = space_coach.evaluate(desc, loaders.validation)
+
+                with FileLock(save_path):
+                    if exists(save_path):
+                        other = torch.load(save_path)
+                        model.space.merge(other.to(model.space.device))
+                    model.space.cpu().save(log_dir, 'merged_space')
+
+                with FileLock(join(log_dir, 'description_reward.json')):
+                    with open(join(log_dir, 'description_reward.json'), 'r') as f:
+                        existing = json.load(f)
+
+                    if current_complexity is not None:
+                        assert isinstance(existing, dict)
+                        if str(current_complexity) not in existing:
+                            existing[str(current_complexity)] = []
+
+                        existing[str(current_complexity)].append([description,
+                                                            np.mean(stats.auc)])
+                    else:
+                        assert isinstance(existing, list)
+                        existing.append([description, np.mean(stats.auc)])
+
+                    with open(join(log_dir, 'description_reward.json'), 'w+') as f:
+                        json.dump(existing, f)
+
+                cleanup()
+                return description, np.mean(stats.auc), device_idx
+
+            except RuntimeError as e:
+                if 'out of memory' in str(e):
+                    if adaptive_batch_size:
+                        batch_size = int(batch_size*batch_size_decay)
+                        config['initial_lr'] *= batch_size_decay
+                        logger.info(f'Out of memory, decreasing batch size to {batch_size}.')
+                    else:
+                        logger.info('Out of memory on fixed batch size. Terminating.')
+                        cleanup()
+                        return description, None, device_idx
+                else:
+                    logger.error(e)
+                    raise e
+
+            except LossIsNoneError:
+                logger.info('Loss is NaN. Terminating.')
+                cleanup()
+                return description, -1, device_idx
+
+        else:
+            logger.info('Out of memory with minimum batch size. Terminating.')
+            cleanup()
+            return description, None, device_idx

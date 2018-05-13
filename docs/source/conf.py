@@ -31,9 +31,9 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-import sys, os
+import nasframe
 import sphinx_rtd_theme
-sys.path.insert(0, os.path.abspath('../../nasframe'))
+
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -70,7 +70,6 @@ author = 'Vladislav Zavadskyy'
 # built documents.
 #
 # The short X.Y version.
-import nasframe
 version = nasframe.__version__
 # The full version, including alpha/beta/rc tags.
 release = f'v{version} alpha'

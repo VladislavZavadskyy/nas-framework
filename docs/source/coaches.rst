@@ -1,32 +1,32 @@
 Training Classes
 ================
 
-.. currentmodule:: coaches
+.. currentmodule:: nasframe.coaches
 
 Base
 ^^^^
 
-.. autoclass:: CoachBase
+.. autoclass:: nasframe.coaches.CoachBase
    :members:
    :private-members:
 
 Architect
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass:: ArchitectCoach
+.. autoclass:: nasframe.coaches.ArchitectCoach
    :members:
    :private-members:
 
 Feed Forward
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass:: FeedForwardCoach
+.. autoclass:: nasframe.coaches.FeedForwardCoach
    :members:
    :private-members:
 
 Recurrent
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass:: RecurrentCoach
+.. autoclass:: nasframe.coaches.RecurrentCoach
    :members:
    :private-members:

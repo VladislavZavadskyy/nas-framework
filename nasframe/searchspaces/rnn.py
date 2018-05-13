@@ -38,7 +38,7 @@ class RNNSpace(MLPSpace):
             to be evaluated, which returns this number. If not specified, defaults to maximum possible number of inputs.
         use_zoneout (bool): whether to use zoneout instead of recurrent dropout.
         kwargs: keyword arguments to be passed to MLPSpace constructor.
-        """
+    """
     def __init__(self, max_nodes, max_states,
                  state_dims=(16,32,64,128),
                  out_sizes=(.2, .5, 1, 2, 5),

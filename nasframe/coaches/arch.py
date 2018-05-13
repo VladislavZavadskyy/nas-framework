@@ -24,12 +24,13 @@ class ArchitectCoach(CoachBase):
         **kwargs: keyword arguments passed to CoachBase constructor
 
     """
-    def __init__(self, architect, storage, name='architect',
-                 curriculum=True, epochs_to_increase=10, lower_complexity_chance=.2,
+    def __init__(self, architect, storage, curriculum=True,
+                 epochs_to_increase=10, lower_complexity_chance=.2,
                  batch_size=8, entropy_gain=1e-4, complexity_penalty=0.,
                  ppo_clip=.2, **kwargs):
 
         kwargs['scheduler_metric'] = kwargs.get('scheduler_metric', 'total_loss')
+        kwargs['name'] = kwargs.get('name', 'architect')
         super().__init__(model=architect, **kwargs)
 
         self.entropy_gain = entropy_gain

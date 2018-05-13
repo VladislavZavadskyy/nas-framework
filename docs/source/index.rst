@@ -3,25 +3,18 @@ Documentation for NAS Framework
 
 .. toctree::
    :maxdepth: 2
-   :caption: Framework:
+   :caption: Framework API:
 
    architect
    searchspaces
    coaches
    storage
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Scripts & Utils:
-
-   scripts
    utils
    loaders
+   scripts
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Tutorials:
 
-
-Go to
-=====
-
-* :ref:`genindex`
-* :ref:`modindex`
+   config

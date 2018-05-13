@@ -1,10 +1,12 @@
 Utility functions and classes
 =============================
 
+.. currentmodule:: nasframe
+
 Torch-related
 ^^^^^^^^^^^^^
 
-.. automodule:: utils.torch
+.. automodule:: nasframe.utils.torch
    :members:
    :private-members:
 
@@ -12,10 +14,10 @@ Torch-related
 Miscellaneous
 ^^^^^^^^^^^^^
 
-.. autoclass:: utils.FileLock
+.. automodule:: nasframe.utils.filelock
    :members:
    :private-members:
 
-.. automodule:: utils.misc
+.. automodule:: nasframe.utils.misc
    :members:
    :private-members:

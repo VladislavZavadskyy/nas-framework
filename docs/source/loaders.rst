@@ -1,10 +1,12 @@
 Data Loaders
 ============
 
+.. currentmodule:: nasframe.loaders
+
 Text loader
 ^^^^^^^^^^^
 
-.. autoclass:: loaders.TextLoader
+.. autoclass:: TextLoader
    :members:
    :private-members:
 

@@ -1,0 +1,45 @@
+log_dir: logs
+data_dir: data/toxic
+
+searchspace:
+  type: RNN
+  max_nodes: 15
+  max_states: 5
+
+  u_gate_fallback: avg
+  input_picking_method: set_last
+  shape_resolution_method: min
+  add_unnecessary_layers: false
+  add_layer_after_combine: false
+  reuse_parameters: true
+  data_parallel: false
+  bias: true
+
+child_training:
+  initial_lr: 0.001
+  batch_size: 256
+  criterion: bcewithlogits
+  scheduler_metric: auc
+  scheduler_kwargs:
+    mode: max
+
+  adaptive_batch_size: true
+  min_batch_size: 32
+  max_batch_size: 512
+  batch_size_decay: 0.5
+
+  keep_data_on_device: false
+
+architect_training:
+  curriculum: true
+  max_curriculum_complexity: 15
+
+  epochs_per_loop: 10
+  lr_decay: .9
+
+  initial_lr: 0.001
+  batch_size: 8
+  steps_per_epoch: 4
+
+  storage_surplus_factor: 1.6
+  load_architect: true
