@@ -1,17 +1,16 @@
 Storage
 =======
-.. currentmodule:: storage
 
 Plain Storage
 ^^^^^^^^^^^^^
 
-.. autoclass:: Storage
+.. autoclass:: nasframe.storage.Storage
    :members:
    :private-members:
 
 Curriculum Storage
 ^^^^^^^^^^^^^^^^^^
 
-.. autoclass:: CurriculumStorage
+.. autoclass:: nasframe.storage.CurriculumStorage
    :members:
    :private-members:

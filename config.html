@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring the search &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
+        <link rel="next" title="Scripts" href="scripts.html"/>
+        <link rel="prev" title="Storage" href="storage.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuring the search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#search-space-section">Search space section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#child-training-section">Child training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#batch-size">batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adaptive-batch-size">adaptive_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#min-batch-size">min_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#max-batch-size">max_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#batch-size-decay">batch_size_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keep-data-on-device">keep_data_on_device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#architect-training-section">Architect training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#curriculum">curriculum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#max-curriculum-complexity">max_curriculum_complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#epochs-per-loop">epochs_per_loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lr-decay">lr_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#storage-surplus-factor">storage_surplus_factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load-architect">load_architect</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Configuring the search</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/config.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-the-search">
+<h1>Configuring the search<a class="headerlink" href="#configuring-the-search" title="Permalink to this headline">¶</a></h1>
+<p>In order to configure a search process, YAML configuration file must be created.
+The configuration file should have the following structure:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">log_dir</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="l l-Scalar l-Scalar-Plain">data_dir</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+
+<span class="l l-Scalar l-Scalar-Plain">searchspace</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+
+<span class="l l-Scalar l-Scalar-Plain">child_training</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+
+<span class="l l-Scalar l-Scalar-Plain">architect_training</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+<div class="section" id="search-space-section">
+<h2>Search space section<a class="headerlink" href="#search-space-section" title="Permalink to this headline">¶</a></h2>
+<p>Search space section should contain search space type name:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">searchspace</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span> <span class="c1"># RNN or MLP</span>
+</pre></div>
+</div>
+<p>And keyword arguments to be passed to search space constructor of the specified type.</p>
+</div>
+<div class="section" id="child-training-section">
+<h2>Child training section<a class="headerlink" href="#child-training-section" title="Permalink to this headline">¶</a></h2>
+<p>Child training section should contain the following:</p>
+<div class="section" id="batch-size">
+<h3>batch_size<a class="headerlink" href="#batch-size" title="Permalink to this headline">¶</a></h3>
+<p>The size of batch of data to be processed by child network each training step.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">child_training</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">batch_size</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adaptive-batch-size">
+<h3>adaptive_batch_size<a class="headerlink" href="#adaptive-batch-size" title="Permalink to this headline">¶</a></h3>
+<p>Boolean, which specifies whether adaptive batch size should be used.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Adaptive batch size decreases batch size by multiplying it by <code class="docutils literal notranslate"><span class="pre">batch_size_decay</span></code> each time when
+CUDA OOM error is encountered until <code class="docutils literal notranslate"><span class="pre">min_batch_size</span></code> is reached. Using this, allows to evaluate
+memory-demanding architectures, instead of skipping them.</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">child_training</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">adaptive_batch_size</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="min-batch-size">
+<h3>min_batch_size<a class="headerlink" href="#min-batch-size" title="Permalink to this headline">¶</a></h3>
+<p>Minimal batch size, after reaching which, attempts to evaluate an architecture will be abandoned.
+Optional if <code class="docutils literal notranslate"><span class="pre">adaptive_batch_size</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">child_training</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">min_batch_size</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="max-batch-size">
+<h3>max_batch_size<a class="headerlink" href="#max-batch-size" title="Permalink to this headline">¶</a></h3>
+<p>Maximal batch size, which is also the initial one if <code class="docutils literal notranslate"><span class="pre">adaptive_batch_size</span></code> is enabled.
+Optional if <code class="docutils literal notranslate"><span class="pre">adaptive_batch_size</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">child_training</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">max_batch_size</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="batch-size-decay">
+<h3>batch_size_decay<a class="headerlink" href="#batch-size-decay" title="Permalink to this headline">¶</a></h3>
+<p>Float, by which current batch size is multiplied if OOM is encountered.
+Should be in range <span class="math notranslate">\((0,1)\)</span>.
+Optional if <code class="docutils literal notranslate"><span class="pre">adaptive_batch_size</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">child_training</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">batch_size_decay</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="keep-data-on-device">
+<h3>keep_data_on_device<a class="headerlink" href="#keep-data-on-device" title="Permalink to this headline">¶</a></h3>
+<p>Boolean, which indicates whether the dataset should be stored in device memory entirely.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">child_training</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">keep_data_on_device</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Enabling this option may increase device memory usage drastically.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Any other specified keyword argument will be passed to the <code class="docutils literal notranslate"><span class="pre">FeedForwardCoach</span></code> constructor.</p>
+</div>
+</div>
+</div>
+<div class="section" id="architect-training-section">
+<h2>Architect training section<a class="headerlink" href="#architect-training-section" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="curriculum">
+<h3>curriculum<a class="headerlink" href="#curriculum" title="Permalink to this headline">¶</a></h3>
+<p>Boolean, which indicates whether a curriculum learning procedure should be used.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">architect_training</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">curriculum</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="max-curriculum-complexity">
+<h3>max_curriculum_complexity<a class="headerlink" href="#max-curriculum-complexity" title="Permalink to this headline">¶</a></h3>
+<p>Maximal complexity to be used during the curriculum training procedure.
+When this complexity is reached, a normal training procedure begins with sampling data from all
+data, generated during the curriculum training procedure.</p>
+<p>Optional if <code class="docutils literal notranslate"><span class="pre">curriculum</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">architect_training</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">max_curriculum_complexity</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="epochs-per-loop">
+<h3>epochs_per_loop<a class="headerlink" href="#epochs-per-loop" title="Permalink to this headline">¶</a></h3>
+<p>Number of architect training epochs per sample-evaluate-train loop.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">architect_training</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">epochs_per_loop</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lr-decay">
+<h3>lr_decay<a class="headerlink" href="#lr-decay" title="Permalink to this headline">¶</a></h3>
+<p>Facrtor by which architect learning rate is multiplied each loop.
+Should be in range <span class="math notranslate">\((0,1)\)</span>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">architect_training</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">lr_decay</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="storage-surplus-factor">
+<h3>storage_surplus_factor<a class="headerlink" href="#storage-surplus-factor" title="Permalink to this headline">¶</a></h3>
+<p>The factor by which number of stored data points (description-rewards)
+must surpass minimum required at the current curriculum level.
+Should be in range <span class="math notranslate">\([1,\infty)\)</span>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">architect_training</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">storage_surplus_factor</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-architect">
+<h3>load_architect<a class="headerlink" href="#load-architect" title="Permalink to this headline">¶</a></h3>
+<p>Boolean, which specifies whether a checkpoint of architect model should be loaded, if it exists.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">architect_training</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">load_architect</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">...</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Any other specified keyword argument will be passed to the <code class="docutils literal notranslate"><span class="pre">Architect</span></code> constructor.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scripts.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="storage.html" class="btn btn-neutral" title="Storage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'v0.1.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

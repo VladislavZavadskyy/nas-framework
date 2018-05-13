@@ -1,0 +1,725 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nasframe.architect &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#module-nasframe.utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../config.html">Configuring the search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#search-space-section">Search space section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#child-training-section">Child training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#batch-size">batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#adaptive-batch-size">adaptive_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#min-batch-size">min_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#max-batch-size">max_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#batch-size-decay">batch_size_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#keep-data-on-device">keep_data_on_device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../config.html#architect-training-section">Architect training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#curriculum">curriculum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#max-curriculum-complexity">max_curriculum_complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#epochs-per-loop">epochs_per_loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#lr-decay">lr_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#storage-surplus-factor">storage_surplus_factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../config.html#load-architect">load_architect</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>nasframe.architect</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for nasframe.architect</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">nasframe.utils.misc</span> <span class="k">import</span> <span class="n">make_dirs</span><span class="p">,</span> <span class="n">add_if_doesnt_exist</span><span class="p">,</span> <span class="n">add_increment</span>
+<span class="kn">from</span> <span class="nn">nasframe.utils.torch</span> <span class="k">import</span> <span class="n">wrap</span>
+<span class="kn">from</span> <span class="nn">nasframe.searchspaces</span> <span class="k">import</span> <span class="n">SearchSpace</span>
+
+<span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="k">import</span> <span class="n">Categorical</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">join</span><span class="p">,</span> <span class="n">exists</span>
+
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+
+<div class="viewcode-block" id="Architect"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect">[docs]</a><span class="k">class</span> <span class="nc">Architect</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Architect neural network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        search_space (SearchSpace): search space to which this architect instance belongs</span>
+<span class="sd">        state_dims (tuple): graph encoder cell dimensions</span>
+<span class="sd">        cell_type (str): &#39;lstm&#39; or &#39;gru&#39;; graph encoder cell type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_space</span><span class="p">,</span> <span class="n">state_dims</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">cell_type</span><span class="o">=</span><span class="s1">&#39;LSTM&#39;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">search_space</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cells</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTMCell</span> <span class="k">if</span> <span class="n">cell_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;lstm&#39;</span> <span class="k">else</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRUCell</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_dims</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cell</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">state_dims</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cells</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;state_zero&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">policies</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="p">,</span> <span class="p">[])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">),</span> <span class="n">state_dims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_policy</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">policies</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_values</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_cuda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns bool value, indicating whether this architect is located on a CUDA device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="o">.</span><span class="n">is_cuda</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">device</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns ``torch.Device`` on which this architect is located.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="o">.</span><span class="n">device</span>
+
+<div class="viewcode-block" id="Architect.reset"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes all parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">xavier_normal_</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">constant_</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Architect.init_hidden"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect.init_hidden">[docs]</a>    <span class="k">def</span> <span class="nf">init_hidden</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes hidden by passing :math:`state_0` embedding and</span>
+<span class="sd">        zero-initialized hidden state to graph encoder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">:</span>
+            <span class="n">num_states</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">*</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTMCell</span><span class="p">)</span>
+            <span class="n">zeros</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">([</span><span class="n">zeros</span><span class="o">.</span><span class="n">clone</span><span class="p">()]</span><span class="o">*</span><span class="n">num_states</span><span class="p">))</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">wrap</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">))</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">states</span></div>
+
+<div class="viewcode-block" id="Architect.save"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_space</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves architect to a file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            prefix (str): prefix directory of a future save</span>
+<span class="sd">            name (str): save name</span>
+<span class="sd">            include_space (bool): whether to save the search space along with this architect instance</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: path to which architect was saved (``prefix``/architect/``name``.pth)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="ow">or</span> <span class="s1">&#39;unnamed&#39;</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">.pth&#39;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="s1">&#39;architect&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span> <span class="n">make_dirs</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+        <span class="n">space</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">include_space</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span> <span class="o">=</span> <span class="n">space</span>
+        <span class="k">return</span> <span class="n">path</span></div>
+
+<div class="viewcode-block" id="Architect.forward"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform a forward path through graph encoder.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            new hidden state if key is None</span>
+<span class="sd">            else tuple of (logits, values, hidden)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">cell_id</span><span class="p">,</span> <span class="n">cell</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">):</span>
+            <span class="n">hidden</span><span class="p">[</span><span class="n">cell_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">cell</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">[</span><span class="n">cell_id</span><span class="p">])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hidden</span><span class="p">[</span><span class="n">cell_id</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="n">hidden</span><span class="p">[</span><span class="n">cell_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">hidden</span><span class="p">[</span><span class="n">cell_id</span><span class="p">]]</span>
+            <span class="nb">input</span> <span class="o">=</span> <span class="n">hidden</span><span class="p">[</span><span class="n">cell_id</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">policies</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">hidden</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">hidden</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">logits</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">hidden</span>
+
+        <span class="k">return</span> <span class="n">hidden</span></div>
+
+<div class="viewcode-block" id="Architect.act"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect.act">[docs]</a>    <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">explore</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pick</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get action given encoded graph predicted to the moment.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            inputs (torch.Tensor): encoded graph representation</span>
+<span class="sd">            explore(bool): whether to explore or exploit only</span>
+<span class="sd">            hidden (list): list of encoder cell(s) hidden states</span>
+<span class="sd">            key (str): key corresponding to policy and value layers</span>
+<span class="sd">            output (defaultdict(list), optional): if provided, chosen logprobs, chosen values and</span>
+<span class="sd">                entropies will be appended to those lists, instead of being returned</span>
+<span class="sd">            pick (int, optional): index of action to pick instead of sampling or argmax.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            action, hidden state, chosen logprobs, chosen values, entropies</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;`key` must not be None for act. &#39;</span> \
+                                <span class="s1">&#39;If you want to update hidden only, call `forward` instead&#39;</span>
+        <span class="n">logits</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="n">distribution</span> <span class="o">=</span> <span class="n">Categorical</span><span class="p">(</span><span class="n">logits</span><span class="o">=</span><span class="n">logits</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">pick</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">pick</span> <span class="o">&lt;</span> <span class="n">logits</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">([</span><span class="n">pick</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">explore</span><span class="p">:</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">probs</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">chosen_logs</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">action</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">chosen_values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">action</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">entropies</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">entropy</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">defaultdict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">output</span><span class="o">.</span><span class="n">default_factory</span> <span class="o">==</span> <span class="nb">list</span><span class="p">,</span> \
+                <span class="s1">&#39;`output` must be a defaultdict with `list` default_factory.&#39;</span>
+
+            <span class="n">output</span><span class="p">[</span><span class="s1">&#39;logprob&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chosen_logs</span><span class="p">)</span>
+            <span class="n">output</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chosen_values</span><span class="p">)</span>
+            <span class="n">output</span><span class="p">[</span><span class="s1">&#39;entropies&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entropies</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">action</span><span class="p">,</span> <span class="n">hidden</span>
+
+        <span class="k">return</span> <span class="n">action</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">chosen_logs</span><span class="p">,</span> <span class="n">chosen_values</span><span class="p">,</span> <span class="n">entropies</span></div>
+
+<div class="viewcode-block" id="Architect.sample"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">explore</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Samples a graph description, using current policy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            explore: whether to explore or exploit only.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: sampled graph, log probabilities and predicted</span>
+<span class="sd">                values of chosen actions, entropies of output distributions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="n">representations</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_hidden</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subsample</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">explore</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="p">,</span> <span class="p">[],</span> <span class="n">representations</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;logprob&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;entropies&#39;</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="Architect.evaluate_description"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect.evaluate_description">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Picks described actions in order to obtain log probabilities, predicted values</span>
+<span class="sd">        and the entropies of output distributions</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            description (dict): description to evaluate</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: sampled graph, log probabilities and predicted</span>
+<span class="sd">                values of chosen actions, entropies of output distributions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="n">representations</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_hidden</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subsample</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="p">,</span> <span class="p">[],</span> <span class="n">representations</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;logprob&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;entropies&#39;</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="Architect._subsample"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect._subsample">[docs]</a>    <span class="k">def</span> <span class="nf">_subsample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">explore</span><span class="p">,</span> <span class="n">search_space</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">representations</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">outer_i</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The recursive workhorse of `sample` method.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hidden (list): previous encoder hidden state</span>
+<span class="sd">            explore (bool): whether to explore the search/action space or exploit only</span>
+<span class="sd">            search_space (SearchSpace): current level of search space</span>
+<span class="sd">            names (list): names of search spaces up to current level</span>
+<span class="sd">            output (defaultdict(list), optional): dict of lists to append outputs to</span>
+<span class="sd">            description (dict): description being generated</span>
+<span class="sd">            outer_i (int): outer iteration ordinal (used in recursion, `None` on depth `0`)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: next hidden state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">search_space</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="c1"># Those checks were introduced to reuse this method to evaluate model output for already existing description.</span>
+        <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># region num inner prediction</span>
+        <span class="n">num_inner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">eval_</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">num_inner</span><span class="p">,</span> <span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+
+        <span class="c1"># region forcing facilitation</span>
+        <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;num_</span><span class="si">{name}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">forced_inner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">eval_</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">forced_num_inner</span><span class="p">,</span> <span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+            <span class="n">max_available</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">num_inner</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">num_inner</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="k">else</span> <span class="n">num_inner</span>
+            <span class="k">assert</span> <span class="n">forced_inner</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">forced_inner</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">forced_inner</span> <span class="o">&lt;=</span> <span class="n">max_available</span>
+
+            <span class="k">if</span> <span class="n">forced_inner</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span> <span class="n">forced_inner</span> <span class="o">=</span> <span class="n">num_inner</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">forced_inner</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Number of inner search spaces &quot;</span><span class="si">{forced_inner}</span><span class="s1">&quot; &#39;</span>
+                                      <span class="s1">&#39;is not present in original search space.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">forced_inner</span> <span class="o">=</span> <span class="n">num_inner</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">description</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;num_</span><span class="si">{name}</span><span class="s1">&#39;</span><span class="p">])</span>
+        <span class="c1"># endregion</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">_start&#39;</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_inner</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;{&quot;_&quot;.join(names[:-1])}_{len(num_inner)}_</span><span class="si">{name}</span><span class="s1">s&#39;</span>
+            <span class="n">action</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">explore</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">forced_inner</span><span class="p">)</span>
+            <span class="n">num_inner</span> <span class="o">=</span> <span class="n">num_inner</span><span class="p">[</span><span class="n">action</span><span class="o">.</span><span class="n">item</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+            <span class="n">num_inner</span> <span class="o">=</span> <span class="n">num_inner</span><span class="p">[</span><span class="n">forced_inner</span><span class="p">]</span> <span class="k">if</span> <span class="n">forced_inner</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">num_inner</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;num_</span><span class="si">{name}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">description</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;num_</span><span class="si">{name}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_inner</span>
+        <span class="c1"># endregion</span>
+
+        <span class="c1"># region inner space prediction</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{num_inner}</span><span class="s1">_</span><span class="si">{name}</span><span class="s1">s&#39;</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="n">encoded_flag</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num_inner</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">eval_</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;{&quot;_&quot;.join(names[:-1])}_{len(v)}_</span><span class="si">{k}</span><span class="s1">s&#39;</span>
+
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">pick</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">pick</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="k">try</span><span class="p">:</span> <span class="n">pick</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pick</span><span class="p">)</span>
+                            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Point &quot;</span><span class="si">{pick}</span><span class="s1">&quot; is not present in &#39;</span>
+                                                 <span class="n">f</span><span class="s1">&#39;</span><span class="si">{k}</span><span class="s1"> dimension of the search space.&#39;</span><span class="p">)</span>
+
+                        <span class="n">action</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">explore</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">pick</span><span class="p">)</span>
+
+                        <span class="n">choice</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">action</span><span class="o">.</span><span class="n">item</span><span class="p">()]</span>
+
+                        <span class="k">if</span> <span class="n">pick</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">choice</span>
+                        <span class="k">else</span><span class="p">:</span> <span class="k">assert</span> <span class="n">choice</span> <span class="o">==</span> <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+
+                        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">representations</span><span class="p">:</span>
+                                <span class="nb">input</span> <span class="o">=</span> <span class="n">representations</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span>
+                                <span class="k">continue</span>
+
+                        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{k}</span><span class="s1">_</span><span class="si">{choice}</span><span class="s1">&#39;</span><span class="p">]</span>
+                        <span class="n">index</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+                        <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span> <span class="k">assert</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">SearchSpace</span><span class="p">)),</span> \
+                    <span class="s1">&#39;Inner search space must be either dict, SearchSpace or list of SearchSpaces.&#39;</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">encoded_flag</span><span class="p">:</span>
+                    <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+                    <span class="n">encoded_flag</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="n">spaces</span> <span class="o">=</span> <span class="p">[</span><span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="p">,</span> <span class="n">SearchSpace</span><span class="p">)</span> <span class="k">else</span> <span class="n">search_space</span><span class="o">.</span><span class="n">inner</span>
+                <span class="k">for</span> <span class="n">space</span> <span class="ow">in</span> <span class="n">spaces</span><span class="p">:</span>
+                    <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subsample</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">explore</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">representations</span><span class="p">,</span>
+                                            <span class="n">output</span><span class="p">,</span> <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
+                    <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">hidden</span><span class="p">)</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">_inner_done&#39;</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="c1"># endregion</span>
+
+        <span class="c1"># region outer keys prediction</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">search_space</span><span class="o">.</span><span class="n">outer</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">eval_</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;{&quot;_&quot;.join(names[:-1])}_{len(v)}_</span><span class="si">{k}</span><span class="s1">s&#39;</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">pick</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">pick</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span> <span class="n">pick</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pick</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Point &quot;</span><span class="si">{pick}</span><span class="s1">&quot; is not present in &#39;</span>
+                                         <span class="n">f</span><span class="s1">&#39;</span><span class="si">{k}</span><span class="s1"> dimension of the search space.&#39;</span><span class="p">)</span>
+
+                <span class="n">action</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">explore</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">pick</span><span class="p">)</span>
+
+                <span class="n">choice</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">action</span><span class="o">.</span><span class="n">item</span><span class="p">()]</span>
+
+                <span class="k">if</span> <span class="n">pick</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">description</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">choice</span>
+                <span class="k">else</span><span class="p">:</span> <span class="k">assert</span> <span class="n">choice</span> <span class="o">==</span> <span class="n">description</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">representations</span><span class="p">:</span>
+                        <span class="nb">input</span> <span class="o">=</span> <span class="n">representations</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span>
+                        <span class="k">continue</span>
+
+                <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{k}</span><span class="s1">_</span><span class="si">{choice}</span><span class="s1">&#39;</span><span class="p">]</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+                <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span> <span class="k">assert</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">description</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+        <span class="c1"># endregion</span>
+
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">_end&#39;</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">wrap</span><span class="p">([</span><span class="n">index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">repr_key</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{names[-2]}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">outer_i</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{names[-2]}</span><span class="s1">_</span><span class="si">{outer_i}</span><span class="s1">&#39;</span>
+            <span class="n">representations</span><span class="p">[</span><span class="n">repr_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">hidden</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">hidden</span></div>
+
+<div class="viewcode-block" id="Architect.initialize"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_space</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">outer_i</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Recursively initializes architect, creating value and policy layers and embedding index.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            search_space (SearchSpace): current level of search space</span>
+<span class="sd">            names (list): names of search spaces up to current level</span>
+<span class="sd">            outer_i (int): outer iteration ordinal (used in recursion, `None` on depth `0`)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">search_space</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">output_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hidden_size</span>
+
+        <span class="n">num_inner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">eval_</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">num_inner</span><span class="p">,</span> <span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_inner</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;{&quot;_&quot;.join(names[:-1])}_{len(num_inner)}_</span><span class="si">{name}</span><span class="s1">s&#39;</span>
+            <span class="n">add_if_doesnt_exist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">policies</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">output_dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_inner</span><span class="p">)))</span>
+            <span class="n">add_if_doesnt_exist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">output_dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_inner</span><span class="p">)))</span>
+
+        <span class="n">add_increment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">_start&#39;</span><span class="p">)</span>
+        <span class="n">add_increment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">_end&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">adapt</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">outer</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">names</span><span class="p">,</span> <span class="n">outer_i</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">num_inner</span><span class="p">)):</span>
+            <span class="n">add_increment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;{i+1}_</span><span class="si">{name}</span><span class="s1">s&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">space</span> <span class="ow">in</span> <span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">space</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="p">,</span> <span class="n">SearchSpace</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> \
+                    <span class="s1">&#39;Inner search space must be either list, dict or SearchSpace.&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adapt</span><span class="p">(</span><span class="n">search_space</span><span class="o">.</span><span class="n">inner</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">names</span><span class="p">,</span> <span class="n">outer_i</span><span class="p">)</span>
+        <span class="n">add_increment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">_inner_done&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Architect.adapt"><a class="viewcode-back" href="../../architect.html#nasframe.architect.Architect.adapt">[docs]</a>    <span class="k">def</span> <span class="nf">adapt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">outer_i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates layers and updates embedding index given search space dimensions.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            items (iterable): iterable of tuples corresponding to search space dimensions</span>
+<span class="sd">            names (list): names of search spaces up to current level</span>
+<span class="sd">            outer_i (int): outer iteration ordinal (used in recursion, `None` on depth `0`)</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">output_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hidden_size</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">eval_</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;{&quot;_&quot;.join(names[:-1])}_{len(v)}_</span><span class="si">{k}</span><span class="s1">s&#39;</span>
+                <span class="n">add_if_doesnt_exist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">policies</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">output_dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+                <span class="n">add_if_doesnt_exist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">output_dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+                <span class="k">for</span> <span class="n">v_</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+                    <span class="n">add_increment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_index</span><span class="p">,</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{k}</span><span class="s1">_</span><span class="si">{v_}</span><span class="s1">&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'v0.1.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

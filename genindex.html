@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; NAS Framework v0.1 alpha documentation</title>
+  <title>Index &mdash; NAS Framework v0.1.1 alpha documentation</title>
   
 
   
@@ -38,7 +38,7 @@
         <link rel="index" title="Index"
               href="#"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="index.html"/> 
+    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.1
+                0.1.1
               </div>
             
           
@@ -91,7 +91,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Framework:</span></p>
+              <p class="caption"><span class="caption-text">Framework API:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
@@ -112,21 +112,43 @@
 <li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.torch">Torch-related</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#miscellaneous">Miscellaneous</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#search-space-section">Search space section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#child-training-section">Child training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size">batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#adaptive-batch-size">adaptive_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#min-batch-size">min_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-batch-size">max_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size-decay">batch_size_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#keep-data-on-device">keep_data_on_device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#architect-training-section">Architect training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#curriculum">curriculum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-curriculum-complexity">max_curriculum_complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#epochs-per-loop">epochs_per_loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#lr-decay">lr_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#storage-surplus-factor">storage_surplus_factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#load-architect">load_architect</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -218,89 +240,89 @@
 <h2 id="_">_</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace._add_agraph_unit">_add_agraph_unit() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace._add_agraph_unit">_add_agraph_unit() (nasframe.searchspaces.MLPSpace method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace._add_agraph_units">_add_agraph_units() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace._add_agraph_units">_add_agraph_units() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace._add_agraph_units">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace._add_agraph_units">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace._add_agraph_units">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._add_agraph_units">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace._connect">_connect() (searchspaces.SearchSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._connect">_connect() (nasframe.searchspaces.SearchSpace method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace._count_related_params">_count_related_params() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace._count_related_params">_count_related_params() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace._count_related_params">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._count_related_params">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace._del_value">_del_value() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._del_value">_del_value() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
-      <li><a href="coaches.html#coaches.CoachBase._evaluate_metric">_evaluate_metric() (coaches.CoachBase method)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase._evaluate_metric">_evaluate_metric() (nasframe.coaches.CoachBase method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace._fill_the_gaps">_fill_the_gaps() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._fill_the_gaps">_fill_the_gaps() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
-      <li><a href="coaches.html#coaches.CoachBase._finalize_epoch">_finalize_epoch() (coaches.CoachBase method)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase._finalize_epoch">_finalize_epoch() (nasframe.coaches.CoachBase method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace._get_value">_get_value() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._get_value">_get_value() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
-      <li><a href="coaches.html#coaches.ArchitectCoach._init_epoch">_init_epoch() (coaches.ArchitectCoach method)</a>
+      <li><a href="coaches.html#nasframe.coaches.ArchitectCoach._init_epoch">_init_epoch() (nasframe.coaches.ArchitectCoach method)</a>
 
       <ul>
-        <li><a href="coaches.html#coaches.CoachBase._init_epoch">(coaches.CoachBase method)</a>
+        <li><a href="coaches.html#nasframe.coaches.CoachBase._init_epoch">(nasframe.coaches.CoachBase method)</a>
 </li>
-        <li><a href="coaches.html#coaches.FeedForwardCoach._init_epoch">(coaches.FeedForwardCoach method)</a>
+        <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach._init_epoch">(nasframe.coaches.FeedForwardCoach method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace._init_layer">_init_layer() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace._init_layer">_init_layer() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace._init_layer">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._init_layer">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="coaches.html#coaches.CoachBase._log">_log() (coaches.CoachBase method)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase._log">_log() (nasframe.coaches.CoachBase method)</a>
 </li>
-      <li><a href="loaders.html#loaders.TextLoader._maybe_print">_maybe_print() (loaders.TextLoader method)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader._maybe_print">_maybe_print() (nasframe.loaders.TextLoader method)</a>
 </li>
-      <li><a href="utils.html#utils.misc._nested_defaultdict">_nested_defaultdict() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc._nested_defaultdict">_nested_defaultdict() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="storage.html#storage.Storage._on_change">_on_change() (storage.Storage method)</a>
+      <li><a href="storage.html#nasframe.storage.Storage._on_change">_on_change() (nasframe.storage.Storage method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace._prune">_prune() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._prune">_prune() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace._resolve_shape">_resolve_shape() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._resolve_shape">_resolve_shape() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace._resolve_shapes">_resolve_shapes() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._resolve_shapes">_resolve_shapes() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace._set_value">_set_value() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._set_value">_set_value() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
-      <li><a href="architect.html#architect.Architect._subsample">_subsample() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect._subsample">_subsample() (nasframe.architect.Architect method)</a>
 </li>
-      <li><a href="coaches.html#coaches.ArchitectCoach._training_loop">_training_loop() (coaches.ArchitectCoach method)</a>
+      <li><a href="coaches.html#nasframe.coaches.ArchitectCoach._training_loop">_training_loop() (nasframe.coaches.ArchitectCoach method)</a>
 
       <ul>
-        <li><a href="coaches.html#coaches.CoachBase._training_loop">(coaches.CoachBase method)</a>
+        <li><a href="coaches.html#nasframe.coaches.CoachBase._training_loop">(nasframe.coaches.CoachBase method)</a>
 </li>
-        <li><a href="coaches.html#coaches.FeedForwardCoach._training_loop">(coaches.FeedForwardCoach method)</a>
+        <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach._training_loop">(nasframe.coaches.FeedForwardCoach method)</a>
 </li>
       </ul></li>
-      <li><a href="coaches.html#coaches.ArchitectCoach._training_loop_body">_training_loop_body() (coaches.ArchitectCoach method)</a>
+      <li><a href="coaches.html#nasframe.coaches.ArchitectCoach._training_loop_body">_training_loop_body() (nasframe.coaches.ArchitectCoach method)</a>
 
       <ul>
-        <li><a href="coaches.html#coaches.CoachBase._training_loop_body">(coaches.CoachBase method)</a>
+        <li><a href="coaches.html#nasframe.coaches.CoachBase._training_loop_body">(nasframe.coaches.CoachBase method)</a>
 </li>
-        <li><a href="coaches.html#coaches.FeedForwardCoach._training_loop_body">(coaches.FeedForwardCoach method)</a>
+        <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach._training_loop_body">(nasframe.coaches.FeedForwardCoach method)</a>
 </li>
-        <li><a href="coaches.html#coaches.RecurrentCoach._training_loop_body">(coaches.RecurrentCoach method)</a>
+        <li><a href="coaches.html#nasframe.coaches.RecurrentCoach._training_loop_body">(nasframe.coaches.RecurrentCoach method)</a>
 </li>
       </ul></li>
-      <li><a href="storage.html#storage.Storage._update_advantages">_update_advantages() (storage.Storage method)</a>
+      <li><a href="storage.html#nasframe.storage.Storage._update_advantages">_update_advantages() (nasframe.storage.Storage method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace._walk_graph">_walk_graph() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace._walk_graph">_walk_graph() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -308,35 +330,33 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="coaches.html#coaches.CoachBase.accumulated_step">accumulated_step (coaches.CoachBase attribute)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase.accumulated_step">accumulated_step (nasframe.coaches.CoachBase attribute)</a>
 </li>
-      <li><a href="utils.html#utils.FileLock.acquire">acquire() (utils.FileLock method)</a>
+      <li><a href="utils.html#nasframe.utils.filelock.FileLock.acquire">acquire() (nasframe.utils.filelock.FileLock method)</a>
 </li>
-      <li><a href="architect.html#architect.Architect.act">act() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.act">act() (nasframe.architect.Architect method)</a>
 </li>
-      <li><a href="architect.html#architect.Architect.adapt">adapt() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.adapt">adapt() (nasframe.architect.Architect method)</a>
 </li>
-      <li><a href="utils.html#utils.misc.add_if_doesnt_exist">add_if_doesnt_exist() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.add_if_doesnt_exist">add_if_doesnt_exist() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="utils.html#utils.misc.add_increment">add_increment() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.add_increment">add_increment() (in module nasframe.utils.misc)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="storage.html#storage.CurriculumStorage.advantages">advantages (storage.CurriculumStorage attribute)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.advantages">advantages (nasframe.storage.CurriculumStorage attribute)</a>
 </li>
-      <li><a href="storage.html#storage.CurriculumStorage.append">append() (storage.CurriculumStorage method)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.append">append() (nasframe.storage.CurriculumStorage method)</a>
 
       <ul>
-        <li><a href="storage.html#storage.Storage.append">(storage.Storage method)</a>
+        <li><a href="storage.html#nasframe.storage.Storage.append">(nasframe.storage.Storage method)</a>
 </li>
       </ul></li>
-      <li><a href="architect.html#architect.Architect">Architect (class in architect)</a>
+      <li><a href="architect.html#nasframe.architect.Architect">Architect (class in nasframe.architect)</a>
 </li>
-      <li><a href="architect.html#module-architect">architect (module)</a>
+      <li><a href="coaches.html#nasframe.coaches.ArchitectCoach">ArchitectCoach (class in nasframe.coaches)</a>
 </li>
-      <li><a href="coaches.html#coaches.ArchitectCoach">ArchitectCoach (class in coaches)</a>
-</li>
-      <li><a href="utils.html#utils.FileLock.available">available (utils.FileLock attribute)</a>
+      <li><a href="utils.html#nasframe.utils.filelock.FileLock.available">available (nasframe.utils.filelock.FileLock attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -344,17 +364,17 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="storage.html#storage.CurriculumStorage.best">best() (storage.CurriculumStorage method)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.best">best() (nasframe.storage.CurriculumStorage method)</a>
 
       <ul>
-        <li><a href="storage.html#storage.Storage.best">(storage.Storage method)</a>
+        <li><a href="storage.html#nasframe.storage.Storage.best">(nasframe.storage.Storage method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.misc.bool_val">bool_val() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.bool_val">bool_val() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="utils.html#utils.misc.Bunch">Bunch (class in utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.Bunch">Bunch (class in nasframe.utils.misc)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -362,35 +382,35 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="searchspaces.html#searchspaces.RNNSpace.cell">cell() (searchspaces.RNNSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.cell">cell() (nasframe.searchspaces.RNNSpace method)</a>
 </li>
-      <li><a href="coaches.html#coaches.CoachBase">CoachBase (class in coaches)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase">CoachBase (class in nasframe.coaches)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace.combine_tensors">combine_tensors() (searchspaces.SearchSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.combine_tensors">combine_tensors() (nasframe.searchspaces.SearchSpace method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.connect">connect() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.connect">connect() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.connect">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.connect">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.connect_leafs">connect_leafs() (searchspaces.MLPSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.connect_leafs">connect_leafs() (nasframe.searchspaces.MLPSpace static method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.connect_leafs">(searchspaces.RNNSpace static method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.connect_leafs">(nasframe.searchspaces.RNNSpace static method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.connect_leafs">(searchspaces.SearchSpace static method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.connect_leafs">(nasframe.searchspaces.SearchSpace static method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.misc.convert_keys_to_int">convert_keys_to_int() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.convert_keys_to_int">convert_keys_to_int() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="coaches.html#coaches.CoachBase.current_lr">current_lr (coaches.CoachBase attribute)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase.current_lr">current_lr (nasframe.coaches.CoachBase attribute)</a>
 </li>
-      <li><a href="storage.html#storage.CurriculumStorage.current_storage">current_storage (storage.CurriculumStorage attribute)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.current_storage">current_storage (nasframe.storage.CurriculumStorage attribute)</a>
 </li>
-      <li><a href="storage.html#storage.CurriculumStorage">CurriculumStorage (class in storage)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage">CurriculumStorage (class in nasframe.storage)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -398,29 +418,29 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="coaches.html#coaches.CoachBase.decay_lr">decay_lr() (coaches.CoachBase method)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase.decay_lr">decay_lr() (nasframe.coaches.CoachBase method)</a>
 </li>
-      <li><a href="utils.html#utils.misc.delete_file">delete_file() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.delete_file">delete_file() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.delete_layer">delete_layer() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.delete_layer">delete_layer() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.delete_layer">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.delete_layer">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="storage.html#storage.CurriculumStorage.descriptions">descriptions (storage.CurriculumStorage attribute)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.descriptions">descriptions (nasframe.storage.CurriculumStorage attribute)</a>
 </li>
-      <li><a href="architect.html#architect.Architect.device">device (architect.Architect attribute)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.device">device (nasframe.architect.Architect attribute)</a>
 
       <ul>
-        <li><a href="scripts.html#scripts.train_generic.GenericModel.device">(scripts.train_generic.GenericModel attribute)</a>
+        <li><a href="scripts.html#nasframe.scripts.train_generic.GenericModel.device">(nasframe.scripts.train_generic.GenericModel attribute)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.device">(searchspaces.SearchSpace attribute)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.device">(nasframe.searchspaces.SearchSpace attribute)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace.draw">draw() (searchspaces.SearchSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.draw">draw() (nasframe.searchspaces.SearchSpace method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -428,21 +448,21 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="storage.html#storage.CurriculumStorage.entropies">entropies (storage.CurriculumStorage attribute)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.entropies">entropies (nasframe.storage.CurriculumStorage attribute)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace.eval_">eval_() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.eval_">eval_() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
-      <li><a href="coaches.html#coaches.FeedForwardCoach.evaluate">evaluate() (coaches.FeedForwardCoach method)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_generic.evaluate">evaluate() (in module nasframe.scripts.train_generic)</a>
 
       <ul>
-        <li><a href="coaches.html#coaches.RecurrentCoach.evaluate">(coaches.RecurrentCoach method)</a>
+        <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach.evaluate">(nasframe.coaches.FeedForwardCoach method)</a>
 </li>
-        <li><a href="scripts.html#scripts.train_generic.evaluate">(in module scripts.train_generic)</a>
+        <li><a href="coaches.html#nasframe.coaches.RecurrentCoach.evaluate">(nasframe.coaches.RecurrentCoach method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="architect.html#architect.Architect.evaluate_description">evaluate_description() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.evaluate_description">evaluate_description() (nasframe.architect.Architect method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -450,74 +470,74 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="coaches.html#coaches.FeedForwardCoach">FeedForwardCoach (class in coaches)</a>
+      <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach">FeedForwardCoach (class in nasframe.coaches)</a>
 </li>
-      <li><a href="utils.html#utils.FileLock">FileLock (class in utils)</a>
+      <li><a href="utils.html#nasframe.utils.filelock.FileLock">FileLock (class in nasframe.utils.filelock)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.fill_the_gaps">fill_the_gaps() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.fill_the_gaps">fill_the_gaps() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.fill_the_gaps">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.fill_the_gaps">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="storage.html#storage.CurriculumStorage.filter_na">filter_na() (storage.CurriculumStorage method)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.filter_na">filter_na() (nasframe.storage.CurriculumStorage method)</a>
 
       <ul>
-        <li><a href="storage.html#storage.Storage.filter_na">(storage.Storage method)</a>
+        <li><a href="storage.html#nasframe.storage.Storage.filter_na">(nasframe.storage.Storage method)</a>
 </li>
       </ul></li>
-      <li><a href="storage.html#storage.CurriculumStorage.find">find() (storage.CurriculumStorage method)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.find">find() (nasframe.storage.CurriculumStorage method)</a>
 
       <ul>
-        <li><a href="storage.html#storage.Storage.find">(storage.Storage method)</a>
+        <li><a href="storage.html#nasframe.storage.Storage.find">(nasframe.storage.Storage method)</a>
 </li>
       </ul></li>
-      <li><a href="loaders.html#loaders.TextLoader.fit_embeddings">fit_embeddings() (loaders.TextLoader method)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader.fit_embeddings">fit_embeddings() (nasframe.loaders.TextLoader method)</a>
 </li>
-      <li><a href="loaders.html#loaders.TextLoader.fit_tokenizer">fit_tokenizer() (loaders.TextLoader method)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader.fit_tokenizer">fit_tokenizer() (nasframe.loaders.TextLoader method)</a>
 </li>
-      <li><a href="storage.html#storage.CurriculumStorage.flatten">flatten() (storage.CurriculumStorage method)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.flatten">flatten() (nasframe.storage.CurriculumStorage method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace.force_num_inner">force_num_inner() (searchspaces.SearchSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.force_num_inner">force_num_inner() (nasframe.searchspaces.SearchSpace method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.force_num_node_inputs">force_num_node_inputs() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.force_num_node_inputs">force_num_node_inputs() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.force_num_node_inputs">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.force_num_node_inputs">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.force_num_nodes">force_num_nodes() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.force_num_nodes">force_num_nodes() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.force_num_nodes">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.force_num_nodes">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.RNNSpace.force_num_state_inputs">force_num_state_inputs() (searchspaces.RNNSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.force_num_state_inputs">force_num_state_inputs() (nasframe.searchspaces.RNNSpace method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.RNNSpace.force_num_states">force_num_states() (searchspaces.RNNSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.force_num_states">force_num_states() (nasframe.searchspaces.RNNSpace method)</a>
 </li>
-      <li><a href="architect.html#architect.Architect.forward">forward() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.forward">forward() (nasframe.architect.Architect method)</a>
 
       <ul>
-        <li><a href="scripts.html#scripts.train_generic.GenericModel.forward">(scripts.train_generic.GenericModel method)</a>
+        <li><a href="scripts.html#nasframe.scripts.train_generic.GenericModel.forward">(nasframe.scripts.train_generic.GenericModel method)</a>
 </li>
-        <li><a href="scripts.html#scripts.train_toxic.ToxicModel.forward">(scripts.train_toxic.ToxicModel method)</a>
+        <li><a href="scripts.html#nasframe.scripts.train_toxic.ToxicModel.forward">(nasframe.scripts.train_toxic.ToxicModel method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.MLPSpace.forward">(searchspaces.MLPSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.forward">(nasframe.searchspaces.MLPSpace method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.forward">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.forward">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.forward">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.forward">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
-        <li><a href="utils.html#utils.torch.Identity.forward">(utils.torch.Identity method)</a>
+        <li><a href="utils.html#nasframe.utils.torch.Identity.forward">(nasframe.utils.torch.Identity method)</a>
 </li>
       </ul></li>
-      <li><a href="storage.html#storage.CurriculumStorage.from_json">from_json() (storage.CurriculumStorage static method)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.from_json">from_json() (nasframe.storage.CurriculumStorage static method)</a>
 
       <ul>
-        <li><a href="storage.html#storage.Storage.from_json">(storage.Storage static method)</a>
+        <li><a href="storage.html#nasframe.storage.Storage.from_json">(nasframe.storage.Storage static method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -526,43 +546,45 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="scripts.html#scripts.train_generic.GenericModel">GenericModel (class in scripts.train_generic)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_generic.generic_worker">generic_worker() (in module nasframe.scripts.train_generic)</a>
 </li>
-      <li><a href="utils.html#utils.torch.get_activation">get_activation() (in module utils.torch)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_generic.GenericModel">GenericModel (class in nasframe.scripts.train_generic)</a>
 </li>
-      <li><a href="utils.html#utils.torch.get_criterion">get_criterion() (in module utils.torch)</a>
+      <li><a href="utils.html#nasframe.utils.torch.get_activation">get_activation() (in module nasframe.utils.torch)</a>
 </li>
-      <li><a href="coaches.html#coaches.CoachBase.get_current_lr">get_current_lr() (coaches.CoachBase method)</a>
+      <li><a href="utils.html#nasframe.utils.torch.get_criterion">get_criterion() (in module nasframe.utils.torch)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.get_index">get_index() (searchspaces.MLPSpace method)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase.get_current_lr">get_current_lr() (nasframe.coaches.CoachBase method)</a>
+</li>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.get_index">get_index() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.get_index">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.get_index">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.get_layer">get_layer() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.get_layer">get_layer() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.get_layer">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.get_layer">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.misc.get_logger">get_logger() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.get_logger">get_logger() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="coaches.html#coaches.FeedForwardCoach.get_loss">get_loss() (coaches.FeedForwardCoach method)</a>
+      <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach.get_loss">get_loss() (nasframe.coaches.FeedForwardCoach method)</a>
 
       <ul>
-        <li><a href="coaches.html#coaches.RecurrentCoach.get_loss">(coaches.RecurrentCoach method)</a>
+        <li><a href="coaches.html#nasframe.coaches.RecurrentCoach.get_loss">(nasframe.coaches.RecurrentCoach method)</a>
 </li>
       </ul></li>
-      <li><a href="utils.html#utils.torch.get_np">get_np() (in module utils.torch)</a>
+      <li><a href="utils.html#nasframe.utils.torch.get_np">get_np() (in module nasframe.utils.torch)</a>
 </li>
-      <li><a href="utils.html#utils.torch.get_optimizer">get_optimizer() (in module utils.torch)</a>
+      <li><a href="utils.html#nasframe.utils.torch.get_optimizer">get_optimizer() (in module nasframe.utils.torch)</a>
 </li>
-      <li><a href="utils.html#utils.torch.get_scheduler">get_scheduler() (in module utils.torch)</a>
+      <li><a href="utils.html#nasframe.utils.torch.get_scheduler">get_scheduler() (in module nasframe.utils.torch)</a>
 </li>
-      <li><a href="utils.html#utils.misc.get_tqdm">get_tqdm() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.get_tqdm">get_tqdm() (in module nasframe.utils.misc)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -570,7 +592,7 @@
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="scripts.html#scripts.train_generic.hash_description">hash_description() (in module scripts.train_generic)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_generic.hash_description">hash_description() (in module nasframe.scripts.train_generic)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -578,26 +600,26 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.torch.Identity">Identity (class in utils.torch)</a>
+      <li><a href="utils.html#nasframe.utils.torch.Identity">Identity (class in nasframe.utils.torch)</a>
 </li>
-      <li><a href="architect.html#architect.Architect.init_hidden">init_hidden() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.init_hidden">init_hidden() (nasframe.architect.Architect method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.init_hidden">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.init_hidden">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="architect.html#architect.Architect.initialize">initialize() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.initialize">initialize() (nasframe.architect.Architect method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.misc.int_to_range">int_to_range() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.int_to_range">int_to_range() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="coaches.html#coaches.CoachBase.is_converged">is_converged (coaches.CoachBase attribute)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase.is_converged">is_converged (nasframe.coaches.CoachBase attribute)</a>
 </li>
-      <li><a href="architect.html#architect.Architect.is_cuda">is_cuda (architect.Architect attribute)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.is_cuda">is_cuda (nasframe.architect.Architect attribute)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.is_cuda">(searchspaces.SearchSpace attribute)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.is_cuda">(nasframe.searchspaces.SearchSpace attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -606,21 +628,21 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.layer_exists">layer_exists() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.layer_exists">layer_exists() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.layer_exists">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.layer_exists">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="loaders.html#loaders.TextLoader.load">load() (loaders.TextLoader static method)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader.load">load() (nasframe.loaders.TextLoader static method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="loaders.html#loaders.TextLoader.load_embeddings">load_embeddings() (loaders.TextLoader method)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader.load_embeddings">load_embeddings() (nasframe.loaders.TextLoader method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace.log_info">log_info() (searchspaces.SearchSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.log_info">log_info() (nasframe.searchspaces.SearchSpace method)</a>
 </li>
-      <li><a href="storage.html#storage.CurriculumStorage.log_probs">log_probs (storage.CurriculumStorage attribute)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.log_probs">log_probs (nasframe.storage.CurriculumStorage attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -628,20 +650,20 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.misc.make_dirs">make_dirs() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.make_dirs">make_dirs() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="loaders.html#loaders.TextLoader.make_torch_dataset">make_torch_dataset() (loaders.TextLoader method)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader.make_torch_dataset">make_torch_dataset() (nasframe.loaders.TextLoader method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace.merge">merge() (searchspaces.SearchSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.merge">merge() (nasframe.searchspaces.SearchSpace method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace">MLPSpace (class in searchspaces)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace">MLPSpace (class in nasframe.searchspaces)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.move_layer">move_layer() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.move_layer">move_layer() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.move_layer">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.move_layer">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -650,11 +672,23 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.misc.nested_defaultdict">nested_defaultdict() (in module utils.misc)</a>
+      <li><a href="architect.html#module-nasframe.architect">nasframe.architect (module)</a>
+</li>
+      <li><a href="scripts.html#module-nasframe.scripts.train_generic">nasframe.scripts.train_generic (module)</a>
+</li>
+      <li><a href="scripts.html#module-nasframe.scripts.train_toxic">nasframe.scripts.train_toxic (module)</a>
+</li>
+      <li><a href="utils.html#module-nasframe.utils.filelock">nasframe.utils.filelock (module)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.misc.now">now() (in module utils.misc)</a>
+      <li><a href="utils.html#module-nasframe.utils.misc">nasframe.utils.misc (module)</a>
+</li>
+      <li><a href="utils.html#module-nasframe.utils.torch">nasframe.utils.torch (module)</a>
+</li>
+      <li><a href="utils.html#nasframe.utils.misc.nested_defaultdict">nested_defaultdict() (in module nasframe.utils.misc)</a>
+</li>
+      <li><a href="utils.html#nasframe.utils.misc.now">now() (in module nasframe.utils.misc)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -662,47 +696,47 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.torch.param_count">param_count() (in module utils.torch)</a>
+      <li><a href="utils.html#nasframe.utils.torch.param_count">param_count() (in module nasframe.utils.torch)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.parameter_count">parameter_count() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.parameter_count">parameter_count() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.parameter_count">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.parameter_count">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.parameter_count">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.parameter_count">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="storage.html#storage.CurriculumStorage.parameter_counts">parameter_counts (storage.CurriculumStorage attribute)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.parameter_counts">parameter_counts (nasframe.storage.CurriculumStorage attribute)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace.pick">pick() (searchspaces.SearchSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.pick">pick() (nasframe.searchspaces.SearchSpace static method)</a>
 </li>
-      <li><a href="utils.html#utils.misc.Bunch.pprint">pprint() (utils.misc.Bunch method)</a>
+      <li><a href="utils.html#nasframe.utils.misc.Bunch.pprint">pprint() (nasframe.utils.misc.Bunch method)</a>
 </li>
-      <li><a href="storage.html#storage.CurriculumStorage.pred_values">pred_values (storage.CurriculumStorage attribute)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.pred_values">pred_values (nasframe.storage.CurriculumStorage attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="scripts.html#scripts.train_generic.prepare">prepare() (in module scripts.train_generic)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_generic.prepare">prepare() (in module nasframe.scripts.train_generic)</a>
 
       <ul>
-        <li><a href="scripts.html#scripts.train_generic.GenericModel.prepare">(scripts.train_generic.GenericModel method)</a>
+        <li><a href="scripts.html#nasframe.scripts.train_generic.GenericModel.prepare">(nasframe.scripts.train_generic.GenericModel method)</a>
 </li>
-        <li><a href="scripts.html#scripts.train_toxic.ToxicModel.prepare">(scripts.train_toxic.ToxicModel method)</a>
+        <li><a href="scripts.html#nasframe.scripts.train_toxic.ToxicModel.prepare">(nasframe.scripts.train_toxic.ToxicModel method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.prepare">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.prepare">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace.preprocess">preprocess() (searchspaces.SearchSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.preprocess">preprocess() (nasframe.searchspaces.SearchSpace method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.prune">prune() (searchspaces.MLPSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.prune">prune() (nasframe.searchspaces.MLPSpace static method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.prune">(searchspaces.RNNSpace static method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.prune">(nasframe.searchspaces.RNNSpace static method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.prune">(searchspaces.SearchSpace static method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.prune">(nasframe.searchspaces.SearchSpace static method)</a>
 </li>
       </ul></li>
-      <li><a href="utils.html#utils.FileLock.purge">purge() (utils.FileLock method)</a>
+      <li><a href="utils.html#nasframe.utils.filelock.FileLock.purge">purge() (nasframe.utils.filelock.FileLock method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -710,65 +744,65 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="coaches.html#coaches.RecurrentCoach">RecurrentCoach (class in coaches)</a>
+      <li><a href="coaches.html#nasframe.coaches.RecurrentCoach">RecurrentCoach (class in nasframe.coaches)</a>
 </li>
-      <li><a href="utils.html#utils.FileLock.release">release() (utils.FileLock method)</a>
+      <li><a href="utils.html#nasframe.utils.filelock.FileLock.release">release() (nasframe.utils.filelock.FileLock method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.release_all_constraints">release_all_constraints() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.release_all_constraints">release_all_constraints() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.release_all_constraints">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.release_all_constraints">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.release_all_constraints">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.release_all_constraints">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace.release_num_inner">release_num_inner() (searchspaces.SearchSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.release_num_inner">release_num_inner() (nasframe.searchspaces.SearchSpace method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.release_num_node_inputs">release_num_node_inputs() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.release_num_node_inputs">release_num_node_inputs() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.release_num_node_inputs">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.release_num_node_inputs">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.release_num_nodes">release_num_nodes() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.release_num_nodes">release_num_nodes() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.release_num_nodes">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.release_num_nodes">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.RNNSpace.release_num_state_inputs">release_num_state_inputs() (searchspaces.RNNSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.release_num_state_inputs">release_num_state_inputs() (nasframe.searchspaces.RNNSpace method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="searchspaces.html#searchspaces.RNNSpace.release_num_states">release_num_states() (searchspaces.RNNSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.release_num_states">release_num_states() (nasframe.searchspaces.RNNSpace method)</a>
 </li>
-      <li><a href="architect.html#architect.Architect.reset">reset() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.reset">reset() (nasframe.architect.Architect method)</a>
 
       <ul>
-        <li><a href="coaches.html#coaches.CoachBase.reset">(coaches.CoachBase method)</a>
+        <li><a href="coaches.html#nasframe.coaches.CoachBase.reset">(nasframe.coaches.CoachBase method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.MLPSpace.reset">(searchspaces.MLPSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.reset">(nasframe.searchspaces.MLPSpace method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.reset">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.reset">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.resolve_shapes">resolve_shapes() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.resolve_shapes">resolve_shapes() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.resolve_shapes">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.resolve_shapes">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="utils.html#utils.misc.return_value">return_value() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.return_value">return_value() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="storage.html#storage.CurriculumStorage.reward">reward() (storage.CurriculumStorage method)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.reward">reward() (nasframe.storage.CurriculumStorage method)</a>
 
       <ul>
-        <li><a href="storage.html#storage.Storage.reward">(storage.Storage method)</a>
+        <li><a href="storage.html#nasframe.storage.Storage.reward">(nasframe.storage.Storage method)</a>
 </li>
       </ul></li>
-      <li><a href="storage.html#storage.CurriculumStorage.rewards">rewards (storage.CurriculumStorage attribute)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.rewards">rewards (nasframe.storage.CurriculumStorage attribute)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.RNNSpace">RNNSpace (class in searchspaces)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace">RNNSpace (class in nasframe.searchspaces)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -776,43 +810,37 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="architect.html#architect.Architect.sample">sample() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.sample">sample() (nasframe.architect.Architect method)</a>
 </li>
-      <li><a href="scripts.html#scripts.train_generic.sample_loop">sample_loop() (in module scripts.train_generic)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_generic.sample_loop">sample_loop() (in module nasframe.scripts.train_generic)</a>
 </li>
-      <li><a href="architect.html#architect.Architect.save">save() (architect.Architect method)</a>
+      <li><a href="architect.html#nasframe.architect.Architect.save">save() (nasframe.architect.Architect method)</a>
 
       <ul>
-        <li><a href="loaders.html#loaders.TextLoader.save">(loaders.TextLoader method)</a>
+        <li><a href="loaders.html#nasframe.loaders.TextLoader.save">(nasframe.loaders.TextLoader method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.save">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.save">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="scripts.html#module-scripts.train_generic">scripts.train_generic (module)</a>
-</li>
-      <li><a href="scripts.html#module-scripts.train_toxic">scripts.train_toxic (module)</a>
-</li>
-      <li><a href="searchspaces.html#searchspaces.SearchSpace">SearchSpace (class in searchspaces)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace">SearchSpace (class in nasframe.searchspaces)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils.html#utils.misc.selfless">selfless() (in module utils.misc)</a>
+      <li><a href="utils.html#nasframe.utils.misc.selfless">selfless() (in module nasframe.utils.misc)</a>
 </li>
-      <li><a href="storage.html#storage.CurriculumStorage.set_complexity">set_complexity() (storage.CurriculumStorage method)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.set_complexity">set_complexity() (nasframe.storage.CurriculumStorage method)</a>
 </li>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.set_curriculum_complexity">set_curriculum_complexity() (searchspaces.MLPSpace method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.set_curriculum_complexity">set_curriculum_complexity() (nasframe.searchspaces.MLPSpace method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.set_curriculum_complexity">(searchspaces.RNNSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.set_curriculum_complexity">(nasframe.searchspaces.RNNSpace method)</a>
 </li>
-        <li><a href="searchspaces.html#searchspaces.SearchSpace.set_curriculum_complexity">(searchspaces.SearchSpace method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.set_curriculum_complexity">(nasframe.searchspaces.SearchSpace method)</a>
 </li>
       </ul></li>
-      <li><a href="scripts.html#scripts.train_toxic.ToxicModel.set_linear">set_linear() (scripts.train_toxic.ToxicModel method)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase.step">step (nasframe.coaches.CoachBase attribute)</a>
 </li>
-      <li><a href="coaches.html#coaches.CoachBase.step">step (coaches.CoachBase attribute)</a>
-</li>
-      <li><a href="storage.html#storage.Storage">Storage (class in storage)</a>
+      <li><a href="storage.html#nasframe.storage.Storage">Storage (class in nasframe.storage)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -820,38 +848,36 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="loaders.html#loaders.TextLoader">TextLoader (class in loaders)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader">TextLoader (class in nasframe.loaders)</a>
 </li>
-      <li><a href="loaders.html#loaders.TextLoader.tokenize">tokenize() (loaders.TextLoader method)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader.tokenize">tokenize() (nasframe.loaders.TextLoader method)</a>
 </li>
-      <li><a href="loaders.html#loaders.TextLoader.torch_embedding">torch_embedding (loaders.TextLoader attribute)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader.torch_embedding">torch_embedding (nasframe.loaders.TextLoader attribute)</a>
 </li>
-      <li><a href="scripts.html#scripts.train_toxic.toxic_worker">toxic_worker() (in module scripts.train_toxic)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_toxic.ToxicModel">ToxicModel (class in nasframe.scripts.train_toxic)</a>
 </li>
-      <li><a href="scripts.html#scripts.train_toxic.ToxicModel">ToxicModel (class in scripts.train_toxic)</a>
-</li>
-      <li><a href="coaches.html#coaches.ArchitectCoach.train">train() (coaches.ArchitectCoach method)</a>
+      <li><a href="coaches.html#nasframe.coaches.ArchitectCoach.train">train() (nasframe.coaches.ArchitectCoach method)</a>
 
       <ul>
-        <li><a href="coaches.html#coaches.CoachBase.train">(coaches.CoachBase method)</a>
+        <li><a href="coaches.html#nasframe.coaches.CoachBase.train">(nasframe.coaches.CoachBase method)</a>
 </li>
-        <li><a href="coaches.html#coaches.FeedForwardCoach.train">(coaches.FeedForwardCoach method)</a>
+        <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach.train">(nasframe.coaches.FeedForwardCoach method)</a>
 </li>
-        <li><a href="coaches.html#coaches.RecurrentCoach.train">(coaches.RecurrentCoach method)</a>
+        <li><a href="coaches.html#nasframe.coaches.RecurrentCoach.train">(nasframe.coaches.RecurrentCoach method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="scripts.html#scripts.train_generic.train_curriculum">train_curriculum() (in module scripts.train_generic)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_generic.train_curriculum">train_curriculum() (in module nasframe.scripts.train_generic)</a>
 </li>
-      <li><a href="scripts.html#scripts.train_generic.train_plain">train_plain() (in module scripts.train_generic)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_generic.train_plain">train_plain() (in module nasframe.scripts.train_generic)</a>
 </li>
-      <li><a href="scripts.html#scripts.train_toxic.train_toxic">train_toxic() (in module scripts.train_toxic)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_toxic.train_toxic">train_toxic() (in module nasframe.scripts.train_toxic)</a>
 </li>
-      <li><a href="coaches.html#coaches.CoachBase.train_until_convergence">train_until_convergence() (coaches.CoachBase method)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase.train_until_convergence">train_until_convergence() (nasframe.coaches.CoachBase method)</a>
 
       <ul>
-        <li><a href="coaches.html#coaches.FeedForwardCoach.train_until_convergence">(coaches.FeedForwardCoach method)</a>
+        <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach.train_until_convergence">(nasframe.coaches.FeedForwardCoach method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -860,23 +886,19 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="storage.html#storage.CurriculumStorage.update">update() (storage.CurriculumStorage method)</a>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.update">update() (nasframe.storage.CurriculumStorage method)</a>
 
       <ul>
-        <li><a href="storage.html#storage.Storage.update">(storage.Storage method)</a>
+        <li><a href="storage.html#nasframe.storage.Storage.update">(nasframe.storage.Storage method)</a>
 </li>
-        <li><a href="utils.html#utils.misc.Bunch.update">(utils.misc.Bunch method)</a>
+        <li><a href="utils.html#nasframe.utils.misc.Bunch.update">(nasframe.utils.misc.Bunch method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="coaches.html#coaches.CoachBase.update_convergence_status">update_convergence_status() (coaches.CoachBase method)</a>
+      <li><a href="coaches.html#nasframe.coaches.CoachBase.update_convergence_status">update_convergence_status() (nasframe.coaches.CoachBase method)</a>
 </li>
-      <li><a href="coaches.html#coaches.FeedForwardCoach.update_optim">update_optim() (coaches.FeedForwardCoach method)</a>
-</li>
-      <li><a href="utils.html#module-utils.misc">utils.misc (module)</a>
-</li>
-      <li><a href="utils.html#module-utils.torch">utils.torch (module)</a>
+      <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach.update_optim">update_optim() (nasframe.coaches.FeedForwardCoach method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -884,19 +906,19 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="searchspaces.html#searchspaces.MLPSpace.walk_graph">walk_graph() (searchspaces.MLPSpace static method)</a>
+      <li><a href="searchspaces.html#nasframe.searchspaces.MLPSpace.walk_graph">walk_graph() (nasframe.searchspaces.MLPSpace static method)</a>
 
       <ul>
-        <li><a href="searchspaces.html#searchspaces.RNNSpace.walk_graph">(searchspaces.RNNSpace static method)</a>
+        <li><a href="searchspaces.html#nasframe.searchspaces.RNNSpace.walk_graph">(nasframe.searchspaces.RNNSpace static method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="loaders.html#loaders.TextLoader.word_index">word_index (loaders.TextLoader attribute)</a>
+      <li><a href="loaders.html#nasframe.loaders.TextLoader.word_index">word_index (nasframe.loaders.TextLoader attribute)</a>
 </li>
-      <li><a href="scripts.html#scripts.train_generic.worker_init">worker_init() (in module scripts.train_generic)</a>
+      <li><a href="scripts.html#nasframe.scripts.train_generic.worker_init">worker_init() (in module nasframe.scripts.train_generic)</a>
 </li>
-      <li><a href="utils.html#utils.torch.wrap">wrap() (in module utils.torch)</a>
+      <li><a href="utils.html#nasframe.utils.torch.wrap">wrap() (in module nasframe.utils.torch)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -937,7 +959,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1 alpha',
+            VERSION:'v0.1.1 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

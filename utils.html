@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Utility functions and classes &mdash; NAS Framework v0.1 alpha documentation</title>
+  <title>Utility functions and classes &mdash; NAS Framework v0.1.1 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="index.html"/>
+    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
         <link rel="next" title="Data Loaders" href="loaders.html"/>
         <link rel="prev" title="Scripts" href="scripts.html"/> 
 
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                0.1
+                0.1.1
               </div>
             
           
@@ -92,7 +92,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Framework:</span></p>
+              <p class="caption"><span class="caption-text">Framework API:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
@@ -116,14 +116,15 @@
 </ul>
 <p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Utility functions and classes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-utils.torch">Torch-related</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nasframe.utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nasframe.utils.filelock">Miscellaneous</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
@@ -195,15 +196,15 @@
             
   <div class="section" id="utility-functions-and-classes">
 <h1>Utility functions and classes<a class="headerlink" href="#utility-functions-and-classes" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-utils.torch">
-<span id="torch-related"></span><h2>Torch-related<a class="headerlink" href="#module-utils.torch" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-nasframe.utils.torch">
+<span id="torch-related"></span><h2>Torch-related<a class="headerlink" href="#module-nasframe.utils.torch" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="utils.torch.Identity">
-<em class="property">class </em><code class="descclassname">utils.torch.</code><code class="descname">Identity</code><a class="reference internal" href="_modules/utils/torch.html#Identity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.Identity" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.torch.Identity">
+<em class="property">class </em><code class="descclassname">nasframe.utils.torch.</code><code class="descname">Identity</code><a class="reference internal" href="_modules/nasframe/utils/torch.html#Identity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.torch.Identity" title="Permalink to this definition">¶</a></dt>
 <dd><p>A <code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> which returns arguments passed to it unchanged, on instance (<code class="docutils literal notranslate"><span class="pre">forward</span></code>) call.</p>
 <dl class="method">
-<dt id="utils.torch.Identity.forward">
-<code class="descname">forward</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#Identity.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.Identity.forward" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.torch.Identity.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/torch.html#Identity.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.torch.Identity.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the computation performed at every call.</p>
 <p>Should be overridden by all subclasses.</p>
 <div class="admonition note">
@@ -218,8 +219,8 @@ registered hooks while the latter silently ignores them.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.torch.get_activation">
-<code class="descclassname">utils.torch.</code><code class="descname">get_activation</code><span class="sig-paren">(</span><em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_activation" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.torch.get_activation">
+<code class="descclassname">nasframe.utils.torch.</code><code class="descname">get_activation</code><span class="sig-paren">(</span><em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/torch.html#get_activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.torch.get_activation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns instantiated activation given the name.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -246,8 +247,8 @@ Tanh, Hardshrink, Hardtanh, identity/linear/none</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.torch.get_criterion">
-<code class="descclassname">utils.torch.</code><code class="descname">get_criterion</code><span class="sig-paren">(</span><em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_criterion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_criterion" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.torch.get_criterion">
+<code class="descclassname">nasframe.utils.torch.</code><code class="descname">get_criterion</code><span class="sig-paren">(</span><em>name</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/torch.html#get_criterion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.torch.get_criterion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns criterion instance given the name.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -273,8 +274,8 @@ NLL, PoissoNLL, SmoothL1, SoftMargin, TripletMargin</dd>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.torch.get_np">
-<code class="descclassname">utils.torch.</code><code class="descname">get_np</code><span class="sig-paren">(</span><em>inputs: torch.Tensor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_np"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_np" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.torch.get_np">
+<code class="descclassname">nasframe.utils.torch.</code><code class="descname">get_np</code><span class="sig-paren">(</span><em>inputs: torch.Tensor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/torch.html#get_np"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.torch.get_np" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attempts to wrap inputs in a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.
 If torch.Tensor passed, places it onto CPU and calls <code class="docutils literal notranslate"><span class="pre">tensor.numpy()</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -290,8 +291,8 @@ If torch.Tensor passed, places it onto CPU and calls <code class="docutils liter
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.torch.get_optimizer">
-<code class="descclassname">utils.torch.</code><code class="descname">get_optimizer</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_optimizer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.torch.get_optimizer">
+<code class="descclassname">nasframe.utils.torch.</code><code class="descname">get_optimizer</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/torch.html#get_optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.torch.get_optimizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns optimizer constructor given the name.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -310,8 +311,8 @@ If torch.Tensor passed, places it onto CPU and calls <code class="docutils liter
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.torch.get_scheduler">
-<code class="descclassname">utils.torch.</code><code class="descname">get_scheduler</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#get_scheduler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.get_scheduler" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.torch.get_scheduler">
+<code class="descclassname">nasframe.utils.torch.</code><code class="descname">get_scheduler</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/torch.html#get_scheduler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.torch.get_scheduler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns scheduler constructor given the name.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -330,8 +331,8 @@ If torch.Tensor passed, places it onto CPU and calls <code class="docutils liter
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.torch.param_count">
-<code class="descclassname">utils.torch.</code><code class="descname">param_count</code><span class="sig-paren">(</span><em>module</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#param_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.param_count" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.torch.param_count">
+<code class="descclassname">nasframe.utils.torch.</code><code class="descname">param_count</code><span class="sig-paren">(</span><em>module</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/torch.html#param_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.torch.param_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Counts parameters in passed module.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -346,8 +347,8 @@ If torch.Tensor passed, places it onto CPU and calls <code class="docutils liter
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.torch.wrap">
-<code class="descclassname">utils.torch.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>inputs</em>, <em>device=-1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/torch.html#wrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.torch.wrap" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.torch.wrap">
+<code class="descclassname">nasframe.utils.torch.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>inputs</em>, <em>device=-1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/torch.html#wrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.torch.wrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a tensor or copies an existing one and puts it on <cite>device</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -368,11 +369,11 @@ If torch.Tensor passed, places it onto CPU and calls <code class="docutils liter
 </dd></dl>
 
 </div>
-<div class="section" id="miscellaneous">
-<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-nasframe.utils.filelock">
+<span id="miscellaneous"></span><h2>Miscellaneous<a class="headerlink" href="#module-nasframe.utils.filelock" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="utils.FileLock">
-<em class="property">class </em><code class="descclassname">utils.</code><code class="descname">FileLock</code><span class="sig-paren">(</span><em>path</em>, <em>delay=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/filelock.html#FileLock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.FileLock" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.filelock.FileLock">
+<em class="property">class </em><code class="descclassname">nasframe.utils.filelock.</code><code class="descname">FileLock</code><span class="sig-paren">(</span><em>path</em>, <em>delay=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/filelock.html#FileLock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.filelock.FileLock" title="Permalink to this definition">¶</a></dt>
 <dd><p>A file locking mechanism.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -387,8 +388,8 @@ If torch.Tensor passed, places it onto CPU and calls <code class="docutils liter
 </tbody>
 </table>
 <dl class="method">
-<dt id="utils.FileLock.acquire">
-<code class="descname">acquire</code><span class="sig-paren">(</span><em>blocking=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/filelock.html#FileLock.acquire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.FileLock.acquire" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.filelock.FileLock.acquire">
+<code class="descname">acquire</code><span class="sig-paren">(</span><em>blocking=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/filelock.html#FileLock.acquire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.filelock.FileLock.acquire" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tries to acquire the lock.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -402,14 +403,14 @@ otherwise will block the next statement execution until the lock is available.</
 </dd></dl>
 
 <dl class="attribute">
-<dt id="utils.FileLock.available">
-<code class="descname">available</code><a class="headerlink" href="#utils.FileLock.available" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.filelock.FileLock.available">
+<code class="descname">available</code><a class="headerlink" href="#nasframe.utils.filelock.FileLock.available" title="Permalink to this definition">¶</a></dt>
 <dd><p>Indicates whether the path is available to be locked.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="utils.FileLock.purge">
-<code class="descname">purge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/filelock.html#FileLock.purge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.FileLock.purge" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.filelock.FileLock.purge">
+<code class="descname">purge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/filelock.html#FileLock.purge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.filelock.FileLock.purge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes the lock file, even if it wasn’t created by the current instance.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -422,29 +423,29 @@ otherwise will block the next statement execution until the lock is available.</
 </dd></dl>
 
 <dl class="method">
-<dt id="utils.FileLock.release">
-<code class="descname">release</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/filelock.html#FileLock.release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.FileLock.release" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.filelock.FileLock.release">
+<code class="descname">release</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/filelock.html#FileLock.release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.filelock.FileLock.release" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases the lock.</p>
 </dd></dl>
 
 </dd></dl>
 
-<span class="target" id="module-utils.misc"></span><dl class="class">
-<dt id="utils.misc.Bunch">
-<em class="property">class </em><code class="descclassname">utils.misc.</code><code class="descname">Bunch</code><span class="sig-paren">(</span><em>dict_or_bunch=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#Bunch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.Bunch" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-nasframe.utils.misc"></span><dl class="class">
+<dt id="nasframe.utils.misc.Bunch">
+<em class="property">class </em><code class="descclassname">nasframe.utils.misc.</code><code class="descname">Bunch</code><span class="sig-paren">(</span><em>dict_or_bunch=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#Bunch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.Bunch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience class, which can be thought of as an extension to pythons <code class="docutils literal notranslate"><span class="pre">dict</span></code>
 which allows accessing it’s items by class attribute access operator <code class="docutils literal notranslate"><span class="pre">.</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dict_or_bunch</strong> (<em>dict</em><em> or </em><a class="reference internal" href="#utils.misc.Bunch" title="utils.misc.Bunch"><em>Bunch</em></a><em>, </em><em>optional</em>) – a collection to initialize items from.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dict_or_bunch</strong> (<em>dict</em><em> or </em><a class="reference internal" href="#nasframe.utils.misc.Bunch" title="nasframe.utils.misc.Bunch"><em>Bunch</em></a><em>, </em><em>optional</em>) – a collection to initialize items from.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="utils.misc.Bunch.pprint">
-<code class="descname">pprint</code><span class="sig-paren">(</span><em>_indent_level=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#Bunch.pprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.Bunch.pprint" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.Bunch.pprint">
+<code class="descname">pprint</code><span class="sig-paren">(</span><em>_indent_level=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#Bunch.pprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.Bunch.pprint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pretty prints a (possibly nested) Bunch.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -457,8 +458,8 @@ which allows accessing it’s items by class attribute access operator <code cla
 </dd></dl>
 
 <dl class="method">
-<dt id="utils.misc.Bunch.update">
-<code class="descname">update</code><span class="sig-paren">(</span><em>object</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#Bunch.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.Bunch.update" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.Bunch.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>object</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#Bunch.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.Bunch.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates itself with an object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -474,8 +475,8 @@ any object, in which case <code class="docutils literal notranslate"><span class
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc._nested_defaultdict">
-<code class="descclassname">utils.misc.</code><code class="descname">_nested_defaultdict</code><span class="sig-paren">(</span><em>levels</em>, <em>factory</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#_nested_defaultdict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc._nested_defaultdict" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc._nested_defaultdict">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">_nested_defaultdict</code><span class="sig-paren">(</span><em>levels</em>, <em>factory</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#_nested_defaultdict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc._nested_defaultdict" title="Permalink to this definition">¶</a></dt>
 <dd><p>A recursive call for <code class="docutils literal notranslate"><span class="pre">nested_defaultdict</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -496,8 +497,8 @@ any object, in which case <code class="docutils literal notranslate"><span class
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.add_if_doesnt_exist">
-<code class="descclassname">utils.misc.</code><code class="descname">add_if_doesnt_exist</code><span class="sig-paren">(</span><em>dictionary</em>, <em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#add_if_doesnt_exist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.add_if_doesnt_exist" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.add_if_doesnt_exist">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">add_if_doesnt_exist</code><span class="sig-paren">(</span><em>dictionary</em>, <em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#add_if_doesnt_exist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.add_if_doesnt_exist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mutates <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> to contain a <code class="docutils literal notranslate"><span class="pre">key</span></code> if it doesn’t already.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -515,8 +516,8 @@ any object, in which case <code class="docutils literal notranslate"><span class
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.add_increment">
-<code class="descclassname">utils.misc.</code><code class="descname">add_increment</code><span class="sig-paren">(</span><em>dictionary</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#add_increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.add_increment" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.add_increment">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">add_increment</code><span class="sig-paren">(</span><em>dictionary</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#add_increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.add_increment" title="Permalink to this definition">¶</a></dt>
 <dd><p>If <code class="docutils literal notranslate"><span class="pre">key</span></code> doesn’t exist in <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>, increments maximum
 existing value by one, and assigns a <cite>key`</cite> to it.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -534,8 +535,8 @@ existing value by one, and assigns a <cite>key`</cite> to it.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.bool_val">
-<code class="descclassname">utils.misc.</code><code class="descname">bool_val</code><span class="sig-paren">(</span><em>string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#bool_val"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.bool_val" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.bool_val">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">bool_val</code><span class="sig-paren">(</span><em>string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#bool_val"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.bool_val" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a boolean value of a string.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bool_val</span><span class="p">(</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
@@ -557,8 +558,8 @@ existing value by one, and assigns a <cite>key`</cite> to it.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.convert_keys_to_int">
-<code class="descclassname">utils.misc.</code><code class="descname">convert_keys_to_int</code><span class="sig-paren">(</span><em>dictionary</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#convert_keys_to_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.convert_keys_to_int" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.convert_keys_to_int">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">convert_keys_to_int</code><span class="sig-paren">(</span><em>dictionary</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#convert_keys_to_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.convert_keys_to_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tries to convert each key of a (possibly nested) <code class="docutils literal notranslate"><span class="pre">dict</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>.
 Useful when loading from json.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -574,8 +575,8 @@ Useful when loading from json.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.delete_file">
-<code class="descclassname">utils.misc.</code><code class="descname">delete_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#delete_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.delete_file" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.delete_file">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">delete_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#delete_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.delete_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes a file, if it exists.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -588,8 +589,8 @@ Useful when loading from json.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.get_logger">
-<code class="descclassname">utils.misc.</code><code class="descname">get_logger</code><span class="sig-paren">(</span><em>name='/root/nas-framework/nasframe/utils/misc.py'</em>, <em>file=None</em>, <em>file_level='INFO'</em>, <em>stout_level='WARNING'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#get_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.get_logger" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.get_logger">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">get_logger</code><span class="sig-paren">(</span><em>name='/root/nas-framework/nasframe/utils/misc.py'</em>, <em>file=None</em>, <em>file_level='INFO'</em>, <em>stdout_level='DEBUG'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#get_logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.get_logger" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets logger by name if it exists, otherwise initializes one.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -598,7 +599,7 @@ Useful when loading from json.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<em>str</em>) – logger name</li>
 <li><strong>file</strong> (<em>str</em><em>, </em><em>optional</em>) – path to the log file</li>
-<li><strong>stout_level</strong> (<em>str</em>) – stdout logging level</li>
+<li><strong>stdout_level</strong> (<em>str</em>) – stdout logging level</li>
 <li><strong>file_level</strong> (<em>str</em>) – file logging level</li>
 </ul>
 </td>
@@ -611,8 +612,8 @@ Useful when loading from json.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.get_tqdm">
-<code class="descclassname">utils.misc.</code><code class="descname">get_tqdm</code><span class="sig-paren">(</span><em>try_notebook=False</em>, <em>leave=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#get_tqdm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.get_tqdm" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.get_tqdm">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">get_tqdm</code><span class="sig-paren">(</span><em>try_notebook=False</em>, <em>leave=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#get_tqdm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.get_tqdm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns tqdm progressbar constructor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -633,22 +634,22 @@ Useful when loading from json.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.int_to_range">
-<code class="descclassname">utils.misc.</code><code class="descname">int_to_range</code><span class="sig-paren">(</span><em>value</em>, <em>shift=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#int_to_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.int_to_range" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.int_to_range">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">int_to_range</code><span class="sig-paren">(</span><em>value</em>, <em>shift=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#int_to_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.int_to_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts <code class="docutils literal notranslate"><span class="pre">value</span></code> to <code class="docutils literal notranslate"><span class="pre">range(shift,</span> <span class="pre">value</span> <span class="pre">+</span> <span class="pre">shift))</span></code> if <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">int</span></code>,
 returns <code class="docutils literal notranslate"><span class="pre">value</span></code> unchanged otherwise.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.make_dirs">
-<code class="descclassname">utils.misc.</code><code class="descname">make_dirs</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#make_dirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.make_dirs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.make_dirs">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">make_dirs</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#make_dirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.make_dirs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes dirs, including intermediate one if they don’t exist.
 :param path: path that needs to be created</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.nested_defaultdict">
-<code class="descclassname">utils.misc.</code><code class="descname">nested_defaultdict</code><span class="sig-paren">(</span><em>levels</em>, <em>factory=None</em>, <em>value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#nested_defaultdict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.nested_defaultdict" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.nested_defaultdict">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">nested_defaultdict</code><span class="sig-paren">(</span><em>levels</em>, <em>factory=None</em>, <em>value=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#nested_defaultdict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.nested_defaultdict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Produces a nested defaultdict with <code class="docutils literal notranslate"><span class="pre">defaultdict(factory)</span></code> as a leaf.
 If <code class="docutils literal notranslate"><span class="pre">factory</span></code> is not specified, creates a factory that returns <code class="docutils literal notranslate"><span class="pre">value</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -670,8 +671,8 @@ If <code class="docutils literal notranslate"><span class="pre">factory</span></
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.now">
-<code class="descclassname">utils.misc.</code><code class="descname">now</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#now"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.now" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.now">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">now</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#now"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.now" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -683,8 +684,8 @@ If <code class="docutils literal notranslate"><span class="pre">factory</span></
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.return_value">
-<code class="descclassname">utils.misc.</code><code class="descname">return_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#return_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.return_value" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.return_value">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">return_value</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#return_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.return_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a value passed to it.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -699,8 +700,8 @@ If <code class="docutils literal notranslate"><span class="pre">factory</span></
 </dd></dl>
 
 <dl class="function">
-<dt id="utils.misc.selfless">
-<code class="descclassname">utils.misc.</code><code class="descname">selfless</code><span class="sig-paren">(</span><em>variables</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/misc.html#selfless"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.misc.selfless" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.utils.misc.selfless">
+<code class="descclassname">nasframe.utils.misc.</code><code class="descname">selfless</code><span class="sig-paren">(</span><em>variables</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/utils/misc.html#selfless"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.utils.misc.selfless" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a copy of a dict of variables, without <code class="docutils literal notranslate"><span class="pre">self</span></code> in it.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -759,7 +760,7 @@ If <code class="docutils literal notranslate"><span class="pre">factory</span></
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1 alpha',
+            VERSION:'v0.1.1 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

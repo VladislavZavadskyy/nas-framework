@@ -1,0 +1,938 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>nasframe.scripts.train_generic &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> NAS Framework
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Framework API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../architect.html">Architect</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../searchspaces.html">Search Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../searchspaces.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../searchspaces.html#multilayer-perceptron">Multilayer Perceptron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../searchspaces.html#recurrent-neural-network">Recurrent Neural Network</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../coaches.html">Training Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../coaches.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../coaches.html#architect">Architect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../coaches.html#feed-forward">Feed Forward</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../coaches.html#recurrent">Recurrent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../storage.html">Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../storage.html#plain-storage">Plain Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../storage.html#curriculum-storage">Curriculum Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../utils.html#module-nasframe.utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../config.html">Configuring the search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../config.html#search-space-section">Search space section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config.html#child-training-section">Child training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#batch-size">batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#adaptive-batch-size">adaptive_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#min-batch-size">min_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#max-batch-size">max_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#batch-size-decay">batch_size_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#keep-data-on-device">keep_data_on_device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../config.html#architect-training-section">Architect training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#curriculum">curriculum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#max-curriculum-complexity">max_curriculum_complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#epochs-per-loop">epochs_per_loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#lr-decay">lr_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#storage-surplus-factor">storage_surplus_factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../config.html#load-architect">load_architect</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">NAS Framework</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>nasframe.scripts.train_generic</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for nasframe.scripts.train_generic</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">flatten_dict</span> <span class="k">import</span> <span class="n">flatten</span>
+
+<span class="kn">from</span> <span class="nn">nasframe.utils.torch</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">nasframe</span> <span class="k">import</span> <span class="n">FeedForwardCoach</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="k">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">nasframe.utils</span> <span class="k">import</span> <span class="n">make_dirs</span><span class="p">,</span> <span class="n">Bunch</span><span class="p">,</span> <span class="n">get_tqdm</span>
+<span class="kn">from</span> <span class="nn">nasframe.utils</span> <span class="k">import</span> <span class="n">get_logger</span><span class="p">,</span> <span class="n">FileLock</span>
+<span class="kn">from</span> <span class="nn">nasframe</span> <span class="k">import</span> <span class="n">Architect</span><span class="p">,</span> <span class="n">ArchitectCoach</span>
+<span class="kn">from</span> <span class="nn">nasframe.coaches.base</span> <span class="k">import</span> <span class="n">LossIsNoneError</span>
+<span class="kn">from</span> <span class="nn">nasframe.storage</span> <span class="k">import</span> <span class="n">CurriculumStorage</span><span class="p">,</span> <span class="n">Storage</span>
+<span class="kn">from</span> <span class="nn">nasframe.searchspaces</span> <span class="k">import</span> <span class="n">RNNSpace</span><span class="p">,</span> <span class="n">MLPSpace</span>
+
+<span class="kn">from</span> <span class="nn">tensorboardX</span> <span class="k">import</span> <span class="n">SummaryWriter</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">exists</span>
+
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="k">import</span> <span class="n">rmtree</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">join</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+
+
+<div class="viewcode-block" id="GenericModel"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.GenericModel">[docs]</a><span class="k">class</span> <span class="nc">GenericModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generic model template to be used as a wrapper for search space.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        space (MLPSpace): search space being wrapped</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">space</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">=</span> <span class="n">space</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">device</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            ``torch.Device`` on which ``self.space`` is located.</span>
+<span class="sd">            Should be also the device of any other instance&#39;s module.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">device</span>
+
+<div class="viewcode-block" id="GenericModel.prepare"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.GenericModel.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A wrapper for the ``space.prepare`` call.</span>
+<span class="sd">        Useful when inputs passed to this wrapper have a shape different from the one of inputs passed to search space.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="GenericModel.forward"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.GenericModel.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cell</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="hash_description"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.hash_description">[docs]</a><span class="k">def</span> <span class="nf">hash_description</span><span class="p">(</span><span class="n">description</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attempts to create a consistent description representation and hash it.</span>
+<span class="sd">    Usually fails.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">description</span><span class="p">))</span>
+    <span class="n">flat_desc</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">flat_desc</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">flat_desc</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">flat_desc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">flat_desc</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">new_k</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">)))</span>
+        <span class="n">flat_desc</span><span class="p">[</span><span class="n">new_k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">flat_desc</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">del</span> <span class="n">flat_desc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">tuples</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">flat_desc</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="n">tuples</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="worker_init"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.worker_init">[docs]</a><span class="k">def</span> <span class="nf">worker_init</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes a worker process.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        description (dict): description for the worker to evaluate</span>
+<span class="sd">        log_dir (str): path to a directory where logs shall be stored</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        logger: logger instance</span>
+<span class="sd">        summary_writer (SummaryWriter): summary writer assigned to this worker</span>
+<span class="sd">        description_dir (str): path of a directory, to which passed description has been assigned</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hashsum</span> <span class="o">=</span> <span class="n">hash_description</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+    <span class="n">description_dir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">hashsum</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="n">description_dir</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">description</span><span class="p">,</span> <span class="s1">&#39;exists&#39;</span>
+    <span class="n">make_dirs</span><span class="p">(</span><span class="n">description_dir</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">description_dir</span><span class="p">,</span> <span class="s1">&#39;description.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;description_</span><span class="si">{hashsum}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="n">description_dir</span><span class="p">,</span> <span class="s1">&#39;training.log&#39;</span><span class="p">))</span>
+    <span class="n">summary_writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="n">description_dir</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">logger</span><span class="p">,</span> <span class="n">summary_writer</span><span class="p">,</span> <span class="n">description_dir</span></div>
+
+
+<div class="viewcode-block" id="prepare"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.prepare">[docs]</a><span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">resume</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">gpu_idx</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes training session.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (dict, str): configuration dictionary or path to YAML file.</span>
+<span class="sd">        resume (boot): whether to attempt to resume a previous session</span>
+<span class="sd">        input_shape (list, tuple, torch.Size): shape of the inputs</span>
+<span class="sd">        num_gpus (int): number of GPUs to use</span>
+<span class="sd">        gpu_idx (str, optional): string of comma separated dpu indices. if ``None``, ``range(num_gpus)`` is used.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Architect and an ArchitectCoach</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="n">log_dir</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;log_dir&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">resume</span> <span class="ow">and</span> <span class="n">exists</span><span class="p">(</span><span class="n">log_dir</span><span class="p">):</span>
+        <span class="n">rmtree</span><span class="p">(</span><span class="n">log_dir</span><span class="p">)</span>
+
+    <span class="n">make_dirs</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;architect&#39;</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;architect&#39;</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;events.out.tfevents&#39;</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;architect&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">make_dirs</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;architect&#39;</span><span class="p">))</span>
+
+    <span class="n">space_type</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;searchspace&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">Type</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;rnn&#39;</span><span class="p">:</span> <span class="n">RNNSpace</span><span class="p">,</span>
+        <span class="s1">&#39;mlp&#39;</span><span class="p">:</span> <span class="n">MLPSpace</span>
+    <span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">space_type</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Search space of type </span><span class="si">{space_type}</span><span class="s1"> is not implemented.&#39;</span><span class="p">)</span>
+    <span class="n">space_proto</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;searchspace&#39;</span><span class="p">])</span>
+
+    <span class="n">arch_logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s1">&#39;arch_coach&#39;</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;architect&#39;</span><span class="p">,</span> <span class="s1">&#39;training.log&#39;</span><span class="p">))</span>
+    <span class="n">load_architect</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;architect_training&#39;</span><span class="p">][</span><span class="s1">&#39;load_architect&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">exists</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;architect&#39;</span><span class="p">,</span> <span class="s1">&#39;checkpoint.pth&#39;</span><span class="p">))</span>
+            <span class="ow">and</span> <span class="n">resume</span> <span class="ow">and</span> <span class="n">load_architect</span><span class="p">):</span>
+        <span class="n">arch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;architect&#39;</span><span class="p">,</span> <span class="s1">&#39;checkpoint.pth&#39;</span><span class="p">))</span>
+        <span class="n">arch</span><span class="o">.</span><span class="n">search_space</span> <span class="o">=</span> <span class="n">space_proto</span>
+        <span class="n">arch_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Restored architect from checkpoint.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">arch</span> <span class="o">=</span> <span class="n">Architect</span><span class="p">(</span><span class="n">space_proto</span><span class="p">)</span>
+
+    <span class="n">curriculum</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;architect_training&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;curriculum&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">max_complexity</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;architect_training&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_curriculum_complexity&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">max_complexity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="n">summary_writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;architect&#39;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;description_reward.json&#39;</span><span class="p">)):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;description_reward.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">({},</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">resume</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">curriculum</span><span class="p">:</span>
+            <span class="n">storage</span> <span class="o">=</span> <span class="n">CurriculumStorage</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span>
+                <span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;description_reward.json&#39;</span><span class="p">),</span>
+                <span class="n">arch</span><span class="p">,</span> <span class="n">space_proto</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">max_complexity</span><span class="p">)</span>
+
+            <span class="n">flat_storage</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="n">arch_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Loaded {len(flat_storage)} descriptions, &#39;</span>
+                             <span class="n">f</span><span class="s1">&#39;{len(storage.storages)} curriculum levels total.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">storage</span> <span class="o">=</span> <span class="n">Storage</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">arch</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="n">space_proto</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="n">input_shape</span><span class="p">,</span>
+                                        <span class="n">path</span><span class="o">=</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;description_reward.json&#39;</span><span class="p">))</span>
+            <span class="n">arch_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{len(storage)} descriptions loaded.&#39;</span><span class="p">)</span>
+
+            <span class="n">flat_storage</span> <span class="o">=</span> <span class="n">storage</span>
+
+        <span class="n">hashums</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">hash_description</span><span class="p">,</span> <span class="n">flat_storage</span><span class="o">.</span><span class="n">descriptions</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">)):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hashums</span><span class="p">:</span> <span class="n">rmtree</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;events.out.tfevents&#39;</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span>
+
+        <span class="n">description_writer</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hashsum</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hashums</span><span class="p">):</span>
+            <span class="n">description_dir</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;descriptions&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">hashsum</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">description_dir</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">description_dir</span><span class="p">)</span>
+                <span class="n">description</span> <span class="o">=</span> <span class="n">flat_storage</span><span class="o">.</span><span class="n">descriptions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">desc</span> <span class="o">=</span> <span class="n">space_proto</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">)</span>
+                <span class="n">space_proto</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="n">description_dir</span><span class="p">,</span> <span class="s1">&#39;graph.png&#39;</span><span class="p">))</span>
+
+                <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">description_dir</span><span class="p">,</span> <span class="s1">&#39;graph.png&#39;</span><span class="p">)))</span>
+                <span class="n">description_writer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;descriptions/</span><span class="si">{hashsum}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">description_dir</span><span class="p">,</span> <span class="s1">&#39;description.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">storage</span> <span class="o">=</span> <span class="n">CurriculumStorage</span><span class="p">(</span><span class="n">max_complexity</span><span class="p">)</span> <span class="k">if</span> <span class="n">curriculum</span> <span class="k">else</span> <span class="n">Storage</span><span class="p">()</span>
+
+    <span class="n">arch_coach</span> <span class="o">=</span> <span class="n">ArchitectCoach</span><span class="p">(</span><span class="n">arch</span><span class="p">,</span> <span class="n">storage</span><span class="p">,</span>
+                                <span class="n">scheduler</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">logger</span><span class="o">=</span><span class="n">arch_logger</span><span class="p">,</span>
+                                <span class="n">epochs_to_increase</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                                <span class="n">tensorboard</span><span class="o">=</span><span class="n">summary_writer</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;architect_training&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="n">space_proto</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;merged_space.pth&#39;</span><span class="p">)):</span>
+        <span class="n">space_proto</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;merged_space&#39;</span><span class="p">)</span>
+
+    <span class="n">FileLock</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="n">space_proto</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;merged_space.pth.lock&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">purge</span><span class="p">()</span>
+    <span class="n">FileLock</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;description_reward.json&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">purge</span><span class="p">()</span>
+
+    <span class="n">gpu_indices</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_gpus</span><span class="p">)</span> <span class="k">if</span> <span class="n">gpu_idx</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">gpu_idx</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;architect_training&#39;</span><span class="p">],</span> <span class="n">space_proto</span><span class="p">,</span> <span class="n">arch</span><span class="p">,</span> <span class="n">arch_coach</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">gpu_indices</span><span class="p">),</span> <span class="n">log_dir</span></div>
+
+
+<div class="viewcode-block" id="sample_loop"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.sample_loop">[docs]</a><span class="k">def</span> <span class="nf">sample_loop</span><span class="p">(</span><span class="n">arch</span><span class="p">,</span> <span class="n">storage</span><span class="p">,</span> <span class="n">space_proto</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span>
+                <span class="n">desired_storage_len</span><span class="p">,</span> <span class="n">append_deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Description sampling loop.</span>
+
+<span class="sd">    Samples description given an architect and a space prototype, then perprocesses them by applying</span>
+<span class="sd">    ``space_proto.preprocess`` method with default parameters, if description is viable after that,</span>
+<span class="sd">    appends it to the list and puts it into storage. Loop stops when the storage length reaches</span>
+<span class="sd">    ``desired_storage_len``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arch (Architect): architect instance</span>
+<span class="sd">        storage (Storage, CurriculumStorage): storage instance</span>
+<span class="sd">        space_proto (SeachSpace): search space prototype</span>
+<span class="sd">        input_shape (list, tuple, torch.Size): input shape</span>
+<span class="sd">        desired_storage_len (int): the length storage should have when the loop is completed</span>
+<span class="sd">        append_deterministic (bool): whether to append description obtained by deterministically choosing the actions</span>
+<span class="sd">            with the highest probability in the architect&#39;s output distribution. If it would be the only description in</span>
+<span class="sd">            resulting evaluation list, this argument will be ignored.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of sampled but not evaluated descriptions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">evaluation_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">desired_storage_len</span><span class="p">:</span>
+        <span class="n">description</span><span class="p">,</span> <span class="n">logps</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">entropies</span> <span class="o">=</span> <span class="n">arch</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">space_proto</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">desc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">num_param</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">space_proto</span><span class="o">.</span><span class="n">parameter_count</span><span class="p">(</span><span class="n">desc</span><span class="p">)[:</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mf">1e6</span>
+            <span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">logps</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">entropies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">num_param</span><span class="p">)</span>
+            <span class="n">evaluation_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+
+    <span class="n">deterministic_is_viable</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">append_deterministic</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">evaluation_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">description</span><span class="p">,</span> <span class="n">logps</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">entropies</span> <span class="o">=</span> <span class="n">arch</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">explore</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">space_proto</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">desc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">num_param</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">space_proto</span><span class="o">.</span><span class="n">parameter_count</span><span class="p">(</span><span class="n">desc</span><span class="p">)[:</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mf">1e6</span>
+            <span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">logps</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">entropies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">num_param</span><span class="p">)</span>
+            <span class="n">evaluation_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+            <span class="n">deterministic_is_viable</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">evaluation_list</span><span class="p">,</span> <span class="n">deterministic_is_viable</span></div>
+
+
+<div class="viewcode-block" id="evaluate"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.evaluate">[docs]</a><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">descriptions</span><span class="p">,</span> <span class="n">worker_fn</span><span class="p">,</span> <span class="n">gpu_indices</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Launch the workers to evaluate descriptions in parallel.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        descriptions (list): descriptions to be evaluated</span>
+<span class="sd">        worker_fn (callable): worker callable</span>
+<span class="sd">        gpu_indices (list): list of gpu indices to run on</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list of (description, reward, device_idx) tuples</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">descriptions</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">descriptions</span><span class="p">)</span>
+
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">ctx</span><span class="o">.</span><span class="n">Manager</span><span class="p">()</span> <span class="k">as</span> <span class="n">manager</span><span class="p">:</span>
+
+        <span class="n">device_queue</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">gpu_indices</span><span class="p">:</span>
+            <span class="n">device_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+        <span class="n">worker_fn</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">worker_fn</span><span class="p">,</span> <span class="n">device_queue</span><span class="o">=</span><span class="n">device_queue</span><span class="p">)</span>
+
+        <span class="n">eval_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">manager</span><span class="o">.</span><span class="n">dict</span><span class="p">,</span> <span class="n">descriptions</span><span class="p">))</span>
+
+        <span class="k">with</span> <span class="n">ctx</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gpu_indices</span><span class="p">),</span> <span class="n">maxtasksperchild</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">worker_fn</span><span class="p">,</span> <span class="n">eval_list</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="train_curriculum"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.train_curriculum">[docs]</a><span class="k">def</span> <span class="nf">train_curriculum</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">worker</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span>
+                     <span class="n">resume</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_idx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Curriculum architect training procedure.</span>
+<span class="sd">    Includes sampling descriptions with complexity :math:`i`, evaluating them, train architect and start over again</span>
+<span class="sd">    with complexity :math:`i+1`.</span>
+<span class="sd">    When ``max_compexity`` is reached, disables curriculum, flattens :class:`CurriculumStorage` and trains plainly</span>
+<span class="sd">    from then on.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (dict, str): configuration dictionary or path to YAML file.</span>
+<span class="sd">        worker (callable): worker callable</span>
+<span class="sd">        input_shape (tuple, list, torch.Size): input&#39;s shape</span>
+<span class="sd">        resume (bool): whether  to try resuming the previous session</span>
+<span class="sd">        num_gpus (int): number of GPUs to use</span>
+<span class="sd">        gpu_idx (str, optional): string of comma separated dpu indices. if ``None``, ``range(num_gpus)`` is used.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        On keyboard interrupt returns storage filled with all that&#39;s benn found and evaluated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">training_config</span><span class="p">,</span> <span class="n">space_proto</span><span class="p">,</span> <span class="n">arch</span><span class="p">,</span> <span class="n">arch_coach</span><span class="p">,</span> <span class="n">gpu_indices</span><span class="p">,</span> <span class="n">log_dir</span> <span class="o">=</span>\
+        <span class="n">prepare</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">resume</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">gpu_idx</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">)</span>
+
+    <span class="n">load_architect</span> <span class="o">=</span> <span class="n">training_config</span><span class="p">[</span><span class="s1">&#39;load_architect&#39;</span><span class="p">]</span>
+    <span class="n">epochs_per_loop</span> <span class="o">=</span> <span class="n">training_config</span><span class="p">[</span><span class="s1">&#39;epochs_per_loop&#39;</span><span class="p">]</span>
+    <span class="n">architect_lr_decay</span> <span class="o">=</span> <span class="n">training_config</span><span class="p">[</span><span class="s1">&#39;lr_decay&#39;</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">architect_lr_decay</span> <span class="o">&lt;</span> <span class="mi">1</span>
+
+    <span class="n">storage_surplus_factor</span> <span class="o">=</span> <span class="n">training_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;storage_surplus_factor&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">storage_surplus_factor</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+
+    <span class="n">storage</span> <span class="o">=</span> <span class="n">arch_coach</span><span class="o">.</span><span class="n">storage</span>
+    <span class="n">summary_writer</span> <span class="o">=</span> <span class="n">arch_coach</span><span class="o">.</span><span class="n">summary_writer</span>
+
+    <span class="n">loops</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">points_per_epoch</span> <span class="o">=</span> <span class="n">arch_coach</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">*</span> <span class="n">arch_coach</span><span class="o">.</span><span class="n">epoch_steps</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">curriculum_complexity</span> <span class="o">=</span> <span class="n">loops</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">desired_storage_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span> <span class="o">+</span> <span class="n">points_per_epoch</span>
+
+            <span class="k">if</span> <span class="n">curriculum_complexity</span> <span class="o">&lt;=</span> <span class="n">storage</span><span class="o">.</span><span class="n">max_complexity</span><span class="p">:</span>
+
+                <span class="n">arch_coach</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">curriculum_complexity</span> <span class="o">=</span> <span class="n">curriculum_complexity</span>
+                <span class="n">arch</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">set_curriculum_complexity</span><span class="p">(</span><span class="n">curriculum_complexity</span><span class="p">)</span>
+                <span class="n">storage</span><span class="o">.</span><span class="n">set_complexity</span><span class="p">(</span><span class="n">curriculum_complexity</span><span class="p">)</span>
+                <span class="n">desired_storage_len</span> <span class="o">=</span> <span class="n">points_per_epoch</span><span class="o">*</span><span class="n">storage_surplus_factor</span>
+
+            <span class="k">elif</span> <span class="n">curriculum_complexity</span> <span class="o">==</span> <span class="n">storage</span><span class="o">.</span><span class="n">max_complexity</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+
+                <span class="n">arch</span><span class="o">.</span><span class="n">curriculum</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">curriculum_complexity</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="n">arch</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">release_all_constraints</span><span class="p">()</span>
+                <span class="n">arch_coach</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">arch_coach</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">curriculum_complexity</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="n">evaluation_list</span><span class="p">,</span> <span class="n">deterministic_is_viable</span> <span class="o">=</span> <span class="n">sample_loop</span><span class="p">(</span>
+                <span class="n">arch</span><span class="p">,</span> <span class="n">storage</span><span class="p">,</span> <span class="n">space_proto</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">desired_storage_len</span><span class="p">)</span>
+
+            <span class="n">worker_fn</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="n">current_complexity</span><span class="o">=</span><span class="n">curriculum_complexity</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">evaluation_list</span><span class="p">,</span> <span class="n">worker_fn</span><span class="p">,</span> <span class="n">gpu_indices</span><span class="p">)</span>
+
+            <span class="n">accuracies</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">description</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">reward</span> <span class="o">==</span> <span class="s1">&#39;exists&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">level</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">storage</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">description</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="n">r</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="n">level</span><span class="p">]</span><span class="o">.</span><span class="n">rewards</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()):</span>
+                            <span class="n">reward</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                            <span class="n">accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+                            <span class="n">storage</span><span class="o">.</span><span class="n">reward</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">reward</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">reward</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+                    <span class="n">storage</span><span class="o">.</span><span class="n">reward</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">reward</span><span class="p">))</span>
+
+            <span class="c1"># Since last reward corresponds to deterministic description</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">deterministic_is_viable</span> <span class="o">=</span> <span class="kc">False</span>
+
+                <span class="k">if</span> <span class="n">deterministic_is_viable</span><span class="p">:</span>
+                    <span class="n">summary_writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;stochastic_acc&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">accuracies</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">loops</span><span class="p">)</span>
+                    <span class="n">summary_writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;deterministic_acc&#39;</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">loops</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">summary_writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;stochastic_acc&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">accuracies</span><span class="p">),</span> <span class="n">loops</span><span class="p">)</span>
+
+            <span class="n">storage</span><span class="o">.</span><span class="n">filter_na</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">desired_storage_len</span> <span class="ow">and</span> <span class="n">curriculum_complexity</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">load_architect</span><span class="p">:</span>
+                    <span class="n">arch_coach</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">epochs_per_loop</span><span class="p">)</span>
+                    <span class="n">arch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;checkpoint&#39;</span><span class="p">)</span>
+                <span class="n">arch_coach</span><span class="o">.</span><span class="n">decay_lr</span><span class="p">(</span><span class="n">architect_lr_decay</span><span class="p">)</span>
+                <span class="n">loops</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;Storage does not contain enough&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                    <span class="k">continue</span>
+
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">storage</span></div>
+
+
+<div class="viewcode-block" id="train_plain"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.train_plain">[docs]</a><span class="k">def</span> <span class="nf">train_plain</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">worker</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span>
+                <span class="n">resume</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">,</span> <span class="n">gpu_idx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Architect training procedure.</span>
+<span class="sd">        Includes sampling descriptions, evaluating them, train architect and start over again</span>
+<span class="sd">        with complexity i+1.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            config (dict, str): configuration dictionary or path to YAML file.</span>
+<span class="sd">            worker (callable): worker callable</span>
+<span class="sd">            input_shape (tuple, list, torch.Size): input&#39;s shape</span>
+<span class="sd">            resume (bool): whether  to try resuming the previous session</span>
+<span class="sd">            num_gpus (int): number of GPUs to use</span>
+<span class="sd">            gpu_idx (str, optional): string of comma separated dpu indices. if ``None``, ``range(num_gpus)`` is used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            On keyboard interrupt returns storage filled with all that&#39;s benn found and evaluated.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="n">training_config</span><span class="p">,</span> <span class="n">space_proto</span><span class="p">,</span> <span class="n">arch</span><span class="p">,</span> <span class="n">arch_coach</span><span class="p">,</span> <span class="n">gpu_indices</span><span class="p">,</span> <span class="n">log_dir</span> <span class="o">=</span>\
+        <span class="n">prepare</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">resume</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">gpu_idx</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">)</span>
+
+    <span class="n">load_architect</span> <span class="o">=</span> <span class="n">training_config</span><span class="p">[</span><span class="s1">&#39;load_architect&#39;</span><span class="p">]</span>
+    <span class="n">epochs_per_loop</span> <span class="o">=</span> <span class="n">training_config</span><span class="p">[</span><span class="s1">&#39;epochs_per_loop&#39;</span><span class="p">]</span>
+    <span class="n">architect_lr_decay</span> <span class="o">=</span> <span class="n">training_config</span><span class="p">[</span><span class="s1">&#39;lr_decay&#39;</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">architect_lr_decay</span> <span class="o">&lt;</span> <span class="mi">1</span>
+
+    <span class="n">storage</span> <span class="o">=</span> <span class="n">arch_coach</span><span class="o">.</span><span class="n">storage</span>
+    <span class="n">summary_writer</span> <span class="o">=</span> <span class="n">arch_coach</span><span class="o">.</span><span class="n">summary_writer</span>
+
+    <span class="n">loops</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">points_per_epoch</span> <span class="o">=</span> <span class="n">arch_coach</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">*</span> <span class="n">arch_coach</span><span class="o">.</span><span class="n">epoch_steps</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">desired_storage_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span> <span class="o">+</span> <span class="n">points_per_epoch</span>
+            <span class="n">evaluation_list</span><span class="p">,</span> <span class="n">deterministic_is_viable</span> <span class="o">=</span> <span class="n">sample_loop</span><span class="p">(</span>
+                <span class="n">arch</span><span class="p">,</span> <span class="n">storage</span><span class="p">,</span> <span class="n">space_proto</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">,</span> <span class="n">desired_storage_len</span><span class="p">)</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">evaluation_list</span><span class="p">,</span> <span class="n">worker</span><span class="p">,</span> <span class="n">gpu_indices</span><span class="p">)</span>
+
+            <span class="n">accuracies</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">description</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">reward</span> <span class="o">==</span> <span class="s1">&#39;exists&#39;</span><span class="p">:</span>
+                    <span class="n">index</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+                    <span class="n">r</span> <span class="o">=</span> <span class="n">storage</span><span class="o">.</span><span class="n">rewards</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()):</span>
+                        <span class="n">reward</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                        <span class="n">accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+                        <span class="n">storage</span><span class="o">.</span><span class="n">reward</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">reward</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">reward</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">accuracies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+                    <span class="n">storage</span><span class="o">.</span><span class="n">reward</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">reward</span><span class="p">))</span>
+
+            <span class="c1"># Since last reward corresponds to deterministic description</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">deterministic_is_viable</span> <span class="o">=</span> <span class="kc">False</span>
+
+                <span class="k">if</span> <span class="n">deterministic_is_viable</span><span class="p">:</span>
+                    <span class="n">summary_writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;stochastic_acc&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">accuracies</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">loops</span><span class="p">)</span>
+                    <span class="n">summary_writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;deterministic_acc&#39;</span><span class="p">,</span> <span class="n">accuracies</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">loops</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">summary_writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;stochastic_acc&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">accuracies</span><span class="p">),</span> <span class="n">loops</span><span class="p">)</span>
+                    <span class="n">summary_writer</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="s1">&#39;deterministic_acc&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">loops</span><span class="p">)</span>
+
+            <span class="n">storage</span><span class="o">.</span><span class="n">filter_na</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">storage</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">points_per_epoch</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">load_architect</span><span class="p">:</span>
+                    <span class="n">arch_coach</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">epochs_per_loop</span><span class="p">)</span>
+                    <span class="n">arch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;checkpoint&#39;</span><span class="p">)</span>
+                <span class="n">arch_coach</span><span class="o">.</span><span class="n">decay_lr</span><span class="p">(</span><span class="n">architect_lr_decay</span><span class="p">)</span>
+                <span class="n">loops</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;Storage does not contain enough&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                    <span class="k">continue</span>
+
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">storage</span></div>
+
+
+<div class="viewcode-block" id="generic_worker"><a class="viewcode-back" href="../../../scripts.html#nasframe.scripts.train_generic.generic_worker">[docs]</a><span class="k">def</span> <span class="nf">generic_worker</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">device_queue</span><span class="p">,</span> <span class="n">current_complexity</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">space_type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Concurrent description evaluator.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        description (dict): description to be evaluated</span>
+<span class="sd">        device_queue (Queue): a queue with available CUDA devices indices</span>
+<span class="sd">        current_complexity (int): current curriculum complexity level.</span>
+<span class="sd">        config (dict, str): configuration dictionary or path to YAML file.</span>
+<span class="sd">        space_type (str): the name of root search space.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple of (description, mean_auc, device_idx).</span>
+
+<span class="sd">        If loss is nan -- mean_auc = -1.</span>
+
+<span class="sd">        If OOM was raised and ``not adaptive_batch_size`` or using ``min_batch_size`` causes OOM -- mean_auc=None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+    <span class="n">log_dir</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;log_dir&#39;</span><span class="p">]</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;child_training&#39;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;batch_size&#39;</span><span class="p">)</span>
+    <span class="n">keep_data_on_device</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;keep_data_on_device&#39;</span><span class="p">)</span>
+    <span class="n">adaptive_batch_size</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;adaptive_batch_size&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">adaptive_batch_size</span><span class="p">:</span>
+        <span class="n">min_batch_size</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;min_batch_size&#39;</span><span class="p">)</span>
+        <span class="n">max_batch_size</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;max_batch_size&#39;</span><span class="p">)</span>
+        <span class="n">batch_size_decay</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;batch_size_decay&#39;</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_batch_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">max_batch_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">batch_size_decay</span> <span class="o">&lt;</span> <span class="mi">1</span>
+
+        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;initial_lr&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">max_batch_size</span> <span class="o">/</span> <span class="n">batch_size</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">max_batch_size</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">min_batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+
+    <span class="n">description</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+    <span class="n">device_idx</span> <span class="o">=</span> <span class="n">device_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">datasets</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;preprocessed.pth&#39;</span><span class="p">))</span>
+
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">device_idx</span><span class="p">):</span>
+        <span class="n">logger</span><span class="p">,</span> <span class="n">summary_writer</span><span class="p">,</span> <span class="n">description_dir</span> <span class="o">=</span> <span class="n">worker_init</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">log_dir</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Aquired device </span><span class="si">{device_idx}</span><span class="s1">.&#39;</span><span class="p">)</span>
+        <span class="n">save_path</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="n">space_type</span><span class="p">,</span> <span class="s1">&#39;merged_space.pth&#39;</span><span class="p">)</span>
+        <span class="n">model_path</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="n">space_type</span><span class="p">,</span> <span class="s1">&#39;model.pth&#39;</span><span class="p">)</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">FileLock</span><span class="p">(</span><span class="n">save_path</span><span class="p">):</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">space</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">input_size</span><span class="p">))</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">join</span><span class="p">(</span><span class="n">description_dir</span><span class="p">,</span> <span class="s1">&#39;graph.png&#39;</span><span class="p">))</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">description_dir</span><span class="p">,</span> <span class="s1">&#39;graph.png&#39;</span><span class="p">)))</span>
+        <span class="n">summary_writer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="s1">&#39;graph&#39;</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">keep_data_on_device</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">datasets</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">datasets</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">tensors</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">cuda</span><span class="p">(</span><span class="n">device_idx</span><span class="p">),</span> <span class="n">datasets</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">tensors</span><span class="p">))</span>
+            <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">cleanup</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">description_dir</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;tfevents&#39;</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">description_dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+            <span class="n">device_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">device_idx</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Released device </span><span class="si">{device_idx}</span><span class="s1">.&#39;</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">min_batch_size</span> <span class="o">&lt;=</span> <span class="n">batch_size</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">loaders</span> <span class="o">=</span> <span class="n">Bunch</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">datasets</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">loaders</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">datasets</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                            <span class="n">pin_memory</span><span class="o">=</span><span class="ow">not</span> <span class="n">keep_data_on_device</span><span class="p">)</span>
+
+                <span class="n">space_coach</span> <span class="o">=</span> <span class="n">FeedForwardCoach</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loaders</span><span class="p">,</span>
+                                               <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+                                               <span class="n">log_dir</span><span class="o">=</span><span class="n">log_dir</span><span class="p">,</span>
+                                               <span class="n">tensorboard</span><span class="o">=</span><span class="n">summary_writer</span><span class="p">,</span>
+                                               <span class="n">tqdm</span><span class="o">=</span><span class="n">get_tqdm</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="n">device_idx</span><span class="p">),</span>
+                                               <span class="o">**</span><span class="n">config</span><span class="p">)</span>
+
+                <span class="n">space_coach</span><span class="o">.</span><span class="n">train_until_convergence</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">desc</span><span class="p">)</span>
+                <span class="n">stats</span> <span class="o">=</span> <span class="n">space_coach</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">loaders</span><span class="o">.</span><span class="n">validation</span><span class="p">)</span>
+
+                <span class="k">with</span> <span class="n">FileLock</span><span class="p">(</span><span class="n">save_path</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="n">save_path</span><span class="p">):</span>
+                        <span class="n">other</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+                        <span class="n">model</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">device</span><span class="p">))</span>
+                    <span class="n">model</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;merged_space&#39;</span><span class="p">)</span>
+
+                <span class="k">with</span> <span class="n">FileLock</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;description_reward.json&#39;</span><span class="p">)):</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;description_reward.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">existing</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">current_complexity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">existing</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">current_complexity</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">existing</span><span class="p">:</span>
+                            <span class="n">existing</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">current_complexity</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[]</span>
+
+                        <span class="n">existing</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">current_complexity</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">description</span><span class="p">,</span>
+                                                            <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">auc</span><span class="p">)])</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">existing</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+                        <span class="n">existing</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">description</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">auc</span><span class="p">)])</span>
+
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">join</span><span class="p">(</span><span class="n">log_dir</span><span class="p">,</span> <span class="s1">&#39;description_reward.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">existing</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+                <span class="n">cleanup</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">description</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">auc</span><span class="p">),</span> <span class="n">device_idx</span>
+
+            <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;out of memory&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">adaptive_batch_size</span><span class="p">:</span>
+                        <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">batch_size</span><span class="o">*</span><span class="n">batch_size_decay</span><span class="p">)</span>
+                        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;initial_lr&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">batch_size_decay</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Out of memory, decreasing batch size to </span><span class="si">{batch_size}</span><span class="s1">.&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Out of memory on fixed batch size. Terminating.&#39;</span><span class="p">)</span>
+                        <span class="n">cleanup</span><span class="p">()</span>
+                        <span class="k">return</span> <span class="n">description</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device_idx</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">e</span>
+
+            <span class="k">except</span> <span class="n">LossIsNoneError</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Loss is NaN. Terminating.&#39;</span><span class="p">)</span>
+                <span class="n">cleanup</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">description</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">device_idx</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Out of memory with minimum batch size. Terminating.&#39;</span><span class="p">)</span>
+            <span class="n">cleanup</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">description</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">device_idx</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Vladislav Zavadskyy.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'v0.1.1 alpha',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

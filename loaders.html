@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Data Loaders &mdash; NAS Framework v0.1 alpha documentation</title>
+  <title>Data Loaders &mdash; NAS Framework v0.1.1 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="index.html"/>
+    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
         <link rel="prev" title="Utility functions and classes" href="utils.html"/> 
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.1
+                0.1.1
               </div>
             
           
@@ -91,7 +91,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Framework:</span></p>
+              <p class="caption"><span class="caption-text">Framework API:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
@@ -115,14 +115,15 @@
 </ul>
 <p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.torch">Torch-related</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#miscellaneous">Miscellaneous</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Data Loaders</a><ul>
@@ -197,8 +198,8 @@
 <div class="section" id="text-loader">
 <h2>Text loader<a class="headerlink" href="#text-loader" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="loaders.TextLoader">
-<em class="property">class </em><code class="descclassname">loaders.</code><code class="descname">TextLoader</code><span class="sig-paren">(</span><em>corpus</em>, <em>task_type='classification'</em>, <em>labels=None</em>, <em>filters='!&quot;#$%&amp;()*+</em>, <em>-./:;&lt;=&gt;?&#64;[\]^_`{|}~tn'</em>, <em>oov_token=None</em>, <em>vocab_size=20000</em>, <em>max_length=100</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loaders/text.html#TextLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loaders.TextLoader" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader">
+<em class="property">class </em><code class="descclassname">nasframe.loaders.</code><code class="descname">TextLoader</code><span class="sig-paren">(</span><em>corpus</em>, <em>task_type='classification'</em>, <em>labels=None</em>, <em>filters='!&quot;#$%&amp;()*+</em>, <em>-./:;&lt;=&gt;?&#64;[\]^_`{|}~tn'</em>, <em>oov_token=None</em>, <em>vocab_size=20000</em>, <em>max_length=100</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader" title="Permalink to this definition">¶</a></dt>
 <dd><p>A text dataset loader and preprocessor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -220,14 +221,14 @@ if None, such tokens are dropped out.</li>
 </tbody>
 </table>
 <dl class="method">
-<dt id="loaders.TextLoader._maybe_print">
-<code class="descname">_maybe_print</code><span class="sig-paren">(</span><em>string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loaders/text.html#TextLoader._maybe_print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loaders.TextLoader._maybe_print" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader._maybe_print">
+<code class="descname">_maybe_print</code><span class="sig-paren">(</span><em>string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader._maybe_print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader._maybe_print" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints <code class="docutils literal notranslate"><span class="pre">string</span></code> if <code class="docutils literal notranslate"><span class="pre">self.verbose</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="loaders.TextLoader.fit_embeddings">
-<code class="descname">fit_embeddings</code><span class="sig-paren">(</span><em>correct_spelling=False</em>, <em>max_dl=2</em>, <em>ignore_stop_words=False</em>, <em>ignore_chars=True</em>, <em>ignore_matching=re.compile('\\d')</em>, <em>reserved_words=None</em>, <em>num_threads=8</em>, <em>tqdm=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loaders/text.html#TextLoader.fit_embeddings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loaders.TextLoader.fit_embeddings" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader.fit_embeddings">
+<code class="descname">fit_embeddings</code><span class="sig-paren">(</span><em>correct_spelling=False</em>, <em>max_dl=2</em>, <em>ignore_stop_words=False</em>, <em>ignore_chars=True</em>, <em>ignore_matching=re.compile('\\d')</em>, <em>reserved_words=None</em>, <em>num_threads=8</em>, <em>tqdm=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader.fit_embeddings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader.fit_embeddings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fits preloaded embeddings to match with <code class="docutils literal notranslate"><span class="pre">self.wrod_index</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -252,14 +253,14 @@ a randomly initialized embedding</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="loaders.TextLoader.fit_tokenizer">
-<code class="descname">fit_tokenizer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loaders/text.html#TextLoader.fit_tokenizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loaders.TextLoader.fit_tokenizer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader.fit_tokenizer">
+<code class="descname">fit_tokenizer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader.fit_tokenizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader.fit_tokenizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fits a <code class="docutils literal notranslate"><span class="pre">Tokenizer</span></code> instance on a text corpus.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="loaders.TextLoader.load">
-<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loaders/text.html#TextLoader.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loaders.TextLoader.load" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader.load">
+<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads an existing loader state, saved via <code class="docutils literal notranslate"><span class="pre">save</span></code> method, and returns a <code class="docutils literal notranslate"><span class="pre">TextLoader</span></code> instance.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -272,8 +273,8 @@ a randomly initialized embedding</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="loaders.TextLoader.load_embeddings">
-<code class="descname">load_embeddings</code><span class="sig-paren">(</span><em>embedding_dim</em>, <em>*</em>, <em>embeddings_path=None</em>, <em>embedding_dict=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loaders/text.html#TextLoader.load_embeddings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loaders.TextLoader.load_embeddings" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader.load_embeddings">
+<code class="descname">load_embeddings</code><span class="sig-paren">(</span><em>embedding_dim</em>, <em>*</em>, <em>embeddings_path=None</em>, <em>embedding_dict=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader.load_embeddings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader.load_embeddings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loads embeddings from a vec-like file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -291,8 +292,8 @@ a randomly initialized embedding</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="loaders.TextLoader.make_torch_dataset">
-<code class="descname">make_torch_dataset</code><span class="sig-paren">(</span><em>corpus=None</em>, <em>labels=None</em>, <em>labels_dtype=torch.int64</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loaders/text.html#TextLoader.make_torch_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loaders.TextLoader.make_torch_dataset" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader.make_torch_dataset">
+<code class="descname">make_torch_dataset</code><span class="sig-paren">(</span><em>corpus=None</em>, <em>labels=None</em>, <em>labels_dtype=torch.int64</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader.make_torch_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader.make_torch_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a torch.utils.data.Dataset from <code class="docutils literal notranslate"><span class="pre">corpus</span></code> or <code class="docutils literal notranslate"><span class="pre">self.sequences</span></code> if <code class="docutils literal notranslate"><span class="pre">corpus</span></code> is None.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -313,8 +314,8 @@ a randomly initialized embedding</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="loaders.TextLoader.save">
-<code class="descname">save</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loaders/text.html#TextLoader.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loaders.TextLoader.save" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves current state into a file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -327,8 +328,8 @@ a randomly initialized embedding</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="loaders.TextLoader.tokenize">
-<code class="descname">tokenize</code><span class="sig-paren">(</span><em>sequence=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loaders/text.html#TextLoader.tokenize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loaders.TextLoader.tokenize" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader.tokenize">
+<code class="descname">tokenize</code><span class="sig-paren">(</span><em>sequence=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader.tokenize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader.tokenize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tokenizes a sequence and maps it to corresponding indices from <code class="docutils literal notranslate"><span class="pre">word_index</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -343,15 +344,15 @@ a randomly initialized embedding</li>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="loaders.TextLoader.torch_embedding">
-<code class="descname">torch_embedding</code><a class="headerlink" href="#loaders.TextLoader.torch_embedding" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader.torch_embedding">
+<code class="descname">torch_embedding</code><a class="headerlink" href="#nasframe.loaders.TextLoader.torch_embedding" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>Returns</em> – torch.nn.Embedding with pretrained weights if <code class="docutils literal notranslate"><span class="pre">fit_emeddings</span></code> was called,
 randomly initialized otherwise.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="loaders.TextLoader.word_index">
-<code class="descname">word_index</code><a class="headerlink" href="#loaders.TextLoader.word_index" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.loaders.TextLoader.word_index">
+<code class="descname">word_index</code><a class="headerlink" href="#nasframe.loaders.TextLoader.word_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Word index used for converting text into numeric sequences.</p>
 </dd></dl>
 
@@ -402,7 +403,7 @@ randomly initialized otherwise.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1 alpha',
+            VERSION:'v0.1.1 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

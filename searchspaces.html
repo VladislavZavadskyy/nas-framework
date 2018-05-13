@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search Spaces &mdash; NAS Framework v0.1 alpha documentation</title>
+  <title>Search Spaces &mdash; NAS Framework v0.1.1 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1 alpha documentation" href="index.html"/>
+    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
         <link rel="next" title="Training Classes" href="coaches.html"/>
         <link rel="prev" title="Architect" href="architect.html"/> 
 
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                0.1
+                0.1.1
               </div>
             
           
@@ -92,7 +92,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Framework:</span></p>
+              <p class="caption"><span class="caption-text">Framework API:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Search Spaces</a><ul>
@@ -116,14 +116,15 @@
 </ul>
 <p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#module-utils.torch">Torch-related</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#miscellaneous">Miscellaneous</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
@@ -198,8 +199,8 @@
 <div class="section" id="base">
 <h2>Base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="searchspaces.SearchSpace">
-<em class="property">class </em><code class="descclassname">searchspaces.</code><code class="descname">SearchSpace</code><span class="sig-paren">(</span><em>name</em>, <em>outer</em>, <em>num_inner</em>, <em>inner</em>, <em>device=-1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace">
+<em class="property">class </em><code class="descclassname">nasframe.searchspaces.</code><code class="descname">SearchSpace</code><span class="sig-paren">(</span><em>name</em>, <em>outer</em>, <em>num_inner</em>, <em>inner</em>, <em>device=-1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base search space, from which all search spaces should be derived.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -234,8 +235,8 @@ is set to <code class="docutils literal notranslate"><span class="pre">False</sp
 </tbody>
 </table>
 <dl class="method">
-<dt id="searchspaces.SearchSpace._add_agraph_units">
-<code class="descname">_add_agraph_units</code><span class="sig-paren">(</span><em>description</em>, <em>graph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._add_agraph_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._add_agraph_units" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._add_agraph_units">
+<code class="descname">_add_agraph_units</code><span class="sig-paren">(</span><em>description</em>, <em>graph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._add_agraph_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._add_agraph_units" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds units to <code class="docutils literal notranslate"><span class="pre">AGraph</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -258,8 +259,8 @@ is set to <code class="docutils literal notranslate"><span class="pre">False</sp
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace._connect">
-<code class="descname">_connect</code><span class="sig-paren">(</span><em>description</em>, <em>space</em>, <em>picking_method='set_random'</em>, <em>input_expr=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._connect" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._connect">
+<code class="descname">_connect</code><span class="sig-paren">(</span><em>description</em>, <em>space</em>, <em>picking_method='set_random'</em>, <em>input_expr=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resolves graph’s connections, by picking requested input names
 from available input names using <code class="docutils literal notranslate"><span class="pre">picking_method</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -268,7 +269,7 @@ from available input names using <code class="docutils literal notranslate"><spa
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>description</strong> (<em>dict</em>) – description to be connected</li>
-<li><strong>space</strong> (<a class="reference internal" href="#searchspaces.SearchSpace" title="searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space corresponding to the description passed</li>
+<li><strong>space</strong> (<a class="reference internal" href="#nasframe.searchspaces.SearchSpace" title="nasframe.searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space corresponding to the description passed</li>
 <li><strong>picking_method</strong> (<em>str</em>) – name of the input picking method</li>
 <li><strong>input_expr</strong> (<em>str</em>) – expression which needs to be evaluated in order to obtain
 the list of available inputs</li>
@@ -286,22 +287,22 @@ the list of available inputs</li>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace._count_related_params">
-<code class="descname">_count_related_params</code><span class="sig-paren">(</span><em>desc</em>, <em>space_name</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._count_related_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._count_related_params" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._count_related_params">
+<code class="descname">_count_related_params</code><span class="sig-paren">(</span><em>desc</em>, <em>space_name</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._count_related_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._count_related_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns tuple of (existing and new) parameter counts of the model described by <code class="docutils literal notranslate"><span class="pre">desc</span></code>
 and a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with of keys of used layers.
 if <code class="docutils literal notranslate"><span class="pre">create_nonexistent</span></code> is True, creates described layers along the way.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace._del_value">
-<em class="property">static </em><code class="descname">_del_value</code><span class="sig-paren">(</span><em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._del_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._del_value" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._del_value">
+<em class="property">static </em><code class="descname">_del_value</code><span class="sig-paren">(</span><em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._del_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._del_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes (last level of) <code class="docutils literal notranslate"><span class="pre">key</span></code> from a (possibly nested) <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace._fill_the_gaps">
-<em class="property">static </em><code class="descname">_fill_the_gaps</code><span class="sig-paren">(</span><em>space</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._fill_the_gaps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._fill_the_gaps" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._fill_the_gaps">
+<em class="property">static </em><code class="descname">_fill_the_gaps</code><span class="sig-paren">(</span><em>space</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._fill_the_gaps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._fill_the_gaps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursively fills gaps in the description.</p>
 <p>If a certain search space dimension has only one possible value, it is ignored by architect and thus
 is absent in descriptions generated by it. This method fills such description ‘gaps’ with that only value.
@@ -322,14 +323,14 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace._get_value">
-<em class="property">static </em><code class="descname">_get_value</code><span class="sig-paren">(</span><em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._get_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._get_value" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._get_value">
+<em class="property">static </em><code class="descname">_get_value</code><span class="sig-paren">(</span><em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._get_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._get_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets value specified by <code class="docutils literal notranslate"><span class="pre">key</span></code> from a (possibly nested) <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace._init_layer">
-<code class="descname">_init_layer</code><span class="sig-paren">(</span><em>module</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._init_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._init_layer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._init_layer">
+<code class="descname">_init_layer</code><span class="sig-paren">(</span><em>module</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._init_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._init_layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes module weights and bias, if present.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -347,15 +348,15 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace._prune">
-<em class="property">static </em><code class="descname">_prune</code><span class="sig-paren">(</span><em>unit_type</em>, <em>mapping</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._prune" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._prune">
+<em class="property">static </em><code class="descname">_prune</code><span class="sig-paren">(</span><em>unit_type</em>, <em>mapping</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._prune" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filters <code class="docutils literal notranslate"><span class="pre">description</span></code> with respect to <code class="docutils literal notranslate"><span class="pre">unit_type</span></code> given <code class="docutils literal notranslate"><span class="pre">mapping</span></code> of the names of useful units.
 <code class="docutils literal notranslate"><span class="pre">mapping</span></code> should be a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with old names as keys and new names as values.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace._resolve_shape">
-<em class="property">static </em><code class="descname">_resolve_shape</code><span class="sig-paren">(</span><em>desc</em>, <em>method</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._resolve_shape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._resolve_shape" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._resolve_shape">
+<em class="property">static </em><code class="descname">_resolve_shape</code><span class="sig-paren">(</span><em>desc</em>, <em>method</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._resolve_shape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._resolve_shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursive call of <code class="docutils literal notranslate"><span class="pre">_resolve_shapes</span></code> method.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -379,8 +380,8 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace._resolve_shapes">
-<em class="property">static </em><code class="descname">_resolve_shapes</code><span class="sig-paren">(</span><em>input</em>, <em>method='min'</em>, <em>unit_type='node'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._resolve_shapes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._resolve_shapes" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._resolve_shapes">
+<em class="property">static </em><code class="descname">_resolve_shapes</code><span class="sig-paren">(</span><em>input</em>, <em>method='min'</em>, <em>unit_type='node'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._resolve_shapes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._resolve_shapes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursively convert relative shapes to absolute.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -402,14 +403,14 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace._set_value">
-<em class="property">static </em><code class="descname">_set_value</code><span class="sig-paren">(</span><em>value</em>, <em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._set_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._set_value" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._set_value">
+<em class="property">static </em><code class="descname">_set_value</code><span class="sig-paren">(</span><em>value</em>, <em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._set_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._set_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets <code class="docutils literal notranslate"><span class="pre">value</span></code> corresponding to <code class="docutils literal notranslate"><span class="pre">key</span></code> in a (possibly nested) <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace._walk_graph">
-<em class="property">static </em><code class="descname">_walk_graph</code><span class="sig-paren">(</span><em>unit_type</em>, <em>persistent_units</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace._walk_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace._walk_graph" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace._walk_graph">
+<em class="property">static </em><code class="descname">_walk_graph</code><span class="sig-paren">(</span><em>unit_type</em>, <em>persistent_units</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._walk_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._walk_graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Walks described graph backwards to determine which units are reachable from <code class="docutils literal notranslate"><span class="pre">persistent_units</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -433,8 +434,8 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.combine_tensors">
-<code class="descname">combine_tensors</code><span class="sig-paren">(</span><em>op_name</em>, <em>tensors</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.combine_tensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.combine_tensors" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.combine_tensors">
+<code class="descname">combine_tensors</code><span class="sig-paren">(</span><em>op_name</em>, <em>tensors</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.combine_tensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.combine_tensors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combines tensor list into one tensor with given op.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -457,26 +458,26 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace.connect_leafs">
-<em class="property">static </em><code class="descname">connect_leafs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.connect_leafs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.connect_leafs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.connect_leafs">
+<em class="property">static </em><code class="descname">connect_leafs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.connect_leafs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.connect_leafs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connects leaf nodes, which would be pruned otherwise, to the output.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.delete_layer">
-<code class="descname">delete_layer</code><span class="sig-paren">(</span><em>*key</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.delete_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.delete_layer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.delete_layer">
+<code class="descname">delete_layer</code><span class="sig-paren">(</span><em>*key</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.delete_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.delete_layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes layer with identity <code class="docutils literal notranslate"><span class="pre">key</span></code>.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="searchspaces.SearchSpace.device">
-<code class="descname">device</code><a class="headerlink" href="#searchspaces.SearchSpace.device" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.device">
+<code class="descname">device</code><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.device" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <code class="docutils literal notranslate"><span class="pre">torch.Device</span></code> on which this search space is located.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.draw">
-<code class="descname">draw</code><span class="sig-paren">(</span><em>description</em>, <em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.draw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.draw" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.draw">
+<code class="descname">draw</code><span class="sig-paren">(</span><em>description</em>, <em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.draw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws a graph given description.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -493,32 +494,32 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace.eval_">
-<em class="property">static </em><code class="descname">eval_</code><span class="sig-paren">(</span><em>**context</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.eval_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.eval_" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.eval_">
+<em class="property">static </em><code class="descname">eval_</code><span class="sig-paren">(</span><em>**context</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.eval_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.eval_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates strings and returns everything else unchanged.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.force_num_inner">
-<code class="descname">force_num_inner</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.force_num_inner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.force_num_inner" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.force_num_inner">
+<code class="descname">force_num_inner</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.force_num_inner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.force_num_inner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signals architect, that number of points in the inner space should always be <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.forward">
-<code class="descname">forward</code><span class="sig-paren">(</span><em>*input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.forward" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>*input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call <code class="docutils literal notranslate"><span class="pre">prepare</span></code> first, and use <code class="docutils literal notranslate"><span class="pre">forward</span></code> method of the returned module instead.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.get_index">
-<code class="descname">get_index</code><span class="sig-paren">(</span><em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.get_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.get_index" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.get_index">
+<code class="descname">get_index</code><span class="sig-paren">(</span><em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.get_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.get_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience method which gets layer index given <code class="docutils literal notranslate"><span class="pre">key</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.get_layer">
-<code class="descname">get_layer</code><span class="sig-paren">(</span><em>*key</em>, <em>constructor=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.get_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.get_layer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.get_layer">
+<code class="descname">get_layer</code><span class="sig-paren">(</span><em>*key</em>, <em>constructor=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.get_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.get_layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a layer or returns existing.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -541,26 +542,26 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="attribute">
-<dt id="searchspaces.SearchSpace.is_cuda">
-<code class="descname">is_cuda</code><a class="headerlink" href="#searchspaces.SearchSpace.is_cuda" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.is_cuda">
+<code class="descname">is_cuda</code><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.is_cuda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns bool value, indicating whether this search space is located on a CUDA device.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.layer_exists">
-<code class="descname">layer_exists</code><span class="sig-paren">(</span><em>*key</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.layer_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.layer_exists" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.layer_exists">
+<code class="descname">layer_exists</code><span class="sig-paren">(</span><em>*key</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.layer_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.layer_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True, if layer with identity <code class="docutils literal notranslate"><span class="pre">key</span></code> exists.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.log_info">
-<code class="descname">log_info</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.log_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.log_info" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.log_info">
+<code class="descname">log_info</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.log_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.log_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Logs info via <code class="docutils literal notranslate"><span class="pre">self.logger.info</span></code> if <code class="docutils literal notranslate"><span class="pre">self.logger</span></code> is not None.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.merge">
-<code class="descname">merge</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.merge" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.merge">
+<code class="descname">merge</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.merge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merges this search space with another.
 Useful only is <code class="docutils literal notranslate"><span class="pre">self.reuse_parameters</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.
 If <code class="docutils literal notranslate"><span class="pre">other</span></code> space instance has a layer which this one doesn’t, such layers get’s added to this space instance.
@@ -569,22 +570,22 @@ parameters.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.move_layer">
-<code class="descname">move_layer</code><span class="sig-paren">(</span><em>*key</em>, <em>device=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.move_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.move_layer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.move_layer">
+<code class="descname">move_layer</code><span class="sig-paren">(</span><em>*key</em>, <em>device=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.move_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.move_layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Moves layer specified by <code class="docutils literal notranslate"><span class="pre">key</span></code> to <code class="docutils literal notranslate"><span class="pre">device</span></code>. If <code class="docutils literal notranslate"><span class="pre">device</span></code> is not specified, defaults to <code class="docutils literal notranslate"><span class="pre">self.device</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.parameter_count">
-<code class="descname">parameter_count</code><span class="sig-paren">(</span><em>description</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.parameter_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.parameter_count" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.parameter_count">
+<code class="descname">parameter_count</code><span class="sig-paren">(</span><em>description</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.parameter_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.parameter_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns tuple of existing, new and total existing parameter counts of the model described by <code class="docutils literal notranslate"><span class="pre">description</span></code>
 and a list of keys corresponding to used layers.
 if <code class="docutils literal notranslate"><span class="pre">create_nonexistent</span></code> is True, creates described layers along the way.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace.pick">
-<em class="property">static </em><code class="descname">pick</code><span class="sig-paren">(</span><em>avail</em>, <em>picking_method</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.pick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.pick" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.pick">
+<em class="property">static </em><code class="descname">pick</code><span class="sig-paren">(</span><em>avail</em>, <em>picking_method</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.pick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.pick" title="Permalink to this definition">¶</a></dt>
 <dd><p>Picks one input name from the <code class="docutils literal notranslate"><span class="pre">avail</span></code> list, using <code class="docutils literal notranslate"><span class="pre">picking_method</span></code>.
 Pops chosen input name from <code class="docutils literal notranslate"><span class="pre">avail</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -610,8 +611,8 @@ and <code class="docutils literal notranslate"><span class="pre">picking_method<
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.prepare">
-<code class="descname">prepare</code><span class="sig-paren">(</span><em>input</em>, <em>description</em>, <em>freeze=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.prepare" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.prepare">
+<code class="descname">prepare</code><span class="sig-paren">(</span><em>input</em>, <em>description</em>, <em>freeze=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.prepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepares search space to evaluate description.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -635,8 +636,8 @@ and <code class="docutils literal notranslate"><span class="pre">picking_method<
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.preprocess">
-<code class="descname">preprocess</code><span class="sig-paren">(</span><em>description</em>, <em>input_shape</em>, <em>connect_leafs=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.preprocess" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.preprocess">
+<code class="descname">preprocess</code><span class="sig-paren">(</span><em>description</em>, <em>input_shape</em>, <em>connect_leafs=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.preprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.preprocess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Description preprocessing pipeline.
 Consists of filling the gaps, then connecting, then connecting leaf units if <code class="docutils literal notranslate"><span class="pre">connect_leafs</span></code>,
 then pruning and, if graph is viable after all that, resolving shapes.</p>
@@ -662,33 +663,33 @@ then pruning and, if graph is viable after all that, resolving shapes.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.SearchSpace.prune">
-<em class="property">static </em><code class="descname">prune</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.prune" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.prune">
+<em class="property">static </em><code class="descname">prune</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.prune" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns modified copy of the <code class="docutils literal notranslate"><span class="pre">description</span></code>, which doesn’t contain unused units and boolean value
 indicating whether the description is viable (i.e. contains used units).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.release_all_constraints">
-<code class="descname">release_all_constraints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.release_all_constraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.release_all_constraints" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.release_all_constraints">
+<code class="descname">release_all_constraints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.release_all_constraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.release_all_constraints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases all constraints set by calling <code class="docutils literal notranslate"><span class="pre">set_curriculum_complexity</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.release_num_inner">
-<code class="descname">release_num_inner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.release_num_inner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.release_num_inner" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.release_num_inner">
+<code class="descname">release_num_inner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.release_num_inner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.release_num_inner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases constraints set on number of points in inner search space dimensions.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.reset">
-<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.reset" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resets search space to initial state.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.save">
-<code class="descname">save</code><span class="sig-paren">(</span><em>prefix='./'</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.save" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>prefix='./'</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves search space to path composed of <code class="docutils literal notranslate"><span class="pre">prefix</span></code>/<code class="docutils literal notranslate"><span class="pre">self.name</span></code>/<code class="docutils literal notranslate"><span class="pre">name</span></code>.pth.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -703,8 +704,8 @@ indicating whether the description is viable (i.e. contains used units).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.SearchSpace.set_curriculum_complexity">
-<code class="descname">set_curriculum_complexity</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/base.html#SearchSpace.set_curriculum_complexity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.SearchSpace.set_curriculum_complexity" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.SearchSpace.set_curriculum_complexity">
+<code class="descname">set_curriculum_complexity</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.set_curriculum_complexity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.set_curriculum_complexity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Should implement constraining certain parameters to match curriculum complexity <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
 </dd></dl>
 
@@ -714,8 +715,8 @@ indicating whether the description is viable (i.e. contains used units).</p>
 <div class="section" id="multilayer-perceptron">
 <h2>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="searchspaces.MLPSpace">
-<em class="property">class </em><code class="descclassname">searchspaces.</code><code class="descname">MLPSpace</code><span class="sig-paren">(</span><em>max_nodes</em>, <em>out_sizes=(0.2</em>, <em>0.5</em>, <em>1</em>, <em>2</em>, <em>5)</em>, <em>input_combine_ops=('add'</em>, <em>'mult'</em>, <em>'avg'</em>, <em>'u_gate'</em>, <em>'concat')</em>, <em>activations=('relu'</em>, <em>'sigmoid'</em>, <em>'tanh')</em>, <em>drop_probs=(0.0</em>, <em>0.1</em>, <em>0.3</em>, <em>0.5)</em>, <em>max_node_inputs=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace">
+<em class="property">class </em><code class="descclassname">nasframe.searchspaces.</code><code class="descname">MLPSpace</code><span class="sig-paren">(</span><em>max_nodes</em>, <em>out_sizes=(0.2</em>, <em>0.5</em>, <em>1</em>, <em>2</em>, <em>5)</em>, <em>input_combine_ops=('add'</em>, <em>'mult'</em>, <em>'avg'</em>, <em>'u_gate'</em>, <em>'concat')</em>, <em>activations=('relu'</em>, <em>'sigmoid'</em>, <em>'tanh')</em>, <em>drop_probs=(0.0</em>, <em>0.1</em>, <em>0.3</em>, <em>0.5)</em>, <em>max_node_inputs=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines a multilayer perceptron search space.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -736,8 +737,8 @@ to be evaluated, which returns this number. If not specified, defaults to maximu
 </tbody>
 </table>
 <dl class="method">
-<dt id="searchspaces.MLPSpace._add_agraph_unit">
-<code class="descname">_add_agraph_unit</code><span class="sig-paren">(</span><em>graph: pygraphviz.agraph.AGraph</em>, <em>unit</em>, <em>name</em>, <em>combine_op: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace._add_agraph_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace._add_agraph_unit" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace._add_agraph_unit">
+<code class="descname">_add_agraph_unit</code><span class="sig-paren">(</span><em>graph: pygraphviz.agraph.AGraph</em>, <em>unit</em>, <em>name</em>, <em>combine_op: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace._add_agraph_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace._add_agraph_unit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a single unit to <code class="docutils literal notranslate"><span class="pre">gv.Agraph</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -756,8 +757,8 @@ to be evaluated, which returns this number. If not specified, defaults to maximu
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace._add_agraph_units">
-<code class="descname">_add_agraph_units</code><span class="sig-paren">(</span><em>description</em>, <em>graph: pygraphviz.agraph.AGraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace._add_agraph_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace._add_agraph_units" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace._add_agraph_units">
+<code class="descname">_add_agraph_units</code><span class="sig-paren">(</span><em>description</em>, <em>graph: pygraphviz.agraph.AGraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace._add_agraph_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace._add_agraph_units" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds units to <code class="docutils literal notranslate"><span class="pre">AGraph</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -780,16 +781,16 @@ to be evaluated, which returns this number. If not specified, defaults to maximu
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace._count_related_params">
-<code class="descname">_count_related_params</code><span class="sig-paren">(</span><em>desc</em>, <em>space_name</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace._count_related_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace._count_related_params" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace._count_related_params">
+<code class="descname">_count_related_params</code><span class="sig-paren">(</span><em>desc</em>, <em>space_name</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace._count_related_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace._count_related_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns tuple of (existing and new) parameter counts of the model described by <code class="docutils literal notranslate"><span class="pre">desc</span></code>
 and a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with of keys of used layers.
 if <code class="docutils literal notranslate"><span class="pre">create_nonexistent</span></code> is True, creates described layers along the way.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace._init_layer">
-<code class="descname">_init_layer</code><span class="sig-paren">(</span><em>module</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace._init_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace._init_layer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace._init_layer">
+<code class="descname">_init_layer</code><span class="sig-paren">(</span><em>module</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace._init_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace._init_layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes module weights and bias, if present.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -807,8 +808,8 @@ if <code class="docutils literal notranslate"><span class="pre">create_nonexiste
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.connect">
-<code class="descname">connect</code><span class="sig-paren">(</span><em>description</em>, <em>picking_method=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.connect" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><em>description</em>, <em>picking_method=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resolves graph’s connections, by picking requested input names
 from available input names using <code class="docutils literal notranslate"><span class="pre">picking_method</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -832,14 +833,14 @@ from available input names using <code class="docutils literal notranslate"><spa
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.MLPSpace.connect_leafs">
-<em class="property">static </em><code class="descname">connect_leafs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.connect_leafs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.connect_leafs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.connect_leafs">
+<em class="property">static </em><code class="descname">connect_leafs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.connect_leafs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.connect_leafs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connects leaf nodes, which otherwise would be pruned, to the output.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.delete_layer">
-<code class="descname">delete_layer</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.delete_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.delete_layer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.delete_layer">
+<code class="descname">delete_layer</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.delete_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.delete_layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes layer.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -857,8 +858,8 @@ from available input names using <code class="docutils literal notranslate"><spa
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.fill_the_gaps">
-<code class="descname">fill_the_gaps</code><span class="sig-paren">(</span><em>description</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.fill_the_gaps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.fill_the_gaps" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.fill_the_gaps">
+<code class="descname">fill_the_gaps</code><span class="sig-paren">(</span><em>description</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.fill_the_gaps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.fill_the_gaps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fills gaps in the description.</p>
 <p>If a certain search space dimension has only one possible value, it is ignored by architect and thus
 is absent in descriptions generated by it. This method fills such description ‘gaps’ with that only value.</p>
@@ -877,20 +878,20 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.force_num_node_inputs">
-<code class="descname">force_num_node_inputs</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.force_num_node_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.force_num_node_inputs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.force_num_node_inputs">
+<code class="descname">force_num_node_inputs</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.force_num_node_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.force_num_node_inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signals architect, that number of node inputs should always be <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.force_num_nodes">
-<code class="descname">force_num_nodes</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.force_num_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.force_num_nodes" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.force_num_nodes">
+<code class="descname">force_num_nodes</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.force_num_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.force_num_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signals architect, that number of nodes should always be <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.forward">
-<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.forward" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Does one forward pass through the described graph.
 Call <code class="docutils literal notranslate"><span class="pre">prepare</span></code> first, and use <code class="docutils literal notranslate"><span class="pre">forward</span></code> method of the returned module instead.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -908,14 +909,14 @@ Call <code class="docutils literal notranslate"><span class="pre">prepare</span>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.get_index">
-<code class="descname">get_index</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.get_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.get_index" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.get_index">
+<code class="descname">get_index</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.get_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.get_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns index of layer specified by <code class="docutils literal notranslate"><span class="pre">input_name</span></code>, <code class="docutils literal notranslate"><span class="pre">unit_name</span></code> and <code class="docutils literal notranslate"><span class="pre">shape</span></code> is <code class="docutils literal notranslate"><span class="pre">self.layers</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.get_layer">
-<code class="descname">get_layer</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.get_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.get_layer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.get_layer">
+<code class="descname">get_layer</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.get_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.get_layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a layer or returns existing.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -939,14 +940,14 @@ Call <code class="docutils literal notranslate"><span class="pre">prepare</span>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.layer_exists">
-<code class="descname">layer_exists</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.layer_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.layer_exists" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.layer_exists">
+<code class="descname">layer_exists</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.layer_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.layer_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns layer’s existence status.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.move_layer">
-<code class="descname">move_layer</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em>, <em>device=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.move_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.move_layer" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.move_layer">
+<code class="descname">move_layer</code><span class="sig-paren">(</span><em>input_name</em>, <em>unit_name</em>, <em>shape</em>, <em>device=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.move_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.move_layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Moves layer to <code class="docutils literal notranslate"><span class="pre">device</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -965,47 +966,47 @@ Call <code class="docutils literal notranslate"><span class="pre">prepare</span>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.parameter_count">
-<code class="descname">parameter_count</code><span class="sig-paren">(</span><em>description</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.parameter_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.parameter_count" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.parameter_count">
+<code class="descname">parameter_count</code><span class="sig-paren">(</span><em>description</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.parameter_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.parameter_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns tuple of existing, new and total existing parameter counts of the model described by <code class="docutils literal notranslate"><span class="pre">description</span></code>
 and a list of keys corresponding to used layers.
 if <code class="docutils literal notranslate"><span class="pre">create_nonexistent</span></code> is True, creates described layers along the way.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.MLPSpace.prune">
-<em class="property">static </em><code class="descname">prune</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.prune" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.prune">
+<em class="property">static </em><code class="descname">prune</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.prune" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns modified copy of the <code class="docutils literal notranslate"><span class="pre">description</span></code>, which doesn’t contain unused units and boolean value
 indicating whether the description is viable (i.e. contains used units).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.release_all_constraints">
-<code class="descname">release_all_constraints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.release_all_constraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.release_all_constraints" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.release_all_constraints">
+<code class="descname">release_all_constraints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.release_all_constraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.release_all_constraints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases all constraints set by <code class="docutils literal notranslate"><span class="pre">force*</span></code> or <code class="docutils literal notranslate"><span class="pre">set_curriculum_complexity</span></code> methods.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.release_num_node_inputs">
-<code class="descname">release_num_node_inputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.release_num_node_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.release_num_node_inputs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.release_num_node_inputs">
+<code class="descname">release_num_node_inputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.release_num_node_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.release_num_node_inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases constraints set on number of node inpus.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.release_num_nodes">
-<code class="descname">release_num_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.release_num_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.release_num_nodes" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.release_num_nodes">
+<code class="descname">release_num_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.release_num_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.release_num_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases constraints set on number of nodes.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.reset">
-<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.reset" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resets search space to initial state.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.resolve_shapes">
-<code class="descname">resolve_shapes</code><span class="sig-paren">(</span><em>desc</em>, <em>input</em>, <em>method=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.resolve_shapes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.resolve_shapes" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.resolve_shapes">
+<code class="descname">resolve_shapes</code><span class="sig-paren">(</span><em>desc</em>, <em>input</em>, <em>method=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.resolve_shapes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.resolve_shapes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts relative shapes to absolute.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1029,14 +1030,14 @@ indicating whether the description is viable (i.e. contains used units).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.MLPSpace.set_curriculum_complexity">
-<code class="descname">set_curriculum_complexity</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.set_curriculum_complexity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.set_curriculum_complexity" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.set_curriculum_complexity">
+<code class="descname">set_curriculum_complexity</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.set_curriculum_complexity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.set_curriculum_complexity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets curriculum complexity <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.MLPSpace.walk_graph">
-<em class="property">static </em><code class="descname">walk_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/mlp.html#MLPSpace.walk_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.MLPSpace.walk_graph" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.MLPSpace.walk_graph">
+<em class="property">static </em><code class="descname">walk_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.walk_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.walk_graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Walks described graph bakwards to determine which nodes are connected
 to the last one (which is assumed to be output).</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1063,8 +1064,8 @@ to the last one (which is assumed to be output).</p>
 <div class="section" id="recurrent-neural-network">
 <h2>Recurrent Neural Network<a class="headerlink" href="#recurrent-neural-network" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="searchspaces.RNNSpace">
-<em class="property">class </em><code class="descclassname">searchspaces.</code><code class="descname">RNNSpace</code><span class="sig-paren">(</span><em>max_nodes</em>, <em>max_states</em>, <em>state_dims=(16</em>, <em>32</em>, <em>64</em>, <em>128)</em>, <em>out_sizes=(0.2</em>, <em>0.5</em>, <em>1</em>, <em>2</em>, <em>5)</em>, <em>input_combine_ops=('add'</em>, <em>'mult'</em>, <em>'avg'</em>, <em>'u_gate'</em>, <em>'concat')</em>, <em>activations=('relu'</em>, <em>'sigmoid'</em>, <em>'tanh'</em>, <em>'identity')</em>, <em>drop_probs=(0.0</em>, <em>0.1</em>, <em>0.3</em>, <em>0.5)</em>, <em>recurrent_drop_probs=(0.0</em>, <em>0.1</em>, <em>0.3</em>, <em>0.5)</em>, <em>max_node_inputs=None</em>, <em>max_state_inputs=None</em>, <em>use_zoneout=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace">
+<em class="property">class </em><code class="descclassname">nasframe.searchspaces.</code><code class="descname">RNNSpace</code><span class="sig-paren">(</span><em>max_nodes</em>, <em>max_states</em>, <em>state_dims=(16</em>, <em>32</em>, <em>64</em>, <em>128)</em>, <em>out_sizes=(0.2</em>, <em>0.5</em>, <em>1</em>, <em>2</em>, <em>5)</em>, <em>input_combine_ops=('add'</em>, <em>'mult'</em>, <em>'avg'</em>, <em>'u_gate'</em>, <em>'concat')</em>, <em>activations=('relu'</em>, <em>'sigmoid'</em>, <em>'tanh'</em>, <em>'identity')</em>, <em>drop_probs=(0.0</em>, <em>0.1</em>, <em>0.3</em>, <em>0.5)</em>, <em>recurrent_drop_probs=(0.0</em>, <em>0.1</em>, <em>0.3</em>, <em>0.5)</em>, <em>max_node_inputs=None</em>, <em>max_state_inputs=None</em>, <em>use_zoneout=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines a recurrent neural network search space.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1091,8 +1092,8 @@ to be evaluated, which returns this number. If not specified, defaults to maximu
 </tbody>
 </table>
 <dl class="method">
-<dt id="searchspaces.RNNSpace._add_agraph_units">
-<code class="descname">_add_agraph_units</code><span class="sig-paren">(</span><em>description</em>, <em>graph: pygraphviz.agraph.AGraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace._add_agraph_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace._add_agraph_units" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace._add_agraph_units">
+<code class="descname">_add_agraph_units</code><span class="sig-paren">(</span><em>description</em>, <em>graph: pygraphviz.agraph.AGraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace._add_agraph_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace._add_agraph_units" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds units to <code class="docutils literal notranslate"><span class="pre">AGraph</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1115,8 +1116,8 @@ to be evaluated, which returns this number. If not specified, defaults to maximu
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.cell">
-<code class="descname">cell</code><span class="sig-paren">(</span><em>input</em>, <em>hidden</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.cell" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.cell">
+<code class="descname">cell</code><span class="sig-paren">(</span><em>input</em>, <em>hidden</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.cell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Processes one time step of the sequence.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1140,8 +1141,8 @@ to be evaluated, which returns this number. If not specified, defaults to maximu
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.connect">
-<code class="descname">connect</code><span class="sig-paren">(</span><em>description</em>, <em>picking_method=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.connect" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><em>description</em>, <em>picking_method=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resolves graph’s connections, by picking requested input names
 from available input names using <code class="docutils literal notranslate"><span class="pre">picking_method</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1165,14 +1166,14 @@ from available input names using <code class="docutils literal notranslate"><spa
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.RNNSpace.connect_leafs">
-<em class="property">static </em><code class="descname">connect_leafs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.connect_leafs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.connect_leafs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.connect_leafs">
+<em class="property">static </em><code class="descname">connect_leafs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.connect_leafs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.connect_leafs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connects leaf nodes, which otherwise would be pruned, to the output.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.fill_the_gaps">
-<code class="descname">fill_the_gaps</code><span class="sig-paren">(</span><em>description</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.fill_the_gaps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.fill_the_gaps" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.fill_the_gaps">
+<code class="descname">fill_the_gaps</code><span class="sig-paren">(</span><em>description</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.fill_the_gaps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.fill_the_gaps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fills gaps in the description.</p>
 <p>If a certain search space dimension has only one possible value, it is ignored by architect and thus
 is absent in descriptions generated by it. This method fills such description ‘gaps’ with that only value.</p>
@@ -1191,32 +1192,32 @@ is absent in descriptions generated by it. This method fills such description �
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.force_num_node_inputs">
-<code class="descname">force_num_node_inputs</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.force_num_node_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.force_num_node_inputs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.force_num_node_inputs">
+<code class="descname">force_num_node_inputs</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.force_num_node_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.force_num_node_inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signals architect, that number of node inputs should always be <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.force_num_nodes">
-<code class="descname">force_num_nodes</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.force_num_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.force_num_nodes" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.force_num_nodes">
+<code class="descname">force_num_nodes</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.force_num_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.force_num_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signals architect, that number of nodes should always be <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.force_num_state_inputs">
-<code class="descname">force_num_state_inputs</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.force_num_state_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.force_num_state_inputs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.force_num_state_inputs">
+<code class="descname">force_num_state_inputs</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.force_num_state_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.force_num_state_inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signals architect, that number of state inputs should always be <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.force_num_states">
-<code class="descname">force_num_states</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.force_num_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.force_num_states" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.force_num_states">
+<code class="descname">force_num_states</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.force_num_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.force_num_states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signals architect, that number of states should always be <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.forward">
-<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em>, <em>hidden=None</em>, <em>return_sequence=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.forward" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em>, <em>hidden=None</em>, <em>return_sequence=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Does <code class="docutils literal notranslate"><span class="pre">inputs.size(1)</span></code> forward passes through the described graph.
 Call <code class="docutils literal notranslate"><span class="pre">prepare</span></code> first, and use <code class="docutils literal notranslate"><span class="pre">forward</span></code> method of the returned module instead.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1242,8 +1243,8 @@ Call <code class="docutils literal notranslate"><span class="pre">prepare</span>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.init_hidden">
-<code class="descname">init_hidden</code><span class="sig-paren">(</span><em>batch_size</em>, <em>dims</em>, <em>device=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.init_hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.init_hidden" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.init_hidden">
+<code class="descname">init_hidden</code><span class="sig-paren">(</span><em>batch_size</em>, <em>dims</em>, <em>device=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.init_hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.init_hidden" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns list of <code class="docutils literal notranslate"><span class="pre">len(dims)</span></code> hidden states initialized with zeros for <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1256,53 +1257,53 @@ Call <code class="docutils literal notranslate"><span class="pre">prepare</span>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.parameter_count">
-<code class="descname">parameter_count</code><span class="sig-paren">(</span><em>description</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.parameter_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.parameter_count" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.parameter_count">
+<code class="descname">parameter_count</code><span class="sig-paren">(</span><em>description</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.parameter_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.parameter_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns tuple of existing, new and total existing parameter counts of the model described by <code class="docutils literal notranslate"><span class="pre">description</span></code>
 and a list of keys corresponding to used layers.
 if <code class="docutils literal notranslate"><span class="pre">create_nonexistent</span></code> is True, creates described layers along the way.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.RNNSpace.prune">
-<em class="property">static </em><code class="descname">prune</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.prune" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.prune">
+<em class="property">static </em><code class="descname">prune</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.prune" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns modified copy of the <code class="docutils literal notranslate"><span class="pre">description</span></code>, which doesn’t contain unused units and boolean value
 indicating whether the description is viable (i.e. contains used units).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.release_all_constraints">
-<code class="descname">release_all_constraints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.release_all_constraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.release_all_constraints" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.release_all_constraints">
+<code class="descname">release_all_constraints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.release_all_constraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.release_all_constraints" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases all constraints set by <code class="docutils literal notranslate"><span class="pre">force*</span></code> or <code class="docutils literal notranslate"><span class="pre">set_curriculum_complexity</span></code> methods.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.release_num_node_inputs">
-<code class="descname">release_num_node_inputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.release_num_node_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.release_num_node_inputs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.release_num_node_inputs">
+<code class="descname">release_num_node_inputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.release_num_node_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.release_num_node_inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases constraints set on number of node inpus.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.release_num_nodes">
-<code class="descname">release_num_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.release_num_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.release_num_nodes" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.release_num_nodes">
+<code class="descname">release_num_nodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.release_num_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.release_num_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases constraints set on number of nodes.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.release_num_state_inputs">
-<code class="descname">release_num_state_inputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.release_num_state_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.release_num_state_inputs" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.release_num_state_inputs">
+<code class="descname">release_num_state_inputs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.release_num_state_inputs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.release_num_state_inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases constraints set on number of state inputs.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.release_num_states">
-<code class="descname">release_num_states</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.release_num_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.release_num_states" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.release_num_states">
+<code class="descname">release_num_states</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.release_num_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.release_num_states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Releases constraints set on number of states.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.resolve_shapes">
-<code class="descname">resolve_shapes</code><span class="sig-paren">(</span><em>description</em>, <em>input</em>, <em>method=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.resolve_shapes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.resolve_shapes" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.resolve_shapes">
+<code class="descname">resolve_shapes</code><span class="sig-paren">(</span><em>description</em>, <em>input</em>, <em>method=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.resolve_shapes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.resolve_shapes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts relative shapes to absolute.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1326,14 +1327,14 @@ indicating whether the description is viable (i.e. contains used units).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="searchspaces.RNNSpace.set_curriculum_complexity">
-<code class="descname">set_curriculum_complexity</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.set_curriculum_complexity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.set_curriculum_complexity" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.set_curriculum_complexity">
+<code class="descname">set_curriculum_complexity</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.set_curriculum_complexity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.set_curriculum_complexity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets curriculum complexity <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="searchspaces.RNNSpace.walk_graph">
-<em class="property">static </em><code class="descname">walk_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/searchspaces/rnn.html#RNNSpace.walk_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#searchspaces.RNNSpace.walk_graph" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.searchspaces.RNNSpace.walk_graph">
+<em class="property">static </em><code class="descname">walk_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.walk_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.walk_graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Walks described graph backwards to determine which nodes are connected to
 at least one <span class="math notranslate">\(h_{t+1}\)</span> state (useful nodes), which states are being both read from on step  <span class="math notranslate">\(t\)</span>
 and written to on step <span class="math notranslate">\(t+1\)</span>  (useful states) and whether the graph depends on input at all.</p>
@@ -1405,7 +1406,7 @@ and written to on step <span class="math notranslate">\(t+1\)</span>  (useful st
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1 alpha',
+            VERSION:'v0.1.1 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
