@@ -18,9 +18,3 @@ Documentation for NAS Framework
    :caption: Tutorials:
 
    config
-
-Go to
-=====
-
-* :ref:`genindex`
-* :ref:`modindex`
