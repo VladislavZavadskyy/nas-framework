@@ -45,7 +45,7 @@ class CoachBase:
                  scheduler='reduceonplateau', scheduler_kwargs=None, scheduler_metric='loss',
                  scheduler_scale='step', steps_per_epoch=None, metrics=None, log_dir='logs',
                  tensorboard=None, log_every=10, logger=None, break_on_nan=True, raise_on_nan=True,
-                 tqdm=None, **kwargs):
+                 tqdm=None, convergence_patience_mult=2, convergence_patience=None, **kwargs):
 
         if logger is not None and len(kwargs) > 0:
             kwargs = ', '.join(kwargs.keys())
@@ -83,9 +83,13 @@ class CoachBase:
         # region convergence detection
         self.convergence = Bunch()
 
-        self.convergence.patience = self.scheduler_kwargs.get('patience', 100 if scheduler_scale == 'step' else 1)
-        self.convergence.patience = int(self.convergence.patience*1.5)
-        self.convergence.threshold = self.scheduler_kwargs.get('threshold', 1e-2)
+        if convergence_patience is None:
+            self.convergence.patience = self.scheduler_kwargs.get('patience', 100 if scheduler_scale == 'step' else 1)
+            self.convergence.patience = int(self.convergence.patience*convergence_patience_mult)
+        else:
+            self.convergence.patience = convergence_patience
+
+        self.convergence.threshold = self.scheduler_kwargs.get('threshold', 1e-3)
         self.convergence.mode = self.scheduler_kwargs.get('mode', 'min')
         # endregion
 
@@ -200,22 +204,28 @@ class CoachBase:
 
         """
         steps = steps or self.epoch_steps
+        self.clear_stats()
+        self.model.train()
         for epoch in range(epochs):
-            self._init_epoch(*args, **kwargs)
             self._training_loop(steps, *args, **kwargs)
-            self._finalize_epoch(*args, **kwargs)
+            self._finalize_epoch()
 
     def train_until_convergence(self, *args, **kwargs):
         """
         Trains until the model has converged.
         """
+        steps = kwargs.get('steps', self.epoch_steps)
+        self.clear_stats()
+        self.model.train()
         while not self.is_converged:
-            self.train(break_on_convergence=True, *args, **kwargs)
+            self._training_loop(steps, break_on_convergence=True, *args, **kwargs)
+            self._finalize_epoch()
 
     def _training_loop(self, steps, *args, **kwargs):
         """
         The training loop, which trains for ``steps`` steps.
         """
+        self.stats.step = 0
         steps = min(self.epoch_steps, steps) if steps is not None else self.epoch_steps
 
         progress_bar = self.tqdm(range(steps), desc=f'Training {self.name} on {str(self.model.device)}')
@@ -250,12 +260,11 @@ class CoachBase:
         """
         raise NotImplemented()
 
-    def _init_epoch(self, *args, **kwargs):
+    def clear_stats(self, *args, **kwargs):
         """
-        Initializes an epoch of training.
+        Clears accumulated stats.
         """
-        self.model.train()
-        self.stats.step = 0
+        raise NotImplemented()
 
     def _finalize_epoch(self, *args, **kwargs):
         """

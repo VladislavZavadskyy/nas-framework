@@ -63,7 +63,7 @@ class RecurrentCoach(FeedForwardCoach):
         Returns:
             Model performance stats collected during evaluation
         """
-        self._init_epoch()
+        self.clear_stats()
         loader = loader or self.loaders.validation
         if self.model is None:
             raise ValueError('You must train the model first.')

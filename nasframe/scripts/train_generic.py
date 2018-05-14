@@ -4,14 +4,14 @@ from nasframe.utils.torch import *
 from nasframe import FeedForwardCoach
 from torch.utils.data import DataLoader
 from nasframe.utils import make_dirs, Bunch, get_tqdm
-from nasframe.utils import get_logger, FileLock
+from nasframe.utils import get_logger, FileLock, logger
 from nasframe import Architect, ArchitectCoach
 from nasframe.coaches.base import LossIsNoneError
 from nasframe.storage import CurriculumStorage, Storage
 from nasframe.searchspaces import RNNSpace, MLPSpace
 
 from tensorboardX import SummaryWriter
-from functools import partial
+from functools import partial, wraps
 from os.path import exists
 
 from shutil import rmtree
@@ -23,7 +23,6 @@ import gc
 import os
 import yaml
 import json
-import copy
 
 import multiprocessing as mp
 
@@ -131,8 +130,15 @@ def prepare(config, resume, input_shape, gpu_idx, num_gpus):
             config = yaml.load(f)
 
     log_dir = config['log_dir']
-    if not resume and exists(log_dir):
-        rmtree(log_dir)
+    if not resume:
+        for path in os.listdir(log_dir):
+            if path == 'model.pth':
+                continue
+            path = join(log_dir, path)
+            if os.path.isdir(path):
+                rmtree(path)
+            else:
+                os.remove(path)
 
     make_dirs(join(log_dir, 'descriptions'))
 
@@ -154,10 +160,9 @@ def prepare(config, resume, input_shape, gpu_idx, num_gpus):
     space_proto = Type(**config['searchspace'])
 
     arch_logger = get_logger('arch_coach', join(log_dir, 'architect', 'training.log'))
-    load_architect = config['architect_training']['load_architect']
+    load_architect = config['architect_training']['load_architect'] and resume
 
-    if (exists(join(log_dir, 'architect', 'checkpoint.pth'))
-            and resume and load_architect):
+    if exists(join(log_dir, 'architect', 'checkpoint.pth')) and load_architect:
         arch = torch.load(join(log_dir, 'architect', 'checkpoint.pth'))
         arch.search_space = space_proto
         arch_logger.info('Restored architect from checkpoint.')
@@ -294,7 +299,7 @@ def evaluate(descriptions, worker_fn, gpu_indices):
     Returns:
         list of (description, reward, device_idx) tuples
     """
-    descriptions = copy.deepcopy(descriptions)
+    if len(descriptions) == 0: return []
 
     ctx = mp.get_context('spawn')
     with ctx.Manager() as manager:
@@ -304,11 +309,8 @@ def evaluate(descriptions, worker_fn, gpu_indices):
             device_queue.put(idx)
 
         worker_fn = partial(worker_fn, device_queue=device_queue)
-
-        eval_list = list(map(manager.dict, descriptions))
-
-        with ctx.Pool(len(gpu_indices), maxtasksperchild=1) as pool:
-            result = pool.map(worker_fn, eval_list)
+        with ctx.Pool(len(descriptions), maxtasksperchild=1) as pool:
+            result = pool.map(worker_fn, descriptions)
 
     return result
 
@@ -336,7 +338,7 @@ def train_curriculum(config, worker, input_shape,
     training_config, space_proto, arch, arch_coach, gpu_indices, log_dir =\
         prepare(config, resume, input_shape, gpu_idx, num_gpus)
 
-    load_architect = training_config['load_architect']
+    load_architect = training_config['load_architect'] and resume
     epochs_per_loop = training_config['epochs_per_loop']
     architect_lr_decay = training_config['lr_decay']
     assert 0 < architect_lr_decay < 1
@@ -505,24 +507,50 @@ def train_plain(config, worker, input_shape,
             return storage
 
 
-def generic_worker(description, device_queue, current_complexity, config, space_type):
+def acquire_device(worker):
+    """
+    Worker decorator which acquires a device from device queue and releases it when
+    the worker is done working.
+
+    Keyword Args:
+        device_queue (Queue): a blocking queue with available devices.
+    """
+    @wraps(worker)
+    def wrapper(*args, **kwds):
+        device_queue = kwds.pop('device_queue')
+
+        idx = device_queue.get()
+        logger.debug(f'Acquired device {idx}.')
+        result = worker(*args, **kwds, device_idx=idx)
+
+        device_queue.put(idx)
+        logger.debug(f'Released device {idx}.')
+        return result
+    return wrapper
+
+
+@acquire_device
+def generic_worker(description, device_idx, current_complexity, config, space_type, reward_metric):
     """
     Concurrent description evaluator.
 
     Args:
         description (dict): description to be evaluated
-        device_queue (Queue): a queue with available CUDA devices indices
+        device_idx (int): a dedicated CUDA devices index
         current_complexity (int): current curriculum complexity level.
         config (dict, str): configuration dictionary or path to YAML file.
         space_type (str): the name of root search space.
+        reward_metric (str): key for the returned evaluation stats dictionary.
 
     Returns:
-        Tuple of (description, mean_auc, device_idx).
+        Tuple of (description, mean ``reward_metric`` value, device_idx).
 
-        If loss is nan -- mean_auc = -1.
+        If loss is NaN, than mean ``reward_metric`` value = 0.
 
         If OOM was raised and ``not adaptive_batch_size`` or using ``min_batch_size`` causes OOM -- mean_auc=None.
     """
+    description = dict(description)
+
     if isinstance(config, str):
         with open(config) as f:
             config = yaml.load(f)
@@ -550,21 +578,21 @@ def generic_worker(description, device_queue, current_complexity, config, space_
     else:
         min_batch_size = batch_size
 
-    description = dict(description)
-    device_idx = device_queue.get()
     datasets = torch.load(join(data_dir, 'preprocessed.pth'))
 
     with torch.cuda.device(device_idx):
         logger, summary_writer, description_dir = worker_init(description, log_dir)
-        logger.debug(f'Aquired device {device_idx}.')
+        logger.debug(f'Worker {device_idx}: initialization done.')
+
         save_path = join(log_dir, space_type, 'merged_space.pth')
-        model_path = join(log_dir, space_type, 'model.pth')
+        model_path = join(log_dir, 'model.pth')
 
         model = torch.load(model_path)
+        logger.debug(f'Worker {device_idx}: model loaded.')
         with FileLock(save_path):
             model.space = torch.load(save_path)
+            logger.debug(f'Worker {device_idx}: search space loaded.')
         model = model.cuda()
-
         model.space.logger = logger
 
         desc = model.space.preprocess(description, (-1, model.input_size))
@@ -583,8 +611,6 @@ def generic_worker(description, device_queue, current_complexity, config, space_
             for f in os.listdir(description_dir):
                 if f.startswith('events.out.tfevents'):
                     os.remove(join(description_dir, f))
-            device_queue.put(device_idx)
-            logger.debug(f'Released device {device_idx}.')
 
         while min_batch_size <= batch_size:
             try:
@@ -602,6 +628,7 @@ def generic_worker(description, device_queue, current_complexity, config, space_
 
                 space_coach.train_until_convergence(description=desc)
                 stats = space_coach.evaluate(desc, loaders.validation)
+                mean_reward = np.mean(stats[reward_metric])
 
                 with FileLock(save_path):
                     if exists(save_path):
@@ -618,17 +645,16 @@ def generic_worker(description, device_queue, current_complexity, config, space_
                         if str(current_complexity) not in existing:
                             existing[str(current_complexity)] = []
 
-                        existing[str(current_complexity)].append([description,
-                                                            np.mean(stats.auc)])
+                        existing[str(current_complexity)].append([description, mean_reward])
                     else:
                         assert isinstance(existing, list)
-                        existing.append([description, np.mean(stats.auc)])
+                        existing.append([description, mean_reward])
 
                     with open(join(log_dir, 'description_reward.json'), 'w+') as f:
                         json.dump(existing, f)
 
                 cleanup()
-                return description, np.mean(stats.auc), device_idx
+                return description, mean_reward, device_idx
 
             except RuntimeError as e:
                 if 'out of memory' in str(e):
@@ -647,7 +673,7 @@ def generic_worker(description, device_queue, current_complexity, config, space_
             except LossIsNoneError:
                 logger.info('Loss is NaN. Terminating.')
                 cleanup()
-                return description, -1, device_idx
+                return description, 0., device_idx
 
         else:
             logger.info('Out of memory with minimum batch size. Terminating.')

@@ -154,8 +154,8 @@ class ArchitectCoach(CoachBase):
 
         )
 
-    def _init_epoch(self, *args, **kwargs):
-        super()._init_epoch(*args, **kwargs)
+    def clear_stats(self, *args, **kwargs):
+        super().clear_stats(*args, **kwargs)
         self.stats.value_losses = []
         self.stats.action_losses = []
         self.stats.total_losses = []
@@ -169,6 +169,6 @@ class ArchitectCoach(CoachBase):
         if steps*self.batch_size > len(self.storage):
             raise ValueError("Storage does not contain enough data points.")
         for epoch in range(epochs):
-            self._init_epoch()
+            self.clear_stats()
             self._training_loop(steps, explore)
             self._finalize_epoch()

@@ -29,6 +29,7 @@ child_training:
   batch_size_decay: 0.5
 
   keep_data_on_device: false
+  convergence_patience_mult: 2
 
 architect_training:
   curriculum: true

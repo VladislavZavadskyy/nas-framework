@@ -2,6 +2,7 @@ import os
 import time
 
 from os.path import exists
+from nasframe.utils import logger
 
 
 class FileLock:
@@ -32,6 +33,7 @@ class FileLock:
             blocking: if the lock is unavailable and `blocking` is False, will return False,
                          otherwise will block the next statement execution until the lock is available.
         """
+        logger.debug(f'Attempting to acquire {self.lockfile}')
         while True:
             try:
                 fd = os.open(self.lockfile, os.O_CREAT | os.O_EXCL | os.O_RDWR)
@@ -43,6 +45,7 @@ class FileLock:
                     return False
                 time.sleep(self.delay)
         self.is_locked = True
+        logger.debug(f'Acquired {self.lockfile}')
         return True
 
     def release(self):

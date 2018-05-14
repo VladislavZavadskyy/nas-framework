@@ -101,12 +101,14 @@ def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perp
         embedding = torch.load(join(data_dir, 'embedding.pth'))
 
     model = ToxicModel(None, embedding)
-    torch.save(model, (join(log_dir, 'rnn', 'model.pth')))
+    make_dirs(join(log_dir))
+    torch.save(model, (join(log_dir, 'model.pth')))
 
     worker_fn = partial(
         generic_worker,
         config=config_path,
-        space_type='rnn'
+        space_type='rnn',
+        reward_metric='auc'
     )
 
     storage = train_curriculum(

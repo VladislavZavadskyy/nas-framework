@@ -83,22 +83,26 @@ class FeedForwardCoach(CoachBase):
 
         """
         assert 'description' in kwargs, 'You should consider providing description of the graph to train.'
+        steps = steps or self.epoch_steps
+        self.clear_stats()
         self.model = None
-        super().train(epochs, steps, *args, **kwargs)
+        for epoch in range(epochs):
+            self._training_loop(steps, *args, **kwargs)
+            self._finalize_epoch()
 
     def train_until_convergence(self, *args, **kwargs):
         """
         Trains until the model has converged.
         """
         assert 'description' in kwargs, 'You should consider providing description of the graph to train.'
+        steps = kwargs.get('steps', self.epoch_steps)
+        self.clear_stats()
         self.model = None
-        super().train_until_convergence(*args, **kwargs)
+        while not self.is_converged:
+            self._training_loop(steps, break_on_convergence=True, *args, **kwargs)
+            self._finalize_epoch()
 
-    def _init_epoch(self, *args, **kwargs):
-        """
-        Initializes an epoch of training.
-        """
-        self.stats.step = 0
+    def clear_stats(self, *args, **kwargs):
         self.stats.losses = []
         if 'auc' in self.metrics:
             self.stats.auc = []
@@ -108,6 +112,7 @@ class FeedForwardCoach(CoachBase):
         A training loop, which wraps ``steps`` calls to ``_training_loop_body``.
         If ``steps`` is not specified, defaults to  ``len(loaders.train)``.
         """
+        self.stats.step = 0
         steps = min(self.epoch_steps, steps) if steps is not None else self.epoch_steps
 
         progress_bar = self.tqdm(self.loaders.train, desc=f'Training {self.name} on {str(self.space.device)}')
@@ -115,7 +120,7 @@ class FeedForwardCoach(CoachBase):
         for i, (input, labels) in enumerate(progress_bar):
             if self.stats.step >= steps: break
 
-            self._training_loop_body(**selfless(locals()),**kwargs)
+            self._training_loop_body(**selfless(locals()), **kwargs)
 
             if np.isnan(self.stats.losses[-1]) and self.raise_on_nan:
                 raise LossIsNoneError('Loss is None.')
@@ -169,7 +174,7 @@ class FeedForwardCoach(CoachBase):
         Returns:
             Model performance stats collected during evaluation
         """
-        self._init_epoch()
+        self.clear_stats()
         loader = loader or self.loaders.validation
         if self.model is None:
             raise ValueError('You should train the model first.')
@@ -186,6 +191,9 @@ class FeedForwardCoach(CoachBase):
         if self.logger is not None:
             self.logger.info(f'{self.name} evaluation loss is: '
                              f'{np.mean(self.stats.losses):5.3f}')
+            if 'auc' in self.stats:
+                self.logger.info(f'{self.name} evaluation ROC AUC score is: '
+                                 f'{np.mean(self.stats.auc):5.3f}')
         return self.stats
 
     def get_loss(self, description, inputs, labels, mean=True):
@@ -208,8 +216,8 @@ class FeedForwardCoach(CoachBase):
             self.model = self.space.prepare(inputs, description)
             self.model.train()
             self.update_optim(self.model.parameters())
-        out = self.model(inputs=inputs, description=description)
 
+        out = self.model(inputs=inputs, description=description)
         loss = self.criterion(out, labels)
 
         if 'auc' in self.metrics:
