@@ -1,6 +1,9 @@
 log_dir: logs
 data_dir: data/toxic
 
+stdout_loglevel: DEBUG
+file_loglevel: INFO
+
 searchspace:
   type: RNN
   max_nodes: 15
@@ -42,5 +45,5 @@ architect_training:
   batch_size: 8
   steps_per_epoch: 4
 
-  storage_surplus_factor: 1.6
-  load_architect: true
+  storage_surplus_factor: 1.3
+  load_architect: false

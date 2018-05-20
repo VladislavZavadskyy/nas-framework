@@ -1,4 +1,4 @@
-import logging, os, time, copy, io, sys
+import logging, os, time, copy, yaml
 
 from collections import defaultdict
 from functools import partial
@@ -26,6 +26,12 @@ def get_logger(name=__file__, file=None, file_level='INFO', stdout_level='DEBUG'
         A logger instance
     """
     logger = logging.getLogger(name)
+
+    if os.path.exists('config.yml'):
+        with open('config.yml') as f:
+            config = yaml.load(f)
+        file_level = config.get('file_loglevel', file_level)
+        stdout_level = config.get('stdout_loglevel', stdout_level)
 
     if getattr(logger, '_init_done__', False):
         logger.setLevel(file_level)

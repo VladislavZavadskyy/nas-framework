@@ -122,9 +122,9 @@ class MLPSpace(SearchSpace):
 
         """
         key = input_name, unit_name, shape
-        self.delete_layer(*key)
-
-        self.log_info(f'Layer {input_name} -> {unit_name} ({shape}) has been deleted.')
+        super().delete_layer(*key)
+        if self.logger is not None:
+            self.logger.debug(f'Layer {input_name} -> {unit_name} ({shape}) has been deleted.')
 
     def move_layer(self, input_name, unit_name, shape, device=None, **kwargs):
         """

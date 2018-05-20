@@ -1,3 +1,5 @@
+import time
+
 from flatten_dict import flatten
 
 from nasframe.utils.torch import *
@@ -178,7 +180,7 @@ def prepare(config, resume, input_shape, gpu_idx, num_gpus):
 
     if not exists(join(log_dir, 'description_reward.json')):
         with open(join(log_dir, 'description_reward.json'), 'w+') as f:
-            json.dump({}, f)
+            json.dump({} if curriculum else [], f)
 
     if resume:
         if curriculum:
@@ -366,8 +368,8 @@ def train_curriculum(config, worker, input_shape,
 
             elif curriculum_complexity == storage.max_complexity + 1:
 
-                arch.curriculum = False
                 curriculum_complexity = 0
+                arch_coach.curriculum = False
 
                 arch.search_space.release_all_constraints()
                 arch_coach.storage = arch_coach.storage.flatten()
@@ -381,6 +383,7 @@ def train_curriculum(config, worker, input_shape,
 
             worker_fn = partial(worker, current_complexity=curriculum_complexity)
             result = evaluate(evaluation_list, worker_fn, gpu_indices)
+            logger.debug(f'Architect training: Evaluated {len(result)} descriptions.')
 
             accuracies = []
             for description, reward, _ in result:
@@ -394,6 +397,7 @@ def train_curriculum(config, worker, input_shape,
                 elif reward is not None:
                     accuracies.append(reward)
                     storage.reward(description, float(reward))
+            logger.debug(f'Architect training: Updated storage with {len(accuracies)} items.')
 
             # Since last reward corresponds to deterministic description
             if len(result) > 0:
@@ -405,13 +409,16 @@ def train_curriculum(config, worker, input_shape,
                     summary_writer.add_scalar('deterministic_acc', accuracies[-1], loops)
                 else:
                     summary_writer.add_scalar('stochastic_acc', np.mean(accuracies), loops)
+                    logger.debug(f'Architect training: Deterministic description is not viable.')
 
             storage.filter_na()
             if len(storage) < desired_storage_len and curriculum_complexity != 0:
+                logger.debug(f'Architect training: not enough samples evaluated, rerunning the loop.')
                 continue
 
             try:
                 if len(result) > 0 or not load_architect:
+                    logger.debug(f'Architect training: beginning the training.')
                     arch_coach.train(epochs_per_loop)
                     arch.save(log_dir, 'checkpoint')
                 arch_coach.decay_lr(architect_lr_decay)
@@ -558,6 +565,9 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
     log_dir = config['log_dir']
     data_dir = config['data_dir']
 
+    logger, summary_writer, description_dir = worker_init(description, log_dir)
+    logger.debug(f'Worker {device_idx}: initialization done.')
+
     config = config.get('child_training', config)
 
     batch_size = config.pop('batch_size')
@@ -580,10 +590,20 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
 
     datasets = torch.load(join(data_dir, 'preprocessed.pth'))
 
-    with torch.cuda.device(device_idx):
-        logger, summary_writer, description_dir = worker_init(description, log_dir)
-        logger.debug(f'Worker {device_idx}: initialization done.')
+    # A bit ugly, but should fix OOMs due to race conditions
+    while True:
+        try:
+            with torch.cuda.device(device_idx):
+                torch.cuda.init()
+                break
+        except RuntimeError as e:
+            if 'out of memory' in str(e):
+                logger.debug(f'Worker {device_idx}: got OOM during init, trying again in 1 second.')
+                time.sleep(1)
+            else:
+                raise e
 
+    with torch.cuda.device(device_idx):
         save_path = join(log_dir, space_type, 'merged_space.pth')
         model_path = join(log_dir, 'model.pth')
 
@@ -592,7 +612,8 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
         with FileLock(save_path):
             model.space = torch.load(save_path)
             logger.debug(f'Worker {device_idx}: search space loaded.')
-        model = model.cuda()
+            model = model.cuda()
+            logger.debug(f'Worker {device_idx}: placed on device.')
         model.space.logger = logger
 
         desc = model.space.preprocess(description, (-1, model.input_size))
@@ -625,8 +646,9 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
                                                tensorboard=summary_writer,
                                                tqdm=get_tqdm(position=device_idx),
                                                **config)
-
+                logger.debug(f'Worker {device_idx}: beginning training.')
                 space_coach.train_until_convergence(description=desc)
+                logger.debug(f'Worker {device_idx}: beginning evaluation')
                 stats = space_coach.evaluate(desc, loaders.validation)
                 mean_reward = np.mean(stats[reward_metric])
 
@@ -679,3 +701,4 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
             logger.info('Out of memory with minimum batch size. Terminating.')
             cleanup()
             return description, None, device_idx
+

@@ -156,7 +156,7 @@ class CoachBase:
         """
         rel_epsilon = 1. - self.convergence.threshold
         if self.convergence.mode == 'min':
-            is_better = metric*rel_epsilon < self.convergence.best_val
+            is_better = metric < self.convergence.best_val*rel_epsilon
         elif self.convergence.mode == 'max':
             is_better = metric * rel_epsilon > self.convergence.best_val
         else:

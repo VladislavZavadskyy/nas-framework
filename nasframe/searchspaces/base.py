@@ -634,7 +634,7 @@ class SearchSpace(nn.Module):
         """
         raise NotImplemented()
 
-    def prepare(self, input, description, freeze=False):
+    def prepare(self, input, description, freeze=False, drop_unused=False):
         """
         Prepares search space to evaluate description.
 
@@ -642,20 +642,36 @@ class SearchSpace(nn.Module):
             input (torch.Tensor): tensor containing sample input
             description (dict): description of a graph
             freeze (bool): whether to freeze the model using ``torch.jit.trace`` (experimental)
+            drop_unused (bool): whether to delete unused in the description layers
 
         Returns:
             nn.Module: model ready for forwarding data through
         """
         assert torch.is_tensor(input) or isinstance(input, np.ndarray)
+        # if input.shape[-1] != description['input_dim']:
+        #     raise ValueError('Shapes were resolved for different input shape.')
 
         # Create needed layers
         if not self.reuse_parameters: self.reset()
         used_keys = self.parameter_count(description, create_nonexistent=True)[-1]
 
+        if drop_unused:
+            unused = set(flatten(self.layer_index)).difference(set(used_keys))
+            for k in unused:
+                self.delete_layer(*k)
+            self.log_info(f'Deleted {len(unused)} layers, {len(self.layer_index)} remain.')
+
         for key in used_keys:
             self.move_layer(*key)
 
-        model = torch.jit.trace(self) if freeze else self
+        if freeze:
+            @torch.jit.trace(input)
+            def f(input, description=description):
+                return self(input, description)
+            model = f
+        else:
+            model = self
+
         if self.data_parallel: return nn.DataParallel(model)
         else: return model
 
