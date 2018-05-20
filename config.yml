@@ -26,6 +26,8 @@ child_training:
   scheduler_kwargs:
     mode: max
 
+  input_shape: [-1, 300]
+
   adaptive_batch_size: true
   min_batch_size: 32
   max_batch_size: 512

@@ -1,4 +1,4 @@
-from .train_generic import *
+from .generic import *
 
 from torch import nn
 
@@ -7,39 +7,8 @@ from nasframe.loaders import TextLoader
 
 
 import pandas as pd
-import click
 import yaml
 import gc
-
-
-@click.command()
-@click.option('-g', '--num-gpus', help=
-              'Number of GPUs to use.',
-              default=3, type=int)
-@click.option('-v', '--val-fraction', help=
-              'Fraction of training data set to be used for validation.',
-              default=.2, type=float, )
-@click.option('-r', '--resume', help=
-              'If set, will attempt to resume previous NAS session.',
-              is_flag=True, default=False)
-@click.option('-c', '--config-path', help=
-              'Path, to the config YAML file.',
-              default='config.yml', type=click.Path(exists=True, dir_okay=False))
-@click.option('--gpu-idx', help=
-              'GPU indices as comma separated values. '
-              'If not set, range(--num-gpus) will be used.',
-              default=None, type=str)
-@click.option('--force-perprocess', help=
-              'Will force preprocessing, even if preprocessed data exists.',
-              is_flag=True, default=False)
-def cli(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perprocess):
-    """
-    Preforms neural architecture search on Jigsaw Toxic Comment dataset.
-    """
-    assert 0 < val_fraction < 1, 'Validation data fraction has to be in range (0,1).'
-    assert num_gpus >= 1, 'Number of GPUs has to be >= 1.'
-
-    train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perprocess)
 
 
 def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perprocess):
@@ -111,9 +80,10 @@ def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perp
         reward_metric='auc'
     )
 
+    input_shape = config['child_training'].pop('input_shape')
     storage = train_curriculum(
         config, worker_fn,
-        input_shape=(-1, 300),
+        input_shape=input_shape,
         resume=resume,
         num_gpus=num_gpus,
         gpu_idx=gpu_idx)

@@ -1,6 +1,6 @@
 import numpy as np
 from collections import defaultdict
-from nasframe.utils import convert_keys_to_int
+from nasframe.utils import convert_keys_to_int, wrap
 
 import torch
 import json
@@ -17,7 +17,7 @@ class Storage:
         self.entropies = []
         self.rewards = []
         self.advantages = []
-        self.parameter_counts = []
+        self.param_counts = []
 
     def find(self, description):
         """
@@ -36,11 +36,11 @@ class Storage:
         Appends data to the storage.
         """
         self.descriptions.append(description)
-        self.log_probs.append(log_probs.detach())
-        self.pred_values.append(pred_values.detach())
-        self.entropies.append(entropies.detach())
-        self.rewards.append(torch.tensor(np.nan if reward is None else reward))
-        self.parameter_counts.append(np.nan if param_count is None else param_count)
+        self.log_probs.append(wrap(log_probs))
+        self.pred_values.append(wrap(pred_values))
+        self.entropies.append(wrap(entropies))
+        self.rewards.append(wrap(reward))
+        self.param_counts.append(wrap(param_count))
         self._on_change()
 
     def reward(self, description, amount):
@@ -102,42 +102,44 @@ class Storage:
         return self.descriptions[idx], self.rewards[idx]
 
     @staticmethod
-    def from_json(arch, *, path=None, json=None, space=None, input_shape=None):
+    def from_json(arch=None, path=None, data=None, space=None, input_shape=None):
         """
         Reads description-reward pairs from json and constructs a Storage from it.
 
         Args:
             arch (Architect): architect instance to collect needed data
             path (str): path to json file
-            json (list): pre-read list of description-reward pairs
+            data (list): pre-loaded list of description-reward pairs
             space (SearchSpace): search space instance to calculate described model complexity
             input_shape (list, tuple, torch.Size): shape of the input
 
         Returns:
             Storage: storage instance containing data from given json
         """
-        if not ((path is None) ^ (json is None)):
+        if not ((path is None) ^ (data is None)):
             raise ValueError('Either path or json must be not None, but not both.')
 
         if path is not None:
             with open(path) as f:
                 data = json.load(f)
-        else: data = json
 
         storage = Storage()
-
         data = list(map(lambda i: (convert_keys_to_int(i[0]), i[1]), data))
+
         for description, reward in data:
-            _, logps, values, entropies = arch.evaluate_description(description)
+            if arch is not None:
+                _, logps, values, entropies = arch.evaluate_description(description)
 
-            param_count = None
-            if space is not None:
-                if input_shape is None:
-                    raise ValueError('If space is provided, input shape must be provided too.')
+                param_count = None
+                if space is not None:
+                    if input_shape is None:
+                        raise ValueError('If space is provided, input shape must be provided too.')
 
-                desc = space.preprocess(description, input_shape)
-                if desc is not None:
-                    param_count = sum(space.parameter_count(desc)[:2]) / 1e6
+                    desc = space.preprocess(description, input_shape)
+                    if desc is not None:
+                        param_count = sum(space.parameter_count(desc)[:2]) / 1e6
+            else:
+                logps, values, entropies, param_count = [None]*4
 
             storage.append(description, logps, values, entropies, reward, param_count)
 
@@ -148,7 +150,7 @@ class Storage:
             return (self.descriptions[item], self.log_probs[item],
                     self.pred_values[item], self.entropies[item],
                     self.rewards[item].expand_as(self.log_probs[item]),
-                    self.advantages[item], self.parameter_counts[item])
+                    self.advantages[item], self.param_counts[item])
         if hasattr(item, '__iter__'):
             return list(map(self.__getitem__, item))
         if isinstance(item, slice):
@@ -163,7 +165,7 @@ class Storage:
             del self.pred_values[item]
             del self.entropies[item]
             del self.rewards[item]
-            del self.parameter_counts[item]
+            del self.param_counts[item]
         else:
             raise ValueError(f'Cannot delete with {type(item)} as index.')
         self._on_change()
@@ -234,11 +236,11 @@ class CurriculumStorage:
         return self.current_storage.advantages
 
     @property
-    def parameter_counts(self):
+    def param_counts(self):
         """
         Returns parameter counts corresponding to current complexity.
         """
-        return self.current_storage.parameter_counts
+        return self.current_storage.param_counts
 
     def flatten(self):
         """
@@ -292,13 +294,14 @@ class CurriculumStorage:
         return results
 
     @staticmethod
-    def from_json(path, arch, space=None, input_shape=None, max_complexity=None):
+    def from_json(arch=None, path=None, data=None, space=None, input_shape=None, max_complexity=None):
         """
         Reads description-reward pairs from json and constructs a Storage from it.
 
         Args:
             arch (Architect): architect instance to collect needed data
             path (str): path to json file
+            data (dict): dictionary with pre-loaded data
             space (SearchSpace): search space instance to calculate described model complexity
             input_shape (list, tuple, torch.Size): shape of the input
             max_complexity (int): maximum complexity of constructed storage
@@ -306,16 +309,21 @@ class CurriculumStorage:
         Returns:
             CurriculumStorage: storage instance containing data from given json
         """
-        with open(path) as f:
-            data = convert_keys_to_int(json.load(f))
-            assert isinstance(data, dict)
-        if max_complexity is None:
-            max_complexity = max(data.keys())
+        if not ((path is None) ^ (data is None)):
+            raise ValueError('Either path or json must be not None, but not both.')
 
-        storage = CurriculumStorage(max_complexity)
+        if path is not None:
+            with open(path) as f:
+                data = json.load(f)
+
+        assert isinstance(data, dict)
+        data = convert_keys_to_int(data)
+
+        storage = CurriculumStorage(max_complexity or max(data.keys()))
+
         for level in data:
-            storage.storages[level] = Storage.from_json(
-                arch, json=data[level], space=space, input_shape=input_shape)
+            storage.storages[level] = Storage.from_json(arch=arch, data=data[level], space=space,
+                                                        input_shape=input_shape)
 
         return storage
 

@@ -158,10 +158,10 @@ def get_scheduler(name):
 
 def wrap(inputs, device=-1, **kwargs):
     """
-    Makes a tensor or copies an existing one and puts it on `device`.
+    Makes a tensor or copies (and detaches) an existing one and puts it on `device`.
 
     Args:
-        inputs: torch.Tensor, list or numpy.ndarray
+        inputs: torch.Tensor, list or numpy.ndarray or None, in the last case, converted to np.nan
         device: GPU index or -1 for CPU or device name (e.g. 'cpu', 'cuda:0') or ``torch.Device``
         kwargs: optional kwargs passed to ``torch.tensor`` constructor.
 
@@ -170,6 +170,12 @@ def wrap(inputs, device=-1, **kwargs):
     """
     if isinstance(inputs, map):
         inputs = list(inputs)
+    if isinstance(inputs, list):
+        inputs = list(map(lambda i: np.nan if i is None else i, inputs))
+    if torch.is_tensor(inputs):
+        inputs = inputs.detach()
+    if inputs is None:
+        inputs = np.nan
 
     if isinstance(device, int):
         device = 'cpu' if device == -1 else f'cuda:{device}'

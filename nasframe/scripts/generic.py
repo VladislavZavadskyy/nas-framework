@@ -10,7 +10,7 @@ from nasframe.utils import get_logger, FileLock, logger
 from nasframe import Architect, ArchitectCoach
 from nasframe.coaches.base import LossIsNoneError
 from nasframe.storage import CurriculumStorage, Storage
-from nasframe.searchspaces import RNNSpace, MLPSpace
+from nasframe.searchspaces import get_space_type
 
 from tensorboardX import SummaryWriter
 from functools import partial, wraps
@@ -151,15 +151,8 @@ def prepare(config, resume, input_shape, gpu_idx, num_gpus):
     else:
         make_dirs(join(log_dir, 'architect'))
 
-    space_type = config['searchspace'].pop('type').lower()
-    Type = {
-        'rnn': RNNSpace,
-        'mlp': MLPSpace
-    }.get(space_type)
-
-    if Type is None:
-        raise NotImplementedError(f'Search space of type {space_type} is not implemented.')
-    space_proto = Type(**config['searchspace'])
+    type_name = config['searchspace'].pop('type')
+    space_proto = get_space_type(type_name)(**config['searchspace'])
 
     arch_logger = get_logger('arch_coach', join(log_dir, 'architect', 'training.log'))
     load_architect = config['architect_training']['load_architect'] and resume
@@ -184,16 +177,16 @@ def prepare(config, resume, input_shape, gpu_idx, num_gpus):
 
     if resume:
         if curriculum:
-            storage = CurriculumStorage.from_json(
-                join(log_dir, 'description_reward.json'),
-                arch, space_proto, input_shape, max_complexity)
+            storage = CurriculumStorage.from_json(arch=arch, path=join(log_dir, 'description_reward.json'),
+                                                  space=space_proto, input_shape=input_shape,
+                                                  max_complexity=max_complexity)
 
             flat_storage = storage.flatten()
             arch_logger.info(f'Loaded {len(flat_storage)} descriptions, '
                              f'{len(storage.storages)} curriculum levels total.')
         else:
-            storage = Storage.from_json(arch, space=space_proto, input_shape=input_shape,
-                                        path=join(log_dir, 'description_reward.json'))
+            storage = Storage.from_json(arch=arch, path=join(log_dir, 'description_reward.json'), space=space_proto,
+                                        input_shape=input_shape)
             arch_logger.info(f'{len(storage)} descriptions loaded.')
 
             flat_storage = storage
@@ -701,4 +694,3 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
             logger.info('Out of memory with minimum batch size. Terminating.')
             cleanup()
             return description, None, device_idx
-

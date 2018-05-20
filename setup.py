@@ -13,6 +13,7 @@ setup(
         'numpy',
         'scikit-learn',
         'scipy',
+        'pyyaml',
         'pillow',
         'tensorboardX',
         'pygraphviz',
@@ -30,6 +31,6 @@ setup(
     },
     entry_points='''
         [console_scripts]
-        toxic_nas=nasframe.scripts.train_toxic:cli
+        nas=nasframe.scripts.cli:nas
     ''',
 )
