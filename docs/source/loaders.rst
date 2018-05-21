@@ -8,5 +8,4 @@ Text loader
 
 .. autoclass:: TextLoader
    :members:
-   :private-members:
 

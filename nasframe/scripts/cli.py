@@ -62,7 +62,7 @@ def find_best(filename, config, preprocess, draw, save_to):
     if preprocess:
         description = space.preprocess(description, input_shape)
         pcount = space.parameter_count(description)
-        click.echo(f'Parameter count: {pcount[1]/1e+6:.2f} million')
+        click.echo(f'Parameter count: {pcount[1]:.3E}')
 
     make_dirs(save_to)
     with open(join(save_to, 'description.json'), 'w+') as f:

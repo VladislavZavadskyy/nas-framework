@@ -8,25 +8,21 @@ Base
 
 .. autoclass:: nasframe.coaches.CoachBase
    :members:
-   :private-members:
 
 Architect
 ^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: nasframe.coaches.ArchitectCoach
    :members:
-   :private-members:
 
 Feed Forward
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: nasframe.coaches.FeedForwardCoach
    :members:
-   :private-members:
 
 Recurrent
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: nasframe.coaches.RecurrentCoach
    :members:
-   :private-members:

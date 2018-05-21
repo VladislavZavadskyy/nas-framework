@@ -4,13 +4,11 @@ Scripts
 Reusable training functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: nasframe.scripts.train_generic
+.. automodule:: nasframe.scripts.generic
    :members:
-   :private-members:
 
 Jigsaw Toxic Comment dataset training
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: nasframe.scripts.train_toxic
+.. automodule:: nasframe.scripts.toxiccomment
    :members:
-   :private-members:

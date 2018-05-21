@@ -772,6 +772,7 @@ def baseline_worker(device_idx, config, reward_metric, name):
                                             pin_memory=not keep_data_on_device)
 
                 space_coach = FeedForwardCoach(model, loaders,
+                                               name=name,
                                                logger=logger,
                                                log_dir=log_dir,
                                                tensorboard=summary_writer,
