@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search Spaces &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  <title>Search Spaces &mdash; NAS Framework v0.1.2 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
+    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="index.html"/>
         <link rel="next" title="Training Classes" href="coaches.html"/>
         <link rel="prev" title="Architect" href="architect.html"/> 
 
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -113,15 +113,6 @@
 <li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
@@ -129,6 +120,36 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.toxiccomment">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#search-space-section">Search space section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#child-training-section">Child training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size">batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#adaptive-batch-size">adaptive_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#min-batch-size">min_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-batch-size">max_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size-decay">batch_size_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#keep-data-on-device">keep_data_on_device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#architect-training-section">Architect training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#curriculum">curriculum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-curriculum-complexity">max_curriculum_complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#epochs-per-loop">epochs_per_loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#lr-decay">lr_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#storage-surplus-factor">storage_surplus_factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#load-architect">load_architect</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -234,205 +255,6 @@ is set to <code class="docutils literal notranslate"><span class="pre">False</sp
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="nasframe.searchspaces.SearchSpace._add_agraph_units">
-<code class="descname">_add_agraph_units</code><span class="sig-paren">(</span><em>description</em>, <em>graph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._add_agraph_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._add_agraph_units" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds units to <code class="docutils literal notranslate"><span class="pre">AGraph</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>description</strong> (<em>dict</em>) – description of a graph</li>
-<li><strong>graph</strong> (<em>gv.AGraph</em>) – pygraphviz graph to add units to</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">graph with units added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">gv.AGraph</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="nasframe.searchspaces.SearchSpace._connect">
-<code class="descname">_connect</code><span class="sig-paren">(</span><em>description</em>, <em>space</em>, <em>picking_method='set_random'</em>, <em>input_expr=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._connect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Resolves graph’s connections, by picking requested input names
-from available input names using <code class="docutils literal notranslate"><span class="pre">picking_method</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>description</strong> (<em>dict</em>) – description to be connected</li>
-<li><strong>space</strong> (<a class="reference internal" href="#nasframe.searchspaces.SearchSpace" title="nasframe.searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space corresponding to the description passed</li>
-<li><strong>picking_method</strong> (<em>str</em>) – name of the input picking method</li>
-<li><strong>input_expr</strong> (<em>str</em>) – expression which needs to be evaluated in order to obtain
-the list of available inputs</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">connected description</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="nasframe.searchspaces.SearchSpace._count_related_params">
-<code class="descname">_count_related_params</code><span class="sig-paren">(</span><em>desc</em>, <em>space_name</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._count_related_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._count_related_params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns tuple of (existing and new) parameter counts of the model described by <code class="docutils literal notranslate"><span class="pre">desc</span></code>
-and a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with of keys of used layers.
-if <code class="docutils literal notranslate"><span class="pre">create_nonexistent</span></code> is True, creates described layers along the way.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="nasframe.searchspaces.SearchSpace._del_value">
-<em class="property">static </em><code class="descname">_del_value</code><span class="sig-paren">(</span><em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._del_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._del_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Deletes (last level of) <code class="docutils literal notranslate"><span class="pre">key</span></code> from a (possibly nested) <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="nasframe.searchspaces.SearchSpace._fill_the_gaps">
-<em class="property">static </em><code class="descname">_fill_the_gaps</code><span class="sig-paren">(</span><em>space</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._fill_the_gaps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._fill_the_gaps" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recursively fills gaps in the description.</p>
-<p>If a certain search space dimension has only one possible value, it is ignored by architect and thus
-is absent in descriptions generated by it. This method fills such description ‘gaps’ with that only value.
-:param description: graph description
-:type description: dict
-:param space: space or sub-space to fill gaps in
-:type space: SearchSpace</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">graph description with default values filled in.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="nasframe.searchspaces.SearchSpace._get_value">
-<em class="property">static </em><code class="descname">_get_value</code><span class="sig-paren">(</span><em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._get_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._get_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets value specified by <code class="docutils literal notranslate"><span class="pre">key</span></code> from a (possibly nested) <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="nasframe.searchspaces.SearchSpace._init_layer">
-<code class="descname">_init_layer</code><span class="sig-paren">(</span><em>module</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._init_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._init_layer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializes module weights and bias, if present.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>module</strong> (<em>nn.Module</em>) – module whose parameters should be initialized</li>
-<li><strong>weight_init</strong> (<em>callable</em>) – inplace initialization function for parameters with <code class="docutils literal notranslate"><span class="pre">ndim</span> <span class="pre">&gt;</span> <span class="pre">1</span></code></li>
-<li><strong>bias_init</strong> (<em>callable</em>) – inplace initialization function for parameters with <code class="docutils literal notranslate"><span class="pre">ndim</span> <span class="pre">&lt;=</span> <span class="pre">1</span></code></li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="nasframe.searchspaces.SearchSpace._prune">
-<em class="property">static </em><code class="descname">_prune</code><span class="sig-paren">(</span><em>unit_type</em>, <em>mapping</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._prune" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filters <code class="docutils literal notranslate"><span class="pre">description</span></code> with respect to <code class="docutils literal notranslate"><span class="pre">unit_type</span></code> given <code class="docutils literal notranslate"><span class="pre">mapping</span></code> of the names of useful units.
-<code class="docutils literal notranslate"><span class="pre">mapping</span></code> should be a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with old names as keys and new names as values.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="nasframe.searchspaces.SearchSpace._resolve_shape">
-<em class="property">static </em><code class="descname">_resolve_shape</code><span class="sig-paren">(</span><em>desc</em>, <em>method</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._resolve_shape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._resolve_shape" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recursive call of <code class="docutils literal notranslate"><span class="pre">_resolve_shapes</span></code> method.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>unit_name</strong> – name of the unit to resolve shape for</li>
-<li><strong>desc</strong> – description of a graph</li>
-<li><strong>method</strong> – method to resolve shape ambiguity; either ‘min’, ‘max’ or ‘mean’</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">node’s absolute output dim.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="nasframe.searchspaces.SearchSpace._resolve_shapes">
-<em class="property">static </em><code class="descname">_resolve_shapes</code><span class="sig-paren">(</span><em>input</em>, <em>method='min'</em>, <em>unit_type='node'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._resolve_shapes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._resolve_shapes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recursively convert relative shapes to absolute.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>desc</strong> – description of a graph</li>
-<li><strong>input</strong> – graphs input tensor or its shape</li>
-<li><strong>method</strong> – method to resolve shape ambiguity; either ‘min’, ‘max’ or ‘mean’</li>
-<li><strong>unit_type</strong> – type of unit to resolve shapes for</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">description with shapes resolved.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="nasframe.searchspaces.SearchSpace._set_value">
-<em class="property">static </em><code class="descname">_set_value</code><span class="sig-paren">(</span><em>value</em>, <em>*key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._set_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._set_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets <code class="docutils literal notranslate"><span class="pre">value</span></code> corresponding to <code class="docutils literal notranslate"><span class="pre">key</span></code> in a (possibly nested) <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="nasframe.searchspaces.SearchSpace._walk_graph">
-<em class="property">static </em><code class="descname">_walk_graph</code><span class="sig-paren">(</span><em>unit_type</em>, <em>persistent_units</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace._walk_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace._walk_graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Walks described graph backwards to determine which units are reachable from <code class="docutils literal notranslate"><span class="pre">persistent_units</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>description</strong> (<em>dict</em>) – description of a graph.</li>
-<li><strong>unit_type</strong> (<em>str</em>) – unit type w.r.t. to which results should be computed</li>
-<li><strong>persistent_units</strong> (<em>dict</em>) – mapping of node names useful a priori to sets of their inputs</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">mapping of unit names to unit names reachable from them</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="method">
 <dt id="nasframe.searchspaces.SearchSpace.combine_tensors">
 <code class="descname">combine_tensors</code><span class="sig-paren">(</span><em>op_name</em>, <em>tensors</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.combine_tensors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.combine_tensors" title="Permalink to this definition">¶</a></dt>
@@ -612,7 +434,7 @@ and <code class="docutils literal notranslate"><span class="pre">picking_method<
 
 <dl class="method">
 <dt id="nasframe.searchspaces.SearchSpace.prepare">
-<code class="descname">prepare</code><span class="sig-paren">(</span><em>input</em>, <em>description</em>, <em>freeze=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.prepare" title="Permalink to this definition">¶</a></dt>
+<code class="descname">prepare</code><span class="sig-paren">(</span><em>input</em>, <em>description</em>, <em>freeze=False</em>, <em>drop_unused=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/base.html#SearchSpace.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.SearchSpace.prepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepares search space to evaluate description.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -622,6 +444,7 @@ and <code class="docutils literal notranslate"><span class="pre">picking_method<
 <li><strong>input</strong> (<em>torch.Tensor</em>) – tensor containing sample input</li>
 <li><strong>description</strong> (<em>dict</em>) – description of a graph</li>
 <li><strong>freeze</strong> (<em>bool</em>) – whether to freeze the model using <code class="docutils literal notranslate"><span class="pre">torch.jit.trace</span></code> (experimental)</li>
+<li><strong>drop_unused</strong> (<em>bool</em>) – whether to delete unused in the description layers</li>
 </ul>
 </td>
 </tr>
@@ -736,77 +559,6 @@ to be evaluated, which returns this number. If not specified, defaults to maximu
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="nasframe.searchspaces.MLPSpace._add_agraph_unit">
-<code class="descname">_add_agraph_unit</code><span class="sig-paren">(</span><em>graph: pygraphviz.agraph.AGraph</em>, <em>unit</em>, <em>name</em>, <em>combine_op: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace._add_agraph_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace._add_agraph_unit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a single unit to <code class="docutils literal notranslate"><span class="pre">gv.Agraph</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>graph</strong> – graph to add unit to.</li>
-<li><strong>unit</strong> – unit description.</li>
-<li><strong>name</strong> – unit name.</li>
-<li><strong>combine_op</strong> – unit’s input combination op.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="nasframe.searchspaces.MLPSpace._add_agraph_units">
-<code class="descname">_add_agraph_units</code><span class="sig-paren">(</span><em>description</em>, <em>graph: pygraphviz.agraph.AGraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace._add_agraph_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace._add_agraph_units" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds units to <code class="docutils literal notranslate"><span class="pre">AGraph</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>description</strong> (<em>dict</em>) – description of a graph</li>
-<li><strong>graph</strong> (<em>gv.AGraph</em>) – pygraphviz graph to add units to</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">graph with units added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">gv.AGraph</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="nasframe.searchspaces.MLPSpace._count_related_params">
-<code class="descname">_count_related_params</code><span class="sig-paren">(</span><em>desc</em>, <em>space_name</em>, <em>create_nonexistent=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace._count_related_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace._count_related_params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns tuple of (existing and new) parameter counts of the model described by <code class="docutils literal notranslate"><span class="pre">desc</span></code>
-and a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with of keys of used layers.
-if <code class="docutils literal notranslate"><span class="pre">create_nonexistent</span></code> is True, creates described layers along the way.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="nasframe.searchspaces.MLPSpace._init_layer">
-<code class="descname">_init_layer</code><span class="sig-paren">(</span><em>module</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace._init_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace._init_layer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializes module weights and bias, if present.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>module</strong> (<em>nn.Module</em>) – module whose parameters should be initialized</li>
-<li><strong>weight_init</strong> (<em>callable</em>) – inplace initialization function for parameters with <code class="docutils literal notranslate"><span class="pre">ndim</span> <span class="pre">&gt;</span> <span class="pre">1</span></code></li>
-<li><strong>bias_init</strong> (<em>callable</em>) – inplace initialization function for parameters with <code class="docutils literal notranslate"><span class="pre">ndim</span> <span class="pre">&lt;=</span> <span class="pre">1</span></code></li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="method">
 <dt id="nasframe.searchspaces.MLPSpace.connect">
 <code class="descname">connect</code><span class="sig-paren">(</span><em>description</em>, <em>picking_method=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/mlp.html#MLPSpace.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.MLPSpace.connect" title="Permalink to this definition">¶</a></dt>
@@ -1091,30 +843,6 @@ to be evaluated, which returns this number. If not specified, defaults to maximu
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="nasframe.searchspaces.RNNSpace._add_agraph_units">
-<code class="descname">_add_agraph_units</code><span class="sig-paren">(</span><em>description</em>, <em>graph: pygraphviz.agraph.AGraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace._add_agraph_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace._add_agraph_units" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds units to <code class="docutils literal notranslate"><span class="pre">AGraph</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>description</strong> (<em>dict</em>) – description of a graph</li>
-<li><strong>graph</strong> (<em>gv.AGraph</em>) – pygraphviz graph to add units to</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">graph with units added</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">gv.AGraph</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="method">
 <dt id="nasframe.searchspaces.RNNSpace.cell">
 <code class="descname">cell</code><span class="sig-paren">(</span><em>input</em>, <em>hidden</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/searchspaces/rnn.html#RNNSpace.cell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.searchspaces.RNNSpace.cell" title="Permalink to this definition">¶</a></dt>
@@ -1406,7 +1134,7 @@ and written to on step <span class="math notranslate">\(t+1\)</span>  (useful st
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1.1 alpha',
+            VERSION:'v0.1.2 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

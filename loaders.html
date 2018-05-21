@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Data Loaders &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  <title>Data Loaders &mdash; NAS Framework v0.1.2 alpha documentation</title>
   
 
   
@@ -37,7 +37,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
+    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="index.html"/>
+        <link rel="next" title="Scripts" href="scripts.html"/>
         <link rel="prev" title="Utility functions and classes" href="utils.html"/> 
 
   
@@ -67,7 +68,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -92,7 +93,7 @@
             
             
               <p class="caption"><span class="caption-text">Framework API:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="architect.html">Architect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="searchspaces.html">Search Spaces</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="searchspaces.html#base">Base</a></li>
@@ -112,15 +113,6 @@
 <li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
@@ -128,6 +120,36 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Data Loaders</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#text-loader">Text loader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.toxiccomment">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#search-space-section">Search space section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#child-training-section">Child training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size">batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#adaptive-batch-size">adaptive_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#min-batch-size">min_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-batch-size">max_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size-decay">batch_size_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#keep-data-on-device">keep_data_on_device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#architect-training-section">Architect training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#curriculum">curriculum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-curriculum-complexity">max_curriculum_complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#epochs-per-loop">epochs_per_loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#lr-decay">lr_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#storage-surplus-factor">storage_surplus_factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#load-architect">load_architect</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -220,12 +242,6 @@ if None, such tokens are dropped out.</li>
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="nasframe.loaders.TextLoader._maybe_print">
-<code class="descname">_maybe_print</code><span class="sig-paren">(</span><em>string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader._maybe_print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader._maybe_print" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints <code class="docutils literal notranslate"><span class="pre">string</span></code> if <code class="docutils literal notranslate"><span class="pre">self.verbose</span></code>.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="nasframe.loaders.TextLoader.fit_embeddings">
 <code class="descname">fit_embeddings</code><span class="sig-paren">(</span><em>correct_spelling=False</em>, <em>max_dl=2</em>, <em>ignore_stop_words=False</em>, <em>ignore_chars=True</em>, <em>ignore_matching=re.compile('\\d')</em>, <em>reserved_words=None</em>, <em>num_threads=8</em>, <em>tqdm=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/loaders/text.html#TextLoader.fit_embeddings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.loaders.TextLoader.fit_embeddings" title="Permalink to this definition">¶</a></dt>
@@ -371,6 +387,8 @@ randomly initialized otherwise.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="scripts.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
       
         <a href="utils.html" class="btn btn-neutral" title="Utility functions and classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
@@ -403,7 +421,7 @@ randomly initialized otherwise.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1.1 alpha',
+            VERSION:'v0.1.2 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

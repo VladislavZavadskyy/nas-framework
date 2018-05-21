@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuring the search &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  <title>Configuring the search &mdash; NAS Framework v0.1.2 alpha documentation</title>
   
 
   
@@ -37,9 +37,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
-        <link rel="next" title="Scripts" href="scripts.html"/>
-        <link rel="prev" title="Storage" href="storage.html"/> 
+    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="index.html"/>
+        <link rel="prev" title="Scripts" href="scripts.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -68,7 +67,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -113,8 +112,22 @@
 <li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#reusable-training-functions">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#jigsaw-toxic-comment-dataset-training">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Configuring the search</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#search-space-section">Search space section</a></li>
@@ -136,20 +149,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#load-architect">load_architect</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
 </ul>
 </li>
 </ul>
@@ -384,10 +383,8 @@ Should be in range <span class="math notranslate">\([1,\infty)\)</span>.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="scripts.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="storage.html" class="btn btn-neutral" title="Storage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="scripts.html" class="btn btn-neutral" title="Scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -418,7 +415,7 @@ Should be in range <span class="math notranslate">\([1,\infty)\)</span>.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1.1 alpha',
+            VERSION:'v0.1.2 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

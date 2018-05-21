@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nasframe.searchspaces.base &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  <title>nasframe.searchspaces.base &mdash; NAS Framework v0.1.2 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="../../../index.html"/>
+    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -122,8 +122,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.toxiccomment">Jigsaw Toxic Comment dataset training</a></li>
 </ul>
 </li>
 </ul>
@@ -851,7 +851,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="bp">NotImplemented</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SearchSpace.prepare"><a class="viewcode-back" href="../../../searchspaces.html#nasframe.searchspaces.SearchSpace.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">freeze</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SearchSpace.prepare"><a class="viewcode-back" href="../../../searchspaces.html#nasframe.searchspaces.SearchSpace.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">freeze</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">drop_unused</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prepares search space to evaluate description.</span>
 
@@ -859,20 +859,36 @@
 <span class="sd">            input (torch.Tensor): tensor containing sample input</span>
 <span class="sd">            description (dict): description of a graph</span>
 <span class="sd">            freeze (bool): whether to freeze the model using ``torch.jit.trace`` (experimental)</span>
+<span class="sd">            drop_unused (bool): whether to delete unused in the description layers</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            nn.Module: model ready for forwarding data through</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
+        <span class="c1"># if input.shape[-1] != description[&#39;input_dim&#39;]:</span>
+        <span class="c1">#     raise ValueError(&#39;Shapes were resolved for different input shape.&#39;)</span>
 
         <span class="c1"># Create needed layers</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">reuse_parameters</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
         <span class="n">used_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_count</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">create_nonexistent</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
+        <span class="k">if</span> <span class="n">drop_unused</span><span class="p">:</span>
+            <span class="n">unused</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer_index</span><span class="p">))</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">used_keys</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">unused</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">delete_layer</span><span class="p">(</span><span class="o">*</span><span class="n">k</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Deleted {len(unused)} layers, {len(self.layer_index)} remain.&#39;</span><span class="p">)</span>
+
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">used_keys</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">move_layer</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="p">)</span>
 
-        <span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">jit</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="n">freeze</span> <span class="k">else</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">freeze</span><span class="p">:</span>
+            <span class="nd">@torch</span><span class="o">.</span><span class="n">jit</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_parallel</span><span class="p">:</span> <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">DataParallel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">model</span></div>
 
@@ -1049,7 +1065,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'v0.1.1 alpha',
+            VERSION:'v0.1.2 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

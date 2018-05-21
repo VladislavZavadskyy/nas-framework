@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nasframe.utils.filelock &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  <title>nasframe.utils.filelock &mdash; NAS Framework v0.1.2 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="../../../index.html"/>
+    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -122,8 +122,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.toxiccomment">Jigsaw Toxic Comment dataset training</a></li>
 </ul>
 </li>
 </ul>
@@ -219,9 +219,10 @@
 <span class="kn">import</span> <span class="nn">time</span>
 
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="k">import</span> <span class="n">exists</span>
+<span class="kn">from</span> <span class="nn">nasframe.utils</span> <span class="k">import</span> <span class="n">logger</span>
 
 
-<div class="viewcode-block" id="FileLock"><a class="viewcode-back" href="../../../utils.html#nasframe.utils.FileLock">[docs]</a><span class="k">class</span> <span class="nc">FileLock</span><span class="p">:</span>
+<div class="viewcode-block" id="FileLock"><a class="viewcode-back" href="../../../utils.html#nasframe.utils.filelock.FileLock">[docs]</a><span class="k">class</span> <span class="nc">FileLock</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A file locking mechanism.</span>
 
@@ -241,7 +242,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lockfile</span><span class="p">)</span>
 
-<div class="viewcode-block" id="FileLock.acquire"><a class="viewcode-back" href="../../../utils.html#nasframe.utils.FileLock.acquire">[docs]</a>    <span class="k">def</span> <span class="nf">acquire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="FileLock.acquire"><a class="viewcode-back" href="../../../utils.html#nasframe.utils.filelock.FileLock.acquire">[docs]</a>    <span class="k">def</span> <span class="nf">acquire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tries to acquire the lock.</span>
 
@@ -249,6 +250,7 @@
 <span class="sd">            blocking: if the lock is unavailable and `blocking` is False, will return False,</span>
 <span class="sd">                         otherwise will block the next statement execution until the lock is available.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Attempting to acquire </span><span class="si">{self.lockfile}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">fd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lockfile</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">O_EXCL</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">O_RDWR</span><span class="p">)</span>
@@ -260,9 +262,10 @@
                     <span class="k">return</span> <span class="kc">False</span>
                 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delay</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_locked</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Acquired </span><span class="si">{self.lockfile}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="FileLock.release"><a class="viewcode-back" href="../../../utils.html#nasframe.utils.FileLock.release">[docs]</a>    <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FileLock.release"><a class="viewcode-back" href="../../../utils.html#nasframe.utils.filelock.FileLock.release">[docs]</a>    <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Releases the lock.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -272,7 +275,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;The file lock is not owned by this instance.&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileLock.purge"><a class="viewcode-back" href="../../../utils.html#nasframe.utils.FileLock.purge">[docs]</a>    <span class="k">def</span> <span class="nf">purge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FileLock.purge"><a class="viewcode-back" href="../../../utils.html#nasframe.utils.filelock.FileLock.purge">[docs]</a>    <span class="k">def</span> <span class="nf">purge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Removes the lock file, even if it wasn&#39;t created by the current instance.</span>
 
@@ -331,7 +334,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'v0.1.1 alpha',
+            VERSION:'v0.1.2 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -6,18 +6,15 @@ Base
 
 .. autoclass:: nasframe.searchspaces.SearchSpace
    :members:
-   :private-members:
 
 Multilayer Perceptron
 ^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: nasframe.searchspaces.MLPSpace
    :members:
-   :private-members:
 
 Recurrent Neural Network
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autoclass:: nasframe.searchspaces.RNNSpace
    :members:
-   :private-members:

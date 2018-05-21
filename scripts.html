@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Scripts &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  <title>Scripts &mdash; NAS Framework v0.1.2 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
+    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="index.html"/>
         <link rel="next" title="Configuring the search" href="config.html"/>
         <link rel="prev" title="Data Loaders" href="loaders.html"/> 
 
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -123,8 +123,8 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nasframe.scripts.generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nasframe.scripts.toxiccomment">Jigsaw Toxic Comment dataset training</a></li>
 </ul>
 </li>
 </ul>
@@ -217,11 +217,11 @@
             
   <div class="section" id="scripts">
 <h1>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-nasframe.scripts.train_generic">
-<span id="reusable-training-functions"></span><h2>Reusable training functions<a class="headerlink" href="#module-nasframe.scripts.train_generic" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-nasframe.scripts.generic">
+<span id="reusable-training-functions"></span><h2>Reusable training functions<a class="headerlink" href="#module-nasframe.scripts.generic" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="nasframe.scripts.train_generic.GenericModel">
-<em class="property">class </em><code class="descclassname">nasframe.scripts.train_generic.</code><code class="descname">GenericModel</code><span class="sig-paren">(</span><em>space</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#GenericModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.GenericModel" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.GenericModel">
+<em class="property">class </em><code class="descclassname">nasframe.scripts.generic.</code><code class="descname">GenericModel</code><span class="sig-paren">(</span><em>space</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#GenericModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.GenericModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic model template to be used as a wrapper for search space.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -232,15 +232,15 @@
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="nasframe.scripts.train_generic.GenericModel.device">
-<code class="descname">device</code><a class="headerlink" href="#nasframe.scripts.train_generic.GenericModel.device" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.GenericModel.device">
+<code class="descname">device</code><a class="headerlink" href="#nasframe.scripts.generic.GenericModel.device" title="Permalink to this definition">¶</a></dt>
 <dd><p><em>Returns</em> – <code class="docutils literal notranslate"><span class="pre">torch.Device</span></code> on which <code class="docutils literal notranslate"><span class="pre">self.space</span></code> is located.
 Should be also the device of any other instance’s module.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="nasframe.scripts.train_generic.GenericModel.forward">
-<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#GenericModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.GenericModel.forward" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.GenericModel.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#GenericModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.GenericModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the computation performed at every call.</p>
 <p>Should be overridden by all subclasses.</p>
 <div class="admonition note">
@@ -253,8 +253,8 @@ registered hooks while the latter silently ignores them.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="nasframe.scripts.train_generic.GenericModel.prepare">
-<code class="descname">prepare</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#GenericModel.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.GenericModel.prepare" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.GenericModel.prepare">
+<code class="descname">prepare</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#GenericModel.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.GenericModel.prepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for the <code class="docutils literal notranslate"><span class="pre">space.prepare</span></code> call.
 Useful when inputs passed to this wrapper have a shape different from the one of inputs passed to search space.</p>
 </dd></dl>
@@ -262,8 +262,50 @@ Useful when inputs passed to this wrapper have a shape different from the one of
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.train_generic.evaluate">
-<code class="descclassname">nasframe.scripts.train_generic.</code><code class="descname">evaluate</code><span class="sig-paren">(</span><em>descriptions</em>, <em>worker_fn</em>, <em>gpu_indices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.evaluate" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.acquire_device">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">acquire_device</code><span class="sig-paren">(</span><em>worker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#acquire_device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.acquire_device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Worker decorator which acquires a device from device queue and releases it when
+the worker is done working.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><strong>device_queue</strong> (<em>Queue</em>) – a blocking queue with available devices.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nasframe.scripts.generic.baseline_worker">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">baseline_worker</code><span class="sig-paren">(</span><em>device_idx</em>, <em>config</em>, <em>reward_metric</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#baseline_worker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.baseline_worker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concurrent description evaluator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>device_idx</strong> (<em>int</em>) – a dedicated CUDA devices index</li>
+<li><strong>config</strong> (<em>dict</em><em>, </em><em>str</em>) – configuration dictionary or path to YAML file.</li>
+<li><strong>reward_metric</strong> (<em>str</em>) – key for the returned evaluation stats dictionary.</li>
+<li><strong>name</strong> (<em>str</em>) – baseline name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">achieved <code class="docutils literal notranslate"><span class="pre">reward_metric</span></code> value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nasframe.scripts.generic.evaluate">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">evaluate</code><span class="sig-paren">(</span><em>descriptions</em>, <em>worker_fn</em>, <em>gpu_indices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#evaluate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.evaluate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launch the workers to evaluate descriptions in parallel.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -284,8 +326,8 @@ Useful when inputs passed to this wrapper have a shape different from the one of
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.train_generic.generic_worker">
-<code class="descclassname">nasframe.scripts.train_generic.</code><code class="descname">generic_worker</code><span class="sig-paren">(</span><em>description</em>, <em>device_queue</em>, <em>current_complexity</em>, <em>config</em>, <em>space_type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#generic_worker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.generic_worker" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.generic_worker">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">generic_worker</code><span class="sig-paren">(</span><em>description</em>, <em>device_idx</em>, <em>current_complexity</em>, <em>config</em>, <em>space_type</em>, <em>reward_metric</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#generic_worker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.generic_worker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Concurrent description evaluator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -293,15 +335,16 @@ Useful when inputs passed to this wrapper have a shape different from the one of
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>description</strong> (<em>dict</em>) – description to be evaluated</li>
-<li><strong>device_queue</strong> (<em>Queue</em>) – a queue with available CUDA devices indices</li>
+<li><strong>device_idx</strong> (<em>int</em>) – a dedicated CUDA devices index</li>
 <li><strong>current_complexity</strong> (<em>int</em>) – current curriculum complexity level.</li>
 <li><strong>config</strong> (<em>dict</em><em>, </em><em>str</em>) – configuration dictionary or path to YAML file.</li>
 <li><strong>space_type</strong> (<em>str</em>) – the name of root search space.</li>
+<li><strong>reward_metric</strong> (<em>str</em>) – key for the returned evaluation stats dictionary.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>Tuple of (description, mean_auc, device_idx).</p>
-<p>If loss is nan – mean_auc = -1.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>Tuple of (description, mean <code class="docutils literal notranslate"><span class="pre">reward_metric</span></code> value).</p>
+<p>If loss is NaN, than mean <code class="docutils literal notranslate"><span class="pre">reward_metric</span></code> value = 0.</p>
 <p>If OOM was raised and <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">adaptive_batch_size</span></code> or using <code class="docutils literal notranslate"><span class="pre">min_batch_size</span></code> causes OOM – mean_auc=None.</p>
 </p>
 </td>
@@ -311,15 +354,15 @@ Useful when inputs passed to this wrapper have a shape different from the one of
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.train_generic.hash_description">
-<code class="descclassname">nasframe.scripts.train_generic.</code><code class="descname">hash_description</code><span class="sig-paren">(</span><em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#hash_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.hash_description" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.hash_description">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">hash_description</code><span class="sig-paren">(</span><em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#hash_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.hash_description" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attempts to create a consistent description representation and hash it.
 Usually fails.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.train_generic.prepare">
-<code class="descclassname">nasframe.scripts.train_generic.</code><code class="descname">prepare</code><span class="sig-paren">(</span><em>config</em>, <em>resume</em>, <em>input_shape</em>, <em>gpu_idx</em>, <em>num_gpus</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.prepare" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.prepare">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">prepare</code><span class="sig-paren">(</span><em>config</em>, <em>resume</em>, <em>input_shape</em>, <em>gpu_idx</em>, <em>num_gpus</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.prepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes training session.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -342,8 +385,8 @@ Usually fails.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.train_generic.sample_loop">
-<code class="descclassname">nasframe.scripts.train_generic.</code><code class="descname">sample_loop</code><span class="sig-paren">(</span><em>arch</em>, <em>storage</em>, <em>space_proto</em>, <em>input_shape</em>, <em>desired_storage_len</em>, <em>append_deterministic=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#sample_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.sample_loop" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.sample_loop">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">sample_loop</code><span class="sig-paren">(</span><em>arch</em>, <em>storage</em>, <em>space_proto</em>, <em>input_shape</em>, <em>desired_storage_len</em>, <em>append_deterministic=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#sample_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.sample_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Description sampling loop.</p>
 <p>Samples description given an architect and a space prototype, then perprocesses them by applying
 <code class="docutils literal notranslate"><span class="pre">space_proto.preprocess</span></code> method with default parameters, if description is viable after that,
@@ -373,8 +416,8 @@ resulting evaluation list, this argument will be ignored.</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.train_generic.train_curriculum">
-<code class="descclassname">nasframe.scripts.train_generic.</code><code class="descname">train_curriculum</code><span class="sig-paren">(</span><em>config</em>, <em>worker</em>, <em>input_shape</em>, <em>resume</em>, <em>num_gpus</em>, <em>gpu_idx</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#train_curriculum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.train_curriculum" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.train_curriculum">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">train_curriculum</code><span class="sig-paren">(</span><em>config</em>, <em>worker</em>, <em>input_shape</em>, <em>resume</em>, <em>num_gpus</em>, <em>gpu_idx</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#train_curriculum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.train_curriculum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Curriculum architect training procedure.
 Includes sampling descriptions with complexity <span class="math notranslate">\(i\)</span>, evaluating them, train architect and start over again
 with complexity <span class="math notranslate">\(i+1\)</span>.
@@ -402,8 +445,8 @@ from then on.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.train_generic.train_plain">
-<code class="descclassname">nasframe.scripts.train_generic.</code><code class="descname">train_plain</code><span class="sig-paren">(</span><em>config</em>, <em>worker</em>, <em>input_shape</em>, <em>resume</em>, <em>num_gpus</em>, <em>gpu_idx</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#train_plain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.train_plain" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.train_plain">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">train_plain</code><span class="sig-paren">(</span><em>config</em>, <em>worker</em>, <em>input_shape</em>, <em>resume</em>, <em>num_gpus</em>, <em>gpu_idx</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#train_plain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.train_plain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Architect training procedure.
 Includes sampling descriptions, evaluating them, train architect and start over again
 with complexity i+1.</p>
@@ -429,8 +472,8 @@ with complexity i+1.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.train_generic.worker_init">
-<code class="descclassname">nasframe.scripts.train_generic.</code><code class="descname">worker_init</code><span class="sig-paren">(</span><em>description</em>, <em>log_dir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_generic.html#worker_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_generic.worker_init" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.worker_init">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">worker_init</code><span class="sig-paren">(</span><em>description</em>, <em>log_dir</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#worker_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.worker_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes a worker process.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -455,25 +498,22 @@ description_dir (str): path of a directory, to which passed description has been
 </dd></dl>
 
 </div>
-<div class="section" id="module-nasframe.scripts.train_toxic">
-<span id="jigsaw-toxic-comment-dataset-training"></span><h2>Jigsaw Toxic Comment dataset training<a class="headerlink" href="#module-nasframe.scripts.train_toxic" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-nasframe.scripts.toxiccomment">
+<span id="jigsaw-toxic-comment-dataset-training"></span><h2>Jigsaw Toxic Comment dataset training<a class="headerlink" href="#module-nasframe.scripts.toxiccomment" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="nasframe.scripts.train_toxic.ToxicModel">
-<em class="property">class </em><code class="descclassname">nasframe.scripts.train_toxic.</code><code class="descname">ToxicModel</code><span class="sig-paren">(</span><em>space</em>, <em>embedding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_toxic.html#ToxicModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_toxic.ToxicModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>A (one of many possible) model, for Jigsaw Toxic Comment dataset.
-This one uses concatenated 1D average and max pooling after unrolled
-<code class="docutils literal notranslate"><span class="pre">RNNSpace</span></code> cell output as an input to the last linear.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>space</strong> (<a class="reference internal" href="searchspaces.html#nasframe.searchspaces.RNNSpace" title="nasframe.searchspaces.RNNSpace"><em>RNNSpace</em></a>) – a space</td>
-</tr>
-</tbody>
-</table>
+<dt id="nasframe.scripts.toxiccomment.BaselineModel">
+<em class="property">class </em><code class="descclassname">nasframe.scripts.toxiccomment.</code><code class="descname">BaselineModel</code><span class="sig-paren">(</span><em>embedding</em>, <em>dim</em>, <em>type='lstm'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/toxiccomment.html#BaselineModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.toxiccomment.BaselineModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>A baseline model, for Jigsaw Toxic Comment dataset, based on LSTM or GRU.</p>
+<dl class="attribute">
+<dt id="nasframe.scripts.toxiccomment.BaselineModel.device">
+<code class="descname">device</code><a class="headerlink" href="#nasframe.scripts.toxiccomment.BaselineModel.device" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Returns</em> – <code class="docutils literal notranslate"><span class="pre">torch.Device</span></code> on which <code class="docutils literal notranslate"><span class="pre">self.space</span></code> is located.
+Should be also the device of any other instance’s module.</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="nasframe.scripts.train_toxic.ToxicModel.forward">
-<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_toxic.html#ToxicModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_toxic.ToxicModel.forward" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.toxiccomment.BaselineModel.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/toxiccomment.html#BaselineModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.toxiccomment.BaselineModel.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines the computation performed at every call.</p>
 <p>Should be overridden by all subclasses.</p>
 <div class="admonition note">
@@ -486,8 +526,44 @@ registered hooks while the latter silently ignores them.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="nasframe.scripts.train_toxic.ToxicModel.prepare">
-<code class="descname">prepare</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_toxic.html#ToxicModel.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_toxic.ToxicModel.prepare" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.toxiccomment.BaselineModel.prepare">
+<code class="descname">prepare</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/toxiccomment.html#BaselineModel.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.toxiccomment.BaselineModel.prepare" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for the <code class="docutils literal notranslate"><span class="pre">space.prepare</span></code> function.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="nasframe.scripts.toxiccomment.ToxicModel">
+<em class="property">class </em><code class="descclassname">nasframe.scripts.toxiccomment.</code><code class="descname">ToxicModel</code><span class="sig-paren">(</span><em>space</em>, <em>embedding</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/toxiccomment.html#ToxicModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.toxiccomment.ToxicModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>A (one of many possible) model, for Jigsaw Toxic Comment dataset.
+This one uses concatenated 1D average and max pooling after unrolled
+<code class="docutils literal notranslate"><span class="pre">RNNSpace</span></code> cell output as an input to the last linear.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>space</strong> (<a class="reference internal" href="searchspaces.html#nasframe.searchspaces.RNNSpace" title="nasframe.searchspaces.RNNSpace"><em>RNNSpace</em></a>) – a space</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="nasframe.scripts.toxiccomment.ToxicModel.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/toxiccomment.html#ToxicModel.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.toxiccomment.ToxicModel.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="nasframe.scripts.toxiccomment.ToxicModel.prepare">
+<code class="descname">prepare</code><span class="sig-paren">(</span><em>inputs</em>, <em>description</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/toxiccomment.html#ToxicModel.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.toxiccomment.ToxicModel.prepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper for the <code class="docutils literal notranslate"><span class="pre">space.prepare</span></code> function.</p>
 <p>It’s needed since actual input shape differs from
 passed as inputs are indices passed through embedding.</p>
@@ -509,8 +585,55 @@ passed as inputs are indices passed through embedding.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.train_toxic.train_toxic">
-<code class="descclassname">nasframe.scripts.train_toxic.</code><code class="descname">train_toxic</code><span class="sig-paren">(</span><em>num_gpus</em>, <em>val_fraction</em>, <em>resume</em>, <em>config_path</em>, <em>gpu_idx</em>, <em>force_perprocess</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/train_toxic.html#train_toxic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.train_toxic.train_toxic" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.toxiccomment.evaluate_baseline">
+<code class="descclassname">nasframe.scripts.toxiccomment.</code><code class="descname">evaluate_baseline</code><span class="sig-paren">(</span><em>config_path</em>, <em>val_fraction</em>, <em>force_perprocess</em>, <em>cell_type</em>, <em>state_dim</em>, <em>device_idx</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/toxiccomment.html#evaluate_baseline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.toxiccomment.evaluate_baseline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates baseline performance on Jigsaw Toxic Comment dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cell_type</strong> (<em>str</em>) – <em>LSTM</em> or <em>GRU</em></li>
+<li><strong>state_dim</strong> (<em>int</em>) – number of dimensions in rnn state</li>
+<li><strong>device_idx</strong> (<em>int</em>) – index of a device ot use</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nasframe.scripts.toxiccomment.prepare_data">
+<code class="descclassname">nasframe.scripts.toxiccomment.</code><code class="descname">prepare_data</code><span class="sig-paren">(</span><em>data_dir</em>, <em>val_fraction</em>, <em>embedding_path</em>, <em>embedding_dim</em>, <em>force_perprocess=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/toxiccomment.html#prepare_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.toxiccomment.prepare_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-processes data and creates an embedding for architecture search.
+If preprocessed data exists, loads embedding and returns it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data_dir</strong> (<em>str</em>) – directory in which raw data is located</li>
+<li><strong>val_fraction</strong> (<em>float</em>) – fraction of data to be used for validation</li>
+<li><strong>embedding_path</strong> (<em>str</em>) – path to embedding .vec file</li>
+<li><strong>embedding_dim</strong> (<em>int</em>) – number of dimensions in each embedding</li>
+<li><strong>force_perprocess</strong> (<em>bool</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> will always pre-process raw data</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">embedding, fitted for this dataset</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">nn.Embedding</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="nasframe.scripts.toxiccomment.train_toxic">
+<code class="descclassname">nasframe.scripts.toxiccomment.</code><code class="descname">train_toxic</code><span class="sig-paren">(</span><em>num_gpus</em>, <em>val_fraction</em>, <em>resume</em>, <em>config_path</em>, <em>gpu_idx</em>, <em>force_perprocess</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/toxiccomment.html#train_toxic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.toxiccomment.train_toxic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Trains architect (performs NAS) of Jigsaw Toxic Comment dataset.
 See cli help, for parameter description.</p>
 </dd></dl>
@@ -562,7 +685,7 @@ See cli help, for parameter description.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1.1 alpha',
+            VERSION:'v0.1.2 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

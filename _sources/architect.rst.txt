@@ -3,4 +3,3 @@ Architect
 
 .. automodule:: nasframe.architect
    :members:
-   :private-members:

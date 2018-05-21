@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nasframe.coaches.feedforward &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  <title>nasframe.coaches.feedforward &mdash; NAS Framework v0.1.2 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="../../../index.html"/>
+    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -122,8 +122,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../scripts.html#module-nasframe.scripts.toxiccomment">Jigsaw Toxic Comment dataset training</a></li>
 </ul>
 </li>
 </ul>
@@ -300,22 +300,26 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="s1">&#39;description&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">,</span> <span class="s1">&#39;You should consider providing description of the graph to train.&#39;</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_stats</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_training_loop</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_finalize_epoch</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="FeedForwardCoach.train_until_convergence"><a class="viewcode-back" href="../../../coaches.html#nasframe.coaches.FeedForwardCoach.train_until_convergence">[docs]</a>    <span class="k">def</span> <span class="nf">train_until_convergence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Trains until the model has converged.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="s1">&#39;description&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">,</span> <span class="s1">&#39;You should consider providing description of the graph to train.&#39;</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;steps&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_stats</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">train_until_convergence</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_converged</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_training_loop</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">break_on_convergence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_finalize_epoch</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="FeedForwardCoach._init_epoch"><a class="viewcode-back" href="../../../coaches.html#nasframe.coaches.FeedForwardCoach._init_epoch">[docs]</a>    <span class="k">def</span> <span class="nf">_init_epoch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initializes an epoch of training.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="viewcode-block" id="FeedForwardCoach.clear_stats"><a class="viewcode-back" href="../../../coaches.html#nasframe.coaches.FeedForwardCoach.clear_stats">[docs]</a>    <span class="k">def</span> <span class="nf">clear_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="s1">&#39;auc&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">auc</span> <span class="o">=</span> <span class="p">[]</span></div>
@@ -325,6 +329,7 @@
 <span class="sd">        A training loop, which wraps ``steps`` calls to ``_training_loop_body``.</span>
 <span class="sd">        If ``steps`` is not specified, defaults to  ``len(loaders.train)``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">steps</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span><span class="p">,</span> <span class="n">steps</span><span class="p">)</span> <span class="k">if</span> <span class="n">steps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch_steps</span>
 
         <span class="n">progress_bar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loaders</span><span class="o">.</span><span class="n">train</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="n">f</span><span class="s1">&#39;Training </span><span class="si">{self.name}</span><span class="s1"> on {str(self.space.device)}&#39;</span><span class="p">)</span>
@@ -332,7 +337,7 @@
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">progress_bar</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">step</span> <span class="o">&gt;=</span> <span class="n">steps</span><span class="p">:</span> <span class="k">break</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_training_loop_body</span><span class="p">(</span><span class="o">**</span><span class="n">selfless</span><span class="p">(</span><span class="nb">locals</span><span class="p">()),</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_training_loop_body</span><span class="p">(</span><span class="o">**</span><span class="n">selfless</span><span class="p">(</span><span class="nb">locals</span><span class="p">()),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">raise_on_nan</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">LossIsNoneError</span><span class="p">(</span><span class="s1">&#39;Loss is None.&#39;</span><span class="p">)</span>
@@ -386,7 +391,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Model performance stats collected during evaluation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_init_epoch</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_stats</span><span class="p">()</span>
         <span class="n">loader</span> <span class="o">=</span> <span class="n">loader</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaders</span><span class="o">.</span><span class="n">validation</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You should train the model first.&#39;</span><span class="p">)</span>
@@ -403,6 +408,9 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.name}</span><span class="s1"> evaluation loss is: &#39;</span>
                              <span class="n">f</span><span class="s1">&#39;{np.mean(self.stats.losses):5.3f}&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;auc&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.name}</span><span class="s1"> evaluation ROC AUC score is: &#39;</span>
+                                 <span class="n">f</span><span class="s1">&#39;{np.mean(self.stats.auc):5.3f}&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span></div>
 
 <div class="viewcode-block" id="FeedForwardCoach.get_loss"><a class="viewcode-back" href="../../../coaches.html#nasframe.coaches.FeedForwardCoach.get_loss">[docs]</a>    <span class="k">def</span> <span class="nf">get_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -425,8 +433,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">update_optim</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">)</span>
 
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">)</span>
         <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criterion</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="s1">&#39;auc&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">:</span>
@@ -473,7 +481,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'v0.1.1 alpha',
+            VERSION:'v0.1.2 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

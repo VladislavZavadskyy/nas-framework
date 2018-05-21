@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Architect &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  <title>Architect &mdash; NAS Framework v0.1.2 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
+    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="index.html"/>
         <link rel="next" title="Search Spaces" href="searchspaces.html"/>
         <link rel="prev" title="Documentation for NAS Framework" href="index.html"/> 
 
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -113,15 +113,6 @@
 <li class="toctree-l2"><a class="reference internal" href="storage.html#curriculum-storage">Curriculum Storage</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
@@ -129,6 +120,36 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.toxiccomment">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#search-space-section">Search space section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#child-training-section">Child training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size">batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#adaptive-batch-size">adaptive_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#min-batch-size">min_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-batch-size">max_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size-decay">batch_size_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#keep-data-on-device">keep_data_on_device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#architect-training-section">Architect training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#curriculum">curriculum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-curriculum-complexity">max_curriculum_complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#epochs-per-loop">epochs_per_loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#lr-decay">lr_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#storage-surplus-factor">storage_surplus_factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#load-architect">load_architect</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -213,35 +234,6 @@
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="nasframe.architect.Architect._subsample">
-<code class="descname">_subsample</code><span class="sig-paren">(</span><em>hidden</em>, <em>explore</em>, <em>search_space</em>, <em>names</em>, <em>representations</em>, <em>output</em>, <em>description</em>, <em>outer_i=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/architect.html#Architect._subsample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.architect.Architect._subsample" title="Permalink to this definition">¶</a></dt>
-<dd><p>The recursive workhorse of <cite>sample</cite> method.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hidden</strong> (<em>list</em>) – previous encoder hidden state</li>
-<li><strong>explore</strong> (<em>bool</em>) – whether to explore the search/action space or exploit only</li>
-<li><strong>search_space</strong> (<a class="reference internal" href="searchspaces.html#nasframe.searchspaces.SearchSpace" title="nasframe.searchspaces.SearchSpace"><em>SearchSpace</em></a>) – current level of search space</li>
-<li><strong>names</strong> (<em>list</em>) – names of search spaces up to current level</li>
-<li><strong>output</strong> (<em>defaultdict</em><em>(</em><em>list</em><em>)</em><em>, </em><em>optional</em>) – dict of lists to append outputs to</li>
-<li><strong>description</strong> (<em>dict</em>) – description being generated</li>
-<li><strong>outer_i</strong> (<em>int</em>) – outer iteration ordinal (used in recursion, <cite>None</cite> on depth <cite>0</cite>)</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">next hidden state</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="method">
 <dt id="nasframe.architect.Architect.act">
 <code class="descname">act</code><span class="sig-paren">(</span><em>inputs</em>, <em>hidden</em>, <em>explore</em>, <em>key</em>, <em>output=None</em>, <em>pick=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/architect.html#Architect.act"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.architect.Architect.act" title="Permalink to this definition">¶</a></dt>
@@ -465,7 +457,7 @@ zero-initialized hidden state to graph encoder</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1.1 alpha',
+            VERSION:'v0.1.2 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

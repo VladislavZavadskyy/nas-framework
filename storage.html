@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Storage &mdash; NAS Framework v0.1.1 alpha documentation</title>
+  <title>Storage &mdash; NAS Framework v0.1.2 alpha documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1.1 alpha documentation" href="index.html"/>
-        <link rel="next" title="Configuring the search" href="config.html"/>
+    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="index.html"/>
+        <link rel="next" title="Utility functions and classes" href="utils.html"/>
         <link rel="prev" title="Training Classes" href="coaches.html"/> 
 
   
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.1.2
               </div>
             
           
@@ -113,15 +113,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#curriculum-storage">Curriculum Storage</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Scripts &amp; Utils:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_generic">Reusable training functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.train_toxic">Jigsaw Toxic Comment dataset training</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility functions and classes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.torch">Torch-related</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#module-nasframe.utils.filelock">Miscellaneous</a></li>
@@ -129,6 +120,36 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="loaders.html">Data Loaders</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="loaders.html#text-loader">Text loader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.generic">Reusable training functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#module-nasframe.scripts.toxiccomment">Jigsaw Toxic Comment dataset training</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Configuring the search</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#search-space-section">Search space section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#child-training-section">Child training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size">batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#adaptive-batch-size">adaptive_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#min-batch-size">min_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-batch-size">max_batch_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#batch-size-decay">batch_size_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#keep-data-on-device">keep_data_on_device</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#architect-training-section">Architect training section</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config.html#curriculum">curriculum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#max-curriculum-complexity">max_curriculum_complexity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#epochs-per-loop">epochs_per_loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#lr-decay">lr_decay</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#storage-surplus-factor">storage_surplus_factor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html#load-architect">load_architect</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -203,18 +224,6 @@
 <em class="property">class </em><code class="descclassname">nasframe.storage.</code><code class="descname">Storage</code><a class="reference internal" href="_modules/nasframe/storage.html#Storage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing all the data, needed for architect training.</p>
 <dl class="method">
-<dt id="nasframe.storage.Storage._on_change">
-<code class="descname">_on_change</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#Storage._on_change"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage._on_change" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should be called on data change.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="nasframe.storage.Storage._update_advantages">
-<code class="descname">_update_advantages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#Storage._update_advantages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage._update_advantages" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates advantages from rewards and predicted values.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="nasframe.storage.Storage.append">
 <code class="descname">append</code><span class="sig-paren">(</span><em>description</em>, <em>log_probs</em>, <em>pred_values</em>, <em>entropies</em>, <em>reward=None</em>, <em>param_count=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#Storage.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage.append" title="Permalink to this definition">¶</a></dt>
 <dd><p>Appends data to the storage.</p>
@@ -248,7 +257,7 @@
 
 <dl class="staticmethod">
 <dt id="nasframe.storage.Storage.from_json">
-<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>*</em>, <em>path=None</em>, <em>json=None</em>, <em>space=None</em>, <em>input_shape=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#Storage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage.from_json" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>path=None</em>, <em>data=None</em>, <em>space=None</em>, <em>input_shape=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#Storage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage.from_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads description-reward pairs from json and constructs a Storage from it.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -257,7 +266,7 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>arch</strong> (<a class="reference internal" href="architect.html#nasframe.architect.Architect" title="nasframe.architect.Architect"><em>Architect</em></a>) – architect instance to collect needed data</li>
 <li><strong>path</strong> (<em>str</em>) – path to json file</li>
-<li><strong>json</strong> (<em>list</em>) – pre-read list of description-reward pairs</li>
+<li><strong>data</strong> (<em>list</em>) – pre-loaded list of description-reward pairs</li>
 <li><strong>space</strong> (<a class="reference internal" href="searchspaces.html#nasframe.searchspaces.SearchSpace" title="nasframe.searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space instance to calculate described model complexity</li>
 <li><strong>input_shape</strong> (<em>list</em><em>, </em><em>tuple</em><em>, </em><em>torch.Size</em>) – shape of the input</li>
 </ul>
@@ -368,7 +377,7 @@
 
 <dl class="staticmethod">
 <dt id="nasframe.storage.CurriculumStorage.from_json">
-<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>arch</em>, <em>space=None</em>, <em>input_shape=None</em>, <em>max_complexity=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#CurriculumStorage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.CurriculumStorage.from_json" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>path=None</em>, <em>data=None</em>, <em>space=None</em>, <em>input_shape=None</em>, <em>max_complexity=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#CurriculumStorage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.CurriculumStorage.from_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads description-reward pairs from json and constructs a Storage from it.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -377,6 +386,7 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>arch</strong> (<a class="reference internal" href="architect.html#nasframe.architect.Architect" title="nasframe.architect.Architect"><em>Architect</em></a>) – architect instance to collect needed data</li>
 <li><strong>path</strong> (<em>str</em>) – path to json file</li>
+<li><strong>data</strong> (<em>dict</em>) – dictionary with pre-loaded data</li>
 <li><strong>space</strong> (<a class="reference internal" href="searchspaces.html#nasframe.searchspaces.SearchSpace" title="nasframe.searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space instance to calculate described model complexity</li>
 <li><strong>input_shape</strong> (<em>list</em><em>, </em><em>tuple</em><em>, </em><em>torch.Size</em>) – shape of the input</li>
 <li><strong>max_complexity</strong> (<em>int</em>) – maximum complexity of constructed storage</li>
@@ -400,8 +410,8 @@
 </dd></dl>
 
 <dl class="attribute">
-<dt id="nasframe.storage.CurriculumStorage.parameter_counts">
-<code class="descname">parameter_counts</code><a class="headerlink" href="#nasframe.storage.CurriculumStorage.parameter_counts" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.storage.CurriculumStorage.param_counts">
+<code class="descname">param_counts</code><a class="headerlink" href="#nasframe.storage.CurriculumStorage.param_counts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns parameter counts corresponding to current complexity.</p>
 </dd></dl>
 
@@ -450,7 +460,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="config.html" class="btn btn-neutral float-right" title="Configuring the search" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="utils.html" class="btn btn-neutral float-right" title="Utility functions and classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="coaches.html" class="btn btn-neutral" title="Training Classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -484,7 +494,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1.1 alpha',
+            VERSION:'v0.1.2 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
