@@ -106,3 +106,32 @@ def toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perprocess
 
     from .toxiccomment import train_toxic
     train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perprocess)
+
+
+@nas.command()
+@click.option('-g', '--gpu', help=
+              'Index of GPU to use',
+              default=0, type=int)
+@click.option('-v', '--val-fraction', help=
+              'Fraction of training data set to be used for validation',
+              default=.2, type=float, )
+@click.option('-c', '--config-path', help=
+              'Path, to the config YAML file',
+              default='config.yml', type=click.Path(exists=True, dir_okay=False))
+@click.option('--force-perprocess', help=
+              'Will force pre-processing, even if preprocessed data exists',
+              is_flag=True, default=False)
+@click.option('--cell', help=
+              'Cell type "LSTM" or "GRU" (default: "LSTM")',
+              type=str, default='lstm')
+@click.option('--dim', help=
+              'Number of cell dimensions (default: 128)',
+              type=int, default=128)
+def toxic_baseline(gpu, val_fraction, config_path, force_perprocess, cell, dim):
+    """
+    Preforms neural architecture search on Jigsaw Toxic Comment dataset
+    """
+    assert 0 < val_fraction < 1, 'Validation data fraction has to be in range (0,1).'
+    click.echo(force_perprocess)
+    from .toxiccomment import evaluate_baseline
+    evaluate_baseline(config_path, val_fraction, force_perprocess, cell, dim, gpu)

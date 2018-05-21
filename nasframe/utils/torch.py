@@ -214,3 +214,18 @@ def param_count(module):
         Parameter count.
     """
     return sum(map(lambda p: p.numel(), module.parameters()))
+
+
+def flip(x, dim):
+    """
+    Flips a tensor along ``dim`` dimension.
+
+    Taken from this `github issue`_.
+
+    .. github issue: https://github.com/pytorch/pytorch/issues/229
+    """
+    dim = x.dim() + dim if dim < 0 else dim
+    indices = [slice(None)] * x.dim()
+    indices[dim] = torch.arange(x.size(dim) - 1, -1, -1,
+                                dtype=torch.long, device=x.device)
+    return x[tuple(indices)]

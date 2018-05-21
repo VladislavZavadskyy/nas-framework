@@ -11,18 +11,21 @@ import yaml
 import gc
 
 
-def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perprocess):
+def prepare_data(data_dir, val_fraction, embedding_path, embedding_dim, force_perprocess=False):
     """
-    Trains architect (performs NAS) of Jigsaw Toxic Comment dataset.
-    See cli help, for parameter description.
+    Pre-processes data and creates an embedding for architecture search.
+    If preprocessed data exists, loads embedding and returns it.
+
+    Args:
+        data_dir (str): directory in which raw data is located
+        val_fraction (float): fraction of data to be used for validation
+        embedding_path (str): path to embedding .vec file
+        embedding_dim (int): number of dimensions in each embedding
+        force_perprocess (bool): if ``True`` will always pre-process raw data
+
+    Returns:
+        nn.Embedding: embedding, fitted for this dataset
     """
-
-    with open(config_path) as f:
-        config = yaml.load(f)
-
-    data_dir = config['data_dir']
-    log_dir = config['log_dir']
-
     if force_perprocess or not exists(join(data_dir, 'preprocessed.pth')):
         data_train = pd.read_csv(join(data_dir, 'train.csv')).fillna('Nan').sample(frac=1)
 
@@ -43,7 +46,7 @@ def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perp
         else:
             loader = TextLoader(data_train.comment_text, verbose=True)
             loader.load_embeddings(
-                300, embeddings_path=join(data_dir, '..', 'crawl-300d-2M.vec'))
+                embedding_dim, embeddings_path=embedding_path)
             loader.fit_embeddings()
 
             loader.embedding_dict = None
@@ -68,6 +71,24 @@ def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perp
         gc.collect()
     else:
         embedding = torch.load(join(data_dir, 'embedding.pth'))
+
+    return embedding
+
+
+def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perprocess):
+    """
+    Trains architect (performs NAS) of Jigsaw Toxic Comment dataset.
+    See cli help, for parameter description.
+    """
+
+    with open(config_path) as f:
+        config = yaml.load(f)
+
+    data_dir = config['data_dir']
+    log_dir = config['log_dir']
+
+    embeddings_path=join(data_dir, '..', 'crawl-300d-2M.vec')
+    embedding = prepare_data(data_dir, val_fraction, embeddings_path, 300, force_perprocess)
 
     model = ToxicModel(None, embedding)
     make_dirs(join(log_dir))
@@ -95,6 +116,38 @@ def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perp
         json.dump(best_description, f)
     logger.info('Corresponding description is stored in '
                 f'{join(log_dir, "descriptions", "best.json")}.')
+
+
+def evaluate_baseline(config_path, val_fraction, force_perprocess, cell_type, state_dim, device_idx):
+    """
+    Evaluates baseline performance on Jigsaw Toxic Comment dataset.
+
+    Args:
+        cell_type (str): *LSTM* or *GRU*
+        state_dim (int): number of dimensions in rnn state
+        device_idx (int): index of a device ot use
+
+    """
+    with open(config_path) as f:
+        config = yaml.load(f)
+
+    data_dir = config['data_dir']
+    log_dir = config['log_dir']
+
+    embeddings_path = join(data_dir, '..', 'crawl-300d-2M.vec')
+    embedding = prepare_data(data_dir, val_fraction, embeddings_path, 300, force_perprocess)
+
+    model = BaselineModel(embedding, state_dim, cell_type)
+    make_dirs(join(log_dir))
+    torch.save(model, (join(log_dir, 'model.pth')))
+
+    reward = baseline_worker(
+        device_idx=device_idx,
+        config=config,
+        reward_metric='auc',
+        name=cell_type)
+
+    print(f'Baseline AUC: {reward}')
 
 
 class ToxicModel(GenericModel):
@@ -150,6 +203,55 @@ class ToxicModel(GenericModel):
         if self.cell is None:
             raise ValueError('Prepare must be called prior to forward.')
         rnn_out = self.cell(inputs=embedded, description=description, return_sequence=True)[0]
+        avgs = self.avg_pool(rnn_out.transpose(1, 2)).squeeze()
+        maxes = self.avg_pool(rnn_out.transpose(1, 2)).squeeze()
+        out = self.linear(torch.cat((avgs, maxes), -1))
+        return out
+
+
+class BaselineModel(nn.Module):
+    """
+    A baseline model, for Jigsaw Toxic Comment dataset, based on LSTM or GRU.
+    """
+    def __init__(self, embedding, dim, type='lstm'):
+        super().__init__()
+        self.embedding = embedding
+        self.avg_pool = nn.AdaptiveAvgPool1d(1)
+        self.max_pool = nn.AdaptiveMaxPool1d(1)
+
+        type = type.strip().lower()
+        if type == 'lstm': self.rnn = nn.LSTM
+        elif type == 'gru': self.rnn = nn.GRU
+        else: raise NotImplementedError(f'Cell type {type} is not implemented.')
+
+        self.rnn = self.rnn(
+            input_size=self.space_input_size, hidden_size=dim, batch_first=True)
+
+        self.linear = nn.Linear(dim*2, 6)
+
+    @property
+    def device(self):
+        """
+        Returns:
+            ``torch.Device`` on which ``self.space`` is located.
+            Should be also the device of any other instance's module.
+
+        """
+        return self.rnn.weight_hh_l0.device
+
+    @property
+    def space_input_size(self):
+        return self.embedding.embedding_dim
+
+    def prepare(self, inputs, description):
+        """
+        A wrapper for the ``space.prepare`` function.
+        """
+        return self
+
+    def forward(self, inputs, description):
+        embedded = self.embedding(inputs)
+        rnn_out = self.rnn(embedded)[0]
         avgs = self.avg_pool(rnn_out.transpose(1, 2)).squeeze()
         maxes = self.avg_pool(rnn_out.transpose(1, 2)).squeeze()
         out = self.linear(torch.cat((avgs, maxes), -1))

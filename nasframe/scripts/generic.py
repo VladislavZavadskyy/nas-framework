@@ -379,7 +379,7 @@ def train_curriculum(config, worker, input_shape,
             logger.debug(f'Architect training: Evaluated {len(result)} descriptions.')
 
             accuracies = []
-            for description, reward, _ in result:
+            for description, reward in result:
                 if reward == 'exists':
                     for level, index in storage.find(description).items():
                         r = storage.storages[level].rewards[index]
@@ -465,7 +465,7 @@ def train_plain(config, worker, input_shape,
             result = evaluate(evaluation_list, worker, gpu_indices)
 
             accuracies = []
-            for description, reward, _ in result:
+            for description, reward in result:
                 if reward == 'exists':
                     index = storage.find(description)
                     r = storage.rewards[index]
@@ -543,7 +543,7 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
         reward_metric (str): key for the returned evaluation stats dictionary.
 
     Returns:
-        Tuple of (description, mean ``reward_metric`` value, device_idx).
+        Tuple of (description, mean ``reward_metric`` value).
 
         If loss is NaN, than mean ``reward_metric`` value = 0.
 
@@ -609,7 +609,7 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
             logger.debug(f'Worker {device_idx}: placed on device.')
         model.space.logger = logger
 
-        desc = model.space.preprocess(description, (-1, model.input_size))
+        desc = model.space.preprocess(description, (-1, model.space_input_size))
 
         model.space.draw(desc, join(description_dir, 'graph.png'))
         img = np.array(Image.open(join(description_dir, 'graph.png')))
@@ -669,7 +669,7 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
                         json.dump(existing, f)
 
                 cleanup()
-                return description, mean_reward, device_idx
+                return description, mean_reward
 
             except RuntimeError as e:
                 if 'out of memory' in str(e):
@@ -680,7 +680,7 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
                     else:
                         logger.info('Out of memory on fixed batch size. Terminating.')
                         cleanup()
-                        return description, None, device_idx
+                        return description, None
                 else:
                     logger.error(e)
                     raise e
@@ -693,4 +693,115 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
         else:
             logger.info('Out of memory with minimum batch size. Terminating.')
             cleanup()
-            return description, None, device_idx
+            return description, None
+
+
+def baseline_worker(device_idx, config, reward_metric, name):
+    """
+    Concurrent description evaluator.
+
+    Args:
+        device_idx (int): a dedicated CUDA devices index
+        config (dict, str): configuration dictionary or path to YAML file.
+        reward_metric (str): key for the returned evaluation stats dictionary.
+        name (str): baseline name
+
+    Returns:
+        float: achieved ``reward_metric`` value
+    """
+    if isinstance(config, str):
+        with open(config) as f:
+            config = yaml.load(f)
+
+    log_dir = config['log_dir']
+    data_dir = config['data_dir']
+
+    baseline_dir = join(log_dir, 'baselines', name)
+
+    if exists(baseline_dir):
+        rmtree(baseline_dir)
+    make_dirs(baseline_dir)
+
+    logger = get_logger(f'baseline_{name}', join(baseline_dir, 'training.log'))
+    summary_writer = SummaryWriter(baseline_dir)
+
+    logger.debug(f'Worker {device_idx}: initialization done.')
+
+    config = config.get('child_training', config)
+
+    batch_size = config.pop('batch_size')
+    keep_data_on_device = config.pop('keep_data_on_device')
+    adaptive_batch_size = config.pop('adaptive_batch_size')
+
+    if adaptive_batch_size:
+        min_batch_size = config.pop('min_batch_size')
+        max_batch_size = config.pop('max_batch_size')
+        batch_size_decay = config.pop('batch_size_decay')
+
+        assert isinstance(min_batch_size, int)
+        assert isinstance(max_batch_size, int)
+        assert 0 < batch_size_decay < 1
+
+        config['initial_lr'] *= max_batch_size / batch_size
+        batch_size = max_batch_size
+    else:
+        min_batch_size = batch_size
+
+    datasets = torch.load(join(data_dir, 'preprocessed.pth'))
+
+    with torch.cuda.device(device_idx):
+        model_path = join(log_dir, 'model.pth')
+
+        model = torch.load(model_path)
+        logger.debug(f'Worker {device_idx}: model loaded.')
+
+        model = model.cuda()
+        logger.debug(f'Worker {device_idx}: placed on device.')
+
+        if keep_data_on_device:
+            for key in datasets.keys():
+                datasets[key].tensors = tuple(map(
+                    lambda t: t.cuda(device_idx), datasets[key].tensors))
+            gc.collect()
+
+        while min_batch_size <= batch_size:
+            try:
+                loaders = Bunch()
+                for k in datasets.keys():
+                    loaders[k] = DataLoader(datasets[k], batch_size, shuffle=True,
+                                            pin_memory=not keep_data_on_device)
+
+                space_coach = FeedForwardCoach(model, loaders,
+                                               logger=logger,
+                                               log_dir=log_dir,
+                                               tensorboard=summary_writer,
+                                               tqdm=get_tqdm(position=device_idx),
+                                               **config)
+                logger.debug(f'Worker {device_idx}: beginning training.')
+                space_coach.train_until_convergence(description={})
+                logger.debug(f'Worker {device_idx}: beginning evaluation')
+                stats = space_coach.evaluate({}, loaders.validation)
+                mean_reward = np.mean(stats[reward_metric])
+
+                return mean_reward
+
+            except RuntimeError as e:
+                if 'out of memory' in str(e):
+                    if adaptive_batch_size:
+                        batch_size = int(batch_size*batch_size_decay)
+                        config['initial_lr'] *= batch_size_decay
+                        logger.info(f'Out of memory, decreasing batch size to {batch_size}.')
+                    else:
+                        logger.info('Out of memory on fixed batch size.')
+                        return None
+                else:
+                    logger.error(e)
+                    raise e
+
+            except LossIsNoneError:
+                logger.info('Loss is NaN.')
+                return np.nan
+
+        else:
+            logger.info('Out of memory with minimum batch size.')
+            return None
