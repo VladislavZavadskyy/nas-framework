@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>nasframe.storage &mdash; NAS Framework v0.1.2 alpha documentation</title>
+  <title>nasframe.storage &mdash; NAS Framework v0.1.3 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="../../index.html"/>
+    <link rel="top" title="NAS Framework v0.1.3 alpha documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.1.3
               </div>
             
           
@@ -281,7 +281,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">entropies</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">entropies</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_on_change</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Storage._update_advantages"><a class="viewcode-back" href="../../storage.html#nasframe.storage.Storage._update_advantages">[docs]</a>    <span class="k">def</span> <span class="nf">_update_advantages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_update_advantages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculates advantages from rewards and predicted values.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -292,13 +292,13 @@
         <span class="n">adv</span> <span class="o">=</span> <span class="n">adv</span><span class="p">[</span><span class="o">~</span><span class="n">isnan</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">adv</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">adv</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">adv</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">advantages</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">std</span><span class="o">+</span><span class="mf">1e-5</span><span class="p">))</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span> <span class="n">advantages</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">advantages</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="p">((</span><span class="n">a</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">std</span><span class="o">+</span><span class="mf">1e-5</span><span class="p">))</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span> <span class="n">advantages</span><span class="p">))</span>
 
-<div class="viewcode-block" id="Storage._on_change"><a class="viewcode-back" href="../../storage.html#nasframe.storage.Storage._on_change">[docs]</a>    <span class="k">def</span> <span class="nf">_on_change</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_on_change</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Should be called on data change.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_update_advantages</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_advantages</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Storage.filter_na"><a class="viewcode-back" href="../../storage.html#nasframe.storage.Storage.filter_na">[docs]</a>    <span class="k">def</span> <span class="nf">filter_na</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -319,7 +319,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">descriptions</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rewards</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Storage.from_json"><a class="viewcode-back" href="../../storage.html#nasframe.storage.Storage.from_json">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads description-reward pairs from json and constructs a Storage from it.</span>
 
@@ -327,7 +327,6 @@
 <span class="sd">            arch (Architect): architect instance to collect needed data</span>
 <span class="sd">            path (str): path to json file</span>
 <span class="sd">            data (list): pre-loaded list of description-reward pairs</span>
-<span class="sd">            space (SearchSpace): search space instance to calculate described model complexity</span>
 <span class="sd">            input_shape (list, tuple, torch.Size): shape of the input</span>
 
 <span class="sd">        Returns:</span>
@@ -348,19 +347,23 @@
                 <span class="n">_</span><span class="p">,</span> <span class="n">logps</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">entropies</span> <span class="o">=</span> <span class="n">arch</span><span class="o">.</span><span class="n">evaluate_description</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
 
                 <span class="n">param_count</span> <span class="o">=</span> <span class="kc">None</span>
-                <span class="k">if</span> <span class="n">space</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">input_shape</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;If space is provided, input shape must be provided too.&#39;</span><span class="p">)</span>
-
-                    <span class="n">desc</span> <span class="o">=</span> <span class="n">space</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">input_shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">desc</span> <span class="o">=</span> <span class="n">arch</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">desc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                        <span class="n">param_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">space</span><span class="o">.</span><span class="n">parameter_count</span><span class="p">(</span><span class="n">desc</span><span class="p">)[:</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mf">1e6</span>
+                        <span class="n">param_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arch</span><span class="o">.</span><span class="n">search_space</span><span class="o">.</span><span class="n">parameter_count</span><span class="p">(</span><span class="n">desc</span><span class="p">)[:</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mf">1e6</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">logps</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">entropies</span><span class="p">,</span> <span class="n">param_count</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span>
 
             <span class="n">storage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">logps</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">entropies</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">param_count</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">storage</span></div>
+
+<div class="viewcode-block" id="Storage.to_json"><a class="viewcode-back" href="../../storage.html#nasframe.storage.Storage.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dumps descriptions and corresponding rewards into a JSON-formatted file on ``path``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">descriptions</span><span class="p">,</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rewards</span><span class="p">))),</span> <span class="n">f</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">)):</span>
@@ -511,7 +514,7 @@
         <span class="k">return</span> <span class="n">results</span></div>
 
 <div class="viewcode-block" id="CurriculumStorage.from_json"><a class="viewcode-back" href="../../storage.html#nasframe.storage.CurriculumStorage.from_json">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_complexity</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_complexity</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads description-reward pairs from json and constructs a Storage from it.</span>
 
@@ -519,7 +522,6 @@
 <span class="sd">            arch (Architect): architect instance to collect needed data</span>
 <span class="sd">            path (str): path to json file</span>
 <span class="sd">            data (dict): dictionary with pre-loaded data</span>
-<span class="sd">            space (SearchSpace): search space instance to calculate described model complexity</span>
 <span class="sd">            input_shape (list, tuple, torch.Size): shape of the input</span>
 <span class="sd">            max_complexity (int): maximum complexity of constructed storage</span>
 
@@ -539,10 +541,24 @@
         <span class="n">storage</span> <span class="o">=</span> <span class="n">CurriculumStorage</span><span class="p">(</span><span class="n">max_complexity</span> <span class="ow">or</span> <span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 
         <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-            <span class="n">storage</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="n">level</span><span class="p">]</span> <span class="o">=</span> <span class="n">Storage</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="n">arch</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">level</span><span class="p">],</span> <span class="n">space</span><span class="o">=</span><span class="n">space</span><span class="p">,</span>
-                                                        <span class="n">input_shape</span><span class="o">=</span><span class="n">input_shape</span><span class="p">)</span>
+            <span class="n">storage</span><span class="o">.</span><span class="n">storages</span><span class="p">[</span><span class="n">level</span><span class="p">]</span> <span class="o">=</span> <span class="n">Storage</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span>
+                <span class="n">arch</span><span class="o">=</span><span class="n">arch</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">level</span><span class="p">],</span> <span class="n">input_shape</span><span class="o">=</span><span class="n">input_shape</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">storage</span></div>
+
+<div class="viewcode-block" id="CurriculumStorage.to_json"><a class="viewcode-back" href="../../storage.html#nasframe.storage.CurriculumStorage.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dumps descriptions and corresponding rewards into a JSON-formatted file on ``path``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">storages</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">storages</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">storages</span><span class="p">:</span>
+            <span class="n">descriptions</span> <span class="o">=</span> <span class="n">storages</span><span class="p">[</span><span class="n">level</span><span class="p">]</span><span class="o">.</span><span class="n">descriptions</span>
+            <span class="n">rewards</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">storages</span><span class="p">[</span><span class="n">level</span><span class="p">]</span><span class="o">.</span><span class="n">rewards</span><span class="p">)</span>
+            <span class="n">storages</span><span class="p">[</span><span class="n">level</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">descriptions</span><span class="p">,</span> <span class="n">rewards</span><span class="p">))</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">storages</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CurriculumStorage.best"><a class="viewcode-back" href="../../storage.html#nasframe.storage.CurriculumStorage.best">[docs]</a>    <span class="k">def</span> <span class="nf">best</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -602,7 +618,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'v0.1.2 alpha',
+            VERSION:'v0.1.3 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

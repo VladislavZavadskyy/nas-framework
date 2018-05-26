@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Scripts &mdash; NAS Framework v0.1.2 alpha documentation</title>
+  <title>Scripts &mdash; NAS Framework v0.1.3 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="index.html"/>
+    <link rel="top" title="NAS Framework v0.1.3 alpha documentation" href="index.html"/>
         <link rel="next" title="Configuring the search" href="config.html"/>
         <link rel="prev" title="Data Loaders" href="loaders.html"/> 
 
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.1.3
               </div>
             
           
@@ -263,15 +263,14 @@ Useful when inputs passed to this wrapper have a shape different from the one of
 
 <dl class="function">
 <dt id="nasframe.scripts.generic.acquire_device">
-<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">acquire_device</code><span class="sig-paren">(</span><em>worker</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#acquire_device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.acquire_device" title="Permalink to this definition">¶</a></dt>
-<dd><p>Worker decorator which acquires a device from device queue and releases it when
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">acquire_device</code><span class="sig-paren">(</span><em>queue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#acquire_device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.acquire_device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context manager which acquires a device from device queue and releases it when
 the worker is done working.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body"><strong>device_queue</strong> (<em>Queue</em>) – a blocking queue with available devices.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>queue</strong> (<em>Queue</em>) – a blocking queue with available devices.</td>
 </tr>
 </tbody>
 </table>
@@ -327,7 +326,7 @@ the worker is done working.</p>
 
 <dl class="function">
 <dt id="nasframe.scripts.generic.generic_worker">
-<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">generic_worker</code><span class="sig-paren">(</span><em>description</em>, <em>device_idx</em>, <em>current_complexity</em>, <em>config</em>, <em>space_type</em>, <em>reward_metric</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#generic_worker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.generic_worker" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">generic_worker</code><span class="sig-paren">(</span><em>description</em>, <em>device_queue</em>, <em>current_complexity</em>, <em>config</em>, <em>space_type</em>, <em>reward_metric</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#generic_worker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.generic_worker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Concurrent description evaluator.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -335,7 +334,7 @@ the worker is done working.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>description</strong> (<em>dict</em>) – description to be evaluated</li>
-<li><strong>device_idx</strong> (<em>int</em>) – a dedicated CUDA devices index</li>
+<li><strong>device_queue</strong> (<em>Queue</em>) – a blocking queue with available devices.</li>
 <li><strong>current_complexity</strong> (<em>int</em>) – current curriculum complexity level.</li>
 <li><strong>config</strong> (<em>dict</em><em>, </em><em>str</em>) – configuration dictionary or path to YAML file.</li>
 <li><strong>space_type</strong> (<em>str</em>) – the name of root search space.</li>
@@ -361,27 +360,26 @@ Usually fails.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.generic.prepare">
-<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">prepare</code><span class="sig-paren">(</span><em>config</em>, <em>resume</em>, <em>input_shape</em>, <em>gpu_idx</em>, <em>num_gpus</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.prepare" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializes training session.</p>
+<dt id="nasframe.scripts.generic.load_storage">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">load_storage</code><span class="sig-paren">(</span><em>config</em>, <em>logger</em>, <em>architect=None</em>, <em>delete=True</em>, <em>visualize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#load_storage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.load_storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates storage from JSON.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>config</strong> (<em>dict</em><em>, </em><em>str</em>) – configuration dictionary or path to YAML file.</li>
-<li><strong>resume</strong> (<em>boot</em>) – whether to attempt to resume a previous session</li>
-<li><strong>input_shape</strong> (<em>list</em><em>, </em><em>tuple</em><em>, </em><em>torch.Size</em>) – shape of the inputs</li>
-<li><strong>num_gpus</strong> (<em>int</em>) – number of GPUs to use</li>
-<li><strong>gpu_idx</strong> (<em>str</em><em>, </em><em>optional</em>) – string of comma separated dpu indices. if <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">range(num_gpus)</span></code> is used.</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>config</strong> (<em>dict</em>) – search configuration</li>
+<li><strong>logger</strong> (<em>Logger</em>) – logger instance</li>
+<li><strong>architect</strong> (<a class="reference internal" href="architect.html#nasframe.architect.Architect" title="nasframe.architect.Architect"><em>Architect</em></a><em>, </em><em>optional</em>) – architect bound to a search space(if omitted, described graphs won’t be evaluated
+prior to storing and parameter counts won’t be calculated)</li>
+<li><strong>delete</strong> – </li>
+<li><strong>visualize</strong> – </li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Architect and an ArchitectCoach</p>
 </td>
 </tr>
 </tbody>
 </table>
+<p>Returns:</p>
 </dd></dl>
 
 <dl class="function">
@@ -416,8 +414,8 @@ resulting evaluation list, this argument will be ignored.</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.generic.train_curriculum">
-<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">train_curriculum</code><span class="sig-paren">(</span><em>config</em>, <em>worker</em>, <em>input_shape</em>, <em>resume</em>, <em>num_gpus</em>, <em>gpu_idx</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#train_curriculum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.train_curriculum" title="Permalink to this definition">¶</a></dt>
+<dt id="nasframe.scripts.generic.train">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">train</code><span class="sig-paren">(</span><em>config</em>, <em>worker</em>, <em>resume</em>, <em>num_gpus</em>, <em>gpu_idx</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Curriculum architect training procedure.
 Includes sampling descriptions with complexity <span class="math notranslate">\(i\)</span>, evaluating them, train architect and start over again
 with complexity <span class="math notranslate">\(i+1\)</span>.
@@ -430,7 +428,6 @@ from then on.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>config</strong> (<em>dict</em><em>, </em><em>str</em>) – configuration dictionary or path to YAML file.</li>
 <li><strong>worker</strong> (<em>callable</em>) – worker callable</li>
-<li><strong>input_shape</strong> (<em>tuple</em><em>, </em><em>list</em><em>, </em><em>torch.Size</em>) – input’s shape</li>
 <li><strong>resume</strong> (<em>bool</em>) – whether  to try resuming the previous session</li>
 <li><strong>num_gpus</strong> (<em>int</em>) – number of GPUs to use</li>
 <li><strong>gpu_idx</strong> (<em>str</em><em>, </em><em>optional</em>) – string of comma separated dpu indices. if <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">range(num_gpus)</span></code> is used.</li>
@@ -445,26 +442,22 @@ from then on.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="nasframe.scripts.generic.train_plain">
-<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">train_plain</code><span class="sig-paren">(</span><em>config</em>, <em>worker</em>, <em>input_shape</em>, <em>resume</em>, <em>num_gpus</em>, <em>gpu_idx</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#train_plain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.train_plain" title="Permalink to this definition">¶</a></dt>
-<dd><p>Architect training procedure.
-Includes sampling descriptions, evaluating them, train architect and start over again
-with complexity i+1.</p>
+<dt id="nasframe.scripts.generic.train_init">
+<code class="descclassname">nasframe.scripts.generic.</code><code class="descname">train_init</code><span class="sig-paren">(</span><em>config</em>, <em>resume</em>, <em>gpu_idx</em>, <em>num_gpus</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/scripts/generic.html#train_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.scripts.generic.train_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes training session.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>config</strong> (<em>dict</em><em>, </em><em>str</em>) – configuration dictionary or path to YAML file.</li>
-<li><strong>worker</strong> (<em>callable</em>) – worker callable</li>
-<li><strong>input_shape</strong> (<em>tuple</em><em>, </em><em>list</em><em>, </em><em>torch.Size</em>) – input’s shape</li>
-<li><strong>resume</strong> (<em>bool</em>) – whether  to try resuming the previous session</li>
+<li><strong>resume</strong> (<em>boot</em>) – whether to attempt to resume a previous session</li>
 <li><strong>num_gpus</strong> (<em>int</em>) – number of GPUs to use</li>
 <li><strong>gpu_idx</strong> (<em>str</em><em>, </em><em>optional</em>) – string of comma separated dpu indices. if <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">range(num_gpus)</span></code> is used.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">On keyboard interrupt returns storage filled with all that’s benn found and evaluated.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Architect and an ArchitectCoach</p>
 </td>
 </tr>
 </tbody>
@@ -685,7 +678,7 @@ See cli help, for parameter description.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1.2 alpha',
+            VERSION:'v0.1.3 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

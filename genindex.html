@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; NAS Framework v0.1.2 alpha documentation</title>
+  <title>Index &mdash; NAS Framework v0.1.3 alpha documentation</title>
   
 
   
@@ -38,7 +38,7 @@
         <link rel="index" title="Index"
               href="#"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="index.html"/> 
+    <link rel="top" title="NAS Framework v0.1.3 alpha documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.1.3
               </div>
             
           
@@ -580,6 +580,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="loaders.html#nasframe.loaders.TextLoader.load_embeddings">load_embeddings() (nasframe.loaders.TextLoader method)</a>
 </li>
+      <li><a href="scripts.html#nasframe.scripts.generic.load_storage">load_storage() (in module nasframe.scripts.generic)</a>
+</li>
       <li><a href="searchspaces.html#nasframe.searchspaces.SearchSpace.log_info">log_info() (nasframe.searchspaces.SearchSpace method)</a>
 </li>
       <li><a href="storage.html#nasframe.storage.CurriculumStorage.log_probs">log_probs (nasframe.storage.CurriculumStorage attribute)</a>
@@ -654,11 +656,9 @@
 </li>
       <li><a href="storage.html#nasframe.storage.CurriculumStorage.pred_values">pred_values (nasframe.storage.CurriculumStorage attribute)</a>
 </li>
-      <li><a href="scripts.html#nasframe.scripts.generic.prepare">prepare() (in module nasframe.scripts.generic)</a>
+      <li><a href="scripts.html#nasframe.scripts.generic.GenericModel.prepare">prepare() (nasframe.scripts.generic.GenericModel method)</a>
 
       <ul>
-        <li><a href="scripts.html#nasframe.scripts.generic.GenericModel.prepare">(nasframe.scripts.generic.GenericModel method)</a>
-</li>
         <li><a href="scripts.html#nasframe.scripts.toxiccomment.BaselineModel.prepare">(nasframe.scripts.toxiccomment.BaselineModel method)</a>
 </li>
         <li><a href="scripts.html#nasframe.scripts.toxiccomment.ToxicModel.prepare">(nasframe.scripts.toxiccomment.ToxicModel method)</a>
@@ -794,15 +794,23 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="loaders.html#nasframe.loaders.TextLoader">TextLoader (class in nasframe.loaders)</a>
 </li>
+      <li><a href="storage.html#nasframe.storage.CurriculumStorage.to_json">to_json() (nasframe.storage.CurriculumStorage method)</a>
+
+      <ul>
+        <li><a href="storage.html#nasframe.storage.Storage.to_json">(nasframe.storage.Storage method)</a>
+</li>
+      </ul></li>
       <li><a href="loaders.html#nasframe.loaders.TextLoader.tokenize">tokenize() (nasframe.loaders.TextLoader method)</a>
 </li>
       <li><a href="loaders.html#nasframe.loaders.TextLoader.torch_embedding">torch_embedding (nasframe.loaders.TextLoader attribute)</a>
 </li>
       <li><a href="scripts.html#nasframe.scripts.toxiccomment.ToxicModel">ToxicModel (class in nasframe.scripts.toxiccomment)</a>
 </li>
-      <li><a href="coaches.html#nasframe.coaches.ArchitectCoach.train">train() (nasframe.coaches.ArchitectCoach method)</a>
+      <li><a href="scripts.html#nasframe.scripts.generic.train">train() (in module nasframe.scripts.generic)</a>
 
       <ul>
+        <li><a href="coaches.html#nasframe.coaches.ArchitectCoach.train">(nasframe.coaches.ArchitectCoach method)</a>
+</li>
         <li><a href="coaches.html#nasframe.coaches.CoachBase.train">(nasframe.coaches.CoachBase method)</a>
 </li>
         <li><a href="coaches.html#nasframe.coaches.FeedForwardCoach.train">(nasframe.coaches.FeedForwardCoach method)</a>
@@ -812,9 +820,7 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="scripts.html#nasframe.scripts.generic.train_curriculum">train_curriculum() (in module nasframe.scripts.generic)</a>
-</li>
-      <li><a href="scripts.html#nasframe.scripts.generic.train_plain">train_plain() (in module nasframe.scripts.generic)</a>
+      <li><a href="scripts.html#nasframe.scripts.generic.train_init">train_init() (in module nasframe.scripts.generic)</a>
 </li>
       <li><a href="scripts.html#nasframe.scripts.toxiccomment.train_toxic">train_toxic() (in module nasframe.scripts.toxiccomment)</a>
 </li>
@@ -903,7 +909,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1.2 alpha',
+            VERSION:'v0.1.3 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Storage &mdash; NAS Framework v0.1.2 alpha documentation</title>
+  <title>Storage &mdash; NAS Framework v0.1.3 alpha documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="NAS Framework v0.1.2 alpha documentation" href="index.html"/>
+    <link rel="top" title="NAS Framework v0.1.3 alpha documentation" href="index.html"/>
         <link rel="next" title="Utility functions and classes" href="utils.html"/>
         <link rel="prev" title="Training Classes" href="coaches.html"/> 
 
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.1.3
               </div>
             
           
@@ -257,7 +257,7 @@
 
 <dl class="staticmethod">
 <dt id="nasframe.storage.Storage.from_json">
-<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>path=None</em>, <em>data=None</em>, <em>space=None</em>, <em>input_shape=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#Storage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage.from_json" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>path=None</em>, <em>data=None</em>, <em>input_shape=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#Storage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage.from_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads description-reward pairs from json and constructs a Storage from it.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -267,7 +267,6 @@
 <li><strong>arch</strong> (<a class="reference internal" href="architect.html#nasframe.architect.Architect" title="nasframe.architect.Architect"><em>Architect</em></a>) – architect instance to collect needed data</li>
 <li><strong>path</strong> (<em>str</em>) – path to json file</li>
 <li><strong>data</strong> (<em>list</em>) – pre-loaded list of description-reward pairs</li>
-<li><strong>space</strong> (<a class="reference internal" href="searchspaces.html#nasframe.searchspaces.SearchSpace" title="nasframe.searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space instance to calculate described model complexity</li>
 <li><strong>input_shape</strong> (<em>list</em><em>, </em><em>tuple</em><em>, </em><em>torch.Size</em>) – shape of the input</li>
 </ul>
 </td>
@@ -286,6 +285,12 @@
 <dt id="nasframe.storage.Storage.reward">
 <code class="descname">reward</code><span class="sig-paren">(</span><em>description</em>, <em>amount</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#Storage.reward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage.reward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets or overwrites the reward for given description.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nasframe.storage.Storage.to_json">
+<code class="descname">to_json</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#Storage.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.Storage.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dumps descriptions and corresponding rewards into a JSON-formatted file on <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -377,7 +382,7 @@
 
 <dl class="staticmethod">
 <dt id="nasframe.storage.CurriculumStorage.from_json">
-<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>path=None</em>, <em>data=None</em>, <em>space=None</em>, <em>input_shape=None</em>, <em>max_complexity=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#CurriculumStorage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.CurriculumStorage.from_json" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">from_json</code><span class="sig-paren">(</span><em>path=None</em>, <em>data=None</em>, <em>input_shape=None</em>, <em>max_complexity=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#CurriculumStorage.from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.CurriculumStorage.from_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads description-reward pairs from json and constructs a Storage from it.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -387,7 +392,6 @@
 <li><strong>arch</strong> (<a class="reference internal" href="architect.html#nasframe.architect.Architect" title="nasframe.architect.Architect"><em>Architect</em></a>) – architect instance to collect needed data</li>
 <li><strong>path</strong> (<em>str</em>) – path to json file</li>
 <li><strong>data</strong> (<em>dict</em>) – dictionary with pre-loaded data</li>
-<li><strong>space</strong> (<a class="reference internal" href="searchspaces.html#nasframe.searchspaces.SearchSpace" title="nasframe.searchspaces.SearchSpace"><em>SearchSpace</em></a>) – search space instance to calculate described model complexity</li>
 <li><strong>input_shape</strong> (<em>list</em><em>, </em><em>tuple</em><em>, </em><em>torch.Size</em>) – shape of the input</li>
 <li><strong>max_complexity</strong> (<em>int</em>) – maximum complexity of constructed storage</li>
 </ul>
@@ -437,6 +441,12 @@
 <dt id="nasframe.storage.CurriculumStorage.set_complexity">
 <code class="descname">set_complexity</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#CurriculumStorage.set_complexity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.CurriculumStorage.set_complexity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets current curriculum complexity to <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="nasframe.storage.CurriculumStorage.to_json">
+<code class="descname">to_json</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/nasframe/storage.html#CurriculumStorage.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#nasframe.storage.CurriculumStorage.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dumps descriptions and corresponding rewards into a JSON-formatted file on <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -494,7 +504,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'v0.1.2 alpha',
+            VERSION:'v0.1.3 alpha',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
