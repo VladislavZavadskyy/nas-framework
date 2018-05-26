@@ -102,21 +102,12 @@ def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perp
     )
 
     input_shape = config['child_training'].pop('input_shape')
-    curriculum = config['architect_training'].get('curriculum', False)
-    if curriculum:
-        storage = train_curriculum(
-            config, worker_fn,
-            input_shape=input_shape,
-            resume=resume,
-            num_gpus=num_gpus,
-            gpu_idx=gpu_idx)
-    else:
-        storage = train_plain(
-            config, worker_fn,
-            input_shape=input_shape,
-            resume=resume,
-            num_gpus=num_gpus,
-            gpu_idx=gpu_idx)
+    storage = train(
+        config, worker_fn,
+        input_shape=input_shape,
+        resume=resume,
+        num_gpus=num_gpus,
+        gpu_idx=gpu_idx)
 
     best_description, best_auc = storage.best()
     logger.info(f'Best achieved ROC AUC score on validation data set: {best_auc:.5f}.')

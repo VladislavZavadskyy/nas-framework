@@ -55,6 +55,7 @@ def get_logger(name=__file__, file=None, file_level='INFO', stdout_level='DEBUG'
 
     if file is not None:
         file_handler = logging.FileHandler(file)
+        file_handler.setFormatter(formatter)
         file_handler.setLevel(file_level)
         logger.addHandler(file_handler)
 

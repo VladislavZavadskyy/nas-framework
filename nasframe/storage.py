@@ -102,7 +102,7 @@ class Storage:
         return self.descriptions[idx], self.rewards[idx]
 
     @staticmethod
-    def from_json(arch=None, path=None, data=None, space=None, input_shape=None):
+    def from_json(arch=None, path=None, data=None, input_shape=None):
         """
         Reads description-reward pairs from json and constructs a Storage from it.
 
@@ -110,7 +110,6 @@ class Storage:
             arch (Architect): architect instance to collect needed data
             path (str): path to json file
             data (list): pre-loaded list of description-reward pairs
-            space (SearchSpace): search space instance to calculate described model complexity
             input_shape (list, tuple, torch.Size): shape of the input
 
         Returns:
@@ -131,19 +130,23 @@ class Storage:
                 _, logps, values, entropies = arch.evaluate_description(description)
 
                 param_count = None
-                if space is not None:
-                    if input_shape is None:
-                        raise ValueError('If space is provided, input shape must be provided too.')
-
-                    desc = space.preprocess(description, input_shape)
+                if input_shape is not None:
+                    desc = arch.search_space.preprocess(description, input_shape)
                     if desc is not None:
-                        param_count = sum(space.parameter_count(desc)[:2]) / 1e6
+                        param_count = sum(arch.search_space.parameter_count(desc)[:2]) / 1e6
             else:
                 logps, values, entropies, param_count = [None]*4
 
             storage.append(description, logps, values, entropies, reward, param_count)
 
         return storage
+
+    def to_json(self, path):
+        """
+        Dumps descriptions and corresponding rewards into a JSON-formatted file on ``path``.
+        """
+        with open(path, 'w+') as f:
+            json.dump(list(zip(self.descriptions, self.rewards)), f)
 
     def __getitem__(self, item):
         if isinstance(item, (int, np.int_)):
@@ -294,7 +297,7 @@ class CurriculumStorage:
         return results
 
     @staticmethod
-    def from_json(arch=None, path=None, data=None, space=None, input_shape=None, max_complexity=None):
+    def from_json(arch=None, path=None, data=None, input_shape=None, max_complexity=None):
         """
         Reads description-reward pairs from json and constructs a Storage from it.
 
@@ -302,7 +305,6 @@ class CurriculumStorage:
             arch (Architect): architect instance to collect needed data
             path (str): path to json file
             data (dict): dictionary with pre-loaded data
-            space (SearchSpace): search space instance to calculate described model complexity
             input_shape (list, tuple, torch.Size): shape of the input
             max_complexity (int): maximum complexity of constructed storage
 
@@ -322,10 +324,24 @@ class CurriculumStorage:
         storage = CurriculumStorage(max_complexity or max(data.keys()))
 
         for level in data:
-            storage.storages[level] = Storage.from_json(arch=arch, data=data[level], space=space,
-                                                        input_shape=input_shape)
+            storage.storages[level] = Storage.from_json(
+                arch=arch, data=data[level], input_shape=input_shape)
 
         return storage
+
+    def to_json(self, path):
+        """
+        Dumps descriptions and corresponding rewards into a JSON-formatted file on ``path``.
+        """
+        storages = dict(self.storages)
+
+        for level in storages:
+            descriptions = storages[level].descriptions
+            rewards = storages[level].rewards
+            storages[level] = list(zip(descriptions, rewards))
+
+        with open(path, 'w+') as f:
+            json.dump(storages, f)
 
     def best(self):
         """

@@ -1,5 +1,6 @@
 log_dir: logs
 data_dir: data/toxic
+storage: logs/description_reward.json
 
 stdout_loglevel: DEBUG
 file_loglevel: INFO
