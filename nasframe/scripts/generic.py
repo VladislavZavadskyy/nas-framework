@@ -1,6 +1,6 @@
 import sys
-import time
 
+from contextlib import contextmanager
 from flatten_dict import flatten
 from itertools import chain
 
@@ -15,7 +15,7 @@ from nasframe.storage import CurriculumStorage, Storage
 from nasframe.searchspaces import get_space_type
 
 from tensorboardX import SummaryWriter
-from functools import partial, wraps
+from functools import partial
 from os.path import exists
 
 from shutil import rmtree
@@ -83,6 +83,85 @@ def hash_description(description):
         del flat_desc[k]
     tuples = frozenset(flat_desc.items())
     return hash(tuples)
+
+
+def sample_loop(arch, storage, space_proto, input_shape,
+                desired_storage_len, append_deterministic=True):
+    """
+    Description sampling loop.
+
+    Samples description given an architect and a space prototype, then perprocesses them by applying
+    ``space_proto.preprocess`` method with default parameters, if description is viable after that,
+    appends it to the list and puts it into storage. Loop stops when the storage length reaches
+    ``desired_storage_len``.
+
+    Args:
+        arch (Architect): architect instance
+        storage (Storage, CurriculumStorage): storage instance
+        space_proto (SeachSpace): search space prototype
+        input_shape (list, tuple, torch.Size): input shape
+        desired_storage_len (int): the length storage should have when the loop is completed
+        append_deterministic (bool): whether to append description obtained by deterministically choosing the actions
+            with the highest probability in the architect's output distribution. If it would be the only description in
+            resulting evaluation list, this argument will be ignored.
+
+    Returns:
+        A list of sampled but not evaluated descriptions.
+    """
+    evaluation_list = []
+    while len(storage) < desired_storage_len:
+        description, logps, values, entropies = arch.sample()
+        desc = space_proto.preprocess(description, input_shape)
+        if desc is not None:
+            num_param = sum(space_proto.parameter_count(desc)[:2]) / 1e6
+            storage.append(description, logps, values, entropies, None, num_param)
+            evaluation_list.append(description)
+
+    deterministic_is_viable = False
+    if append_deterministic and len(evaluation_list) > 0:
+        description, logps, values, entropies = arch.sample(explore=False)
+        desc = space_proto.preprocess(description, input_shape)
+
+        if desc is not None:
+            num_param = sum(space_proto.parameter_count(desc)[:2]) / 1e6
+            storage.append(description, logps, values, entropies, None, num_param)
+            evaluation_list.append(description)
+            deterministic_is_viable = True
+
+    return evaluation_list, deterministic_is_viable
+
+
+def evaluate(descriptions, worker_fn, gpu_indices):
+    """
+    Launch the workers to evaluate descriptions in parallel.
+
+    Args:
+        descriptions (list): descriptions to be evaluated
+        worker_fn (callable): worker callable
+        gpu_indices (list): list of gpu indices to run on
+
+    Returns:
+        list of (description, reward, device_idx) tuples
+    """
+    if len(descriptions) == 0: return []
+
+    ctx = mp.get_context('spawn')
+    with ctx.Manager() as manager:
+
+        device_queue = manager.Queue()
+        for idx in gpu_indices:
+            device_queue.put(idx)
+
+        def log_and_raise(err):
+            logger.error(str(err))
+            raise err
+
+        worker_fn = partial(worker_fn, device_queue=device_queue)
+        with ctx.Pool(len(descriptions), maxtasksperchild=1) as pool:
+            result = pool.map_async(worker_fn, descriptions,
+                                    error_callback=log_and_raise).get()
+
+    return result
 
 
 def load_storage(config, logger, architect=None, delete=True, visualize=True):
@@ -240,90 +319,10 @@ def train_init(config, resume, gpu_idx, num_gpus):
     FileLock(storage_path).purge()
 
     gpu_indices = range(num_gpus) if gpu_idx is None else map(int, gpu_idx.split(','))
-    return config['architect_training'], space_proto, arch, arch_coach, list(gpu_indices), log_dir
+    return config, space_proto, arch, arch_coach, list(gpu_indices), log_dir
 
 
-def sample_loop(arch, storage, space_proto, input_shape,
-                desired_storage_len, append_deterministic=True):
-    """
-    Description sampling loop.
-
-    Samples description given an architect and a space prototype, then perprocesses them by applying
-    ``space_proto.preprocess`` method with default parameters, if description is viable after that,
-    appends it to the list and puts it into storage. Loop stops when the storage length reaches
-    ``desired_storage_len``.
-
-    Args:
-        arch (Architect): architect instance
-        storage (Storage, CurriculumStorage): storage instance
-        space_proto (SeachSpace): search space prototype
-        input_shape (list, tuple, torch.Size): input shape
-        desired_storage_len (int): the length storage should have when the loop is completed
-        append_deterministic (bool): whether to append description obtained by deterministically choosing the actions
-            with the highest probability in the architect's output distribution. If it would be the only description in
-            resulting evaluation list, this argument will be ignored.
-
-    Returns:
-        A list of sampled but not evaluated descriptions.
-    """
-    evaluation_list = []
-    while len(storage) < desired_storage_len:
-        description, logps, values, entropies = arch.sample()
-        desc = space_proto.preprocess(description, input_shape)
-        if desc is not None:
-            num_param = sum(space_proto.parameter_count(desc)[:2]) / 1e6
-            storage.append(description, logps, values, entropies, None, num_param)
-            evaluation_list.append(description)
-
-    deterministic_is_viable = False
-    if append_deterministic and len(evaluation_list) > 0:
-        description, logps, values, entropies = arch.sample(explore=False)
-        desc = space_proto.preprocess(description, input_shape)
-
-        if desc is not None:
-            num_param = sum(space_proto.parameter_count(desc)[:2]) / 1e6
-            storage.append(description, logps, values, entropies, None, num_param)
-            evaluation_list.append(description)
-            deterministic_is_viable = True
-
-    return evaluation_list, deterministic_is_viable
-
-
-def evaluate(descriptions, worker_fn, gpu_indices):
-    """
-    Launch the workers to evaluate descriptions in parallel.
-
-    Args:
-        descriptions (list): descriptions to be evaluated
-        worker_fn (callable): worker callable
-        gpu_indices (list): list of gpu indices to run on
-
-    Returns:
-        list of (description, reward, device_idx) tuples
-    """
-    if len(descriptions) == 0: return []
-
-    ctx = mp.get_context('spawn')
-    with ctx.Manager() as manager:
-
-        device_queue = manager.Queue()
-        for idx in gpu_indices:
-            device_queue.put(idx)
-
-        def log_and_raise(err):
-            logger.error(str(err))
-            raise err
-
-        worker_fn = partial(worker_fn, device_queue=device_queue)
-        with ctx.Pool(len(descriptions), maxtasksperchild=1) as pool:
-            result = pool.map_async(worker_fn, descriptions,
-                                    error_callback=log_and_raise).get()
-
-    return result
-
-
-def train(config, worker, input_shape,
-          resume, num_gpus, gpu_idx):
+def train(config, worker, resume, num_gpus, gpu_idx):
     """
     Curriculum architect training procedure.
     Includes sampling descriptions with complexity :math:`i`, evaluating them, train architect and start over again
@@ -334,7 +333,6 @@ def train(config, worker, input_shape,
     Args:
         config (dict, str): configuration dictionary or path to YAML file.
         worker (callable): worker callable
-        input_shape (tuple, list, torch.Size): input's shape
         resume (bool): whether  to try resuming the previous session
         num_gpus (int): number of GPUs to use
         gpu_idx (str, optional): string of comma separated dpu indices. if ``None``, ``range(num_gpus)`` is used.
@@ -342,8 +340,11 @@ def train(config, worker, input_shape,
     Returns:
         On keyboard interrupt returns storage filled with all that's benn found and evaluated.
     """
-    training_config, space_proto, arch, arch_coach, gpu_indices, log_dir =\
+    config, space, architect, archicoach, gpu_indices, log_dir =\
         train_init(config, resume, gpu_idx, num_gpus)
+
+    input_shape = config['child_training']['input_shape']
+    training_config = config['architect_training']
 
     load_architect = training_config['load_architect'] and resume
     epochs_per_loop = training_config['epochs_per_loop']
@@ -355,11 +356,11 @@ def train(config, worker, input_shape,
         storage_surplus_factor = training_config.get('storage_surplus_factor', 1)
         assert storage_surplus_factor >= 1
 
-    storage = arch_coach.storage
-    summary_writer = arch_coach.summary_writer
+    storage = archicoach.storage
+    summary_writer = archicoach.summary_writer
 
     loops = 0
-    points_per_epoch = arch_coach.batch_size * arch_coach.epoch_steps
+    points_per_epoch = archicoach.batch_size * archicoach.epoch_steps
 
     while True:
         try:
@@ -370,18 +371,18 @@ def train(config, worker, input_shape,
 
                 if curriculum_complexity <= storage.max_complexity:
 
-                    arch_coach.stats.curriculum_complexity = curriculum_complexity
-                    arch.search_space.set_curriculum_complexity(curriculum_complexity)
+                    archicoach.stats.curriculum_complexity = curriculum_complexity
+                    architect.search_space.set_curriculum_complexity(curriculum_complexity)
                     storage.set_complexity(curriculum_complexity)
                     desired_storage_len = points_per_epoch*storage_surplus_factor
 
                 elif curriculum_complexity == storage.max_complexity + 1:
 
                     curriculum_complexity = 0
-                    arch_coach.curriculum = False
+                    archicoach.curriculum = False
 
-                    arch.search_space.release_all_constraints()
-                    arch_coach.storage = arch_coach.storage.flatten()
+                    architect.search_space.release_all_constraints()
+                    archicoach.storage = archicoach.storage.flatten()
 
                 else:
 
@@ -392,7 +393,7 @@ def train(config, worker, input_shape,
                 desired_storage_len = (loops + 1) * points_per_epoch
 
             evaluation_list, deterministic_is_viable = sample_loop(
-                arch, storage, space_proto, input_shape, desired_storage_len)
+                architect, storage, space, input_shape, desired_storage_len)
 
             worker_fn = partial(worker, current_complexity=curriculum_complexity)
             result = evaluate(evaluation_list, worker_fn, gpu_indices)
@@ -442,9 +443,9 @@ def train(config, worker, input_shape,
             try:
                 if len(result) > 0 or not load_architect:
                     logger.debug(f'Architect training: beginning the training.')
-                    arch_coach.train(epochs_per_loop)
-                    arch.save(log_dir, 'checkpoint')
-                arch_coach.decay_lr(architect_lr_decay)
+                    archicoach.train(epochs_per_loop)
+                    architect.save(log_dir, 'checkpoint')
+                archicoach.decay_lr(architect_lr_decay)
                 loops += 1
             except ValueError as e:
                 if 'Storage does not contain enough' in str(e):
@@ -452,28 +453,6 @@ def train(config, worker, input_shape,
 
         except KeyboardInterrupt:
             return storage
-
-
-def acquire_device(worker):
-    """
-    Worker decorator which acquires a device from device queue and releases it when
-    the worker is done working.
-
-    Keyword Args:
-        device_queue (Queue): a blocking queue with available devices.
-    """
-    @wraps(worker)
-    def wrapper(*args, **kwds):
-        device_queue = kwds.pop('device_queue')
-
-        idx = device_queue.get()
-        logger.debug(f'Acquired device {idx}.')
-        result = worker(*args, **kwds, device_idx=idx)
-
-        device_queue.put(idx)
-        logger.debug(f'Released device {idx}.')
-        return result
-    return wrapper
 
 
 def worker_init(description, log_dir):
@@ -506,14 +485,31 @@ def worker_init(description, log_dir):
     return logger, summary_writer, description_dir
 
 
-@acquire_device
-def generic_worker(description, device_idx, current_complexity, config, space_type, reward_metric):
+@contextmanager
+def acquire_device(queue):
+    """
+    Context manager which acquires a device from device queue and releases it when
+    the worker is done working.
+
+    Args:
+        queue (Queue): a blocking queue with available devices.
+    """
+    idx = queue.get()
+    logger.debug(f'Acquired device {idx}.')
+
+    yield idx
+
+    queue.put(idx)
+    logger.debug(f'Released device {idx}.')
+
+
+def generic_worker(description, device_queue, current_complexity, config, space_type, reward_metric):
     """
     Concurrent description evaluator.
 
     Args:
         description (dict): description to be evaluated
-        device_idx (int): a dedicated CUDA devices index
+        device_queue (Queue): a blocking queue with available devices.
         current_complexity (int): current curriculum complexity level.
         config (dict, str): configuration dictionary or path to YAML file.
         space_type (str): the name of root search space.
@@ -526,154 +522,141 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
 
         If OOM was raised and ``not adaptive_batch_size`` or using ``min_batch_size`` causes OOM -- mean_auc=None.
     """
-    description = dict(description)
+    with acquire_device(device_queue) as device_idx:
+        description = dict(description)
 
-    if isinstance(config, str):
-        with open(config) as f:
-            config = yaml.load(f)
+        if isinstance(config, str):
+            with open(config) as f:
+                config = yaml.load(f)
 
-    log_dir = config['log_dir']
-    data_dir = config['data_dir']
-    storage_path = config.get('storage', join(log_dir, 'description_reward.json'))
+        log_dir = config['log_dir']
+        data_dir = config['data_dir']
+        storage_path = config.get('storage', join(log_dir, 'description_reward.json'))
 
-    logger, summary_writer, description_dir = worker_init(description, log_dir)
-    logger.debug(f'Worker {device_idx}: initialization done.')
-
-    config = config.get('child_training', config)
-
-    batch_size = config.pop('batch_size')
-    keep_data_on_device = config.pop('keep_data_on_device')
-    adaptive_batch_size = config.pop('adaptive_batch_size')
-
-    if adaptive_batch_size:
-        min_batch_size = config.pop('min_batch_size')
-        max_batch_size = config.pop('max_batch_size')
-        batch_size_decay = config.pop('batch_size_decay')
-
-        assert isinstance(min_batch_size, int)
-        assert isinstance(max_batch_size, int)
-        assert 0 < batch_size_decay < 1
-
-        config['initial_lr'] *= max_batch_size / batch_size
-        batch_size = max_batch_size
-    else:
-        min_batch_size = batch_size
-
-    datasets = torch.load(join(data_dir, 'preprocessed.pth'))
-
-    # A bit ugly, but should fix OOMs due to race conditions
-    while True:
-        try:
-            with torch.cuda.device(device_idx):
-                torch.cuda.init()
-                break
-        except RuntimeError as e:
-            if 'out of memory' in str(e):
-                logger.debug(f'Worker {device_idx}: got OOM during init, trying again in 1 second.')
-                time.sleep(1)
-            else:
-                raise e
-
-    with torch.cuda.device(device_idx):
-        save_path = join(log_dir, space_type, 'merged_space.pth')
-        model_path = join(log_dir, 'model.pth')
-
-        model = torch.load(model_path)
-        logger.debug(f'Worker {device_idx}: model loaded.')
-        with FileLock(save_path):
-            model.space = torch.load(save_path)
-            logger.debug(f'Worker {device_idx}: search space loaded.')
-            model = model.cuda()
-            logger.debug(f'Worker {device_idx}: placed on device.')
-        model.space.logger = logger
-
-        desc = model.space.preprocess(description, (-1, model.space_input_size))
-
-        model.space.draw(desc, join(description_dir, 'graph.png'))
-        img = np.array(Image.open(join(description_dir, 'graph.png')))
-        summary_writer.add_image('graph', img)
-        logger.debug(f'Worker {device_idx}: graph visualization drawn.')
-
-        if keep_data_on_device:
-            for key in datasets.keys():
-                datasets[key].tensors = tuple(map(
-                    lambda t: t.cuda(device_idx), datasets[key].tensors))
-            gc.collect()
-            logger.debug(f'Worker {device_idx}: transferred data to device.')
+        logger, summary_writer, description_dir = worker_init(description, log_dir)
+        logger.debug(f'Worker {device_idx}: initialization done.')
 
         def cleanup():
             for f in os.listdir(description_dir):
                 if f.startswith('events.out.tfevents'):
                     os.remove(join(description_dir, f))
 
-        while min_batch_size <= batch_size:
-            try:
-                loaders = Bunch()
-                for k in datasets.keys():
-                    loaders[k] = DataLoader(datasets[k], batch_size, shuffle=True,
-                                            pin_memory=not keep_data_on_device)
+        config = config.get('child_training', config)
 
-                space_coach = FeedForwardCoach(model, loaders,
-                                               logger=logger,
-                                               log_dir=log_dir,
-                                               tensorboard=summary_writer,
-                                               tqdm=get_tqdm(position=device_idx),
-                                               **config)
-                logger.debug(f'Worker {device_idx}: beginning training.')
-                space_coach.train_until_convergence(description=desc)
-                logger.debug(f'Worker {device_idx}: beginning evaluation')
-                stats = space_coach.evaluate(desc, loaders.validation)
-                mean_reward = np.mean(stats[reward_metric])
+        batch_size = config.pop('batch_size')
+        keep_data_on_device = config.pop('keep_data_on_device')
+        adaptive_batch_size = config.pop('adaptive_batch_size')
 
-                with FileLock(save_path):
-                    if exists(save_path):
-                        other = torch.load(save_path)
-                        model.space.merge(other.to(model.space.device))
-                    model.space.cpu().save(log_dir, 'merged_space')
+        if adaptive_batch_size:
+            min_batch_size = config.pop('min_batch_size')
+            max_batch_size = config.pop('max_batch_size')
+            batch_size_decay = config.pop('batch_size_decay')
 
-                with FileLock(storage_path):
-                    with open(storage_path, 'r') as f:
-                        existing = json.load(f)
+            assert isinstance(min_batch_size, int)
+            assert isinstance(max_batch_size, int)
+            assert 0 < batch_size_decay < 1
 
-                    if current_complexity is not None:
-                        assert isinstance(existing, dict)
-                        if str(current_complexity) not in existing:
-                            existing[str(current_complexity)] = []
-
-                        existing[str(current_complexity)].append([description, mean_reward])
-                    else:
-                        assert isinstance(existing, list)
-                        existing.append([description, mean_reward])
-
-                    with open(storage_path, 'w+') as f:
-                        json.dump(existing, f)
-
-                cleanup()
-                return description, mean_reward
-
-            except RuntimeError as e:
-                if 'out of memory' in str(e):
-                    if adaptive_batch_size:
-                        batch_size = int(batch_size*batch_size_decay)
-                        config['initial_lr'] *= batch_size_decay
-                        logger.info(f'Out of memory, decreasing batch size to {batch_size}.')
-                    else:
-                        logger.info('Out of memory on fixed batch size. Terminating.')
-                        cleanup()
-                        return description, None
-                else:
-                    logger.error(e)
-                    raise e
-
-            except LossIsNoneError:
-                logger.info('Loss is NaN. Terminating.')
-                cleanup()
-                return description, 0.
-
+            config['initial_lr'] *= max_batch_size / batch_size
+            batch_size = max_batch_size
         else:
-            logger.info('Out of memory with minimum batch size. Terminating.')
-            cleanup()
-            return description, None
+            min_batch_size = batch_size
+
+        datasets = torch.load(join(data_dir, 'preprocessed.pth'))
+        with torch.cuda.device(device_idx):
+            save_path = join(log_dir, space_type, 'merged_space.pth')
+            model_path = join(log_dir, 'model.pth')
+
+            model = torch.load(model_path)
+            logger.debug(f'Worker {device_idx}: model loaded.')
+            with FileLock(save_path):
+                model.space = torch.load(save_path)
+                logger.debug(f'Worker {device_idx}: search space loaded.')
+                model = model.cuda()
+                logger.debug(f'Worker {device_idx}: placed on device.')
+            model.space.logger = logger
+
+            desc = model.space.preprocess(description, (-1, model.space_input_size))
+
+            model.space.draw(desc, join(description_dir, 'graph.png'))
+            img = np.array(Image.open(join(description_dir, 'graph.png')))
+            summary_writer.add_image('graph', img)
+            logger.debug(f'Worker {device_idx}: graph visualization drawn.')
+
+            if keep_data_on_device:
+                for key in datasets.keys():
+                    datasets[key].tensors = tuple(map(
+                        lambda t: t.cuda(device_idx), datasets[key].tensors))
+                gc.collect()
+                logger.debug(f'Worker {device_idx}: transferred data to device.')
+
+            while min_batch_size <= batch_size:
+                try:
+                    loaders = Bunch()
+                    for k in datasets.keys():
+                        loaders[k] = DataLoader(datasets[k], batch_size, shuffle=True,
+                                                pin_memory=not keep_data_on_device)
+
+                    space_coach = FeedForwardCoach(model, loaders,
+                                                   logger=logger,
+                                                   log_dir=log_dir,
+                                                   tensorboard=summary_writer,
+                                                   tqdm=get_tqdm(position=device_idx),
+                                                   **config)
+                    logger.debug(f'Worker {device_idx}: beginning training.')
+                    space_coach.train_until_convergence(description=desc)
+                    logger.debug(f'Worker {device_idx}: beginning evaluation')
+                    stats = space_coach.evaluate(desc, loaders.validation)
+                    mean_reward = np.mean(stats[reward_metric])
+
+                    with FileLock(save_path):
+                        if exists(save_path):
+                            other = torch.load(save_path)
+                            model.space.merge(other.to(model.space.device))
+                        model.space.cpu().save(log_dir, 'merged_space')
+
+                    with FileLock(storage_path):
+                        with open(storage_path, 'r') as f:
+                            existing = json.load(f)
+
+                        if current_complexity is not None:
+                            assert isinstance(existing, dict)
+                            if str(current_complexity) not in existing:
+                                existing[str(current_complexity)] = []
+
+                            existing[str(current_complexity)].append([description, mean_reward])
+                        else:
+                            assert isinstance(existing, list)
+                            existing.append([description, mean_reward])
+
+                        with open(storage_path, 'w+') as f:
+                            json.dump(existing, f)
+
+                    cleanup()
+                    return description, mean_reward
+
+                except RuntimeError as e:
+                    if 'out of memory' in str(e):
+                        if adaptive_batch_size:
+                            batch_size = int(batch_size*batch_size_decay)
+                            config['initial_lr'] *= batch_size_decay
+                            logger.info(f'Out of memory, decreasing batch size to {batch_size}.')
+                        else:
+                            logger.info('Out of memory on fixed batch size. Terminating.')
+                            cleanup()
+                            return description, None
+                    else:
+                        logger.error(e)
+                        raise e
+
+                except LossIsNoneError:
+                    logger.info('Loss is NaN. Terminating.')
+                    cleanup()
+                    return description, 0.
+
+            else:
+                logger.info('Out of memory with minimum batch size. Terminating.')
+                cleanup()
+                return description, None
 
 
 def baseline_worker(device_idx, config, reward_metric, name):

@@ -146,7 +146,7 @@ class Storage:
         Dumps descriptions and corresponding rewards into a JSON-formatted file on ``path``.
         """
         with open(path, 'w+') as f:
-            json.dump(list(zip(self.descriptions, self.rewards)), f)
+            json.dump(list(zip(self.descriptions, map(lambda t: t.item(), self.rewards))), f)
 
     def __getitem__(self, item):
         if isinstance(item, (int, np.int_)):
@@ -337,7 +337,7 @@ class CurriculumStorage:
 
         for level in storages:
             descriptions = storages[level].descriptions
-            rewards = storages[level].rewards
+            rewards = map(lambda t: t.item(), storages[level].rewards)
             storages[level] = list(zip(descriptions, rewards))
 
         with open(path, 'w+') as f:

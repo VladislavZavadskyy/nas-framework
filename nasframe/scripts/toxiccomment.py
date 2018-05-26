@@ -101,10 +101,8 @@ def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perp
         reward_metric='auc'
     )
 
-    input_shape = config['child_training'].pop('input_shape')
     storage = train(
         config, worker_fn,
-        input_shape=input_shape,
         resume=resume,
         num_gpus=num_gpus,
         gpu_idx=gpu_idx)

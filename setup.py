@@ -1,9 +1,10 @@
 from setuptools import setup, find_packages
+import nasframe
 
 setup(
     name='nasframe',
     description='Neural Architecture Search Framework',
-    version='0.1.2',
+    version=nasframe.__version__,
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
