@@ -129,7 +129,7 @@ def toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perprocess
               type=int, default=128)
 def toxic_baseline(gpu, val_fraction, config_path, force_perprocess, cell, dim):
     """
-    Preforms neural architecture search on Jigsaw Toxic Comment dataset
+    Trains and evaluates baseline architecture search on Jigsaw Toxic Comment dataset
     """
     assert 0 < val_fraction < 1, 'Validation data fraction has to be in range (0,1).'
     click.echo(force_perprocess)

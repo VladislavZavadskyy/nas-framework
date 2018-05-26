@@ -458,11 +458,12 @@ def train_plain(config, worker, input_shape,
 
     while True:
         try:
-            desired_storage_len = len(storage) + points_per_epoch
+            desired_storage_len = (loops+1)*points_per_epoch
             evaluation_list, deterministic_is_viable = sample_loop(
                 arch, storage, space_proto, input_shape, desired_storage_len)
 
-            result = evaluate(evaluation_list, worker, gpu_indices)
+            worker_fn = partial(worker, current_complexity=None)
+            result = evaluate(evaluation_list, worker_fn, gpu_indices)
 
             accuracies = []
             for description, reward in result:
@@ -614,12 +615,14 @@ def generic_worker(description, device_idx, current_complexity, config, space_ty
         model.space.draw(desc, join(description_dir, 'graph.png'))
         img = np.array(Image.open(join(description_dir, 'graph.png')))
         summary_writer.add_image('graph', img)
+        logger.debug(f'Worker {device_idx}: graph visualization drawn.')
 
         if keep_data_on_device:
             for key in datasets.keys():
                 datasets[key].tensors = tuple(map(
                     lambda t: t.cuda(device_idx), datasets[key].tensors))
             gc.collect()
+            logger.debug(f'Worker {device_idx}: transferred data to device.')
 
         def cleanup():
             for f in os.listdir(description_dir):

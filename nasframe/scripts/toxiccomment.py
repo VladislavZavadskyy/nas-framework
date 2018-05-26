@@ -102,12 +102,21 @@ def train_toxic(num_gpus, val_fraction, resume, config_path, gpu_idx, force_perp
     )
 
     input_shape = config['child_training'].pop('input_shape')
-    storage = train_curriculum(
-        config, worker_fn,
-        input_shape=input_shape,
-        resume=resume,
-        num_gpus=num_gpus,
-        gpu_idx=gpu_idx)
+    curriculum = config['architect_training'].get('curriculum', False)
+    if curriculum:
+        storage = train_curriculum(
+            config, worker_fn,
+            input_shape=input_shape,
+            resume=resume,
+            num_gpus=num_gpus,
+            gpu_idx=gpu_idx)
+    else:
+        storage = train_plain(
+            config, worker_fn,
+            input_shape=input_shape,
+            resume=resume,
+            num_gpus=num_gpus,
+            gpu_idx=gpu_idx)
 
     best_description, best_auc = storage.best()
     logger.info(f'Best achieved ROC AUC score on validation data set: {best_auc:.5f}.')
@@ -168,7 +177,7 @@ class ToxicModel(GenericModel):
         self.linear = None
 
     @property
-    def input_size(self):
+    def space_input_size(self):
         return self.embedding.embedding_dim
 
     def prepare(self, inputs, description):
@@ -191,7 +200,7 @@ class ToxicModel(GenericModel):
             if inputs[-1] != self.embedding.embedding_dim:
                 inputs = list(inputs) + [self.embedding.embedding_dim]
 
-        output_dim = description['rnn'][0]['state'][0]['dim'] * 2
+        output_dim = description['rnn'][0]['state'][0]['dim'] * 4
         if self.linear is None or self.linear.weight.size(0) != output_dim:
             self.linear = nn.Linear(output_dim, 6).to(self.space.device)
 
@@ -202,9 +211,11 @@ class ToxicModel(GenericModel):
         embedded = self.embedding(inputs)
         if self.cell is None:
             raise ValueError('Prepare must be called prior to forward.')
-        rnn_out = self.cell(inputs=embedded, description=description, return_sequence=True)[0]
+        fwd = self.cell(inputs=embedded, description=description, return_sequence=True)[0]
+        bkwd = self.cell(inputs=flip(embedded, 1), description=description, return_sequence=True)[0]
+        rnn_out = torch.cat([fwd,bkwd], 2)
         avgs = self.avg_pool(rnn_out.transpose(1, 2)).squeeze()
-        maxes = self.avg_pool(rnn_out.transpose(1, 2)).squeeze()
+        maxes = self.max_pool(rnn_out.transpose(1, 2)).squeeze()
         out = self.linear(torch.cat((avgs, maxes), -1))
         return out
 
@@ -227,7 +238,7 @@ class BaselineModel(nn.Module):
         self.rnn = self.rnn(
             input_size=self.space_input_size, hidden_size=dim, batch_first=True)
 
-        self.linear = nn.Linear(dim*2, 6)
+        self.linear = nn.Linear(dim*4, 6)
 
     @property
     def device(self):
@@ -251,8 +262,10 @@ class BaselineModel(nn.Module):
 
     def forward(self, inputs, description):
         embedded = self.embedding(inputs)
-        rnn_out = self.rnn(embedded)[0]
+        fwd = self.rnn(embedded)[0]
+        bkwd = self.rnn(flip(embedded, 1))[0]
+        rnn_out = torch.cat([fwd, bkwd], 2)
         avgs = self.avg_pool(rnn_out.transpose(1, 2)).squeeze()
-        maxes = self.avg_pool(rnn_out.transpose(1, 2)).squeeze()
+        maxes = self.max_pool(rnn_out.transpose(1, 2)).squeeze()
         out = self.linear(torch.cat((avgs, maxes), -1))
         return out

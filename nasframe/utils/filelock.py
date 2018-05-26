@@ -55,6 +55,7 @@ class FileLock:
         if self.is_locked:
             self.is_locked = False
             os.remove(self.lockfile)
+            logger.debug(f'Released {self.lockfile}')
         else:
             raise RuntimeError('The file lock is not owned by this instance.')
 
